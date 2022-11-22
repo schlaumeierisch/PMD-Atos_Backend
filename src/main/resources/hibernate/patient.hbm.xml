@@ -20,7 +20,23 @@
         <property name="email" column="email" type="string"/>
         <property name="isUsingApp" column="is_using_app" type="boolean"/>
 
-        <many-to-one name="generalPractitioner" column="general_practitioner_id"/>
+        <set name="contactPersons" table="patient_contact_person" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="patient_id" not-null="true" />
+            </key>
+            <one-to-many class="nl.hva.backend.domain.ContactPerson" />
+        </set>
+        <set name="careProviders" table="patient_care_provider" lazy="true" fetch="select" cascade="all">
+            <key>
+                <column name="patient_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="nl.hva.backend.domain.CareProvider">
+                <column name="care_provider_id" not-null="true" />
+            </many-to-many>
+        </set>
+        <many-to-one name="generalPractitioner" class="nl.hva.backend.domain.GeneralPractitioner" fetch="select">
+            <column name="general_practitioner_id" not-null="true" />
+        </many-to-one>
 
     </class>
 </hibernate-mapping>
