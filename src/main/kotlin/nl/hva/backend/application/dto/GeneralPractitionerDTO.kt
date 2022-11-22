@@ -25,19 +25,7 @@ class GeneralPractitionerDTO {
 
             generalPractitionerDTO.patientDTOs = mutableSetOf()
             for (patient in generalPractitioner.patients()) {
-                val patientDTO: PatientDTO = PatientDTO().builder()
-                    .withFirstName(patient.firstName())
-                    .withLastName(patient.lastName())
-                    .withAddress(AddressDTO.fromAddress(patient.address()))
-                    .withGender(patient.gender())
-                    .withBirthDate(patient.birthDate())
-                    .withPhoneNumber(patient.phoneNumber())
-                    .withEmail(patient.email())
-                    .withIsUsingApp(patient.isUsingApp())
-                    .withGeneralPractitionerDTO(generalPractitionerDTO)
-                    .build()
-
-                generalPractitionerDTO.patientDTOs.add(patientDTO)
+                generalPractitionerDTO.patientDTOs.add(PatientDTO.fromPatient(patient))
             }
 
             return generalPractitionerDTO

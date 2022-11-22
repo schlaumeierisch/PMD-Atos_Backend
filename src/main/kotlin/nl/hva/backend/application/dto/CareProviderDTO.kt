@@ -13,8 +13,10 @@ class CareProviderDTO {
     private lateinit var phoneNumber: String
     private lateinit var specialism: Enum<Specialism>
 
+    private lateinit var patientDTOs: MutableSet<PatientDTO>
+
     companion object {
-        fun fromcareProvider(careProvider: CareProvider): CareProviderDTO {
+        fun fromCareProvider(careProvider: CareProvider): CareProviderDTO {
             val careProviderDTO = CareProviderDTO()
 
             careProviderDTO.id = careProvider.id().toString()
@@ -23,6 +25,11 @@ class CareProviderDTO {
             careProviderDTO.addressDTO = AddressDTO.fromAddress(careProvider.address())
             careProviderDTO.phoneNumber = careProvider.phoneNumber()
             careProviderDTO.specialism = careProvider.specialism()
+
+            careProviderDTO.patientDTOs = mutableSetOf()
+            for (patient in careProvider.patients()) {
+                careProviderDTO.patientDTOs.add(PatientDTO.fromPatient(patient))
+            }
 
             return careProviderDTO
         }
@@ -35,6 +42,7 @@ class CareProviderDTO {
     fun address(): AddressDTO = this.addressDTO
     fun phoneNumber(): String = this.phoneNumber
     fun specialism(): Enum<Specialism> = this.specialism
+    fun patientDTOs(): MutableSet<PatientDTO> = this.patientDTOs
 
     fun builder(): Builder {
         return Builder()
@@ -73,6 +81,11 @@ class CareProviderDTO {
             return this
         }
 
+        fun withPatientDTOs(patientDTOs: MutableSet<PatientDTO>): Builder {
+            instance.patientDTOs = patientDTOs
+            return this
+        }
+
         fun build(): CareProviderDTO {
             Objects.requireNonNull(instance.id, "id must be set in CareProviderDTO")
             Objects.requireNonNull(instance.firstName, "firstName must be set in CareProviderDTO")
@@ -80,6 +93,7 @@ class CareProviderDTO {
             Objects.requireNonNull(instance.addressDTO, "addressDTO must be set in CareProviderDTO")
             Objects.requireNonNull(instance.phoneNumber, "phoneNumber must be set in CareProviderDTO")
             Objects.requireNonNull(instance.specialism, "specialism must be set in CareProviderDTO")
+            Objects.requireNonNull(instance.patientDTOs, "patientDTOs must be set in CareProviderDTO")
 
             return instance
         }

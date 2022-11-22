@@ -20,24 +20,26 @@ class CareProviderServiceImpl : CareProviderService {
 
     @Transactional
     override fun createAccount(
-            firstName: String,
-            lastName: String,
-            street: String,
-            zip: String,
-            city: String,
-            country: String,
-            phoneNumber: String,
-            specialism: Enum<Specialism>
+        firstName: String,
+        lastName: String,
+        street: String,
+        zip: String,
+        city: String,
+        country: String,
+        phoneNumber: String,
+        specialism: Enum<Specialism>
     ) {
         val careProviderId: CareProviderId = careProviderRepository.nextIdentity()
 
+        // todo: change mutableSetOf() to real values
         val careProvider = CareProvider(
-                careProviderId,
-                firstName,
-                lastName,
-                Address(street, zip, city, country),
-                phoneNumber,
-                specialism
+            careProviderId,
+            firstName,
+            lastName,
+            Address(street, zip, city, country),
+            phoneNumber,
+            specialism,
+            mutableSetOf()
         )
 
         this.careProviderRepository.createAccount(careProvider)
@@ -45,26 +47,26 @@ class CareProviderServiceImpl : CareProviderService {
 
     @Transactional
     override fun editAccount(
-            careProviderId: CareProviderId,
-            firstName: String,
-            lastName: String,
-            street: String,
-            zip: String,
-            city: String,
-            country: String,
-            phoneNumber: String,
-            specialism: Enum<Specialism>
+        careProviderId: CareProviderId,
+        firstName: String,
+        lastName: String,
+        street: String,
+        zip: String,
+        city: String,
+        country: String,
+        phoneNumber: String,
+        specialism: Enum<Specialism>
     ) {
         this.careProviderRepository.editAccount(
-                careProviderId,
-                firstName,
-                lastName,
-                street,
-                zip,
-                city,
-                country,
-                phoneNumber,
-                specialism
+            careProviderId,
+            firstName,
+            lastName,
+            street,
+            zip,
+            city,
+            country,
+            phoneNumber,
+            specialism
         )
     }
 
@@ -76,16 +78,18 @@ class CareProviderServiceImpl : CareProviderService {
     @Transactional
     override fun getAccountById(careProviderId: CareProviderId): CareProviderDTO {
         val careProvider: CareProvider =
-                this.careProviderRepository.getAccountById(careProviderId)
+            this.careProviderRepository.getAccountById(careProviderId)
 
+        // todo: change mutableSetOf() to real values
         return CareProviderDTO().builder()
-                .withId(careProvider.domainId().id())
-                .withFirstName(careProvider.firstName())
-                .withLastName(careProvider.lastName())
-                .withAddress(AddressDTO.fromAddress(careProvider.address()))
-                .withPhoneNumber(careProvider.phoneNumber())
-                .withSpecialism(careProvider.specialism())
-                .build()
+            .withId(careProvider.domainId().id())
+            .withFirstName(careProvider.firstName())
+            .withLastName(careProvider.lastName())
+            .withAddress(AddressDTO.fromAddress(careProvider.address()))
+            .withPhoneNumber(careProvider.phoneNumber())
+            .withSpecialism(careProvider.specialism())
+            .withPatientDTOs(mutableSetOf())
+            .build()
     }
 
     @Transactional
@@ -93,15 +97,17 @@ class CareProviderServiceImpl : CareProviderService {
         val careProviders: List<CareProvider> = this.careProviderRepository.getAllAccounts()
         val careProviderDTOs: ArrayList<CareProviderDTO> = arrayListOf()
 
+        // todo: change mutableSetOf() to real values
         for (careProvider in careProviders) {
             val careProviderDTO: CareProviderDTO = CareProviderDTO().builder()
-                    .withId(careProvider.domainId().id())
-                    .withFirstName(careProvider.firstName())
-                    .withLastName(careProvider.lastName())
-                    .withAddress(AddressDTO.fromAddress(careProvider.address()))
-                    .withPhoneNumber(careProvider.phoneNumber())
-                    .withSpecialism(careProvider.specialism())
-                    .build()
+                .withId(careProvider.domainId().id())
+                .withFirstName(careProvider.firstName())
+                .withLastName(careProvider.lastName())
+                .withAddress(AddressDTO.fromAddress(careProvider.address()))
+                .withPhoneNumber(careProvider.phoneNumber())
+                .withSpecialism(careProvider.specialism())
+                .withPatientDTOs(mutableSetOf())
+                .build()
 
             careProviderDTOs.add(careProviderDTO)
         }

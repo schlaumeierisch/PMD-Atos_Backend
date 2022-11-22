@@ -36,29 +36,12 @@ class PatientDTO {
 
             patientDTO.careProviderDTOs = mutableSetOf()
             for (careProvider in patient.careProviders()) {
-                val careProviderDTO: CareProviderDTO = CareProviderDTO().builder()
-                    .withId(careProvider.domainId().id())
-                    .withFirstName(careProvider.firstName())
-                    .withLastName(careProvider.lastName())
-                    .withAddress(AddressDTO.fromAddress(careProvider.address()))
-                    .withPhoneNumber(careProvider.phoneNumber())
-                    .withSpecialism(careProvider.specialism())
-                    .build()
-
-                patientDTO.careProviderDTOs.add(careProviderDTO)
+                patientDTO.careProviderDTOs.add(CareProviderDTO.fromCareProvider(careProvider))
             }
 
             patientDTO.contactPersonDTOs = mutableSetOf()
             for (contactPerson in patient.contactPersons()) {
-                val contactPersonDTO: ContactPersonDTO = ContactPersonDTO().builder()
-                    .withId(contactPerson.domainId().id())
-                    .withFirstName(contactPerson.firstName())
-                    .withLastName(contactPerson.lastName())
-                    .withPhoneNumber(contactPerson.phoneNumber())
-                    .withPatientDTO(patientDTO)
-                    .build()
-
-                patientDTO.contactPersonDTOs.add(contactPersonDTO)
+                patientDTO.contactPersonDTOs.add(ContactPersonDTO.fromContactPerson(contactPerson))
             }
 
             return patientDTO
@@ -75,8 +58,8 @@ class PatientDTO {
     fun phoneNumber(): String = this.phoneNumber
     fun email(): String = this.email
     fun isUsingApp(): Boolean = this.isUsingApp
-    fun contactPersonDTOs(): Set<ContactPersonDTO> = this.contactPersonDTOs
-    fun careProviderDTOs(): Set<CareProviderDTO> = this.careProviderDTOs
+    fun contactPersonDTOs(): MutableSet<ContactPersonDTO> = this.contactPersonDTOs
+    fun careProviderDTOs(): MutableSet<CareProviderDTO> = this.careProviderDTOs
     fun generalPractitionerDTO(): GeneralPractitionerDTO = this.generalPractitionerDTO
 
     fun builder(): Builder {

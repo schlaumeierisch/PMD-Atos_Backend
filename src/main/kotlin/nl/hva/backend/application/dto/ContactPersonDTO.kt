@@ -12,7 +12,7 @@ class ContactPersonDTO {
     private lateinit var patientDTO: PatientDTO
 
     companion object {
-        fun fromcareProvider(contactPerson: ContactPerson): ContactPersonDTO {
+        fun fromContactPerson(contactPerson: ContactPerson): ContactPersonDTO {
             val contactPersonDTO = ContactPersonDTO()
 
             contactPersonDTO.id = contactPerson.id().toString()
