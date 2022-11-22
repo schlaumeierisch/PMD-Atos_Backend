@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <title>Care Provider - Edit Account</title>
+    <meta content="CareProvider" name="page">
+    <placeholder th:replace="fragments/main.html :: head"></placeholder>
+</head>
+<body>
+
+<header th:replace="fragments/main.html :: header"></header>
+
+<div class="container">
+
+    <h4>Care Provider - Edit Account</h4>
+
+    <form action="/care-provider/edit/submit" method="post" class="section">
+        <!-- input fields -->
+        <input name="care_provider_id" th:value="${careProviderId}" type="hidden" class="validate">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="first_name" name="first_name" type="text"  class="validate"
+                       th:value="${careProvider.firstName}" required>
+                <label for="first_name">First Name</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="last_name" name="last_name" type="text"  class="validate" th:value="${careProvider.lastName}"
+                       required>
+                <label for="last_name">Last Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s4">
+                <input id="street" name="street" type="text" class="validate" th:value="${careProvider.address.street}"
+                       required>
+                <label for="street">Street</label>
+            </div>
+            <div class="input-field col s2">
+                <input id="zip" name="zip" type="text" class="validate" th:value="${careProvider.address.zip}" pattern="[A-Z0-9]{6}" required>
+                <label for="zip">Zip</label>
+            </div>
+            <div class="input-field col s3">
+                <input id="city" name="city" type="text" class="validate" th:value="${careProvider.address.city}"
+                       required>
+                <label for="city">City</label>
+            </div>
+            <div class="input-field col s3">
+                <input id="country" name="country" type="text" class="validate"
+                       th:value="${careProvider.address.country}" required>
+                <label for="country">Country</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="phone_number" name="phone_number" type="text" pattern="[0-9]{10}" class="validate"
+                       th:value="${careProvider.phoneNumber}" required>
+                <label for="phone_number">Phone Number</label>
+            </div>
+            <div class="input-field col s6">
+                <select id="specialism" name="specialism">
+                    <option th:each="specialism : ${T(nl.hva.backend.domain.value_objects.Specialism).values()}"
+                            th:text="${specialism.displayValue}"
+                            th:value="${specialism}"
+                            th:selected="${specialism == careProvider.specialism}">
+                    </option>
+                </select>
+                <label for="specialism">Specialism</label>
+            </div>
+        </div>
+
+        <!-- cancel/submit -->
+        <div class="row">
+            <div class="col s6">
+                <a href="/care-provider/overview" class="btn waves-effect waves-light red lighten-2"
+                   style="width: 100%">
+                    <i class="material-icons right">cancel</i>
+                    Cancel
+                </a>
+            </div>
+            <div class="col s6">
+                <button class="btn waves-effect waves-light blue lighten-2" type="submit" name="action"
+                        style="width: 100%">
+                    <i class="material-icons right">send</i>
+                    Submit Changes
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<footer th:replace="fragments/main.html :: footer"></footer>
+
+</body>
+</html>

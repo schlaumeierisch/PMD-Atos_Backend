@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping" default-access="field">
+    <class name="nl.hva.backend.domain.CareProvider" table="care_provider">
+
+        <id name="id" column="id" type="long">
+            <generator class="increment"/>
+        </id>
+
+        <component name="domainId" class="nl.hva.backend.domain.ids.CareProviderId">
+            <property name="id" column="care_provider_id" type="string"/>
+        </component>
+
+        <property name="firstName" column="first_name" type="string"/>
+        <property name="lastName" column="last_name" type="string"/>
+
+        <component name="address" class="nl.hva.backend.domain.value_objects.Address">
+            <property name="street" column="street" type="string"/>
+            <property name="zip" column="zip" type="string"/>
+            <property name="city" column="city" type="string"/>
+            <property name="country" column="country" type="string"/>
+        </component>
+
+        <property name="phoneNumber" column="phone_number" type="string"/>
+        <property name="specialism" column="specialism">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">nl.hva.backend.domain.value_objects.Specialism</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+
+    </class>
+</hibernate-mapping>
