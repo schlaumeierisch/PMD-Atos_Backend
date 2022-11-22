@@ -16,8 +16,8 @@ class PatientDTO {
     private lateinit var email: String
     private var isUsingApp: Boolean = false
 
-    private lateinit var contactPersonDTOs: Set<ContactPersonDTO>
-    private lateinit var careProviderDTOs: Set<CareProviderDTO>
+    private lateinit var contactPersonDTOs: MutableSet<ContactPersonDTO>
+    private lateinit var careProviderDTOs: MutableSet<CareProviderDTO>
     private lateinit var generalPractitionerDTO: GeneralPractitionerDTO
 
     companion object {
@@ -32,9 +32,34 @@ class PatientDTO {
             patientDTO.phoneNumber = patient.phoneNumber()
             patientDTO.email = patient.email()
             patientDTO.isUsingApp = patient.isUsingApp()
-            patientDTO.contactPersonDTOs = setOf()
-            patientDTO.careProviderDTOs = setOf()
             patientDTO.generalPractitionerDTO = GeneralPractitionerDTO.fromGeneralPractitioner(patient.generalPractitioner())
+
+            patientDTO.careProviderDTOs = mutableSetOf()
+            for (careProvider in patient.careProviders()) {
+                val careProviderDTO: CareProviderDTO = CareProviderDTO().builder()
+                    .withId(careProvider.domainId().id())
+                    .withFirstName(careProvider.firstName())
+                    .withLastName(careProvider.lastName())
+                    .withAddress(AddressDTO.fromAddress(careProvider.address()))
+                    .withPhoneNumber(careProvider.phoneNumber())
+                    .withSpecialism(careProvider.specialism())
+                    .build()
+
+                patientDTO.careProviderDTOs.add(careProviderDTO)
+            }
+
+            patientDTO.contactPersonDTOs = mutableSetOf()
+            for (contactPerson in patient.contactPersons()) {
+                val contactPersonDTO: ContactPersonDTO = ContactPersonDTO().builder()
+                    .withId(contactPerson.domainId().id())
+                    .withFirstName(contactPerson.firstName())
+                    .withLastName(contactPerson.lastName())
+                    .withPhoneNumber(contactPerson.phoneNumber())
+                    .withPatientDTO(patientDTO)
+                    .build()
+
+                patientDTO.contactPersonDTOs.add(contactPersonDTO)
+            }
 
             return patientDTO
         }
@@ -106,12 +131,12 @@ class PatientDTO {
             return this
         }
 
-        fun withContactPersonDTOs(contactPersonDTOs: Set<ContactPersonDTO>): Builder {
+        fun withContactPersonDTOs(contactPersonDTOs: MutableSet<ContactPersonDTO>): Builder {
             instance.contactPersonDTOs = contactPersonDTOs
             return this
         }
 
-        fun withCareProviderDTOs(careProviderDTOs: Set<CareProviderDTO>): Builder {
+        fun withCareProviderDTOs(careProviderDTOs: MutableSet<CareProviderDTO>): Builder {
             instance.careProviderDTOs = careProviderDTOs
             return this
         }

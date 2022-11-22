@@ -17,8 +17,8 @@ open class Patient {
     private lateinit var email: String
     private var isUsingApp: Boolean = false
 
-    private lateinit var contactPersons: Set<ContactPerson>
-    private lateinit var careProviders: Set<CareProvider>
+    private lateinit var contactPersons: MutableSet<ContactPerson>
+    private lateinit var careProviders: MutableSet<CareProvider>
     private lateinit var generalPractitioner: GeneralPractitioner
 
     // required by hibernate
@@ -34,8 +34,8 @@ open class Patient {
         phoneNumber: String,
         email: String,
         isUsingApp: Boolean,
-        contactPersons: Set<ContactPerson>,
-        careProviders: Set<CareProvider>,
+        contactPersons: MutableSet<ContactPerson>,
+        careProviders: MutableSet<CareProvider>,
         generalPractitioner: GeneralPractitioner
     ) {
         this.domainId = domainId
@@ -63,7 +63,7 @@ open class Patient {
     fun phoneNumber(): String = this.phoneNumber
     fun email(): String = this.email
     fun isUsingApp(): Boolean = this.isUsingApp
-    fun contactPersons(): Set<ContactPerson> = this.contactPersons
-    fun careProviders(): Set<CareProvider> = this.careProviders
+    fun contactPersons(): MutableSet<ContactPerson> = this.contactPersons
+    fun careProviders(): MutableSet<CareProvider> = this.careProviders
     fun generalPractitioner(): GeneralPractitioner = this.generalPractitioner
 }
