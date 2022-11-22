@@ -37,6 +37,7 @@ class PatientServiceImpl : PatientService {
     ) {
         val patientId: PatientId = patientRepository.nextIdentity()
 
+        // todo: change mutableSetOf() to real values
         val patient = Patient(
             patientId,
             firstName,
@@ -47,6 +48,8 @@ class PatientServiceImpl : PatientService {
             phoneNumber,
             email,
             isUsingApp,
+            mutableSetOf(),
+            mutableSetOf(),
             generalPractitioner
         )
 

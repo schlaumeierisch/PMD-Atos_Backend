@@ -24,5 +24,12 @@
 
         <property name="phoneNumber" column="phone_number" type="string"/>
 
+        <set name="patients" table="general_practitioner_patient" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="general_practitioner_id" not-null="true" />
+            </key>
+            <one-to-many class="nl.hva.backend.domain.Patient" />
+        </set>
+
     </class>
 </hibernate-mapping>

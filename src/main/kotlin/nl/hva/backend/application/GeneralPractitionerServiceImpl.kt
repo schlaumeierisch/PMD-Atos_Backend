@@ -29,12 +29,14 @@ class GeneralPractitionerServiceImpl : GeneralPractitionerService {
     ) {
         val generalPractitionerId: GeneralPractitionerId = generalPractitionerRepository.nextIdentity()
 
+        // todo: change mutableSetOf() to real values
         val generalPractitioner = GeneralPractitioner(
             generalPractitionerId,
             firstName,
             lastName,
             Address(street, zip, city, country),
-            phoneNumber
+            phoneNumber,
+            mutableSetOf()
         )
 
         this.generalPractitionerRepository.createAccount(generalPractitioner)
@@ -73,12 +75,14 @@ class GeneralPractitionerServiceImpl : GeneralPractitionerService {
         val generalPractitioner: GeneralPractitioner =
             this.generalPractitionerRepository.getAccountById(generalPractitionerId)
 
+        // todo: change mutableSetOf() to real values
         return GeneralPractitionerDTO().builder()
             .withId(generalPractitioner.domainId().id())
             .withFirstName(generalPractitioner.firstName())
             .withLastName(generalPractitioner.lastName())
             .withAddress(AddressDTO.fromAddress(generalPractitioner.address()))
             .withPhoneNumber(generalPractitioner.phoneNumber())
+            .withPatientDTOs(mutableSetOf())
             .build()
     }
 
@@ -87,6 +91,7 @@ class GeneralPractitionerServiceImpl : GeneralPractitionerService {
         val generalPractitioners: List<GeneralPractitioner> = this.generalPractitionerRepository.getAllAccounts()
         val generalPractitionerDTOs: ArrayList<GeneralPractitionerDTO> = arrayListOf()
 
+        // todo: change mutableSetOf() to real values
         for (generalPractitioner in generalPractitioners) {
             val generalPractitionerDTO: GeneralPractitionerDTO = GeneralPractitionerDTO().builder()
                 .withId(generalPractitioner.domainId().id())
@@ -94,6 +99,7 @@ class GeneralPractitionerServiceImpl : GeneralPractitionerService {
                 .withLastName(generalPractitioner.lastName())
                 .withAddress(AddressDTO.fromAddress(generalPractitioner.address()))
                 .withPhoneNumber(generalPractitioner.phoneNumber())
+                .withPatientDTOs(mutableSetOf())
                 .build()
 
             generalPractitionerDTOs.add(generalPractitionerDTO)
