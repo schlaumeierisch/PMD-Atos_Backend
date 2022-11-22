@@ -16,6 +16,8 @@ class PatientDTO {
     private lateinit var email: String
     private var isUsingApp: Boolean = false
 
+    private lateinit var contactPersonDTOs: Set<ContactPersonDTO>
+    private lateinit var careProviderDTOs: Set<CareProviderDTO>
     private lateinit var generalPractitionerDTO: GeneralPractitionerDTO
 
     companion object {
@@ -30,6 +32,8 @@ class PatientDTO {
             patientDTO.phoneNumber = patient.phoneNumber()
             patientDTO.email = patient.email()
             patientDTO.isUsingApp = patient.isUsingApp()
+            patientDTO.contactPersonDTOs = setOf()
+            patientDTO.careProviderDTOs = setOf()
             patientDTO.generalPractitionerDTO = GeneralPractitionerDTO.fromGeneralPractitioner(patient.generalPractitioner())
 
             return patientDTO
@@ -46,6 +50,8 @@ class PatientDTO {
     fun phoneNumber(): String = this.phoneNumber
     fun email(): String = this.email
     fun isUsingApp(): Boolean = this.isUsingApp
+    fun contactPersonDTOs(): Set<ContactPersonDTO> = this.contactPersonDTOs
+    fun careProviderDTOs(): Set<CareProviderDTO> = this.careProviderDTOs
     fun generalPractitionerDTO(): GeneralPractitionerDTO = this.generalPractitionerDTO
 
     fun builder(): Builder {
@@ -100,6 +106,16 @@ class PatientDTO {
             return this
         }
 
+        fun withContactPersonDTOs(contactPersonDTOs: Set<ContactPersonDTO>): Builder {
+            instance.contactPersonDTOs = contactPersonDTOs
+            return this
+        }
+
+        fun withCareProviderDTOs(careProviderDTOs: Set<CareProviderDTO>): Builder {
+            instance.careProviderDTOs = careProviderDTOs
+            return this
+        }
+
         fun withGeneralPractitionerDTO(generalPractitionerDTO: GeneralPractitionerDTO): Builder {
             instance.generalPractitionerDTO = generalPractitionerDTO
             return this
@@ -112,6 +128,8 @@ class PatientDTO {
             Objects.requireNonNull(instance.birthDate, "birthDate must be set in PatientDTO")
             Objects.requireNonNull(instance.phoneNumber, "phoneNumber must be set in PatientDTO")
             Objects.requireNonNull(instance.email, "email must be set in PatientDTO")
+            Objects.requireNonNull(instance.contactPersonDTOs, "contactPersonDTOs must be set in PatientDTO")
+            Objects.requireNonNull(instance.careProviderDTOs, "careProviderDTOs must be set in PatientDTO")
             Objects.requireNonNull(instance.generalPractitionerDTO, "generalPractitionerDTO must be set in PatientDTO")
 
             return instance

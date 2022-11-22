@@ -19,12 +19,14 @@ open class ContactPerson {
         domainId: ContactPersonId,
         firstName: String,
         lastName: String,
-        phoneNumber: String
+        phoneNumber: String,
+        patient: Patient
     ) {
         this.domainId = domainId
         this.firstName = firstName
         this.lastName = lastName
         this.phoneNumber = phoneNumber
+        this.patient = patient
     }
 
     // getter
@@ -33,4 +35,5 @@ open class ContactPerson {
     fun firstName(): String = this.firstName
     fun lastName(): String = this.lastName
     fun phoneNumber(): String = this.phoneNumber
+    fun patient(): Patient = this.patient
 }
