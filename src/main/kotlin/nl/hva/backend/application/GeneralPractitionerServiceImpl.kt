@@ -77,14 +77,18 @@ class GeneralPractitionerServiceImpl : GeneralPractitionerService {
         val generalPractitioner: GeneralPractitioner =
             this.generalPractitionerRepository.getAccountById(generalPractitionerId)
 
-        // todo: change mutableSetOf() to real values
         return GeneralPractitionerDTO().builder()
             .withId(generalPractitioner.domainId().id())
             .withFirstName(generalPractitioner.firstName())
             .withLastName(generalPractitioner.lastName())
             .withAddress(AddressDTO.fromAddress(generalPractitioner.address()))
             .withPhoneNumber(generalPractitioner.phoneNumber())
-            .withPatientDTOs(mutableSetOf())
+            .withPatientDTOs(
+                generalPractitioner.patients()
+                    .stream()
+                    .map(PatientDTO::fromPatient)
+                    .collect(Collectors.toUnmodifiableSet())
+            )
             .build()
     }
 
@@ -100,10 +104,12 @@ class GeneralPractitionerServiceImpl : GeneralPractitionerService {
                 .withLastName(generalPractitioner.lastName())
                 .withAddress(AddressDTO.fromAddress(generalPractitioner.address()))
                 .withPhoneNumber(generalPractitioner.phoneNumber())
-                .withPatientDTOs(generalPractitioner.patients()
-                    .stream()
-                    .map(PatientDTO::fromPatient)
-                    .collect(Collectors.toUnmodifiableSet()))
+                .withPatientDTOs(
+                    generalPractitioner.patients()
+                        .stream()
+                        .map(PatientDTO::fromPatient)
+                        .collect(Collectors.toUnmodifiableSet())
+                )
                 .build()
 
             generalPractitionerDTOs.add(generalPractitionerDTO)

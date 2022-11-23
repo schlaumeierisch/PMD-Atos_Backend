@@ -19,7 +19,7 @@ class GeneralPractitionerDTO {
         fun fromGeneralPractitioner(generalPractitioner: GeneralPractitioner, withIteration: Boolean): GeneralPractitionerDTO {
             val generalPractitionerDTO = GeneralPractitionerDTO()
 
-            generalPractitionerDTO.id = generalPractitioner.id().toString()
+            generalPractitionerDTO.id = generalPractitioner.domainId().id()
             generalPractitionerDTO.firstName = generalPractitioner.firstName()
             generalPractitionerDTO.lastName = generalPractitioner.lastName()
             generalPractitionerDTO.addressDTO = AddressDTO.fromAddress(generalPractitioner.address())

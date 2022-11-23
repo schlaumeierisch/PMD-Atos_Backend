@@ -26,6 +26,7 @@ class PatientDTO {
         fun fromPatient(patient: Patient): PatientDTO {
             val patientDTO = PatientDTO()
 
+            patientDTO.id = patient.domainId().id()
             patientDTO.firstName = patient.firstName()
             patientDTO.lastName = patient.lastName()
             patientDTO.address = AddressDTO.fromAddress(patient.address())
