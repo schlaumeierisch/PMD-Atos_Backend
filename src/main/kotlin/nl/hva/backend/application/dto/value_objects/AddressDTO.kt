@@ -1,8 +1,10 @@
 package nl.hva.backend.application.dto.value_objects
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect
 import nl.hva.backend.domain.value_objects.Address
 import java.util.*
 
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 class AddressDTO {
     private lateinit var street: String
     private lateinit var zip: String

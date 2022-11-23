@@ -1,10 +1,12 @@
 package nl.hva.backend.application.dto
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect
 import nl.hva.backend.application.dto.value_objects.AddressDTO
 import nl.hva.backend.domain.CareProvider
 import nl.hva.backend.domain.value_objects.Specialism
 import java.util.*
 
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 class CareProviderDTO {
     private lateinit var id: String
     private lateinit var firstName: String
