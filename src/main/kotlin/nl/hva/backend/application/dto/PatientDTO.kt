@@ -34,7 +34,7 @@ class PatientDTO {
             patientDTO.phoneNumber = patient.phoneNumber()
             patientDTO.email = patient.email()
             patientDTO.isUsingApp = patient.isUsingApp()
-            patientDTO.generalPractitionerDTO = GeneralPractitionerDTO.fromGeneralPractitioner(patient.generalPractitioner())
+            patientDTO.generalPractitionerDTO = GeneralPractitionerDTO.fromGeneralPractitioner(patient.generalPractitioner(), false)
 
             patientDTO.careProviderDTOs = mutableSetOf()
             for (careProvider in patient.careProviders()) {

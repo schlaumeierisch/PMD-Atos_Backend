@@ -109,7 +109,7 @@ class PatientServiceImpl : PatientService {
             .withPhoneNumber(patient.phoneNumber())
             .withEmail(patient.email())
             .withIsUsingApp(patient.isUsingApp())
-            .withGeneralPractitionerDTO(GeneralPractitionerDTO.fromGeneralPractitioner(patient.generalPractitioner()))
+            .withGeneralPractitionerDTO(GeneralPractitionerDTO.fromGeneralPractitioner(patient.generalPractitioner(), false))
             .build()
     }
 
@@ -129,7 +129,7 @@ class PatientServiceImpl : PatientService {
                 .withPhoneNumber(patient.phoneNumber())
                 .withEmail(patient.email())
                 .withIsUsingApp(patient.isUsingApp())
-                .withGeneralPractitionerDTO(GeneralPractitionerDTO.fromGeneralPractitioner(patient.generalPractitioner()))
+                .withGeneralPractitionerDTO(GeneralPractitionerDTO.fromGeneralPractitioner(patient.generalPractitioner(), false))
                 .build()
 
             patientDTOs.add(patientDTO)

@@ -2,6 +2,7 @@ package nl.hva.backend.application
 
 import nl.hva.backend.application.api.GeneralPractitionerService
 import nl.hva.backend.application.dto.GeneralPractitionerDTO
+import nl.hva.backend.application.dto.PatientDTO
 import nl.hva.backend.application.dto.value_objects.AddressDTO
 import nl.hva.backend.domain.GeneralPractitioner
 import nl.hva.backend.domain.api.GeneralPractitionerRepository
@@ -10,6 +11,7 @@ import nl.hva.backend.domain.value_objects.Address
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
+import java.util.stream.Collectors
 
 @Component
 class GeneralPractitionerServiceImpl : GeneralPractitionerService {
@@ -91,7 +93,6 @@ class GeneralPractitionerServiceImpl : GeneralPractitionerService {
         val generalPractitioners: List<GeneralPractitioner> = this.generalPractitionerRepository.getAllAccounts()
         val generalPractitionerDTOs: ArrayList<GeneralPractitionerDTO> = arrayListOf()
 
-        // todo: change mutableSetOf() to real values
         for (generalPractitioner in generalPractitioners) {
             val generalPractitionerDTO: GeneralPractitionerDTO = GeneralPractitionerDTO().builder()
                 .withId(generalPractitioner.domainId().id())
@@ -99,7 +100,10 @@ class GeneralPractitionerServiceImpl : GeneralPractitionerService {
                 .withLastName(generalPractitioner.lastName())
                 .withAddress(AddressDTO.fromAddress(generalPractitioner.address()))
                 .withPhoneNumber(generalPractitioner.phoneNumber())
-                .withPatientDTOs(mutableSetOf())
+                .withPatientDTOs(generalPractitioner.patients()
+                    .stream()
+                    .map(PatientDTO::fromPatient)
+                    .collect(Collectors.toUnmodifiableSet()))
                 .build()
 
             generalPractitionerDTOs.add(generalPractitionerDTO)

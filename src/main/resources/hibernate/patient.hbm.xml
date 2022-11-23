@@ -14,6 +14,14 @@
 
         <property name="firstName" column="first_name" type="string"/>
         <property name="lastName" column="last_name" type="string"/>
+
+        <component name="address" class="nl.hva.backend.domain.value_objects.Address">
+            <property name="street" column="street" type="string"/>
+            <property name="zip" column="zip" type="string"/>
+            <property name="city" column="city" type="string"/>
+            <property name="country" column="country" type="string"/>
+        </component>
+
         <property name="gender" column="gender" type="string"/>
         <property name="birthDate" column="birth_date" type="java.time.LocalDate"/>
         <property name="phoneNumber" column="phone_number" type="string"/>

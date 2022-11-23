@@ -16,7 +16,7 @@ class GeneralPractitionerDTO {
     private lateinit var patientDTOs: MutableSet<PatientDTO>
 
     companion object {
-        fun fromGeneralPractitioner(generalPractitioner: GeneralPractitioner): GeneralPractitionerDTO {
+        fun fromGeneralPractitioner(generalPractitioner: GeneralPractitioner, withIteration: Boolean): GeneralPractitionerDTO {
             val generalPractitionerDTO = GeneralPractitionerDTO()
 
             generalPractitionerDTO.id = generalPractitioner.id().toString()
@@ -25,9 +25,12 @@ class GeneralPractitionerDTO {
             generalPractitionerDTO.addressDTO = AddressDTO.fromAddress(generalPractitioner.address())
             generalPractitionerDTO.phoneNumber = generalPractitioner.phoneNumber()
 
-            generalPractitionerDTO.patientDTOs = mutableSetOf()
-            for (patient in generalPractitioner.patients()) {
-                generalPractitionerDTO.patientDTOs.add(PatientDTO.fromPatient(patient))
+            if (withIteration) {
+                for (patient in generalPractitioner.patients()) {
+                    generalPractitionerDTO.patientDTOs.add(PatientDTO.fromPatient(patient))
+                }
+            } else {
+                generalPractitionerDTO.patientDTOs = mutableSetOf()
             }
 
             return generalPractitionerDTO
