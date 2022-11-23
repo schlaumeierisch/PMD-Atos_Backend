@@ -18,9 +18,9 @@ class PatientDTO {
     private lateinit var email: String
     private var isUsingApp: Boolean = false
 
-    private lateinit var contactPersonDTOs: MutableSet<ContactPersonDTO>
-    private lateinit var careProviderDTOs: MutableSet<CareProviderDTO>
-    private lateinit var generalPractitionerDTO: GeneralPractitionerDTO
+    private var contactPersonDTOs: MutableSet<ContactPersonDTO> = mutableSetOf()
+    private var careProviderDTOs: MutableSet<CareProviderDTO> = mutableSetOf()
+    private var generalPractitionerDTO: GeneralPractitionerDTO? = null
 
     companion object {
         fun fromPatient(patient: Patient): PatientDTO {
@@ -34,14 +34,15 @@ class PatientDTO {
             patientDTO.phoneNumber = patient.phoneNumber()
             patientDTO.email = patient.email()
             patientDTO.isUsingApp = patient.isUsingApp()
-            patientDTO.generalPractitionerDTO = GeneralPractitionerDTO.fromGeneralPractitioner(patient.generalPractitioner(), false)
 
-            patientDTO.careProviderDTOs = mutableSetOf()
+            if (patient.generalPractitioner() != null) {
+                patientDTO.generalPractitionerDTO = GeneralPractitionerDTO.fromGeneralPractitioner(patient.generalPractitioner()!!, false)
+            }
+
             for (careProvider in patient.careProviders()) {
                 patientDTO.careProviderDTOs.add(CareProviderDTO.fromCareProvider(careProvider))
             }
 
-            patientDTO.contactPersonDTOs = mutableSetOf()
             for (contactPerson in patient.contactPersons()) {
                 patientDTO.contactPersonDTOs.add(ContactPersonDTO.fromContactPerson(contactPerson))
             }
@@ -62,7 +63,7 @@ class PatientDTO {
     fun isUsingApp(): Boolean = this.isUsingApp
     fun contactPersonDTOs(): MutableSet<ContactPersonDTO> = this.contactPersonDTOs
     fun careProviderDTOs(): MutableSet<CareProviderDTO> = this.careProviderDTOs
-    fun generalPractitionerDTO(): GeneralPractitionerDTO = this.generalPractitionerDTO
+    fun generalPractitionerDTO(): GeneralPractitionerDTO? = this.generalPractitionerDTO
 
     fun builder(): Builder {
         return Builder()

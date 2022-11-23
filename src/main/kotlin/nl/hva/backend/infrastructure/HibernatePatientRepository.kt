@@ -36,15 +36,14 @@ class HibernatePatientRepository : PatientRepository {
         birthDate: LocalDate,
         phoneNumber: String,
         email: String,
-        isUsingApp: Boolean,
-        generalPractitioner: GeneralPractitioner
+        isUsingApp: Boolean
     ) {
 
         val query: Query = this.entityManager.createQuery(
             "UPDATE Patient p SET p.firstName = ?1, p.lastName = ?2, p.address.street = ?3, p.address.zip = ?4," +
                     "p.address.city = ?5, p.address.country = ?6, p.gender = ?7, p.birthDate = ?8, p.phoneNumber = ?9," +
-                    "p.email = ?10, p.isUsingApp = ?11, p.generalPractitioner = ?12" +
-                    "WHERE p.domainId = ?13"
+                    "p.email = ?10, p.isUsingApp = ?11" +
+                    "WHERE p.domainId = ?12"
         )
             .setParameter(1, firstName)
             .setParameter(2, lastName)
@@ -57,8 +56,7 @@ class HibernatePatientRepository : PatientRepository {
             .setParameter(9, phoneNumber)
             .setParameter(10, email)
             .setParameter(11, isUsingApp)
-            .setParameter(12, generalPractitioner)
-            .setParameter(13, patientId)
+            .setParameter(12, patientId)
 
         query.executeUpdate()
     }

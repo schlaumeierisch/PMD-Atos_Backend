@@ -4,7 +4,6 @@ import nl.hva.backend.application.api.PatientService
 import nl.hva.backend.application.dto.GeneralPractitionerDTO
 import nl.hva.backend.application.dto.PatientDTO
 import nl.hva.backend.application.dto.value_objects.AddressDTO
-import nl.hva.backend.domain.GeneralPractitioner
 import nl.hva.backend.domain.Patient
 import nl.hva.backend.domain.api.PatientRepository
 import nl.hva.backend.domain.ids.PatientId
@@ -32,12 +31,10 @@ class PatientServiceImpl : PatientService {
         birthDate: LocalDate,
         phoneNumber: String,
         email: String,
-        isUsingApp: Boolean,
-        generalPractitioner: GeneralPractitioner
+        isUsingApp: Boolean
     ) {
         val patientId: PatientId = patientRepository.nextIdentity()
 
-        // todo: change mutableSetOf() to real values
         val patient = Patient(
             patientId,
             firstName,
@@ -47,10 +44,7 @@ class PatientServiceImpl : PatientService {
             birthDate,
             phoneNumber,
             email,
-            isUsingApp,
-            mutableSetOf(),
-            mutableSetOf(),
-            generalPractitioner
+            isUsingApp
         )
 
         this.patientRepository.createAccount(patient)
@@ -69,8 +63,7 @@ class PatientServiceImpl : PatientService {
         birthDate: LocalDate,
         phoneNumber: String,
         email: String,
-        isUsingApp: Boolean,
-        generalPractitioner: GeneralPractitioner
+        isUsingApp: Boolean
     ) {
         this.patientRepository.editAccount(
             patientId,
@@ -84,8 +77,7 @@ class PatientServiceImpl : PatientService {
             birthDate,
             phoneNumber,
             email,
-            isUsingApp,
-            generalPractitioner
+            isUsingApp
         )
     }
 
@@ -99,27 +91,8 @@ class PatientServiceImpl : PatientService {
         val patient: Patient =
             this.patientRepository.getAccountById(patientId)
 
-        return PatientDTO().builder()
-            .withId(patient.domainId().id())
-            .withFirstName(patient.firstName())
-            .withLastName(patient.lastName())
-            .withAddress(AddressDTO.fromAddress(patient.address()))
-            .withGender(patient.gender())
-            .withBirthDate(patient.birthDate())
-            .withPhoneNumber(patient.phoneNumber())
-            .withEmail(patient.email())
-            .withIsUsingApp(patient.isUsingApp())
-            .withGeneralPractitionerDTO(GeneralPractitionerDTO.fromGeneralPractitioner(patient.generalPractitioner(), false))
-            .build()
-    }
-
-    @Transactional
-    override fun getAllAccounts(): List<PatientDTO> {
-        val patients: List<Patient> = this.patientRepository.getAllAccounts()
-        val patientDTOs: ArrayList<PatientDTO> = arrayListOf()
-
-        for (patient in patients) {
-            val patientDTO: PatientDTO = PatientDTO().builder()
+        if (patient.generalPractitioner() != null) {
+            return PatientDTO().builder()
                 .withId(patient.domainId().id())
                 .withFirstName(patient.firstName())
                 .withLastName(patient.lastName())
@@ -129,8 +102,66 @@ class PatientServiceImpl : PatientService {
                 .withPhoneNumber(patient.phoneNumber())
                 .withEmail(patient.email())
                 .withIsUsingApp(patient.isUsingApp())
-                .withGeneralPractitionerDTO(GeneralPractitionerDTO.fromGeneralPractitioner(patient.generalPractitioner(), false))
+                .withGeneralPractitionerDTO(
+                    GeneralPractitionerDTO.fromGeneralPractitioner(
+                        patient.generalPractitioner()!!,
+                        false
+                    )
+                )
                 .build()
+        } else {
+            return PatientDTO().builder()
+                .withId(patient.domainId().id())
+                .withFirstName(patient.firstName())
+                .withLastName(patient.lastName())
+                .withAddress(AddressDTO.fromAddress(patient.address()))
+                .withGender(patient.gender())
+                .withBirthDate(patient.birthDate())
+                .withPhoneNumber(patient.phoneNumber())
+                .withEmail(patient.email())
+                .withIsUsingApp(patient.isUsingApp())
+                .build()
+        }
+    }
+
+    @Transactional
+    override fun getAllAccounts(): List<PatientDTO> {
+        val patients: List<Patient> = this.patientRepository.getAllAccounts()
+        val patientDTOs: ArrayList<PatientDTO> = arrayListOf()
+
+        for (patient in patients) {
+            val patientDTO: PatientDTO
+            if (patient.generalPractitioner() != null) {
+                patientDTO = PatientDTO().builder()
+                    .withId(patient.domainId().id())
+                    .withFirstName(patient.firstName())
+                    .withLastName(patient.lastName())
+                    .withAddress(AddressDTO.fromAddress(patient.address()))
+                    .withGender(patient.gender())
+                    .withBirthDate(patient.birthDate())
+                    .withPhoneNumber(patient.phoneNumber())
+                    .withEmail(patient.email())
+                    .withIsUsingApp(patient.isUsingApp())
+                    .withGeneralPractitionerDTO(
+                        GeneralPractitionerDTO.fromGeneralPractitioner(
+                            patient.generalPractitioner()!!,
+                            false
+                        )
+                    )
+                    .build()
+            } else {
+                patientDTO = PatientDTO().builder()
+                    .withId(patient.domainId().id())
+                    .withFirstName(patient.firstName())
+                    .withLastName(patient.lastName())
+                    .withAddress(AddressDTO.fromAddress(patient.address()))
+                    .withGender(patient.gender())
+                    .withBirthDate(patient.birthDate())
+                    .withPhoneNumber(patient.phoneNumber())
+                    .withEmail(patient.email())
+                    .withIsUsingApp(patient.isUsingApp())
+                    .build()
+            }
 
             patientDTOs.add(patientDTO)
         }

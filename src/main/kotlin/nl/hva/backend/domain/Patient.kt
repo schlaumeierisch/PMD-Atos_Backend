@@ -17,9 +17,9 @@ open class Patient {
     private lateinit var email: String
     private var isUsingApp: Boolean = false
 
-    private lateinit var contactPersons: MutableSet<ContactPerson>
-    private lateinit var careProviders: MutableSet<CareProvider>
-    private lateinit var generalPractitioner: GeneralPractitioner
+    private var contactPersons: MutableSet<ContactPerson> = mutableSetOf()
+    private var careProviders: MutableSet<CareProvider> = mutableSetOf()
+    private var generalPractitioner: GeneralPractitioner? = null
 
     // required by hibernate
     protected constructor()
@@ -33,10 +33,7 @@ open class Patient {
         birthDate: LocalDate,
         phoneNumber: String,
         email: String,
-        isUsingApp: Boolean,
-        contactPersons: MutableSet<ContactPerson>,
-        careProviders: MutableSet<CareProvider>,
-        generalPractitioner: GeneralPractitioner
+        isUsingApp: Boolean
     ) {
         this.domainId = domainId
         this.firstName = firstName
@@ -47,9 +44,6 @@ open class Patient {
         this.phoneNumber = phoneNumber
         this.email = email
         this.isUsingApp = isUsingApp
-        this.contactPersons = contactPersons
-        this.careProviders = careProviders
-        this.generalPractitioner = generalPractitioner
     }
 
     // getter
@@ -65,5 +59,5 @@ open class Patient {
     fun isUsingApp(): Boolean = this.isUsingApp
     fun contactPersons(): MutableSet<ContactPerson> = this.contactPersons
     fun careProviders(): MutableSet<CareProvider> = this.careProviders
-    fun generalPractitioner(): GeneralPractitioner = this.generalPractitioner
+    fun generalPractitioner(): GeneralPractitioner? = this.generalPractitioner
 }

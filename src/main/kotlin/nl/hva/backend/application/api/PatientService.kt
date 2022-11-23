@@ -18,8 +18,7 @@ interface PatientService {
         birthDate: LocalDate,
         phoneNumber: String,
         email: String,
-        isUsingApp: Boolean,
-        generalPractitioner: GeneralPractitioner
+        isUsingApp: Boolean
     )
 
     fun editAccount(
@@ -34,8 +33,7 @@ interface PatientService {
         birthDate: LocalDate,
         phoneNumber: String,
         email: String,
-        isUsingApp: Boolean,
-        generalPractitioner: GeneralPractitioner
+        isUsingApp: Boolean
     )
 
     fun deleteAccount(patientId: PatientId)
