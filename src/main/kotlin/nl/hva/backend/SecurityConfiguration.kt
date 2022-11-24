@@ -12,7 +12,7 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
             .csrf().disable()
             .headers().frameOptions().disable()
             .and()
-            // define accessible folders (without being logged in)
+            // define accessible folders/paths (without being logged in)
             .authorizeRequests().antMatchers(
                 "/css/**",
                 "/fonts/**",
