@@ -17,7 +17,10 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
                 "/css/**",
                 "/fonts/**",
                 "/img/**",
-                "/js/**"
+                "/js/**",
+                "/rest/**",
+                "/v3/api-docs/**",
+                "/swagger-ui/**"
             ).permitAll()
             .anyRequest().authenticated()
             .and()

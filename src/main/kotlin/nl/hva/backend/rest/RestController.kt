@@ -22,12 +22,6 @@ class RestController {
     @Autowired
     private lateinit var generalPractitionerService: GeneralPractitionerService
 
-    @GetMapping("/patients/getAll")
-    @ResponseBody
-    fun getAllPatients(): List<PatientDTO> {
-        return this.patientService.getAllAccounts()
-    }
-
     @GetMapping("/patients/getByGeneralPractitionerId/{id}")
     @ResponseBody
     fun getPatientsOfGeneralPractitioner(

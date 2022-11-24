@@ -11,7 +11,7 @@ class PatientDTO {
     private lateinit var id: String
     private lateinit var firstName: String
     private lateinit var lastName: String
-    private lateinit var address: AddressDTO
+    private lateinit var addressDTO: AddressDTO
     private lateinit var gender: String
     private lateinit var birthDate: LocalDate
     private lateinit var phoneNumber: String
@@ -29,7 +29,7 @@ class PatientDTO {
             patientDTO.id = patient.domainId().id()
             patientDTO.firstName = patient.firstName()
             patientDTO.lastName = patient.lastName()
-            patientDTO.address = AddressDTO.fromAddress(patient.address())
+            patientDTO.addressDTO = AddressDTO.fromAddress(patient.address())
             patientDTO.gender = patient.gender()
             patientDTO.birthDate = patient.birthDate()
             patientDTO.phoneNumber = patient.phoneNumber()
@@ -56,7 +56,7 @@ class PatientDTO {
     fun id(): String = this.id
     fun firstName(): String = this.firstName
     fun lastName(): String = this.lastName
-    fun address(): AddressDTO = this.address
+    fun addressDTO(): AddressDTO = this.addressDTO
     fun gender(): String = this.gender
     fun birthDate(): LocalDate = this.birthDate
     fun phoneNumber(): String = this.phoneNumber
@@ -88,8 +88,8 @@ class PatientDTO {
             return this
         }
 
-        fun withAddress(address: AddressDTO): Builder {
-            instance.address = address
+        fun withAddressDTO(address: AddressDTO): Builder {
+            instance.addressDTO = address
             return this
         }
 
@@ -136,6 +136,7 @@ class PatientDTO {
         fun build(): PatientDTO {
             Objects.requireNonNull(instance.firstName, "street must be set in PatientDTO")
             Objects.requireNonNull(instance.lastName, "lastName must be set in PatientDTO")
+            Objects.requireNonNull(instance.addressDTO, "addressDTO must be set in PatientDTO")
             Objects.requireNonNull(instance.gender, "gender must be set in PatientDTO")
             Objects.requireNonNull(instance.birthDate, "birthDate must be set in PatientDTO")
             Objects.requireNonNull(instance.phoneNumber, "phoneNumber must be set in PatientDTO")
