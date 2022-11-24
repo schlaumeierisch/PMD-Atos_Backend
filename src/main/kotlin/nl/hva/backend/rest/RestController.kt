@@ -23,9 +23,13 @@ class RestController {
     private lateinit var generalPractitionerService: GeneralPractitionerService
 
     @GetMapping("/patients/getAll")
-    fun getAllPatients(): List<PatientDTO> = this.patientService.getAllAccounts()
+    @ResponseBody
+    fun getAllPatients(): List<PatientDTO> {
+        return this.patientService.getAllAccounts()
+    }
 
     @GetMapping("/patients/getByGeneralPractitionerId/{id}")
+    @ResponseBody
     fun getPatientsOfGeneralPractitioner(
         @PathVariable("id") id: String
     ): MutableSet<PatientDTO> {
