@@ -13,10 +13,8 @@ class GeneralPractitionerDTO {
     private lateinit var addressDTO: AddressDTO
     private lateinit var phoneNumber: String
 
-    private lateinit var patientDTOs: MutableSet<PatientDTO>
-
     companion object {
-        fun fromGeneralPractitioner(generalPractitioner: GeneralPractitioner, withIteration: Boolean): GeneralPractitionerDTO {
+        fun fromGeneralPractitioner(generalPractitioner: GeneralPractitioner): GeneralPractitionerDTO {
             val generalPractitionerDTO = GeneralPractitionerDTO()
 
             generalPractitionerDTO.id = generalPractitioner.domainId().id()
@@ -24,14 +22,6 @@ class GeneralPractitionerDTO {
             generalPractitionerDTO.lastName = generalPractitioner.lastName()
             generalPractitionerDTO.addressDTO = AddressDTO.fromAddress(generalPractitioner.address())
             generalPractitionerDTO.phoneNumber = generalPractitioner.phoneNumber()
-
-            if (withIteration) {
-                for (patient in generalPractitioner.patients()) {
-                    generalPractitionerDTO.patientDTOs.add(PatientDTO.fromPatient(patient))
-                }
-            } else {
-                generalPractitionerDTO.patientDTOs = mutableSetOf()
-            }
 
             return generalPractitionerDTO
         }
@@ -43,7 +33,6 @@ class GeneralPractitionerDTO {
     fun lastName(): String = this.lastName
     fun address(): AddressDTO = this.addressDTO
     fun phoneNumber(): String = this.phoneNumber
-    fun patientDTOs(): MutableSet<PatientDTO> = this.patientDTOs
 
     fun builder(): Builder {
         return Builder()
@@ -77,18 +66,12 @@ class GeneralPractitionerDTO {
             return this
         }
 
-        fun withPatientDTOs(patientDTOs: MutableSet<PatientDTO>): Builder {
-            instance.patientDTOs = patientDTOs
-            return this
-        }
-
         fun build(): GeneralPractitionerDTO {
             Objects.requireNonNull(instance.id, "id must be set in GeneralPractitionerDTO")
             Objects.requireNonNull(instance.firstName, "firstName must be set in GeneralPractitionerDTO")
             Objects.requireNonNull(instance.lastName, "lastName must be set in GeneralPractitionerDTO")
             Objects.requireNonNull(instance.addressDTO, "addressDTO must be set in GeneralPractitionerDTO")
             Objects.requireNonNull(instance.phoneNumber, "phoneNumber must be set in GeneralPractitionerDTO")
-            Objects.requireNonNull(instance.patientDTOs, "patientDTOs must be set in GeneralPractitionerDTO")
 
             return instance
         }

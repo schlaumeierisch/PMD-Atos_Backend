@@ -1,5 +1,6 @@
 package nl.hva.backend.domain
 
+import nl.hva.backend.domain.ids.GeneralPractitionerId
 import nl.hva.backend.domain.ids.PatientId
 import nl.hva.backend.domain.value_objects.Address
 import java.time.LocalDate
@@ -17,9 +18,12 @@ open class Patient {
     private lateinit var email: String
     private var isUsingApp: Boolean = false
 
+    // many-to-many
     private var contactPersons: MutableSet<ContactPerson> = mutableSetOf()
     private var careProviders: MutableSet<CareProvider> = mutableSetOf()
-    private var generalPractitioner: GeneralPractitioner? = null
+
+    // many-to-one
+    private var gpDomainId: GeneralPractitionerId = GeneralPractitionerId("")
 
     // required by hibernate
     protected constructor()
@@ -59,5 +63,5 @@ open class Patient {
     fun isUsingApp(): Boolean = this.isUsingApp
     fun contactPersons(): MutableSet<ContactPerson> = this.contactPersons
     fun careProviders(): MutableSet<CareProvider> = this.careProviders
-    fun generalPractitioner(): GeneralPractitioner? = this.generalPractitioner
+    fun gpDomainId(): GeneralPractitionerId = this.gpDomainId
 }

@@ -1,6 +1,5 @@
 package nl.hva.backend.infrastructure
 
-import nl.hva.backend.domain.GeneralPractitioner
 import nl.hva.backend.domain.Patient
 import nl.hva.backend.domain.api.PatientRepository
 import nl.hva.backend.domain.ids.PatientId

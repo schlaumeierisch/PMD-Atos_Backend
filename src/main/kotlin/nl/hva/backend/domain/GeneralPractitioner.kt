@@ -12,8 +12,6 @@ open class GeneralPractitioner {
     private lateinit var address: Address
     private lateinit var phoneNumber: String
 
-    private lateinit var patients: MutableSet<Patient>
-
     // required by hibernate
     protected constructor()
 
@@ -22,15 +20,13 @@ open class GeneralPractitioner {
         firstName: String,
         lastName: String,
         address: Address,
-        phoneNumber: String,
-        patients: MutableSet<Patient>
+        phoneNumber: String
     ) {
         this.domainId = generalPractitionerId
         this.firstName = firstName
         this.lastName = lastName
         this.address = address
         this.phoneNumber = phoneNumber
-        this.patients = patients
     }
 
     // getter
@@ -40,5 +36,4 @@ open class GeneralPractitioner {
     fun lastName(): String = this.lastName
     fun address(): Address = this.address
     fun phoneNumber(): String = this.phoneNumber
-    fun patients(): MutableSet<Patient> = this.patients
 }

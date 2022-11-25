@@ -20,7 +20,9 @@ class PatientDTO {
 
     private var contactPersonDTOs: MutableSet<ContactPersonDTO> = mutableSetOf()
     private var careProviderDTOs: MutableSet<CareProviderDTO> = mutableSetOf()
-    private var generalPractitionerDTO: GeneralPractitionerDTO? = null
+
+    // many-to-one
+    private var gpId: String = ""
 
     companion object {
         fun fromPatient(patient: Patient): PatientDTO {
@@ -36,9 +38,7 @@ class PatientDTO {
             patientDTO.email = patient.email()
             patientDTO.isUsingApp = patient.isUsingApp()
 
-            if (patient.generalPractitioner() != null) {
-                patientDTO.generalPractitionerDTO = GeneralPractitionerDTO.fromGeneralPractitioner(patient.generalPractitioner()!!, false)
-            }
+            patientDTO.gpId = patient.gpDomainId().id()
 
             for (careProvider in patient.careProviders()) {
                 patientDTO.careProviderDTOs.add(CareProviderDTO.fromCareProvider(careProvider))
@@ -64,7 +64,7 @@ class PatientDTO {
     fun isUsingApp(): Boolean = this.isUsingApp
     fun contactPersonDTOs(): MutableSet<ContactPersonDTO> = this.contactPersonDTOs
     fun careProviderDTOs(): MutableSet<CareProviderDTO> = this.careProviderDTOs
-    fun generalPractitionerDTO(): GeneralPractitionerDTO? = this.generalPractitionerDTO
+    fun gpId(): String = this.gpId
 
     fun builder(): Builder {
         return Builder()
@@ -128,8 +128,8 @@ class PatientDTO {
             return this
         }
 
-        fun withGeneralPractitionerDTO(generalPractitionerDTO: GeneralPractitionerDTO): Builder {
-            instance.generalPractitionerDTO = generalPractitionerDTO
+        fun withGpId(gpId: String): Builder {
+            instance.gpId = gpId
             return this
         }
 
@@ -143,7 +143,7 @@ class PatientDTO {
             Objects.requireNonNull(instance.email, "email must be set in PatientDTO")
             Objects.requireNonNull(instance.contactPersonDTOs, "contactPersonDTOs must be set in PatientDTO")
             Objects.requireNonNull(instance.careProviderDTOs, "careProviderDTOs must be set in PatientDTO")
-            Objects.requireNonNull(instance.generalPractitionerDTO, "generalPractitionerDTO must be set in PatientDTO")
+            Objects.requireNonNull(instance.gpId, "gpId must be set in PatientDTO")
 
             return instance
         }

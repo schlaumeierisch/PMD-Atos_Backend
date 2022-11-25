@@ -24,17 +24,10 @@ class HibernateGeneralPractitionerRepository : GeneralPractitionerRepository {
     }
 
     override fun editAccount(
-        generalPractitionerId: GeneralPractitionerId,
-        firstName: String,
-        lastName: String,
-        street: String,
-        zip: String,
-        city: String,
-        country: String,
-        phoneNumber: String
+        generalPractitionerId: GeneralPractitionerId, firstName: String, lastName: String, street: String,
+        zip: String, city: String, country: String, phoneNumber: String
     ) {
-
-        val query: Query = this.entityManager.createQuery(
+        val updateQuery: Query = this.entityManager.createQuery(
             "UPDATE GeneralPractitioner gp SET gp.firstName = ?1, gp.lastName = ?2, gp.address.street = ?3, gp.address.zip = ?4, gp.address.city = ?5, gp.address.country = ?6, gp.phoneNumber = ?7 WHERE gp.domainId = ?8"
         )
             .setParameter(1, firstName)
@@ -46,15 +39,24 @@ class HibernateGeneralPractitionerRepository : GeneralPractitionerRepository {
             .setParameter(7, phoneNumber)
             .setParameter(8, generalPractitionerId)
 
-        query.executeUpdate()
+        updateQuery.executeUpdate()
     }
 
     override fun deleteAccount(generalPractitionerId: GeneralPractitionerId) {
-        val query: TypedQuery<GeneralPractitioner> = this.entityManager.createQuery(
+        val deleteQuery: TypedQuery<GeneralPractitioner> = this.entityManager.createQuery(
             "SELECT gp FROM GeneralPractitioner gp WHERE gp.domainId = ?1", GeneralPractitioner::class.java
         )
-        val result: GeneralPractitioner = query.setParameter(1, generalPractitionerId).singleResult
+        val result: GeneralPractitioner = deleteQuery.setParameter(1, generalPractitionerId).singleResult
         this.entityManager.remove(result)
+
+        // delete GP reference from patient(s) as well
+        val updateQuery: Query = this.entityManager.createQuery(
+            "UPDATE Patient p SET p.gpDomainId = ?1 WHERE p.gpDomainId = ?2"
+        )
+            .setParameter(1, GeneralPractitionerId(""))
+            .setParameter(2, generalPractitionerId)
+
+        updateQuery.executeUpdate()
     }
 
     override fun getAccountById(generalPractitionerId: GeneralPractitionerId): GeneralPractitioner {

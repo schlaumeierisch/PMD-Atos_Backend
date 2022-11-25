@@ -42,9 +42,9 @@
                 <column name="care_provider_id" not-null="true" />
             </many-to-many>
         </set>
-        <many-to-one name="generalPractitioner" class="nl.hva.backend.domain.GeneralPractitioner" fetch="select">
-            <column name="general_practitioner_id" not-null="true" />
-        </many-to-one>
+        <component name="gpDomainId" class="nl.hva.backend.domain.ids.GeneralPractitionerId">
+            <property name="id" column="general_practitioner_id" type="string"/>
+        </component>
 
     </class>
 </hibernate-mapping>

@@ -1,7 +1,6 @@
 package nl.hva.backend.application
 
 import nl.hva.backend.application.api.PatientService
-import nl.hva.backend.application.dto.GeneralPractitionerDTO
 import nl.hva.backend.application.dto.PatientDTO
 import nl.hva.backend.application.dto.value_objects.AddressDTO
 import nl.hva.backend.domain.Patient
@@ -91,7 +90,7 @@ class PatientServiceImpl : PatientService {
         val patient: Patient =
             this.patientRepository.getAccountById(patientId)
 
-        if (patient.generalPractitioner() != null) {
+        if (patient.gpDomainId() != null) {
             return PatientDTO().builder()
                 .withId(patient.domainId().id())
                 .withFirstName(patient.firstName())
@@ -102,12 +101,7 @@ class PatientServiceImpl : PatientService {
                 .withPhoneNumber(patient.phoneNumber())
                 .withEmail(patient.email())
                 .withIsUsingApp(patient.isUsingApp())
-                .withGeneralPractitionerDTO(
-                    GeneralPractitionerDTO.fromGeneralPractitioner(
-                        patient.generalPractitioner()!!,
-                        false
-                    )
-                )
+                .withGpId(patient.gpDomainId()!!.id())
                 .build()
         } else {
             return PatientDTO().builder()
@@ -131,7 +125,7 @@ class PatientServiceImpl : PatientService {
 
         for (patient in patients) {
             val patientDTO: PatientDTO
-            if (patient.generalPractitioner() != null) {
+            if (patient.gpDomainId() != null) {
                 patientDTO = PatientDTO().builder()
                     .withId(patient.domainId().id())
                     .withFirstName(patient.firstName())
@@ -142,12 +136,7 @@ class PatientServiceImpl : PatientService {
                     .withPhoneNumber(patient.phoneNumber())
                     .withEmail(patient.email())
                     .withIsUsingApp(patient.isUsingApp())
-                    .withGeneralPractitionerDTO(
-                        GeneralPractitionerDTO.fromGeneralPractitioner(
-                            patient.generalPractitioner()!!,
-                            false
-                        )
-                    )
+                    .withGpId(patient.gpDomainId()!!.id())
                     .build()
             } else {
                 patientDTO = PatientDTO().builder()

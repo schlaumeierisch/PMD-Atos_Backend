@@ -1,6 +1,5 @@
 package nl.hva.backend.domain.api
 
-import nl.hva.backend.domain.GeneralPractitioner
 import nl.hva.backend.domain.Patient
 import nl.hva.backend.domain.ids.PatientId
 import java.time.LocalDate

@@ -14,12 +14,12 @@ values (111, 'dom-id-cp-111', 'Stijn', 'Boers', 'De Prunus 101', '7701WR', 'Dede
 
 -- patient
 insert into patient (id, patient_id, first_name, last_name, street, zip, city, country, gender, birth_date, phone_number, email, is_using_app, general_practitioner_id)
-values (111, 'dom-id-pa-111', 'Lotje', 'Oldhof', 'Johan Frisoplantsoen 184', '2751XR', 'Moerkapelle', 'Netherlands', 'female', '1978-11-28', '0636038499', 'odin88@packiu.com', true, 111),
-       (222, 'dom-id-pa-222', 'Loes', 'Sens', 'Dorperhofweg 5', '8161PD', 'Epe', 'Netherlands', 'female', '1995-02-14', '0676549954', 'family777@mercantravellers.com', true, 111),
-       (333, 'dom-id-pa-333', 'Noud', 'Vrisau', 'Vlielandlaan 138', '6922EG', 'Duiven', 'Netherlands', 'male', '1984-05-25', '0692663244', 'sicego@hobbylegal.com', true, 222),
-       (444, 'dom-id-pa-444', 'Reinier', 'Taalen', 'Professor Kamerlingh Onnesweg 123', '5144NR', 'Waalwijk', 'Netherlands', 'male', '1998-04-04', '0672246079', 'rlbdmd@emvil.com', true, 333),
-       (555, 'dom-id-pa-555', 'Anje', 'Nijboer', 'Burgemeester van Heugtenlaan 82', '2911HA', 'Nieuwerkerk Aan Den Ijssel', 'Netherlands', 'female', '1946-12-06', '0692152165', 'backstorm@rendrone.fun', true, 333),
-       (666, 'dom-id-pa-666', 'Merel', 'Hilberink', 'Spiekerlanden 111', '9407JD', 'Assen', 'Netherlands', 'female', '1951-08-09', '0665598329', 'mikeg21@dmxs8.com', true, 444),
-       (777, 'dom-id-pa-777', 'Rik', 'Koldewee', 'Alexander Battalaan 175', '6221CB', 'Maastricht', 'Netherlands', 'male', '1965-04-18', '0652071117', '4321j@yt-google.com', true, 444),
-       (888, 'dom-id-pa-888', 'Gust', 'Breukers', 'Nico Werkmanstraat 150', '7556LH', 'Hengelo', 'Netherlands', 'male', '1944-06-28', '0668539864', 'rinatalove@101livemail.top', true, 444),
-       (999, 'dom-id-pa-999', 'Ruud', 'Meester', 'De Hovenlaan 31', '7325ZC', 'Apeldoorn', 'Netherlands', 'male', '1938-05-24', '0658433139', 'zindy@goldinbox.net', true, 555);
+values (111, 'dom-id-pa-111', 'Lotje', 'Oldhof', 'Johan Frisoplantsoen 184', '2751XR', 'Moerkapelle', 'Netherlands', 'female', '1978-11-28', '0636038499', 'odin88@packiu.com', true, 'dom-id-gp-111'),
+       (222, 'dom-id-pa-222', 'Loes', 'Sens', 'Dorperhofweg 5', '8161PD', 'Epe', 'Netherlands', 'female', '1995-02-14', '0676549954', 'family777@mercantravellers.com', true, 'dom-id-gp-111'),
+       (333, 'dom-id-pa-333', 'Noud', 'Vrisau', 'Vlielandlaan 138', '6922EG', 'Duiven', 'Netherlands', 'male', '1984-05-25', '0692663244', 'sicego@hobbylegal.com', true, 'dom-id-gp-222'),
+       (444, 'dom-id-pa-444', 'Reinier', 'Taalen', 'Professor Kamerlingh Onnesweg 123', '5144NR', 'Waalwijk', 'Netherlands', 'male', '1998-04-04', '0672246079', 'rlbdmd@emvil.com', true, 'dom-id-gp-333'),
+       (555, 'dom-id-pa-555', 'Anje', 'Nijboer', 'Burgemeester van Heugtenlaan 82', '2911HA', 'Nieuwerkerk Aan Den Ijssel', 'Netherlands', 'female', '1946-12-06', '0692152165', 'backstorm@rendrone.fun', true, 'dom-id-gp-333'),
+       (666, 'dom-id-pa-666', 'Merel', 'Hilberink', 'Spiekerlanden 111', '9407JD', 'Assen', 'Netherlands', 'female', '1951-08-09', '0665598329', 'mikeg21@dmxs8.com', true, 'dom-id-gp-444'),
+       (777, 'dom-id-pa-777', 'Rik', 'Koldewee', 'Alexander Battalaan 175', '6221CB', 'Maastricht', 'Netherlands', 'male', '1965-04-18', '0652071117', '4321j@yt-google.com', true, 'dom-id-gp-444'),
+       (888, 'dom-id-pa-888', 'Gust', 'Breukers', 'Nico Werkmanstraat 150', '7556LH', 'Hengelo', 'Netherlands', 'male', '1944-06-28', '0668539864', 'rinatalove@101livemail.top', true, 'dom-id-gp-444'),
+       (999, 'dom-id-pa-999', 'Ruud', 'Meester', 'De Hovenlaan 31', '7325ZC', 'Apeldoorn', 'Netherlands', 'male', '1938-05-24', '0658433139', 'zindy@goldinbox.net', true, 'dom-id-gp-555');
