@@ -9,4 +9,7 @@ $(document).ready(function () {
     // enable side navbar
     elems = $('.sidenav');
     M.Sidenav.init(elems, {});
+
+    // initialize datepicker
+    $('.datepicker').datepicker();
 });

@@ -28,13 +28,13 @@ class HibernatePatientRepository : PatientRepository {
     override fun editAccount(
         patientId: PatientId, firstName: String, lastName: String, street: String, zip: String,
         city: String, country: String, gender: Enum<Gender>, birthDate: LocalDate, phoneNumber: String,
-        email: String, isUsingApp: Boolean
+        email: String, isUsingApp: Boolean, gpDomainId: GeneralPractitionerId
     ) {
         val query: Query = this.entityManager.createQuery(
             "UPDATE Patient p SET p.firstName = ?1, p.lastName = ?2, p.address.street = ?3, p.address.zip = ?4," +
                     "p.address.city = ?5, p.address.country = ?6, p.gender = ?7, p.birthDate = ?8, p.phoneNumber = ?9," +
-                    "p.email = ?10, p.isUsingApp = ?11" +
-                    "WHERE p.domainId = ?12"
+                    "p.email = ?10, p.isUsingApp = ?11, p.gpDomainId = ?12" +
+                    "WHERE p.domainId = ?13"
         )
             .setParameter(1, firstName)
             .setParameter(2, lastName)
@@ -47,7 +47,8 @@ class HibernatePatientRepository : PatientRepository {
             .setParameter(9, phoneNumber)
             .setParameter(10, email)
             .setParameter(11, isUsingApp)
-            .setParameter(12, patientId)
+            .setParameter(12, gpDomainId)
+            .setParameter(13, patientId)
 
         query.executeUpdate()
     }

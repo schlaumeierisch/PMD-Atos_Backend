@@ -38,7 +38,8 @@ open class Patient {
         birthDate: LocalDate,
         phoneNumber: String,
         email: String,
-        isUsingApp: Boolean
+        isUsingApp: Boolean,
+        gpDomainId: GeneralPractitionerId
     ) {
         this.domainId = domainId
         this.firstName = firstName
@@ -49,6 +50,7 @@ open class Patient {
         this.phoneNumber = phoneNumber
         this.email = email
         this.isUsingApp = isUsingApp
+        this.gpDomainId = gpDomainId
     }
 
     // getter

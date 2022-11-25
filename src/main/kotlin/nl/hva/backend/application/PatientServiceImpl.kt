@@ -24,13 +24,13 @@ class PatientServiceImpl : PatientService {
     override fun createAccount(
         firstName: String, lastName: String, street: String, zip: String,
         city: String, country: String, gender: Enum<Gender>, birthDate: LocalDate,
-        phoneNumber: String, email: String, isUsingApp: Boolean
+        phoneNumber: String, email: String, isUsingApp: Boolean, gpId: String
     ) {
         val patientId: PatientId = patientRepository.nextIdentity()
 
         val patient = Patient(
             patientId, firstName, lastName, Address(street, zip, city, country),
-            gender, birthDate, phoneNumber, email, isUsingApp
+            gender, birthDate, phoneNumber, email, isUsingApp, GeneralPractitionerId(gpId)
         )
 
         this.patientRepository.createAccount(patient)
@@ -40,11 +40,11 @@ class PatientServiceImpl : PatientService {
     override fun editAccount(
         patientId: PatientId, firstName: String, lastName: String, street: String,
         zip: String, city: String, country: String, gender: Enum<Gender>, birthDate: LocalDate,
-        phoneNumber: String, email: String, isUsingApp: Boolean
+        phoneNumber: String, email: String, isUsingApp: Boolean, gpId: String
     ) {
         this.patientRepository.editAccount(
             patientId, firstName, lastName, street, zip, city, country,
-            gender, birthDate, phoneNumber, email, isUsingApp
+            gender, birthDate, phoneNumber, email, isUsingApp, GeneralPractitionerId(gpId)
         )
     }
 

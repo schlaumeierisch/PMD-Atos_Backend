@@ -47,17 +47,38 @@
         </div>
         <div class="row">
             <div class="input-field col s6">
+                <select id="gender" name="gender">
+                    <option th:each="gender : ${T(nl.hva.backend.domain.value_objects.Gender).values()}"
+                            th:text="${gender.displayValue}"
+                            th:value="${gender}">
+                    </option>
+                </select>
+                <label for="gender">Gender</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="birth_date" name="birth_date" type="date" class="datepicker" required>
+                <label for="birth_date">Birth Date</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
                 <input id="phone_number" name="phone_number" type="text" pattern="[0-9]{10}" class="validate" required>
                 <label for="phone_number">Phone Number</label>
             </div>
             <div class="input-field col s6">
-                <select id="specialism" name="specialism">
-                    <option th:each="specialism : ${T(nl.hva.backend.domain.value_objects.Specialism).values()}"
-                            th:text="${specialism.displayValue}"
-                            th:value="${specialism}">
+                <input id="email" name="email" type="email" class="validate" required>
+                <label for="email">Email</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <select id="general_practitioner" name="general_practitioner">
+                    <option th:each="generalPractitioner : ${generalPractitioners}"
+                            th:text="${generalPractitioner.firstName + ' ' + generalPractitioner.lastName}"
+                            th:value="${generalPractitioner.id}">
                     </option>
                 </select>
-                <label for="specialism">Specialism</label>
+                <label for="general_practitioner">General Practitioner</label>
             </div>
         </div>
 

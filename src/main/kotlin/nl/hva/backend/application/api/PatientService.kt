@@ -11,13 +11,13 @@ interface PatientService {
     fun createAccount(
         firstName: String, lastName: String, street: String, zip: String,
         city: String, country: String, gender: Enum<Gender>, birthDate: LocalDate,
-        phoneNumber: String, email: String, isUsingApp: Boolean
+        phoneNumber: String, email: String, isUsingApp: Boolean, gpId: String
     )
 
     fun editAccount(
         patientId: PatientId, firstName: String, lastName: String, street: String,
         zip: String, city: String, country: String, gender: Enum<Gender>, birthDate: LocalDate,
-        phoneNumber: String, email: String, isUsingApp: Boolean
+        phoneNumber: String, email: String, isUsingApp: Boolean, gpId: String
     )
 
     fun deleteAccount(patientId: PatientId)
