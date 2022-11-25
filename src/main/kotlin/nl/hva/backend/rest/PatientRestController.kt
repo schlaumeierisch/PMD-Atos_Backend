@@ -26,10 +26,7 @@ class PatientRestController {
     @ResponseBody
     fun getPatientsOfGeneralPractitioner(
         @PathVariable("id") id: String
-    ): MutableSet<PatientDTO> {
-        val generalPractitionerDTO = this.generalPractitionerService.getAccountById(GeneralPractitionerId(id))
-
-        // TODO: fix
-        return mutableSetOf()
+    ): List<PatientDTO> {
+        return this.patientService.getAccountByGeneralPractitionerId(GeneralPractitionerId(id))
     }
 }

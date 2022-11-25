@@ -20,7 +20,8 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
                 "/js/**",
                 "/rest/**",
                 "/v3/api-docs/**",
-                "/swagger-ui/**"
+                "/swagger-ui/**",
+                "/h2-console/**"
             ).permitAll()
             .anyRequest().authenticated()
             .and()
