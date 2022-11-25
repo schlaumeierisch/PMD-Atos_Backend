@@ -6,24 +6,13 @@ import nl.hva.backend.domain.ids.GeneralPractitionerId
 interface GeneralPractitionerService {
 
     fun createAccount(
-        firstName: String,
-        lastName: String,
-        street: String,
-        zip: String,
-        city: String,
-        country: String,
-        phoneNumber: String
+        firstName: String, lastName: String, street: String,zip: String,
+        city: String, country: String, phoneNumber: String
     )
 
     fun editAccount(
-        generalPractitionerId: GeneralPractitionerId,
-        firstName: String,
-        lastName: String,
-        street: String,
-        zip: String,
-        city: String,
-        country: String,
-        phoneNumber: String
+        generalPractitionerId: GeneralPractitionerId, firstName: String, lastName: String,
+        street: String, zip: String, city: String, country: String, phoneNumber: String
     )
 
     fun deleteAccount(generalPractitionerId: GeneralPractitionerId)

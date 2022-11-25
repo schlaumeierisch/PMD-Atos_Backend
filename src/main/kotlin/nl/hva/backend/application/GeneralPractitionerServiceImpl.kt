@@ -19,23 +19,13 @@ class GeneralPractitionerServiceImpl : GeneralPractitionerService {
 
     @Transactional
     override fun createAccount(
-        firstName: String,
-        lastName: String,
-        street: String,
-        zip: String,
-        city: String,
-        country: String,
-        phoneNumber: String
+        firstName: String, lastName: String, street: String, zip: String,
+        city: String, country: String, phoneNumber: String
     ) {
         val generalPractitionerId: GeneralPractitionerId = generalPractitionerRepository.nextIdentity()
 
-        // todo: change mutableSetOf() to real values
         val generalPractitioner = GeneralPractitioner(
-            generalPractitionerId,
-            firstName,
-            lastName,
-            Address(street, zip, city, country),
-            phoneNumber
+            generalPractitionerId, firstName, lastName, Address(street, zip, city, country), phoneNumber
         )
 
         this.generalPractitionerRepository.createAccount(generalPractitioner)
@@ -43,24 +33,11 @@ class GeneralPractitionerServiceImpl : GeneralPractitionerService {
 
     @Transactional
     override fun editAccount(
-        generalPractitionerId: GeneralPractitionerId,
-        firstName: String,
-        lastName: String,
-        street: String,
-        zip: String,
-        city: String,
-        country: String,
-        phoneNumber: String
+        generalPractitionerId: GeneralPractitionerId, firstName: String, lastName: String,
+        street: String, zip: String, city: String, country: String, phoneNumber: String
     ) {
         this.generalPractitionerRepository.editAccount(
-            generalPractitionerId,
-            firstName,
-            lastName,
-            street,
-            zip,
-            city,
-            country,
-            phoneNumber
+            generalPractitionerId, firstName, lastName, street, zip, city, country, phoneNumber
         )
     }
 

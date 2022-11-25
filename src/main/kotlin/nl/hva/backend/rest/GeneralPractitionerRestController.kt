@@ -2,11 +2,9 @@ package nl.hva.backend.rest
 
 import nl.hva.backend.application.api.GeneralPractitionerService
 import nl.hva.backend.application.dto.GeneralPractitionerDTO
+import nl.hva.backend.domain.ids.GeneralPractitionerId
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.ResponseBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/rest/generalPractitioners")
@@ -20,4 +18,18 @@ class GeneralPractitionerRestController {
     fun getAllAccounts(): List<GeneralPractitionerDTO> {
         return this.generalPractitionerService.getAllAccounts()
     }
+
+    @GetMapping("/getById/{id}")
+    @ResponseBody
+    fun getAccountById(
+        @PathVariable("id") id: String
+    ): GeneralPractitionerDTO? {
+        // TODO: return something else than null (maybe ResponseEntity<>)
+        return try {
+            this.generalPractitionerService.getAccountById(GeneralPractitionerId(id))
+        } catch (e: Exception) {
+            null
+        }
+    }
+
 }

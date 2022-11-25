@@ -10,13 +10,8 @@ interface GeneralPractitionerRepository {
     fun createAccount(generalPractitioner: GeneralPractitioner)
 
     fun editAccount(
-        generalPractitionerId: GeneralPractitionerId, firstName: String,
-        lastName: String,
-        street: String,
-        zip: String,
-        city: String,
-        country: String,
-        phoneNumber: String
+        generalPractitionerId: GeneralPractitionerId, firstName: String, lastName: String,
+        street: String, zip: String, city: String, country: String, phoneNumber: String
     )
 
     fun deleteAccount(generalPractitionerId: GeneralPractitionerId)
