@@ -4,6 +4,7 @@ import nl.hva.backend.domain.Patient
 import nl.hva.backend.domain.api.PatientRepository
 import nl.hva.backend.domain.ids.GeneralPractitionerId
 import nl.hva.backend.domain.ids.PatientId
+import nl.hva.backend.domain.value_objects.Gender
 import org.springframework.stereotype.Component
 import java.time.LocalDate
 import java.util.*
@@ -26,7 +27,7 @@ class HibernatePatientRepository : PatientRepository {
 
     override fun editAccount(
         patientId: PatientId, firstName: String, lastName: String, street: String, zip: String,
-        city: String, country: String, gender: String, birthDate: LocalDate, phoneNumber: String,
+        city: String, country: String, gender: Enum<Gender>, birthDate: LocalDate, phoneNumber: String,
         email: String, isUsingApp: Boolean
     ) {
         val query: Query = this.entityManager.createQuery(

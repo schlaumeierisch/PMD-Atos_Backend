@@ -3,6 +3,7 @@ package nl.hva.backend.application.dto
 import com.fasterxml.jackson.annotation.JsonAutoDetect
 import nl.hva.backend.application.dto.value_objects.AddressDTO
 import nl.hva.backend.domain.Patient
+import nl.hva.backend.domain.value_objects.Gender
 import java.time.LocalDate
 import java.util.*
 
@@ -12,7 +13,7 @@ class PatientDTO {
     private lateinit var firstName: String
     private lateinit var lastName: String
     private lateinit var addressDTO: AddressDTO
-    private lateinit var gender: String
+    private lateinit var gender: Enum<Gender>
     private lateinit var birthDate: LocalDate
     private lateinit var phoneNumber: String
     private lateinit var email: String
@@ -57,7 +58,7 @@ class PatientDTO {
     fun firstName(): String = this.firstName
     fun lastName(): String = this.lastName
     fun addressDTO(): AddressDTO = this.addressDTO
-    fun gender(): String = this.gender
+    fun gender(): Enum<Gender> = this.gender
     fun birthDate(): LocalDate = this.birthDate
     fun phoneNumber(): String = this.phoneNumber
     fun email(): String = this.email
@@ -93,7 +94,7 @@ class PatientDTO {
             return this
         }
 
-        fun withGender(gender: String): Builder {
+        fun withGender(gender: Enum<Gender>): Builder {
             instance.gender = gender
             return this
         }

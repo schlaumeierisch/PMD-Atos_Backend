@@ -22,7 +22,12 @@
             <property name="country" column="country" type="string"/>
         </component>
 
-        <property name="gender" column="gender" type="string"/>
+        <property name="gender" column="gender">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">nl.hva.backend.domain.value_objects.Gender</param>
+                <param name="type">12</param>
+            </type>
+        </property>
         <property name="birthDate" column="birth_date" type="java.time.LocalDate"/>
         <property name="phoneNumber" column="phone_number" type="string"/>
         <property name="email" column="email" type="string"/>

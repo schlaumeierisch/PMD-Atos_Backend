@@ -3,6 +3,7 @@ package nl.hva.backend.domain
 import nl.hva.backend.domain.ids.GeneralPractitionerId
 import nl.hva.backend.domain.ids.PatientId
 import nl.hva.backend.domain.value_objects.Address
+import nl.hva.backend.domain.value_objects.Gender
 import java.time.LocalDate
 
 open class Patient {
@@ -12,7 +13,7 @@ open class Patient {
     private lateinit var firstName: String
     private lateinit var lastName: String
     private lateinit var address: Address
-    private lateinit var gender: String
+    private lateinit var gender: Enum<Gender>
     private lateinit var birthDate: LocalDate
     private lateinit var phoneNumber: String
     private lateinit var email: String
@@ -33,7 +34,7 @@ open class Patient {
         firstName: String,
         lastName: String,
         address: Address,
-        gender: String,
+        gender: Enum<Gender>,
         birthDate: LocalDate,
         phoneNumber: String,
         email: String,
@@ -56,7 +57,7 @@ open class Patient {
     fun firstName(): String = this.firstName
     fun lastName(): String = this.lastName
     fun address(): Address = this.address
-    fun gender(): String = this.gender
+    fun gender(): Enum<Gender> = this.gender
     fun birthDate(): LocalDate = this.birthDate
     fun phoneNumber(): String = this.phoneNumber
     fun email(): String = this.email

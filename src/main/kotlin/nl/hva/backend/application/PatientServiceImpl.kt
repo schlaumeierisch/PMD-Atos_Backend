@@ -8,6 +8,7 @@ import nl.hva.backend.domain.api.PatientRepository
 import nl.hva.backend.domain.ids.GeneralPractitionerId
 import nl.hva.backend.domain.ids.PatientId
 import nl.hva.backend.domain.value_objects.Address
+import nl.hva.backend.domain.value_objects.Gender
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
@@ -22,7 +23,7 @@ class PatientServiceImpl : PatientService {
     @Transactional
     override fun createAccount(
         firstName: String, lastName: String, street: String, zip: String,
-        city: String, country: String, gender: String, birthDate: LocalDate,
+        city: String, country: String, gender: Enum<Gender>, birthDate: LocalDate,
         phoneNumber: String, email: String, isUsingApp: Boolean
     ) {
         val patientId: PatientId = patientRepository.nextIdentity()
@@ -38,7 +39,7 @@ class PatientServiceImpl : PatientService {
     @Transactional
     override fun editAccount(
         patientId: PatientId, firstName: String, lastName: String, street: String,
-        zip: String, city: String, country: String, gender: String, birthDate: LocalDate,
+        zip: String, city: String, country: String, gender: Enum<Gender>, birthDate: LocalDate,
         phoneNumber: String, email: String, isUsingApp: Boolean
     ) {
         this.patientRepository.editAccount(
