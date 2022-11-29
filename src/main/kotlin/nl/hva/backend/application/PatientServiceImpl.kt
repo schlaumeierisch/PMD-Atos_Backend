@@ -69,6 +69,7 @@ class PatientServiceImpl : PatientService {
             .withPhoneNumber(patient.phoneNumber())
             .withEmail(patient.email())
             .withIsUsingApp(patient.isUsingApp())
+            .withMedicalRecordId(patient.medicalRecordDomainId().id())
             .withGpId(patient.gpDomainId().id())
             .build()
     }
@@ -88,6 +89,7 @@ class PatientServiceImpl : PatientService {
                 .withPhoneNumber(patient.phoneNumber())
                 .withEmail(patient.email())
                 .withIsUsingApp(patient.isUsingApp())
+                .withMedicalRecordId(patient.medicalRecordDomainId().id())
                 .withGpId(patient.gpDomainId().id())
                 .build()
 
@@ -113,6 +115,7 @@ class PatientServiceImpl : PatientService {
                 .withPhoneNumber(patient.phoneNumber())
                 .withEmail(patient.email())
                 .withIsUsingApp(patient.isUsingApp())
+                .withMedicalRecordId(patient.medicalRecordDomainId().id())
                 .withGpId(patient.gpDomainId().id())
                 .build()
 
