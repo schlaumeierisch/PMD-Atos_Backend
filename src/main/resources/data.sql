@@ -55,3 +55,27 @@ values (001, 'dom-id-mr-001', 'dom-id-pa-001'),
        (017, 'dom-id-mr-017', 'dom-id-pa-017'),
        (018, 'dom-id-mr-018', 'dom-id-pa-018'),
        (019, 'dom-id-mr-019', 'dom-id-pa-019');
+
+-- observation
+insert into observation(id, observation_id, title, description, date, medical_record_id)
+values (001, 'dom-id-obs-001', 'Observation 1', 'This is a description of observation 1', '2022-11-20', 'dom-id-mr-001'),
+       (002, 'dom-id-obs-002', 'Observation 2', 'This is a description of observation 2', '2022-11-20', 'dom-id-mr-001'),
+       (003, 'dom-id-obs-003', 'Observation 3', 'This is a description of observation 3', '2022-11-20', 'dom-id-mr-001'),
+       (004, 'dom-id-obs-004', 'Observation 1', 'This is a description of observation 1', '2022-11-20', 'dom-id-mr-002'),
+       (005, 'dom-id-obs-005', 'Observation 2', 'This is a description of observation 2', '2022-11-20', 'dom-id-mr-002'),
+       (006, 'dom-id-obs-006', 'Observation 3', 'This is a description of observation 3', '2022-11-20', 'dom-id-mr-002'),
+       (007, 'dom-id-obs-007', 'Observation 1', 'This is a description of observation 1', '2022-11-20', 'dom-id-mr-003'),
+       (008, 'dom-id-obs-008', 'Observation 2', 'This is a description of observation 2', '2022-11-20', 'dom-id-mr-003'),
+       (009, 'dom-id-obs-009', 'Observation 3', 'This is a description of observation 3', '2022-11-20', 'dom-id-mr-003'),
+       (010, 'dom-id-obs-010', 'Observation 1', 'This is a description of observation 1', '2022-11-20', 'dom-id-mr-004'),
+       (011, 'dom-id-obs-011', 'Observation 2', 'This is a description of observation 2', '2022-11-20', 'dom-id-mr-004'),
+       (012, 'dom-id-obs-012', 'Observation 3', 'This is a description of observation 3', '2022-11-20', 'dom-id-mr-004'),
+       (013, 'dom-id-obs-013', 'Observation 1', 'This is a description of observation 1', '2022-11-20', 'dom-id-mr-005'),
+       (014, 'dom-id-obs-014', 'Observation 2', 'This is a description of observation 2', '2022-11-20', 'dom-id-mr-005'),
+       (015, 'dom-id-obs-015', 'Observation 3', 'This is a description of observation 3', '2022-11-20', 'dom-id-mr-005'),
+       (016, 'dom-id-obs-016', 'Observation 1', 'This is a description of observation 1', '2022-11-20', 'dom-id-mr-006'),
+       (017, 'dom-id-obs-017', 'Observation 2', 'This is a description of observation 2', '2022-11-20', 'dom-id-mr-006'),
+       (018, 'dom-id-obs-018', 'Observation 3', 'This is a description of observation 3', '2022-11-20', 'dom-id-mr-006'),
+       (019, 'dom-id-obs-019', 'Observation 1', 'This is a description of observation 1', '2022-11-20', 'dom-id-mr-007'),
+       (020, 'dom-id-obs-020', 'Observation 2', 'This is a description of observation 2', '2022-11-20', 'dom-id-mr-007'),
+       (021, 'dom-id-obs-021', 'Observation 3', 'This is a description of observation 3', '2022-11-20', 'dom-id-mr-007');
