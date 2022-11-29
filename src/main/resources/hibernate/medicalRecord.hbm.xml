@@ -12,9 +12,5 @@
             <property name="id" column="medical_record_id" type="string"/>
         </component>
 
-        <component name="patientDomainId" class="nl.hva.backend.domain.ids.PatientId">
-            <property name="id" column="patient_id" type="string"/>
-        </component>
-
     </class>
 </hibernate-mapping>

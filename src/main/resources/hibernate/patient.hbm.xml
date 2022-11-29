@@ -33,6 +33,10 @@
         <property name="email" column="email" type="string"/>
         <property name="isUsingApp" column="is_using_app" type="boolean"/>
 
+        <component name="medicalRecordDomainId" class="nl.hva.backend.domain.ids.MedicalRecordId">
+            <property name="id" column="medical_record_id" type="string"/>
+        </component>
+
         <set name="contactPersons" table="patient_contact_person" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="patient_id" not-null="true" />

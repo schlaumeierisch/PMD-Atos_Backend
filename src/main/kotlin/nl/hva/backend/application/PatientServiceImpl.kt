@@ -4,8 +4,10 @@ import nl.hva.backend.application.api.PatientService
 import nl.hva.backend.application.dto.PatientDTO
 import nl.hva.backend.application.dto.value_objects.AddressDTO
 import nl.hva.backend.domain.Patient
+import nl.hva.backend.domain.api.MedicalRecordRepository
 import nl.hva.backend.domain.api.PatientRepository
 import nl.hva.backend.domain.ids.GeneralPractitionerId
+import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.PatientId
 import nl.hva.backend.domain.value_objects.Address
 import nl.hva.backend.domain.value_objects.Gender
@@ -22,15 +24,15 @@ class PatientServiceImpl : PatientService {
 
     @Transactional
     override fun createAccount(
-        firstName: String, lastName: String, street: String, zip: String,
-        city: String, country: String, gender: Enum<Gender>, birthDate: LocalDate,
-        phoneNumber: String, email: String, isUsingApp: Boolean, gpId: String
+        firstName: String, lastName: String, street: String, zip: String, city: String,
+        country: String, gender: Enum<Gender>, birthDate: LocalDate, phoneNumber: String,
+        email: String, isUsingApp: Boolean, medicalRecordId: String, gpId: String
     ) {
-        val patientId: PatientId = patientRepository.nextIdentity()
+        val patientId: PatientId = this.patientRepository.nextIdentity()
 
         val patient = Patient(
-            patientId, firstName, lastName, Address(street, zip, city, country),
-            gender, birthDate, phoneNumber, email, isUsingApp, GeneralPractitionerId(gpId)
+            patientId, firstName, lastName, Address(street, zip, city, country), gender, birthDate,
+            phoneNumber, email, isUsingApp, MedicalRecordId(medicalRecordId), GeneralPractitionerId(gpId)
         )
 
         this.patientRepository.createAccount(patient)

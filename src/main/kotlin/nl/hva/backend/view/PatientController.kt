@@ -1,9 +1,11 @@
 package nl.hva.backend.view
 
 import nl.hva.backend.application.api.GeneralPractitionerService
+import nl.hva.backend.application.api.MedicalRecordService
 import nl.hva.backend.application.api.PatientService
 import nl.hva.backend.application.dto.GeneralPractitionerDTO
 import nl.hva.backend.application.dto.PatientDTO
+import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.value_objects.Gender
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
@@ -23,6 +25,9 @@ class PatientController {
 
     @Autowired
     private lateinit var patientService: PatientService
+
+    @Autowired
+    private lateinit var medicalRecordService: MedicalRecordService
 
     @Autowired
     private lateinit var generalPractitionerService: GeneralPractitionerService
@@ -63,6 +68,9 @@ class PatientController {
         @RequestParam("general_practitioner") gpId: String,
         redirectAttributes: RedirectAttributes
     ): RedirectView {
+        // create medical record for new patient
+        val medicalRecordId: MedicalRecordId = this.medicalRecordService.createMedicalRecord()
+
         // use patientService to create a new CP account
         this.patientService.createAccount(
             firstName,
@@ -76,6 +84,7 @@ class PatientController {
             phoneNumber,
             email,
             true,
+            medicalRecordId.id(),
             gpId
         )
 

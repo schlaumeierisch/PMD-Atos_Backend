@@ -19,6 +19,9 @@ class PatientDTO {
     private lateinit var email: String
     private var isUsingApp: Boolean = false
 
+    // one-to-one
+    private var medicalRecordId: String = ""
+
     private var contactPersonDTOs: MutableSet<ContactPersonDTO> = mutableSetOf()
     private var careProviderDTOs: MutableSet<CareProviderDTO> = mutableSetOf()
 
@@ -38,6 +41,8 @@ class PatientDTO {
             patientDTO.phoneNumber = patient.phoneNumber()
             patientDTO.email = patient.email()
             patientDTO.isUsingApp = patient.isUsingApp()
+
+            patientDTO.medicalRecordId = patient.medicalRecordDomainId().id()
 
             patientDTO.gpId = patient.gpDomainId().id()
 
@@ -63,6 +68,7 @@ class PatientDTO {
     fun phoneNumber(): String = this.phoneNumber
     fun email(): String = this.email
     fun isUsingApp(): Boolean = this.isUsingApp
+    fun medicalRecordId(): String = this.medicalRecordId
     fun contactPersonDTOs(): MutableSet<ContactPersonDTO> = this.contactPersonDTOs
     fun careProviderDTOs(): MutableSet<CareProviderDTO> = this.careProviderDTOs
     fun gpId(): String = this.gpId
@@ -119,6 +125,11 @@ class PatientDTO {
             return this
         }
 
+        fun withMedicalRecordId(medicalRecordId: String): Builder {
+            instance.medicalRecordId = medicalRecordId
+            return this
+        }
+
         fun withContactPersonDTOs(contactPersonDTOs: MutableSet<ContactPersonDTO>): Builder {
             instance.contactPersonDTOs = contactPersonDTOs
             return this
@@ -144,6 +155,7 @@ class PatientDTO {
             Objects.requireNonNull(instance.email, "email must be set in PatientDTO")
             Objects.requireNonNull(instance.contactPersonDTOs, "contactPersonDTOs must be set in PatientDTO")
             Objects.requireNonNull(instance.careProviderDTOs, "careProviderDTOs must be set in PatientDTO")
+            Objects.requireNonNull(instance.medicalRecordId, "medicalRecordId must be set in PatientDTO")
             Objects.requireNonNull(instance.gpId, "gpId must be set in PatientDTO")
 
             return instance

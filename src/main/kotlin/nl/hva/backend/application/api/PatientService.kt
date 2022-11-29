@@ -9,9 +9,9 @@ import java.time.LocalDate
 interface PatientService {
 
     fun createAccount(
-        firstName: String, lastName: String, street: String, zip: String,
-        city: String, country: String, gender: Enum<Gender>, birthDate: LocalDate,
-        phoneNumber: String, email: String, isUsingApp: Boolean, gpId: String
+        firstName: String, lastName: String, street: String, zip: String, city: String,
+        country: String, gender: Enum<Gender>, birthDate: LocalDate, phoneNumber: String,
+        email: String, isUsingApp: Boolean, medicalRecordId: String, gpId: String
     )
 
     fun editAccount(

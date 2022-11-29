@@ -1,6 +1,7 @@
 package nl.hva.backend.domain
 
 import nl.hva.backend.domain.ids.GeneralPractitionerId
+import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.PatientId
 import nl.hva.backend.domain.value_objects.Address
 import nl.hva.backend.domain.value_objects.Gender
@@ -18,6 +19,9 @@ open class Patient {
     private lateinit var phoneNumber: String
     private lateinit var email: String
     private var isUsingApp: Boolean = false
+
+    // one-to-one
+    private var medicalRecordDomainId: MedicalRecordId = MedicalRecordId("")
 
     // many-to-many
     private var contactPersons: MutableSet<ContactPerson> = mutableSetOf()
@@ -39,6 +43,7 @@ open class Patient {
         phoneNumber: String,
         email: String,
         isUsingApp: Boolean,
+        medicalRecordDomainId: MedicalRecordId,
         gpDomainId: GeneralPractitionerId
     ) {
         this.domainId = domainId
@@ -50,6 +55,7 @@ open class Patient {
         this.phoneNumber = phoneNumber
         this.email = email
         this.isUsingApp = isUsingApp
+        this.medicalRecordDomainId = medicalRecordDomainId
         this.gpDomainId = gpDomainId
     }
 
@@ -64,6 +70,7 @@ open class Patient {
     fun phoneNumber(): String = this.phoneNumber
     fun email(): String = this.email
     fun isUsingApp(): Boolean = this.isUsingApp
+    fun medicalRecordDomainId(): MedicalRecordId = this.medicalRecordDomainId
     fun contactPersons(): MutableSet<ContactPerson> = this.contactPersons
     fun careProviders(): MutableSet<CareProvider> = this.careProviders
     fun gpDomainId(): GeneralPractitionerId = this.gpDomainId
