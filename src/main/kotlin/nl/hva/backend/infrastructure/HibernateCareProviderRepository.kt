@@ -4,15 +4,14 @@ import nl.hva.backend.domain.CareProvider
 import nl.hva.backend.domain.api.CareProviderRepository
 import nl.hva.backend.domain.ids.CareProviderId
 import nl.hva.backend.domain.value_objects.Specialism
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Repository
 import java.util.*
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
 import javax.persistence.Query
 import javax.persistence.TypedQuery
 
-
-@Component
+@Repository
 class HibernateCareProviderRepository : CareProviderRepository {
 
     @PersistenceContext

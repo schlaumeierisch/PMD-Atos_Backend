@@ -8,10 +8,10 @@ import nl.hva.backend.domain.api.GeneralPractitionerRepository
 import nl.hva.backend.domain.ids.GeneralPractitionerId
 import nl.hva.backend.domain.value_objects.Address
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
-@Component
+@Service
 class GeneralPractitionerServiceImpl : GeneralPractitionerService {
 
     @Autowired

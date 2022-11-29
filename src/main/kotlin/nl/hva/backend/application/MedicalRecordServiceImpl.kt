@@ -8,11 +8,11 @@ import nl.hva.backend.domain.api.MedicalRecordRepository
 import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.ObservationId
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
 
-@Component
+@Service
 class MedicalRecordServiceImpl : MedicalRecordService {
 
     @Autowired

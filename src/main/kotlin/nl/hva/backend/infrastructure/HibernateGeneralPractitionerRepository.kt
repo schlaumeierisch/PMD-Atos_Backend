@@ -3,15 +3,14 @@ package nl.hva.backend.infrastructure
 import nl.hva.backend.domain.GeneralPractitioner
 import nl.hva.backend.domain.api.GeneralPractitionerRepository
 import nl.hva.backend.domain.ids.GeneralPractitionerId
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Repository
 import java.util.*
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
 import javax.persistence.Query
 import javax.persistence.TypedQuery
 
-
-@Component
+@Repository
 class HibernateGeneralPractitionerRepository : GeneralPractitionerRepository {
 
     @PersistenceContext

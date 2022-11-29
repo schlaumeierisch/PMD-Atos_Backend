@@ -11,11 +11,11 @@ import nl.hva.backend.domain.ids.PatientId
 import nl.hva.backend.domain.value_objects.Address
 import nl.hva.backend.domain.value_objects.Gender
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
 
-@Component
+@Service
 class PatientServiceImpl : PatientService {
 
     @Autowired

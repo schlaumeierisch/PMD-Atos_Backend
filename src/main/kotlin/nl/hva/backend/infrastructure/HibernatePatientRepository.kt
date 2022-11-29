@@ -5,7 +5,7 @@ import nl.hva.backend.domain.api.PatientRepository
 import nl.hva.backend.domain.ids.GeneralPractitionerId
 import nl.hva.backend.domain.ids.PatientId
 import nl.hva.backend.domain.value_objects.Gender
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Repository
 import java.time.LocalDate
 import java.util.*
 import javax.persistence.EntityManager
@@ -13,7 +13,7 @@ import javax.persistence.PersistenceContext
 import javax.persistence.Query
 import javax.persistence.TypedQuery
 
-@Component
+@Repository
 class HibernatePatientRepository : PatientRepository {
 
     @PersistenceContext

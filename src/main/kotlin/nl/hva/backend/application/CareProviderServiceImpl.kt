@@ -9,10 +9,10 @@ import nl.hva.backend.domain.ids.CareProviderId
 import nl.hva.backend.domain.value_objects.Address
 import nl.hva.backend.domain.value_objects.Specialism
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
-@Component
+@Service
 class CareProviderServiceImpl : CareProviderService {
 
     @Autowired

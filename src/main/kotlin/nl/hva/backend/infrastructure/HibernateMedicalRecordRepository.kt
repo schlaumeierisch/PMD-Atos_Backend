@@ -5,13 +5,13 @@ import nl.hva.backend.domain.Observation
 import nl.hva.backend.domain.api.MedicalRecordRepository
 import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.ObservationId
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Repository
 import java.util.*
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
 import javax.persistence.TypedQuery
 
-@Component
+@Repository
 class HibernateMedicalRecordRepository : MedicalRecordRepository {
 
     @PersistenceContext
