@@ -4,7 +4,6 @@ import nl.hva.backend.application.api.PatientService
 import nl.hva.backend.application.dto.PatientDTO
 import nl.hva.backend.application.dto.value_objects.AddressDTO
 import nl.hva.backend.domain.Patient
-import nl.hva.backend.domain.api.MedicalRecordRepository
 import nl.hva.backend.domain.api.PatientRepository
 import nl.hva.backend.domain.ids.GeneralPractitionerId
 import nl.hva.backend.domain.ids.MedicalRecordId
