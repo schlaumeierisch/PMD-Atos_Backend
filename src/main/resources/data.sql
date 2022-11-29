@@ -33,3 +33,25 @@ values (001, 'dom-id-pa-001', 'Lotje', 'Oldhof', 'Johan Frisoplantsoen 184', '27
        (017, 'dom-id-pa-017', 'Bart', 'Tuink', 'Vlasaard 37', '4759AM', 'Noordhoek', 'Netherlands', 'MALE', '1993-03-02', '0624616558', 'jgwang@optonline.net', true, 'dom-id-gp-004'),
        (018, 'dom-id-pa-018', 'Maaike', 'Leeuw', 'Alexander Battalaan 175', '6221CB', 'Maastricht', 'Netherlands', 'FEMALE', '1977-03-26', '0664742542', 'barlow@comcast.net', true, 'dom-id-gp-005'),
        (019, 'dom-id-pa-019', 'Mannes', 'Stokkers', 'De Ruyschlaan 150', '1181PE', 'Amstelveen', 'Netherlands', 'MALE', '1990-10-10', '0674976363', 'scitext@yahoo.ca', true, 'dom-id-gp-005');
+
+-- medical record
+insert into medical_record(id, medical_record_id, patient_id)
+values (001, 'dom-id-mr-001', 'dom-id-pa-001'),
+       (002, 'dom-id-mr-002', 'dom-id-pa-002'),
+       (003, 'dom-id-mr-003', 'dom-id-pa-003'),
+       (004, 'dom-id-mr-004', 'dom-id-pa-004'),
+       (005, 'dom-id-mr-005', 'dom-id-pa-005'),
+       (006, 'dom-id-mr-006', 'dom-id-pa-006'),
+       (007, 'dom-id-mr-007', 'dom-id-pa-007'),
+       (008, 'dom-id-mr-008', 'dom-id-pa-008'),
+       (009, 'dom-id-mr-009', 'dom-id-pa-009'),
+       (010, 'dom-id-mr-010', 'dom-id-pa-010'),
+       (011, 'dom-id-mr-011', 'dom-id-pa-011'),
+       (012, 'dom-id-mr-012', 'dom-id-pa-012'),
+       (013, 'dom-id-mr-013', 'dom-id-pa-013'),
+       (014, 'dom-id-mr-014', 'dom-id-pa-014'),
+       (015, 'dom-id-mr-015', 'dom-id-pa-015'),
+       (016, 'dom-id-mr-016', 'dom-id-pa-016'),
+       (017, 'dom-id-mr-017', 'dom-id-pa-017'),
+       (018, 'dom-id-mr-018', 'dom-id-pa-018'),
+       (019, 'dom-id-mr-019', 'dom-id-pa-019');
