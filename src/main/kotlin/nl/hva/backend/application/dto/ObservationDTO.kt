@@ -64,8 +64,8 @@ class ObservationDTO {
             return this
         }
 
-        fun withPatientId(patientId: String): Builder {
-            instance.medicalRecordId = patientId
+        fun withMedicalRecordId(medicalRecordId: String): Builder {
+            instance.medicalRecordId = medicalRecordId
             return this
         }
 
@@ -73,7 +73,7 @@ class ObservationDTO {
             Objects.requireNonNull(instance.title, "title must be set in ObservationDTO")
             Objects.requireNonNull(instance.description, "description must be set in ObservationDTO")
             Objects.requireNonNull(instance.date, "date must be set in ObservationDTO")
-            Objects.requireNonNull(instance.medicalRecordId, "patientId must be set in ObservationDTO")
+            Objects.requireNonNull(instance.medicalRecordId, "medicalRecordId must be set in ObservationDTO")
 
             return instance
         }
