@@ -7,6 +7,8 @@ interface MedicalRecordService {
 
     fun createMedicalRecord(): MedicalRecordId
 
-    fun getAllObservationsByMedicalRecordId(medicalRecordId: MedicalRecordId): List<ObservationDTO>
+    fun getAllObservations(medicalRecordId: MedicalRecordId): List<ObservationDTO>
+
+    fun createObservation(title: String, description: String, medicalRecordId: String)
 
 }

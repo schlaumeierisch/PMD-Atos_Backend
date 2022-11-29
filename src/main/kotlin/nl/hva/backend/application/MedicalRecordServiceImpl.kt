@@ -6,12 +6,14 @@ import nl.hva.backend.domain.MedicalRecord
 import nl.hva.backend.domain.Observation
 import nl.hva.backend.domain.api.MedicalRecordRepository
 import nl.hva.backend.domain.ids.MedicalRecordId
+import nl.hva.backend.domain.ids.ObservationId
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
+import java.time.LocalDate
 
 @Component
-class MedicalRecordImpl : MedicalRecordService {
+class MedicalRecordServiceImpl : MedicalRecordService {
 
     @Autowired
     private lateinit var medicalRecordRepository: MedicalRecordRepository
@@ -28,8 +30,8 @@ class MedicalRecordImpl : MedicalRecordService {
     }
 
     @Transactional
-    override fun getAllObservationsByMedicalRecordId(medicalRecordId: MedicalRecordId): List<ObservationDTO> {
-        val observations: List<Observation> = this.medicalRecordRepository.getAllObservationsByMedicalRecordId(medicalRecordId)
+    override fun getAllObservations(medicalRecordId: MedicalRecordId): List<ObservationDTO> {
+        val observations: List<Observation> = this.medicalRecordRepository.getAllObservations(medicalRecordId)
         val observationDTOs: ArrayList<ObservationDTO> = arrayListOf()
 
         for (observation in observations) {
@@ -44,6 +46,15 @@ class MedicalRecordImpl : MedicalRecordService {
         }
 
         return observationDTOs
+    }
+
+    @Transactional
+    override fun createObservation(title: String, description: String, medicalRecordId: String) {
+        val observationId: ObservationId = this.medicalRecordRepository.nextObservationIdentity()
+
+        val observation = Observation(observationId, title, description, LocalDate.now(), MedicalRecordId(medicalRecordId))
+
+        this.medicalRecordRepository.createObservation(observation)
     }
 
 }

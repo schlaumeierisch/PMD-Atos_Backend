@@ -4,6 +4,7 @@ import nl.hva.backend.domain.MedicalRecord
 import nl.hva.backend.domain.Observation
 import nl.hva.backend.domain.api.MedicalRecordRepository
 import nl.hva.backend.domain.ids.MedicalRecordId
+import nl.hva.backend.domain.ids.ObservationId
 import org.springframework.stereotype.Component
 import java.util.*
 import javax.persistence.EntityManager
@@ -18,15 +19,21 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
 
     override fun nextIdentity(): MedicalRecordId = MedicalRecordId(UUID.randomUUID().toString())
 
+    override fun nextObservationIdentity(): ObservationId = ObservationId(UUID.randomUUID().toString())
+
     override fun createMedicalRecord(medicalRecord: MedicalRecord) {
         this.entityManager.persist(medicalRecord)
     }
 
-    override fun getAllObservationsByMedicalRecordId(medicalRecordId: MedicalRecordId): List<Observation> {
+    override fun getAllObservations(medicalRecordId: MedicalRecordId): List<Observation> {
         val query: TypedQuery<Observation> = this.entityManager.createQuery(
             "SELECT obs FROM Observation obs WHERE obs.medicalRecordDomainId = ?1", Observation::class.java
         )
         return query.setParameter(1, medicalRecordId).resultList
+    }
+
+    override fun createObservation(observation: Observation) {
+        this.entityManager.persist(observation)
     }
 
 }
