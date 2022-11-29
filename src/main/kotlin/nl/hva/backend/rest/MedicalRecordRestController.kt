@@ -1,8 +1,11 @@
 package nl.hva.backend.rest
 
 import nl.hva.backend.application.api.MedicalRecordService
+import nl.hva.backend.application.dto.IntakeDTO
+import nl.hva.backend.application.dto.MedicationDTO
 import nl.hva.backend.application.dto.ObservationDTO
 import nl.hva.backend.domain.ids.MedicalRecordId
+import nl.hva.backend.domain.ids.MedicationId
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
@@ -13,15 +16,15 @@ class MedicalRecordRestController {
     @Autowired
     private lateinit var medicalRecordService: MedicalRecordService
 
-    @GetMapping("/getAllObservations/{id}")
+    @GetMapping("/observations/getAllObservations/{id}")
     @ResponseBody
-    fun getPatientsOfGeneralPractitioner(
+    fun getAllObservations(
         @PathVariable("id") id: String
     ): List<ObservationDTO> {
         return this.medicalRecordService.getAllObservations(MedicalRecordId(id))
     }
 
-    @PostMapping("/createObservation")
+    @PostMapping("/observations/createObservation")
     fun createObservation(
         title: String,
         description: String,
@@ -29,4 +32,21 @@ class MedicalRecordRestController {
     ) {
         this.medicalRecordService.createObservation(title, description, medicalRecordId)
     }
+
+    @GetMapping("/medication/getAllMedication/{id}")
+    @ResponseBody
+    fun getAllMedication(
+        @PathVariable("id") id: String
+    ): List<MedicationDTO> {
+        return this.medicalRecordService.getAllMedication(MedicalRecordId(id))
+    }
+
+    @GetMapping("/medication/getIntakeByMedicationId/{id}")
+    @ResponseBody
+    fun getIntakeByMedicationId(
+        @PathVariable("id") id: String
+    ): List<IntakeDTO> {
+        return this.medicalRecordService.getIntakeByMedicationId(MedicationId(id))
+    }
+
 }

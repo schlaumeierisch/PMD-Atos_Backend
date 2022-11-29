@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping" default-access="field">
+    <class name="nl.hva.backend.domain.Intake" table="intake">
+
+        <id name="id" column="id" type="long">
+            <generator class="increment"/>
+        </id>
+
+        <component name="domainId" class="nl.hva.backend.domain.ids.IntakeId">
+            <property name="id" column="intake_id" type="string"/>
+        </component>
+
+        <property name="time" column="time" type="java.sql.Time"/>
+        <property name="amount" column="amount" type="int"/>
+
+        <property name="unit" column="unit">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">nl.hva.backend.domain.value_objects.Unit</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+
+        <component name="medicationDomainId" class="nl.hva.backend.domain.ids.MedicationId">
+            <property name="id" column="medication_id" type="string"/>
+        </component>
+
+    </class>
+</hibernate-mapping>

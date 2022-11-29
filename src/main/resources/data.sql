@@ -79,3 +79,33 @@ values (001, 'dom-id-obs-001', 'Observation 1', 'This is a description of observ
        (019, 'dom-id-obs-019', 'Observation 1', 'This is a description of observation 1', '2022-11-20', 'dom-id-mr-007'),
        (020, 'dom-id-obs-020', 'Observation 2', 'This is a description of observation 2', '2022-11-20', 'dom-id-mr-007'),
        (021, 'dom-id-obs-021', 'Observation 3', 'This is a description of observation 3', '2022-11-20', 'dom-id-mr-007');
+
+-- medication
+insert into medication(id, medication_id, title, description, start_date, end_date, medical_record_id)
+values (001, 'dom-id-med-001', 'Medication 1', 'This is a description of medication 1', '2022-10-10', '2022-12-30', 'dom-id-mr-001'),
+       (002, 'dom-id-med-002', 'Medication 2', 'This is a description of medication 2', '2022-10-10', '2022-12-30', 'dom-id-mr-001'),
+       (003, 'dom-id-med-003', 'Medication 3', 'This is a description of medication 3', '2022-10-10', '2022-12-30', 'dom-id-mr-001'),
+       (004, 'dom-id-med-004', 'Medication 1', 'This is a description of medication 1', '2022-10-10', '2022-12-30', 'dom-id-mr-002'),
+       (005, 'dom-id-med-005', 'Medication 2', 'This is a description of medication 2', '2022-10-10', '2022-12-30', 'dom-id-mr-002'),
+       (006, 'dom-id-med-006', 'Medication 3', 'This is a description of medication 3', '2022-10-10', '2022-12-30', 'dom-id-mr-002'),
+       (007, 'dom-id-med-007', 'Medication 1', 'This is a description of medication 1', '2022-10-10', '2022-12-30', 'dom-id-mr-003'),
+       (008, 'dom-id-med-008', 'Medication 2', 'This is a description of medication 2', '2022-10-10', '2022-12-30', 'dom-id-mr-003'),
+       (009, 'dom-id-med-009', 'Medication 3', 'This is a description of medication 3', '2022-10-10', '2022-12-30', 'dom-id-mr-003'),
+       (010, 'dom-id-med-010', 'Medication 1', 'This is a description of medication 1', '2022-10-10', '2022-12-30', 'dom-id-mr-004'),
+       (011, 'dom-id-med-011', 'Medication 2', 'This is a description of medication 2', '2022-10-10', '2022-12-30', 'dom-id-mr-004'),
+       (012, 'dom-id-med-012', 'Medication 3', 'This is a description of medication 3', '2022-10-10', '2022-12-30', 'dom-id-mr-004');
+
+-- intake
+insert into intake(id, intake_id, time, amount, unit, medication_id)
+values (001, 'dom-id-itk-001', '14:00', 2, 'PILL', 'dom-id-med-001'),
+       (002, 'dom-id-itk-002', '18:00', 10, 'MILLIGRAM', 'dom-id-med-001'),
+       (003, 'dom-id-itk-003', '22:00', 250, 'MILLILITRE', 'dom-id-med-001'),
+       (004, 'dom-id-itk-004', '14:00', 2, 'PILL', 'dom-id-med-002'),
+       (005, 'dom-id-itk-005', '18:00', 10, 'MILLIGRAM', 'dom-id-med-002'),
+       (006, 'dom-id-itk-006', '22:00', 250, 'MILLILITRE', 'dom-id-med-002'),
+       (007, 'dom-id-itk-007', '14:00', 2, 'PILL', 'dom-id-med-003'),
+       (008, 'dom-id-itk-008', '18:00', 10, 'MILLIGRAM', 'dom-id-med-003'),
+       (009, 'dom-id-itk-009', '22:00', 250, 'MILLILITRE', 'dom-id-med-003'),
+       (010, 'dom-id-itk-010', '14:00', 2, 'PILL', 'dom-id-med-004'),
+       (011, 'dom-id-itk-011', '18:00', 10, 'MILLIGRAM', 'dom-id-med-004'),
+       (012, 'dom-id-itk-012', '22:00', 250, 'MILLILITRE', 'dom-id-med-004');
