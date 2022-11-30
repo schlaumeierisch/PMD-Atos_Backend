@@ -13,8 +13,6 @@ open class Medication {
     private lateinit var startDate: LocalDate
     private var endDate: LocalDate? = null
 
-    private lateinit var intake: Intake
-
     // one-to-one
     private var medicalRecordDomainId: MedicalRecordId = MedicalRecordId("")
 
