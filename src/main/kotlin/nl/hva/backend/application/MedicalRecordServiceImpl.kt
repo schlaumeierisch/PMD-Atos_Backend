@@ -37,20 +37,8 @@ class MedicalRecordServiceImpl : MedicalRecordService {
     @Transactional
     override fun getAllObservations(medicalRecordId: MedicalRecordId): List<ObservationDTO> {
         val observations: List<Observation> = this.medicalRecordRepository.getAllObservations(medicalRecordId)
-        val observationDTOs: ArrayList<ObservationDTO> = arrayListOf()
 
-        for (observation in observations) {
-            val observationDTO = ObservationDTO().builder()
-                .withId(observation.domainId().id())
-                .withTitle(observation.title())
-                .withDescription(observation.description())
-                .withDate(observation.date())
-                .build()
-
-            observationDTOs.add(observationDTO)
-        }
-
-        return observationDTOs
+        return ObservationDTO.fromObservations(observations)
     }
 
     @Transactional
@@ -64,41 +52,14 @@ class MedicalRecordServiceImpl : MedicalRecordService {
 
     override fun getAllMedication(medicalRecordId: MedicalRecordId): List<MedicationDTO> {
         val medication: List<Medication> = this.medicalRecordRepository.getAllMedication(medicalRecordId)
-        val medicationDTOs: ArrayList<MedicationDTO> = arrayListOf()
 
-        for (med in medication) {
-            val medicationDTO = MedicationDTO().builder()
-                .withId(med.domainId().id())
-                .withTitle(med.title())
-                .withDescription(med.description())
-                .withStartDate(med.startDate())
-                .withEndDate(med.endDate())
-                .withMedicalRecordId(med.medicalRecordDomainId().id())
-                .build()
-
-            medicationDTOs.add(medicationDTO)
-        }
-
-        return medicationDTOs
+        return MedicationDTO.fromMedication(medication)
     }
 
     override fun getIntakeByMedicationId(medicationId: MedicationId): List<IntakeDTO> {
         val intakes: List<Intake> = this.medicalRecordRepository.getIntakeByMedicationId(medicationId)
-        val intakeDTOs: ArrayList<IntakeDTO> = arrayListOf()
 
-        for (intake in intakes) {
-            val intakeDTO = IntakeDTO().builder()
-                .withId(intake.domainId().id())
-                .withTime(intake.time())
-                .withAmount(intake.amount())
-                .withUnit(intake.unit())
-                .withMedicationId(intake.medicationDomainId().id())
-                .build()
-
-            intakeDTOs.add(intakeDTO)
-        }
-
-        return intakeDTOs
+        return IntakeDTO.fromIntakes(intakes)
     }
 
 }

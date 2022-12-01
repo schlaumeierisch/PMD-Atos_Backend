@@ -23,10 +23,6 @@ open class Patient {
     // one-to-one
     private var medicalRecordDomainId: MedicalRecordId = MedicalRecordId("")
 
-    // many-to-many
-    private var contactPersons: MutableSet<ContactPerson> = mutableSetOf()
-    private var careProviders: MutableSet<CareProvider> = mutableSetOf()
-
     // many-to-one
     private var gpDomainId: GeneralPractitionerId = GeneralPractitionerId("")
 
@@ -71,7 +67,5 @@ open class Patient {
     fun email(): String = this.email
     fun isUsingApp(): Boolean = this.isUsingApp
     fun medicalRecordDomainId(): MedicalRecordId = this.medicalRecordDomainId
-    fun contactPersons(): MutableSet<ContactPerson> = this.contactPersons
-    fun careProviders(): MutableSet<CareProvider> = this.careProviders
     fun gpDomainId(): GeneralPractitionerId = this.gpDomainId
 }

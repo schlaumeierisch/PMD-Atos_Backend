@@ -1,6 +1,9 @@
 package nl.hva.backend.domain
 
-import nl.hva.backend.domain.ids.*
+import nl.hva.backend.domain.ids.AppointmentId
+import nl.hva.backend.domain.ids.CareProviderId
+import nl.hva.backend.domain.ids.GeneralPractitionerId
+import nl.hva.backend.domain.ids.PatientId
 import java.sql.Time
 import java.time.LocalDate
 

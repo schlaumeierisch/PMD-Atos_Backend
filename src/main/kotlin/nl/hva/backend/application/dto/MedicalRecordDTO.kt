@@ -19,21 +19,4 @@ class MedicalRecordDTO {
 
     // getter
     fun id(): String = this.id
-
-    fun builder(): Builder {
-        return Builder()
-    }
-
-    class Builder {
-        private var instance: MedicalRecordDTO = MedicalRecordDTO()
-
-        fun withId(id: String): Builder {
-            instance.id = id
-            return this
-        }
-
-        fun build(): MedicalRecordDTO {
-            return instance
-        }
-    }
 }

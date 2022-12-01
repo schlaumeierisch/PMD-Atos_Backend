@@ -3,7 +3,6 @@ package nl.hva.backend.application.dto
 import com.fasterxml.jackson.annotation.JsonAutoDetect
 import nl.hva.backend.application.dto.value_objects.AddressDTO
 import nl.hva.backend.domain.GeneralPractitioner
-import java.util.*
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 class GeneralPractitionerDTO {
@@ -25,6 +24,16 @@ class GeneralPractitionerDTO {
 
             return generalPractitionerDTO
         }
+
+        fun fromGeneralPractitioners(generalPractitioners: List<GeneralPractitioner>): List<GeneralPractitionerDTO> {
+            val generalPractitionerDTOs: ArrayList<GeneralPractitionerDTO> = arrayListOf()
+
+            for (generalPractitioner in generalPractitioners) {
+                generalPractitionerDTOs.add(fromGeneralPractitioner(generalPractitioner))
+            }
+
+            return generalPractitionerDTOs
+        }
     }
 
     // getter
@@ -33,47 +42,4 @@ class GeneralPractitionerDTO {
     fun lastName(): String = this.lastName
     fun address(): AddressDTO = this.addressDTO
     fun phoneNumber(): String = this.phoneNumber
-
-    fun builder(): Builder {
-        return Builder()
-    }
-
-    class Builder {
-        private var instance: GeneralPractitionerDTO = GeneralPractitionerDTO()
-
-        fun withId(id: String): Builder {
-            instance.id = id
-            return this
-        }
-
-        fun withFirstName(firstName: String): Builder {
-            instance.firstName = firstName
-            return this
-        }
-
-        fun withLastName(lastName: String): Builder {
-            instance.lastName = lastName
-            return this
-        }
-
-        fun withAddress(address: AddressDTO): Builder {
-            instance.addressDTO = address
-            return this
-        }
-
-        fun withPhoneNumber(phoneNumber: String): Builder {
-            instance.phoneNumber = phoneNumber
-            return this
-        }
-
-        fun build(): GeneralPractitionerDTO {
-            Objects.requireNonNull(instance.id, "id must be set in GeneralPractitionerDTO")
-            Objects.requireNonNull(instance.firstName, "firstName must be set in GeneralPractitionerDTO")
-            Objects.requireNonNull(instance.lastName, "lastName must be set in GeneralPractitionerDTO")
-            Objects.requireNonNull(instance.addressDTO, "addressDTO must be set in GeneralPractitionerDTO")
-            Objects.requireNonNull(instance.phoneNumber, "phoneNumber must be set in GeneralPractitionerDTO")
-
-            return instance
-        }
-    }
 }

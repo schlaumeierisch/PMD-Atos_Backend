@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository
 import java.util.*
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
+import javax.persistence.TypedQuery
 
 @Repository
 class HibernateCalendarRepository : CalendarRepository {
@@ -24,15 +25,24 @@ class HibernateCalendarRepository : CalendarRepository {
     }
 
     override fun getAllAppointmentsByPatientId(patientId: PatientId): List<Appointment> {
-        TODO("Not yet implemented")
+        val query: TypedQuery<Appointment> = this.entityManager.createQuery(
+                "SELECT apt FROM Appointment apt WHERE apt.patientDomainId = ?1", Appointment::class.java
+        )
+        return query.setParameter(1, patientId).resultList
     }
 
     override fun getAllAppointmentsByGeneralPractitionerId(generalPractitionerId: GeneralPractitionerId): List<Appointment> {
-        TODO("Not yet implemented")
+        val query: TypedQuery<Appointment> = this.entityManager.createQuery(
+            "SELECT apt FROM Appointment apt WHERE apt.gpDomainId = ?1", Appointment::class.java
+        )
+        return query.setParameter(1, generalPractitionerId).resultList
     }
 
     override fun getAllAppointmentsByCareProviderId(careProviderId: CareProviderId): List<Appointment> {
-        TODO("Not yet implemented")
+        val query: TypedQuery<Appointment> = this.entityManager.createQuery(
+            "SELECT apt FROM Appointment apt WHERE apt.cpDomainId = ?1", Appointment::class.java
+        )
+        return query.setParameter(1, careProviderId).resultList
     }
 
 }

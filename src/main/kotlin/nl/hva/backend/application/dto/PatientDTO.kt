@@ -5,7 +5,6 @@ import nl.hva.backend.application.dto.value_objects.AddressDTO
 import nl.hva.backend.domain.Patient
 import nl.hva.backend.domain.value_objects.Gender
 import java.time.LocalDate
-import java.util.*
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 class PatientDTO {
@@ -21,9 +20,6 @@ class PatientDTO {
 
     // one-to-one
     private var medicalRecordId: String = ""
-
-    private var contactPersonDTOs: MutableSet<ContactPersonDTO> = mutableSetOf()
-    private var careProviderDTOs: MutableSet<CareProviderDTO> = mutableSetOf()
 
     // many-to-one
     private var gpId: String = ""
@@ -46,15 +42,17 @@ class PatientDTO {
 
             patientDTO.gpId = patient.gpDomainId().id()
 
-            for (careProvider in patient.careProviders()) {
-                patientDTO.careProviderDTOs.add(CareProviderDTO.fromCareProvider(careProvider))
-            }
-
-            for (contactPerson in patient.contactPersons()) {
-                patientDTO.contactPersonDTOs.add(ContactPersonDTO.fromContactPerson(contactPerson))
-            }
-
             return patientDTO
+        }
+
+        fun fromPatients(patients: List<Patient>): List<PatientDTO> {
+            val patientDTOs: ArrayList<PatientDTO> = arrayListOf()
+
+            for (patient in patients) {
+                patientDTOs.add(fromPatient(patient))
+            }
+
+            return patientDTOs
         }
     }
 
@@ -69,96 +67,5 @@ class PatientDTO {
     fun email(): String = this.email
     fun isUsingApp(): Boolean = this.isUsingApp
     fun medicalRecordId(): String = this.medicalRecordId
-    fun contactPersonDTOs(): MutableSet<ContactPersonDTO> = this.contactPersonDTOs
-    fun careProviderDTOs(): MutableSet<CareProviderDTO> = this.careProviderDTOs
     fun gpId(): String = this.gpId
-
-    fun builder(): Builder {
-        return Builder()
-    }
-
-    class Builder {
-        private var instance: PatientDTO = PatientDTO()
-
-        fun withId(id: String): Builder {
-            instance.id = id
-            return this
-        }
-
-        fun withFirstName(firstName: String): Builder {
-            instance.firstName = firstName
-            return this
-        }
-
-        fun withLastName(lastName: String): Builder {
-            instance.lastName = lastName
-            return this
-        }
-
-        fun withAddressDTO(address: AddressDTO): Builder {
-            instance.addressDTO = address
-            return this
-        }
-
-        fun withGender(gender: Enum<Gender>): Builder {
-            instance.gender = gender
-            return this
-        }
-
-        fun withBirthDate(birthDate: LocalDate): Builder {
-            instance.birthDate = birthDate
-            return this
-        }
-
-        fun withPhoneNumber(phoneNumber: String): Builder {
-            instance.phoneNumber = phoneNumber
-            return this
-        }
-
-        fun withEmail(email: String): Builder {
-            instance.email = email
-            return this
-        }
-
-        fun withIsUsingApp(isUsingApp: Boolean): Builder {
-            instance.isUsingApp = isUsingApp
-            return this
-        }
-
-        fun withMedicalRecordId(medicalRecordId: String): Builder {
-            instance.medicalRecordId = medicalRecordId
-            return this
-        }
-
-        fun withContactPersonDTOs(contactPersonDTOs: MutableSet<ContactPersonDTO>): Builder {
-            instance.contactPersonDTOs = contactPersonDTOs
-            return this
-        }
-
-        fun withCareProviderDTOs(careProviderDTOs: MutableSet<CareProviderDTO>): Builder {
-            instance.careProviderDTOs = careProviderDTOs
-            return this
-        }
-
-        fun withGpId(gpId: String): Builder {
-            instance.gpId = gpId
-            return this
-        }
-
-        fun build(): PatientDTO {
-            Objects.requireNonNull(instance.firstName, "street must be set in PatientDTO")
-            Objects.requireNonNull(instance.lastName, "lastName must be set in PatientDTO")
-            Objects.requireNonNull(instance.addressDTO, "addressDTO must be set in PatientDTO")
-            Objects.requireNonNull(instance.gender, "gender must be set in PatientDTO")
-            Objects.requireNonNull(instance.birthDate, "birthDate must be set in PatientDTO")
-            Objects.requireNonNull(instance.phoneNumber, "phoneNumber must be set in PatientDTO")
-            Objects.requireNonNull(instance.email, "email must be set in PatientDTO")
-            Objects.requireNonNull(instance.contactPersonDTOs, "contactPersonDTOs must be set in PatientDTO")
-            Objects.requireNonNull(instance.careProviderDTOs, "careProviderDTOs must be set in PatientDTO")
-            Objects.requireNonNull(instance.medicalRecordId, "medicalRecordId must be set in PatientDTO")
-            Objects.requireNonNull(instance.gpId, "gpId must be set in PatientDTO")
-
-            return instance
-        }
-    }
 }

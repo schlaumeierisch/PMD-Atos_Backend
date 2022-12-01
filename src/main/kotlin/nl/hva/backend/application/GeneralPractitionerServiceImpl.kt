@@ -2,7 +2,6 @@ package nl.hva.backend.application
 
 import nl.hva.backend.application.api.GeneralPractitionerService
 import nl.hva.backend.application.dto.GeneralPractitionerDTO
-import nl.hva.backend.application.dto.value_objects.AddressDTO
 import nl.hva.backend.domain.GeneralPractitioner
 import nl.hva.backend.domain.api.GeneralPractitionerRepository
 import nl.hva.backend.domain.ids.GeneralPractitionerId
@@ -19,8 +18,13 @@ class GeneralPractitionerServiceImpl : GeneralPractitionerService {
 
     @Transactional
     override fun createAccount(
-        firstName: String, lastName: String, street: String, zip: String,
-        city: String, country: String, phoneNumber: String
+        firstName: String,
+        lastName: String,
+        street: String,
+        zip: String,
+        city: String,
+        country: String,
+        phoneNumber: String
     ) {
         val generalPractitionerId: GeneralPractitionerId = generalPractitionerRepository.nextIdentity()
 
@@ -33,8 +37,14 @@ class GeneralPractitionerServiceImpl : GeneralPractitionerService {
 
     @Transactional
     override fun editAccount(
-        generalPractitionerId: GeneralPractitionerId, firstName: String, lastName: String,
-        street: String, zip: String, city: String, country: String, phoneNumber: String
+        generalPractitionerId: GeneralPractitionerId,
+        firstName: String,
+        lastName: String,
+        street: String,
+        zip: String,
+        city: String,
+        country: String,
+        phoneNumber: String
     ) {
         this.generalPractitionerRepository.editAccount(
             generalPractitionerId, firstName, lastName, street, zip, city, country, phoneNumber
@@ -51,33 +61,14 @@ class GeneralPractitionerServiceImpl : GeneralPractitionerService {
         val generalPractitioner: GeneralPractitioner =
             this.generalPractitionerRepository.getAccountById(generalPractitionerId)
 
-        return GeneralPractitionerDTO().builder()
-            .withId(generalPractitioner.domainId().id())
-            .withFirstName(generalPractitioner.firstName())
-            .withLastName(generalPractitioner.lastName())
-            .withAddress(AddressDTO.fromAddress(generalPractitioner.address()))
-            .withPhoneNumber(generalPractitioner.phoneNumber())
-            .build()
+        return GeneralPractitionerDTO.fromGeneralPractitioner(generalPractitioner)
     }
 
     @Transactional
     override fun getAllAccounts(): List<GeneralPractitionerDTO> {
         val generalPractitioners: List<GeneralPractitioner> = this.generalPractitionerRepository.getAllAccounts()
-        val generalPractitionerDTOs: ArrayList<GeneralPractitionerDTO> = arrayListOf()
 
-        for (generalPractitioner in generalPractitioners) {
-            val generalPractitionerDTO: GeneralPractitionerDTO = GeneralPractitionerDTO().builder()
-                .withId(generalPractitioner.domainId().id())
-                .withFirstName(generalPractitioner.firstName())
-                .withLastName(generalPractitioner.lastName())
-                .withAddress(AddressDTO.fromAddress(generalPractitioner.address()))
-                .withPhoneNumber(generalPractitioner.phoneNumber())
-                .build()
-
-            generalPractitionerDTOs.add(generalPractitionerDTO)
-        }
-
-        return generalPractitionerDTOs
+        return GeneralPractitionerDTO.fromGeneralPractitioners(generalPractitioners)
     }
 
 }

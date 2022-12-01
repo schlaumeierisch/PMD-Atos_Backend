@@ -40,17 +40,23 @@ class CalendarServiceImpl : CalendarService {
 
     @Transactional
     override fun getAllAppointmentsByPatientId(patientId: PatientId): List<AppointmentDTO> {
-        TODO("Not yet implemented")
+        val appointments: List<Appointment> = this.calendarRepository.getAllAppointmentsByPatientId(patientId)
+
+        return AppointmentDTO.fromAppointments(appointments)
     }
 
     @Transactional
     override fun getAllAppointmentsByGeneralPractitionerId(generalPractitionerId: GeneralPractitionerId): List<AppointmentDTO> {
-        TODO("Not yet implemented")
+        val appointments: List<Appointment> = this.calendarRepository.getAllAppointmentsByGeneralPractitionerId(generalPractitionerId)
+
+        return AppointmentDTO.fromAppointments(appointments)
     }
 
     @Transactional
     override fun getAllAppointmentsByCareProviderId(careProviderId: CareProviderId): List<AppointmentDTO> {
-        TODO("Not yet implemented")
+        val appointments: List<Appointment> = this.calendarRepository.getAllAppointmentsByCareProviderId(careProviderId)
+
+        return AppointmentDTO.fromAppointments(appointments)
     }
 
 }

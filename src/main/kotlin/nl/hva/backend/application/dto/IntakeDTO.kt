@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect
 import nl.hva.backend.domain.Intake
 import nl.hva.backend.domain.value_objects.Unit
 import java.sql.Time
-import java.util.*
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 class IntakeDTO {
@@ -29,6 +28,16 @@ class IntakeDTO {
 
             return intakeDTO
         }
+
+        fun fromIntakes(intakes: List<Intake>): List<IntakeDTO> {
+            val intakeDTOs: ArrayList<IntakeDTO> = arrayListOf()
+
+            for (intake in intakes) {
+                intakeDTOs.add(fromIntake(intake))
+            }
+
+            return intakeDTOs
+        }
     }
 
     // getter
@@ -36,47 +45,5 @@ class IntakeDTO {
     fun time(): Time = this.time
     fun amount(): Int = this.amount
     fun unit(): Enum<Unit> = this.unit
-    fun medicationid(): String = this.medicationid()
-
-    fun builder(): Builder {
-        return Builder()
-    }
-
-    class Builder {
-        private var instance: IntakeDTO = IntakeDTO()
-
-        fun withId(id: String): Builder {
-            instance.id = id
-            return this
-        }
-
-        fun withTime(time: Time): Builder {
-            instance.time = time
-            return this
-        }
-
-        fun withAmount(amount: Int): Builder {
-            instance.amount = amount
-            return this
-        }
-
-        fun withUnit(unit: Enum<Unit>): Builder {
-            instance.unit = unit
-            return this
-        }
-
-        fun withMedicationId(medicationId: String): Builder {
-            instance.medicationId = medicationId
-            return this
-        }
-
-        fun build(): IntakeDTO {
-            Objects.requireNonNull(instance.time, "time must be set in IntakeDTO")
-            Objects.requireNonNull(instance.amount, "amount must be set in IntakeDTO")
-            Objects.requireNonNull(instance.unit, "unit must be set in IntakeDTO")
-            Objects.requireNonNull(instance.medicationId, "medicationId must be set in IntakeDTO")
-
-            return instance
-        }
-    }
+    fun medicationId(): String = this.medicationId()
 }
