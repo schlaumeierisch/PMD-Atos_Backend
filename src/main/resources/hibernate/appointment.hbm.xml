@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping" default-access="field">
+    <class name="nl.hva.backend.domain.Appointment" table="appointment">
+
+        <id name="id" column="id" type="long">
+            <generator class="increment"/>
+        </id>
+
+        <component name="domainId" class="nl.hva.backend.domain.ids.AppointmentId">
+            <property name="id" column="appointment_id" type="string"/>
+        </component>
+
+        <property name="date" column="date" type="java.time.LocalDate"/>
+        <property name="time" column="time" type="java.sql.Time"/>
+        <property name="reason" column="reason" type="string"/>
+
+        <component name="patientDomainId" class="nl.hva.backend.domain.ids.PatientId">
+            <property name="id" column="patient_id" type="string"/>
+        </component>
+
+        <component name="gpDomainId" class="nl.hva.backend.domain.ids.GeneralPractitionerId">
+            <property name="id" column="general_practitioner_id" type="string"/>
+        </component>
+
+        <component name="cpDomainId" class="nl.hva.backend.domain.ids.CareProviderId">
+            <property name="id" column="care_provider_id" type="string"/>
+        </component>
+
+    </class>
+</hibernate-mapping>
