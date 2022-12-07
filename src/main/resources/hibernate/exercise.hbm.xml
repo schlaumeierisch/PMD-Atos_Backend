@@ -13,7 +13,7 @@
         </component>
 
         <property name="title" column="title" type="string"/>
-        <property name="description" column="title" type="string"/>
+        <property name="description" column="description" type="string"/>
         <property name="progress" column="progress" type="int"/>
         <property name="duration" column="duration" type="int"/>
 

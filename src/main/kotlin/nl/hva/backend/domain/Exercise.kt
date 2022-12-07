@@ -1,7 +1,8 @@
 package nl.hva.backend.domain
 
-import nl.hva.backend.domain.ids.ExerciseId
 import nl.hva.backend.domain.ids.MedicalRecordId
+import nl.hva.backend.domain.ids.ExerciseId
+import java.time.LocalDate
 
 open class Exercise {
     private val id: Long = 0
@@ -9,8 +10,8 @@ open class Exercise {
 
     private lateinit var title: String
     private lateinit var description: String
-    private lateinit var progress: Number
-    private lateinit var duration: Number
+    private lateinit var startDate: LocalDate
+    private var endDate: LocalDate? = null
 
     // one-to-one
     private var medicalRecordDomainId: MedicalRecordId = MedicalRecordId("")
@@ -22,15 +23,15 @@ open class Exercise {
         domainId: ExerciseId,
         title: String,
         description: String,
-        progress: Number,
-        duration: Number,
+        startDate: LocalDate,
+        endDate: LocalDate? = null,
         medicalRecordDomainId: MedicalRecordId
     ) {
         this.domainId = domainId
         this.title = title
         this.description = description
-        this.progress = progress
-        this.duration = duration
+        this.startDate = startDate
+        this.endDate = endDate
         this.medicalRecordDomainId = medicalRecordDomainId
     }
 
@@ -39,7 +40,7 @@ open class Exercise {
     fun domainId(): ExerciseId = this.domainId
     fun title(): String = this.title
     fun description(): String = this.description
-    fun progress(): Number = this.progress
-    fun duration(): Number = this.duration
+    fun startDate(): LocalDate = this.startDate
+    fun endDate(): LocalDate? = this.endDate
     fun medicalRecordDomainId(): MedicalRecordId = this.medicalRecordDomainId
 }
