@@ -2,14 +2,14 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping" default-access="field">
-    <class name="nl.hva.backend.domain.Observation" table="observation">
+    <class name="nl.hva.backend.domain.Note" table="note">
 
         <id name="id" column="id" type="long">
             <generator class="increment"/>
         </id>
 
-        <component name="domainId" class="nl.hva.backend.domain.ids.ObservationId">
-            <property name="id" column="observation_id" type="string"/>
+        <component name="domainId" class="nl.hva.backend.domain.ids.NoteId">
+            <property name="id" column="note_id" type="string"/>
         </component>
 
         <property name="title" column="title" type="string"/>

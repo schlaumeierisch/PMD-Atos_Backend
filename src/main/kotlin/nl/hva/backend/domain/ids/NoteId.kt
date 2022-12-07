@@ -2,7 +2,7 @@ package nl.hva.backend.domain.ids
 
 import java.util.*
 
-class ObservationId {
+class NoteId {
     private lateinit var id: String
 
     // required by hibernate
@@ -19,8 +19,8 @@ class ObservationId {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || javaClass != other.javaClass) return false
-        val observationId = other as ObservationId
-        return id == observationId.id
+        val noteId = other as NoteId
+        return id == noteId.id
     }
 
     override fun hashCode(): Int {

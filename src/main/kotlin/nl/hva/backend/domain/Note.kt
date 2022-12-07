@@ -1,12 +1,12 @@
 package nl.hva.backend.domain
 
 import nl.hva.backend.domain.ids.MedicalRecordId
-import nl.hva.backend.domain.ids.ObservationId
+import nl.hva.backend.domain.ids.NoteId
 import java.time.LocalDate
 
-open class Observation {
+open class Note {
     private val id: Long = 0
-    private lateinit var domainId: ObservationId
+    private lateinit var domainId: NoteId
 
     private lateinit var title: String
     private lateinit var description: String
@@ -19,7 +19,7 @@ open class Observation {
     protected constructor()
 
     constructor(
-        domainId: ObservationId,
+        domainId: NoteId,
         title: String,
         description: String,
         date: LocalDate,
@@ -34,7 +34,7 @@ open class Observation {
 
     // getter
     fun id(): Long = this.id
-    fun domainId(): ObservationId = this.domainId
+    fun domainId(): NoteId = this.domainId
     fun title(): String = this.title
     fun description(): String = this.description
     fun date(): LocalDate = this.date

@@ -3,22 +3,22 @@ package nl.hva.backend.domain.api
 import nl.hva.backend.domain.Intake
 import nl.hva.backend.domain.MedicalRecord
 import nl.hva.backend.domain.Medication
-import nl.hva.backend.domain.Observation
+import nl.hva.backend.domain.Note
 import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.MedicationId
-import nl.hva.backend.domain.ids.ObservationId
+import nl.hva.backend.domain.ids.NoteId
 
 interface MedicalRecordRepository {
 
     fun nextIdentity(): MedicalRecordId
 
-    fun nextObservationIdentity(): ObservationId
+    fun nextNoteIdentity(): NoteId
 
     fun createMedicalRecord(medicalRecord: MedicalRecord)
 
-    fun getAllObservations(medicalRecordId: MedicalRecordId): List<Observation>
+    fun getAllNotes(medicalRecordId: MedicalRecordId): List<Note>
 
-    fun createObservation(observation: Observation)
+    fun createNote(note: Note)
 
     fun getAllMedication(medicalRecordId: MedicalRecordId): List<Medication>
 

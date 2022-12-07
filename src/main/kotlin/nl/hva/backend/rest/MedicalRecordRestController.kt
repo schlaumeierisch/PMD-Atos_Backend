@@ -3,7 +3,7 @@ package nl.hva.backend.rest
 import nl.hva.backend.application.api.MedicalRecordService
 import nl.hva.backend.application.dto.IntakeDTO
 import nl.hva.backend.application.dto.MedicationDTO
-import nl.hva.backend.application.dto.ObservationDTO
+import nl.hva.backend.application.dto.NoteDTO
 import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.MedicationId
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,21 +16,21 @@ class MedicalRecordRestController {
     @Autowired
     private lateinit var medicalRecordService: MedicalRecordService
 
-    @GetMapping("/observations/getAllObservations/{id}")
+    @GetMapping("/notes/getAllNotes/{id}")
     @ResponseBody
-    fun getAllObservations(
+    fun getAllNotes(
         @PathVariable("id") id: String
-    ): List<ObservationDTO> {
-        return this.medicalRecordService.getAllObservations(MedicalRecordId(id))
+    ): List<NoteDTO> {
+        return this.medicalRecordService.getAllNotes(MedicalRecordId(id))
     }
 
-    @PostMapping("/observations/createObservation")
-    fun createObservation(
+    @PostMapping("/notes/createNote")
+    fun createNote(
         title: String,
         description: String,
         medicalRecordId: String
     ) {
-        this.medicalRecordService.createObservation(title, description, medicalRecordId)
+        this.medicalRecordService.createNote(title, description, medicalRecordId)
     }
 
     @GetMapping("/medication/getAllMedication/{id}")
