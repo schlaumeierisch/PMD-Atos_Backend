@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping" default-access="field">
+    <class name="nl.hva.backend.domain.Exercise" table="exercise">
+
+        <id name="id" column="id" type="long">
+            <generator class="increment"/>
+        </id>
+
+        <component name="domainId" class="nl.hva.backend.domain.ids.ExerciseId">
+            <property name="id" column="exercise_id" type="string"/>
+        </component>
+
+        <property name="title" column="title" type="string"/>
+        <property name="description" column="title" type="string"/>
+        <property name="progress" column="progress" type="int"/>
+        <property name="duration" column="duration" type="int"/>
+
+        <component name="medicalRecordDomainId" class="nl.hva.backend.domain.ids.MedicalRecordId">
+            <property name="id" column="medical_record_id" type="string"/>
+        </component>
+
+    </class>
+</hibernate-mapping>
