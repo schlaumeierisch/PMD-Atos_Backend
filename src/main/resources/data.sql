@@ -114,3 +114,18 @@ values (001, 'dom-id-itk-001', '14:00', 2, 'PILL', 'dom-id-med-001'),
 insert into appointment(id, appointment_id, time, reason, patient_id, general_practitioner_id, care_provider_id)
 values (001, 'dom-id-apt-001', '2022-12-01 14:00:00', 'The reason for the appointment', 'dom-id-pa-001', 'dom-id-gp-001', ''),
        (002, 'dom-id-apt-002', '2022-12-01 18:00:00', 'The reason for the appointment', 'dom-id-pa-001', '', 'dom-id-cp-001');
+
+-- exercise
+insert into exercise(id, exercise_id, title, description, start_date, end_date, medical_record_id)
+values (001, 'dom-id-exerc-001', 'Exercise 1', 'This is a description of exercise 1', '2022-10-10', '2022-12-30', 'dom-id-mr-001'),
+       (002, 'dom-id-exerc-002', 'Exercise 2', 'This is a description of exercise 2', '2022-10-10', '2022-12-30', 'dom-id-mr-001'),
+       (003, 'dom-id-exerc-003', 'Exercise 3', 'This is a description of exercise 3', '2022-10-10', '2022-12-30', 'dom-id-mr-001'),
+       (004, 'dom-id-exerc-004', 'Exercise 1', 'This is a description of exercise 1', '2022-10-10', '2022-12-30', 'dom-id-mr-002'),
+       (005, 'dom-id-exerc-005', 'Exercise 2', 'This is a description of exercise 2', '2022-10-10', '2022-12-30', 'dom-id-mr-002'),
+       (006, 'dom-id-exerc-006', 'Exercise 3', 'This is a description of exercise 3', '2022-10-10', '2022-12-30', 'dom-id-mr-002'),
+       (007, 'dom-id-exerc-007', 'Exercise 1', 'This is a description of exercise 1', '2022-10-10', '2022-12-30', 'dom-id-mr-003'),
+       (008, 'dom-id-exerc-008', 'Exercise 2', 'This is a description of exercise 2', '2022-10-10', '2022-12-30', 'dom-id-mr-003'),
+       (009, 'dom-id-exerc-009', 'Exercise 3', 'This is a description of exercise 3', '2022-10-10', '2022-12-30', 'dom-id-mr-003'),
+       (010, 'dom-id-exerc-010', 'Exercise 1', 'This is a description of exercise 1', '2022-10-10', '2022-12-30', 'dom-id-mr-004'),
+       (011, 'dom-id-exerc-011', 'Exercise 2', 'This is a description of exercise 2', '2022-10-10', '2022-12-30', 'dom-id-mr-004'),
+       (012, 'dom-id-exerc-012', 'Exercise 3', 'This is a description of exercise 3', '2022-10-10', '2022-12-30', 'dom-id-mr-004');

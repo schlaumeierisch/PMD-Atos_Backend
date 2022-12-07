@@ -1,9 +1,6 @@
 package nl.hva.backend.infrastructure
 
-import nl.hva.backend.domain.Intake
-import nl.hva.backend.domain.MedicalRecord
-import nl.hva.backend.domain.Medication
-import nl.hva.backend.domain.Note
+import nl.hva.backend.domain.*
 import nl.hva.backend.domain.api.MedicalRecordRepository
 import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.MedicationId
@@ -51,6 +48,13 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
             "SELECT itk FROM Intake itk WHERE itk.medicationDomainId = ?1", Intake::class.java
         )
         return query.setParameter(1, medicationId).resultList
+    }
+
+    override fun getAllExercises(medicalRecordId: MedicalRecordId): List<Exercise> {
+        val query: TypedQuery<Exercise> = this.entityManager.createQuery(
+            "SELECT exerc FROM Exercise exerc WHERE exerc.medicalRecordDomainId = ?1", Exercise::class.java
+        )
+        return query.setParameter(1, medicalRecordId).resultList
     }
 
 }

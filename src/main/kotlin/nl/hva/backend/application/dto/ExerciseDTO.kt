@@ -30,7 +30,7 @@ class ExerciseDTO {
             return exerciseDTO
         }
 
-        fun fromExercise(exercise: List<Exercise>): List<ExerciseDTO> {
+        fun fromExercises(exercise: List<Exercise>): List<ExerciseDTO> {
             val exerciseDTOs: ArrayList<ExerciseDTO> = arrayListOf()
 
             for (med in exercise) {
