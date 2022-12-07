@@ -50,6 +50,13 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
         return query.setParameter(1, medicationId).resultList
     }
 
+    override fun getAllDiagnoses(medicalRecordId: MedicalRecordId): List<Diagnosis> {
+        val query: TypedQuery<Diagnosis> = this.entityManager.createQuery(
+            "SELECT diag FROM Diagnosis diag WHERE diag.medicalRecordDomainId = ?1", Diagnosis::class.java
+        )
+        return query.setParameter(1, medicalRecordId).resultList
+    }
+
     override fun getAllExercises(medicalRecordId: MedicalRecordId): List<Exercise> {
         val query: TypedQuery<Exercise> = this.entityManager.createQuery(
             "SELECT exerc FROM Exercise exerc WHERE exerc.medicalRecordDomainId = ?1", Exercise::class.java

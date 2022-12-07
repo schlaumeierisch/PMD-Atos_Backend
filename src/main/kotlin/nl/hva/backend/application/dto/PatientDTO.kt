@@ -19,7 +19,7 @@ class PatientDTO {
     private var isUsingApp: Boolean = false
 
     // one-to-one
-    private var medicalRecordId: String = ""
+    private lateinit var medicalRecordId: String
 
     // many-to-one
     private var gpId: String = ""

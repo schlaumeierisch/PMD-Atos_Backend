@@ -11,7 +11,7 @@ class AppointmentDTO {
     private lateinit var reason: String
 
     // one-to-one
-    private var patientId: String = ""
+    private lateinit var patientId: String
 
     // one-to-one - can be either GP or CP (not both!)
     private var gpId: String = ""

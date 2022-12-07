@@ -1,6 +1,7 @@
 package nl.hva.backend.application.api
 
 import nl.hva.backend.application.dto.ExerciseDTO
+import nl.hva.backend.application.dto.DiagnosisDTO
 import nl.hva.backend.application.dto.IntakeDTO
 import nl.hva.backend.application.dto.MedicationDTO
 import nl.hva.backend.application.dto.NoteDTO
@@ -18,6 +19,8 @@ interface MedicalRecordService {
     fun getAllMedication(medicalRecordId: MedicalRecordId): List<MedicationDTO>
 
     fun getIntakeByMedicationId(medicationId: MedicationId): List<IntakeDTO>
+
+    fun getAllDiagnoses(medicalRecordId: MedicalRecordId): List<DiagnosisDTO>
 
     fun getAllExercises(medicalRecordId: MedicalRecordId): List<ExerciseDTO>
 

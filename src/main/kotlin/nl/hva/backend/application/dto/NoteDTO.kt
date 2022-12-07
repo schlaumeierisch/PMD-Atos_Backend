@@ -12,7 +12,7 @@ class NoteDTO {
     private lateinit var date: LocalDate
 
     // one-to-one
-    private var medicalRecordId: String = ""
+    private lateinit var medicalRecordId: String
 
     companion object {
         fun fromNote(note: Note): NoteDTO {

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping" default-access="field">
+    <class name="nl.hva.backend.domain.Diagnosis" table="diagnosis">
+
+        <id name="id" column="id" type="long">
+            <generator class="increment"/>
+        </id>
+
+        <component name="domainId" class="nl.hva.backend.domain.ids.DiagnosisId">
+            <property name="id" column="diagnosis_id" type="string"/>
+        </component>
+
+        <property name="title" column="title" type="string"/>
+        <property name="diagnosisType" column="diagnosis_type">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">nl.hva.backend.domain.value_objects.DiagnosisTypes</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+
+        <property name="dateDiagnosed" column="date_diagnosed" type="java.time.LocalDate"/>
+
+        <property name="cause" column="cause" type="string"/>
+        <property name="treatment" column="treatment" type="string"/>
+        <property name="advice" column="advice" type="string"/>
+
+        <component name="medicalRecordDomainId" class="nl.hva.backend.domain.ids.MedicalRecordId">
+            <property name="id" column="medical_record_id" type="string"/>
+        </component>
+
+    </class>
+</hibernate-mapping>

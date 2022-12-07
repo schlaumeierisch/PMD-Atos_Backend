@@ -22,4 +22,6 @@ interface MedicalRecordRepository {
     fun getIntakeByMedicationId(medicationId: MedicationId): List<Intake>
     fun getAllExercises(medicalRecordId: MedicalRecordId): List<Exercise>
 
+    fun getAllDiagnoses(medicalRecordId: MedicalRecordId): List<Diagnosis>
+
 }
