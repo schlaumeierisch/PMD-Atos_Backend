@@ -1,7 +1,6 @@
 package nl.hva.backend.application.api
 
 import nl.hva.backend.application.dto.PatientDTO
-import nl.hva.backend.domain.ids.GeneralPractitionerId
 import nl.hva.backend.domain.ids.PatientId
 import nl.hva.backend.domain.value_objects.Gender
 import java.time.LocalDate
@@ -23,8 +22,6 @@ interface PatientService {
     fun deleteAccount(patientId: PatientId)
 
     fun getAccountById(patientId: PatientId): PatientDTO
-
-    fun getAccountByGeneralPractitionerId(generalPractitionerId: GeneralPractitionerId): List<PatientDTO>
 
     fun getAllAccounts(): List<PatientDTO>
 

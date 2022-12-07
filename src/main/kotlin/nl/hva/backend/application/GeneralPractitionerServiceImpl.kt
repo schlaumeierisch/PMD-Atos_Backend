@@ -2,7 +2,9 @@ package nl.hva.backend.application
 
 import nl.hva.backend.application.api.GeneralPractitionerService
 import nl.hva.backend.application.dto.GeneralPractitionerDTO
+import nl.hva.backend.application.dto.PatientDTO
 import nl.hva.backend.domain.GeneralPractitioner
+import nl.hva.backend.domain.Patient
 import nl.hva.backend.domain.api.GeneralPractitionerRepository
 import nl.hva.backend.domain.ids.GeneralPractitionerId
 import nl.hva.backend.domain.value_objects.Address
@@ -69,6 +71,13 @@ class GeneralPractitionerServiceImpl : GeneralPractitionerService {
         val generalPractitioners: List<GeneralPractitioner> = this.generalPractitionerRepository.getAllAccounts()
 
         return GeneralPractitionerDTO.fromGeneralPractitioners(generalPractitioners)
+    }
+
+    @Transactional
+    override fun getPatientsOfGeneralPractitionerById(generalPractitionerId: GeneralPractitionerId): List<PatientDTO> {
+        val patients: List<Patient> = this.generalPractitionerRepository.getPatientsOfGeneralPractitionerById(generalPractitionerId)
+
+        return PatientDTO.fromPatients(patients)
     }
 
 }

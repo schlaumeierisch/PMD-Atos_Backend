@@ -68,13 +68,6 @@ class HibernatePatientRepository : PatientRepository {
         return query.setParameter(1, patientId).singleResult
     }
 
-    override fun getAccountByGeneralPractitionerId(generalPractitionerId: GeneralPractitionerId): List<Patient> {
-        val query: TypedQuery<Patient> = this.entityManager.createQuery(
-            "SELECT p FROM Patient p WHERE p.gpDomainId = ?1", Patient::class.java
-        )
-        return query.setParameter(1, generalPractitionerId).resultList
-    }
-
     override fun getAllAccounts(): List<Patient> {
         val query: TypedQuery<Patient> = this.entityManager.createQuery(
             "SELECT p FROM Patient p", Patient::class.java

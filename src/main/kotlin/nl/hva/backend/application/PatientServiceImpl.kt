@@ -81,13 +81,6 @@ class PatientServiceImpl : PatientService {
     }
 
     @Transactional
-    override fun getAccountByGeneralPractitionerId(generalPractitionerId: GeneralPractitionerId): List<PatientDTO> {
-        val patients: List<Patient> = this.patientRepository.getAccountByGeneralPractitionerId(generalPractitionerId)
-
-        return PatientDTO.fromPatients(patients)
-    }
-
-    @Transactional
     override fun getAllAccounts(): List<PatientDTO> {
         val patients: List<Patient> = this.patientRepository.getAllAccounts()
 

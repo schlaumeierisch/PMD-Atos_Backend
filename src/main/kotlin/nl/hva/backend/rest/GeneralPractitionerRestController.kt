@@ -2,6 +2,7 @@ package nl.hva.backend.rest
 
 import nl.hva.backend.application.api.GeneralPractitionerService
 import nl.hva.backend.application.dto.GeneralPractitionerDTO
+import nl.hva.backend.application.dto.PatientDTO
 import nl.hva.backend.domain.ids.GeneralPractitionerId
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -30,6 +31,14 @@ class GeneralPractitionerRestController {
         } catch (e: Exception) {
             null
         }
+    }
+
+    @GetMapping("/getPatientsOfGeneralPractitionerById/{id}")
+    @ResponseBody
+    fun getPatientsOfGeneralPractitioner(
+        @PathVariable("id") id: String
+    ): List<PatientDTO> {
+        return this.generalPractitionerService.getPatientsOfGeneralPractitionerById(GeneralPractitionerId(id))
     }
 
 }

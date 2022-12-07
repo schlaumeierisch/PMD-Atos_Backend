@@ -1,6 +1,7 @@
 package nl.hva.backend.domain.api
 
 import nl.hva.backend.domain.GeneralPractitioner
+import nl.hva.backend.domain.Patient
 import nl.hva.backend.domain.ids.GeneralPractitionerId
 
 interface GeneralPractitionerRepository {
@@ -19,5 +20,7 @@ interface GeneralPractitionerRepository {
     fun getAccountById(generalPractitionerId: GeneralPractitionerId): GeneralPractitioner
 
     fun getAllAccounts(): List<GeneralPractitioner>
+
+    fun getPatientsOfGeneralPractitionerById(generalPractitionerId: GeneralPractitionerId): List<Patient>
 
 }

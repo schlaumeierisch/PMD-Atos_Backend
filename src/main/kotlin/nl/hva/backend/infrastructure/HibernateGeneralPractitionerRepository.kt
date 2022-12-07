@@ -1,6 +1,7 @@
 package nl.hva.backend.infrastructure
 
 import nl.hva.backend.domain.GeneralPractitioner
+import nl.hva.backend.domain.Patient
 import nl.hva.backend.domain.api.GeneralPractitionerRepository
 import nl.hva.backend.domain.ids.GeneralPractitionerId
 import org.springframework.stereotype.Repository
@@ -70,6 +71,13 @@ class HibernateGeneralPractitionerRepository : GeneralPractitionerRepository {
             "SELECT gp FROM GeneralPractitioner gp", GeneralPractitioner::class.java
         )
         return query.resultList
+    }
+
+    override fun getPatientsOfGeneralPractitionerById(generalPractitionerId: GeneralPractitionerId): List<Patient> {
+        val query: TypedQuery<Patient> = this.entityManager.createQuery(
+            "SELECT p FROM Patient p WHERE p.gpDomainId = ?1", Patient::class.java
+        )
+        return query.setParameter(1, generalPractitionerId).resultList
     }
 
 }

@@ -22,8 +22,6 @@ interface PatientRepository {
 
     fun getAccountById(patientId: PatientId): Patient
 
-    fun getAccountByGeneralPractitionerId(generalPractitionerId: GeneralPractitionerId): List<Patient>
-
     fun getAllAccounts(): List<Patient>
 
 }
