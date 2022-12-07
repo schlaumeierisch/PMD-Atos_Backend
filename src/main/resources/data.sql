@@ -117,4 +117,5 @@ values (001, 'dom-id-apt-001', '2022-12-01', '14:00', 'The reason for the appoin
 
 -- diagnosis
 insert into diagnosis(id, diagnosis_id, title, diagnosis_type, date_diagnosed, cause, treatment, advice, medical_record_id)
-values (001, 'dom-id-dia-001', 'Diagnosis 1', 'HEART', '2022-12-07', 'heart attack', 'heart medication', 'more rest and less exercises','dom-id-mr-001');
+values (001, 'dom-id-dia-001', 'Diagnosis 1', 'HEART', '2022-12-07', 'heart attack', 'heart medication', 'more rest and less exercises','dom-id-mr-001'),
+       (002, 'dom-id-dia-002', 'Diagnosis 2', 'BONES', '2022-02-11', 'motor accident', 'operation and cast for 8 weeks', 'lot of rest, only walk with crutches','dom-id-mr-001');

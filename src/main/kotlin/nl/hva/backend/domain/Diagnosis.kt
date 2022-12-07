@@ -18,6 +18,9 @@ class Diagnosis {
     //one-to-one connection
     private var medicalRecordDomainId: MedicalRecordId = MedicalRecordId("")
 
+    // required by hibernate
+    protected constructor()
+
     constructor(
         domainId: DiagnosisId,
         title: String,
