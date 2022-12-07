@@ -12,8 +12,7 @@
             <property name="id" column="appointment_id" type="string"/>
         </component>
 
-        <property name="date" column="date" type="java.time.LocalDate"/>
-        <property name="time" column="time" type="java.sql.Time"/>
+        <property name="time" column="time" type="java.time.LocalDateTime"/>
         <property name="reason" column="reason" type="string"/>
 
         <component name="patientDomainId" class="nl.hva.backend.domain.ids.PatientId">
@@ -21,11 +20,11 @@
         </component>
 
         <component name="gpDomainId" class="nl.hva.backend.domain.ids.GeneralPractitionerId">
-            <property name="id" column="general_practitioner_id" type="string"/>
+            <property name="id" column="general_practitioner_id" type="string" not-null="false"/>
         </component>
 
         <component name="cpDomainId" class="nl.hva.backend.domain.ids.CareProviderId">
-            <property name="id" column="care_provider_id" type="string"/>
+            <property name="id" column="care_provider_id" type="string" not-null="false"/>
         </component>
 
     </class>

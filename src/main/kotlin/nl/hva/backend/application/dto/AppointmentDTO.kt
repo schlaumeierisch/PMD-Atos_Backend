@@ -2,14 +2,12 @@ package nl.hva.backend.application.dto
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect
 import nl.hva.backend.domain.Appointment
-import java.sql.Time
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 class AppointmentDTO {
     private lateinit var id: String
-    private lateinit var date: LocalDate
-    private lateinit var time: Time
+    private lateinit var time: LocalDateTime
     private lateinit var reason: String
 
     // one-to-one
@@ -24,7 +22,6 @@ class AppointmentDTO {
             val appointmentDTO = AppointmentDTO()
 
             appointmentDTO.id = appointment.domainId().id()
-            appointmentDTO.date = appointment.date()
             appointmentDTO.time = appointment.time()
             appointmentDTO.reason = appointment.reason()
 
@@ -48,8 +45,7 @@ class AppointmentDTO {
 
     // getter
     fun id(): String = this.id
-    fun date(): LocalDate = this.date
-    fun time(): Time = this.time
+    fun time(): LocalDateTime = this.time
     fun reason(): String = this.reason
     fun patientId(): String = this.patientId
     fun gpId(): String = this.gpId
