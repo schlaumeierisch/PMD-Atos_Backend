@@ -114,3 +114,7 @@ values (001, 'dom-id-itk-001', '14:00', 2, 'PILL', 'dom-id-med-001'),
 insert into appointment(id, appointment_id, date, time, reason, patient_id, general_practitioner_id, care_provider_id)
 values (001, 'dom-id-apt-001', '2022-12-01', '14:00', 'The reason for the appointment', 'dom-id-pa-001', 'dom-id-gp-001', ''),
        (002, 'dom-id-apt-002', '2022-12-01', '18:00', 'The reason for the appointment', 'dom-id-pa-001', '', 'dom-id-cp-001');
+
+-- diagnosis
+insert into diagnosis(id, diagnosis_id, title, diagnosis_type, date_diagnosed, cause, treatment, advice, medical_record_id)
+values (001, 'dom-id-dia-001', 'Diagnosis 1', 'HEART', '2022-12-07', 'heart attack', 'heart medication', 'more rest and less exercises','dom-id-mr-001');

@@ -1,13 +1,11 @@
 package nl.hva.backend.application
 
 import nl.hva.backend.application.api.MedicalRecordService
+import nl.hva.backend.application.dto.DiagnosisDTO
 import nl.hva.backend.application.dto.IntakeDTO
 import nl.hva.backend.application.dto.MedicationDTO
 import nl.hva.backend.application.dto.ObservationDTO
-import nl.hva.backend.domain.Intake
-import nl.hva.backend.domain.MedicalRecord
-import nl.hva.backend.domain.Medication
-import nl.hva.backend.domain.Observation
+import nl.hva.backend.domain.*
 import nl.hva.backend.domain.api.MedicalRecordRepository
 import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.MedicationId
@@ -60,6 +58,13 @@ class MedicalRecordServiceImpl : MedicalRecordService {
         val intakes: List<Intake> = this.medicalRecordRepository.getIntakeByMedicationId(medicationId)
 
         return IntakeDTO.fromIntakes(intakes)
+    }
+
+    @Transactional
+    override fun getAllDiagnoses(medicalRecordId: MedicalRecordId): List<DiagnosisDTO> {
+        val diagnoses: List<Diagnosis> = this.medicalRecordRepository.getAllDiagnoses(medicalRecordId)
+
+        return DiagnosisDTO.fromDiagnoses(diagnoses)
     }
 
 }

@@ -1,6 +1,7 @@
 package nl.hva.backend.rest
 
 import nl.hva.backend.application.api.MedicalRecordService
+import nl.hva.backend.application.dto.DiagnosisDTO
 import nl.hva.backend.application.dto.IntakeDTO
 import nl.hva.backend.application.dto.MedicationDTO
 import nl.hva.backend.application.dto.ObservationDTO
@@ -47,6 +48,14 @@ class MedicalRecordRestController {
         @PathVariable("id") id: String
     ): List<IntakeDTO> {
         return this.medicalRecordService.getIntakeByMedicationId(MedicationId(id))
+    }
+
+    @GetMapping("/diagnoses/getAllDiagnoses/{id}")
+    @ResponseBody
+    fun getAllDiagnoses(
+        @PathVariable("id") id: String
+    ): List<DiagnosisDTO> {
+        return this.medicalRecordService.getAllDiagnoses(MedicalRecordId(id))
     }
 
 }
