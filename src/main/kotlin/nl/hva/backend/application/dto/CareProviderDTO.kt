@@ -19,7 +19,7 @@ class CareProviderDTO {
         fun fromCareProvider(careProvider: CareProvider): CareProviderDTO {
             val careProviderDTO = CareProviderDTO()
 
-            careProviderDTO.id = careProvider.id().toString()
+            careProviderDTO.id = careProvider.domainId().id()
             careProviderDTO.firstName = careProvider.firstName()
             careProviderDTO.lastName = careProvider.lastName()
             careProviderDTO.addressDTO = AddressDTO.fromAddress(careProvider.address())
