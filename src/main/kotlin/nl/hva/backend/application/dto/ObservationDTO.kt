@@ -12,7 +12,7 @@ class ObservationDTO {
     private lateinit var date: LocalDate
 
     // one-to-one
-    private var medicalRecordId: String = ""
+    private lateinit var medicalRecordId: String
 
     companion object {
         fun fromObservation(observation: Observation): ObservationDTO {

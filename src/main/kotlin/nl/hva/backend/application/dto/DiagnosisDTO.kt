@@ -9,7 +9,6 @@ import java.time.LocalDate
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 class DiagnosisDTO {
     private lateinit var id: String
-    private lateinit var domainId: DiagnosisId
     private lateinit var title: String
     private lateinit var diagnosisType: Enum<DiagnosisTypes>
     private lateinit var dateDiagnosed: LocalDate
@@ -18,7 +17,7 @@ class DiagnosisDTO {
     private lateinit var advice: String
 
     //one-to-one connection
-    private var medicalRecordId: String = ""
+    private lateinit var medicalRecordId: String
 
 
     companion object {
@@ -50,7 +49,6 @@ class DiagnosisDTO {
 
     //Getters
     fun id(): String = this.id
-    fun domainId(): DiagnosisId = this.domainId
     fun title(): String = this.title
     fun diagnosisType(): Enum<DiagnosisTypes> = this.diagnosisType
     fun dateDiagnosed(): LocalDate = this.dateDiagnosed
