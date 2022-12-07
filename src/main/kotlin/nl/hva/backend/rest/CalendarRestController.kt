@@ -7,8 +7,8 @@ import nl.hva.backend.domain.ids.GeneralPractitionerId
 import nl.hva.backend.domain.ids.PatientId
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
-import java.sql.Time
-import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @RestController
 @RequestMapping("/rest/calendar/")
@@ -19,14 +19,16 @@ class CalendarRestController {
 
     @PostMapping("/createAppointment")
     fun createAppointment(
-        date: LocalDate,
-        time: Time,
+        time: String,
         reason: String,
         patientId: String,
-        gpId: String,
-        cpId: String
+        @RequestParam(required = false) gpId: String? = null,
+        @RequestParam(required = false) cpId: String? = null
     ) {
-        this.calendarService.createAppointment(date, time, reason, patientId, gpId, cpId)
+        // convert String (time) to LocalDateTime
+        val dateTime = LocalDateTime.parse(time, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
+
+        this.calendarService.createAppointment(dateTime, reason, patientId, gpId, cpId)
     }
 
     @GetMapping("/getAllAppointmentsByPatientId/{id}")

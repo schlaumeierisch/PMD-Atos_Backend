@@ -111,6 +111,6 @@ values (001, 'dom-id-itk-001', '14:00', 2, 'PILL', 'dom-id-med-001'),
        (012, 'dom-id-itk-012', '22:00', 250, 'MILLILITRE', 'dom-id-med-004');
 
 -- appointment
-insert into appointment(id, appointment_id, date, time, reason, patient_id, general_practitioner_id, care_provider_id)
-values (001, 'dom-id-apt-001', '2022-12-01', '14:00', 'The reason for the appointment', 'dom-id-pa-001', 'dom-id-gp-001', ''),
-       (002, 'dom-id-apt-002', '2022-12-01', '18:00', 'The reason for the appointment', 'dom-id-pa-001', '', 'dom-id-cp-001');
+insert into appointment(id, appointment_id, time, reason, patient_id, general_practitioner_id, care_provider_id)
+values (001, 'dom-id-apt-001', '2022-12-01 14:00:00', 'The reason for the appointment', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (002, 'dom-id-apt-002', '2022-12-01 18:00:00', 'The reason for the appointment', 'dom-id-pa-001', '', 'dom-id-cp-001');
