@@ -3,6 +3,7 @@ package nl.hva.backend.domain.api
 import nl.hva.backend.domain.Patient
 import nl.hva.backend.domain.ids.GeneralPractitionerId
 import nl.hva.backend.domain.ids.PatientId
+import nl.hva.backend.domain.many_to_many.PatientCareProviderRelation
 import nl.hva.backend.domain.value_objects.Gender
 import java.time.LocalDate
 
@@ -23,5 +24,7 @@ interface PatientRepository {
     fun getAccountById(patientId: PatientId): Patient
 
     fun getAllAccounts(): List<Patient>
+
+    fun getPatientCareProviderRelationsByPatientId(patientId: PatientId): List<PatientCareProviderRelation>
 
 }

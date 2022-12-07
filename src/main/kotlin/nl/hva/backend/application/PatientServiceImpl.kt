@@ -2,11 +2,13 @@ package nl.hva.backend.application
 
 import nl.hva.backend.application.api.PatientService
 import nl.hva.backend.application.dto.PatientDTO
+import nl.hva.backend.application.dto.many_to_many.PatientCareProviderDTO
 import nl.hva.backend.domain.Patient
 import nl.hva.backend.domain.api.PatientRepository
 import nl.hva.backend.domain.ids.GeneralPractitionerId
 import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.PatientId
+import nl.hva.backend.domain.many_to_many.PatientCareProviderRelation
 import nl.hva.backend.domain.value_objects.Address
 import nl.hva.backend.domain.value_objects.Gender
 import org.springframework.beans.factory.annotation.Autowired
@@ -85,6 +87,12 @@ class PatientServiceImpl : PatientService {
         val patients: List<Patient> = this.patientRepository.getAllAccounts()
 
         return PatientDTO.fromPatients(patients)
+    }
+
+    override fun getPatientCareProviderRelationsByPatientId(patientId: PatientId): List<PatientCareProviderDTO> {
+        val patientCareProviderRelations: List<PatientCareProviderRelation> = this.patientRepository.getPatientCareProviderRelationsByPatientId(patientId)
+
+        return PatientCareProviderDTO.fromPatientCareProviderRelations(patientCareProviderRelations)
     }
 
 }
