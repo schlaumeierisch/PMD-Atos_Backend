@@ -13,7 +13,7 @@ class MedicationDTO {
     private var endDate: LocalDate? = null
 
     // one-to-one
-    private var medicalRecordId: String = ""
+    private lateinit var medicalRecordId: String
 
     companion object {
         fun fromMedication(medication: Medication): MedicationDTO {

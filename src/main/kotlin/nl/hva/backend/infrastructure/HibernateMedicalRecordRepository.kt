@@ -1,9 +1,6 @@
 package nl.hva.backend.infrastructure
 
-import nl.hva.backend.domain.Intake
-import nl.hva.backend.domain.MedicalRecord
-import nl.hva.backend.domain.Medication
-import nl.hva.backend.domain.Note
+import nl.hva.backend.domain.*
 import nl.hva.backend.domain.api.MedicalRecordRepository
 import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.MedicationId

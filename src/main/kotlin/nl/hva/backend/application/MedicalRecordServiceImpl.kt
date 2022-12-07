@@ -5,10 +5,7 @@ import nl.hva.backend.application.dto.DiagnosisDTO
 import nl.hva.backend.application.dto.IntakeDTO
 import nl.hva.backend.application.dto.MedicationDTO
 import nl.hva.backend.application.dto.NoteDTO
-import nl.hva.backend.domain.Intake
-import nl.hva.backend.domain.MedicalRecord
-import nl.hva.backend.domain.Medication
-import nl.hva.backend.domain.Note
+import nl.hva.backend.domain.*
 import nl.hva.backend.domain.api.MedicalRecordRepository
 import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.MedicationId
@@ -50,13 +47,13 @@ class MedicalRecordServiceImpl : MedicalRecordService {
 
         this.medicalRecordRepository.createNote(note)
     }
-
+    @Transactional
     override fun getAllMedication(medicalRecordId: MedicalRecordId): List<MedicationDTO> {
         val medication: List<Medication> = this.medicalRecordRepository.getAllMedication(medicalRecordId)
 
         return MedicationDTO.fromMedication(medication)
     }
-
+    @Transactional
     override fun getIntakeByMedicationId(medicationId: MedicationId): List<IntakeDTO> {
         val intakes: List<Intake> = this.medicalRecordRepository.getIntakeByMedicationId(medicationId)
 

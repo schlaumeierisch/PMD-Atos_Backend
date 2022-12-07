@@ -13,7 +13,7 @@ class IntakeDTO {
     private lateinit var unit: Enum<Unit>
 
     // many-to-one
-    private var medicationId: String = ""
+    private lateinit var medicationId: String
 
     companion object {
         fun fromIntake(intake: Intake): IntakeDTO {
