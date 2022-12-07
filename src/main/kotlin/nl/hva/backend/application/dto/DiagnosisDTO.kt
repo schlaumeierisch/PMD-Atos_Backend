@@ -2,7 +2,6 @@ package nl.hva.backend.application.dto
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect
 import nl.hva.backend.domain.Diagnosis
-import nl.hva.backend.domain.ids.DiagnosisId
 import nl.hva.backend.domain.value_objects.DiagnosisTypes
 import java.time.LocalDate
 
@@ -16,9 +15,8 @@ class DiagnosisDTO {
     private lateinit var treatment: String
     private lateinit var advice: String
 
-    //one-to-one connection
+    // one-to-one
     private lateinit var medicalRecordId: String
-
 
     companion object {
         fun fromDiagnosis(diagnosis: Diagnosis): DiagnosisDTO {
@@ -47,7 +45,7 @@ class DiagnosisDTO {
         }
     }
 
-    //Getters
+    // getter
     fun id(): String = this.id
     fun title(): String = this.title
     fun diagnosisType(): Enum<DiagnosisTypes> = this.diagnosisType
@@ -55,4 +53,5 @@ class DiagnosisDTO {
     fun cause(): String = this.cause
     fun treatment(): String = this.treatment
     fun advice(): String = this.advice
+    fun medicalRecordId(): String = this.medicalRecordId
 }

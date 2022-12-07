@@ -30,14 +30,5 @@
             </type>
         </property>
 
-        <set name="patients" table="patient_care_provider" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="care_provider_id" not-null="true" />
-            </key>
-            <many-to-many entity-name="nl.hva.backend.domain.Patient">
-                <column name="patient_id" not-null="true" />
-            </many-to-many>
-        </set>
-
     </class>
 </hibernate-mapping>

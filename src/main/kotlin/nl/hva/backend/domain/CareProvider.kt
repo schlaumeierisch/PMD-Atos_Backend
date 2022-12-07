@@ -1,6 +1,5 @@
 package nl.hva.backend.domain
 
-
 import nl.hva.backend.domain.ids.CareProviderId
 import nl.hva.backend.domain.value_objects.Address
 import nl.hva.backend.domain.value_objects.Specialism
@@ -15,8 +14,6 @@ open class CareProvider {
     private lateinit var phoneNumber: String
     private lateinit var specialism: Enum<Specialism>
 
-    private lateinit var patients: MutableSet<Patient>
-
     // required by hibernate
     protected constructor()
 
@@ -26,8 +23,7 @@ open class CareProvider {
         lastName: String,
         address: Address,
         phoneNumber: String,
-        specialism: Enum<Specialism>,
-        patients: MutableSet<Patient>
+        specialism: Enum<Specialism>
     ) {
         this.domainId = generalPractitionerId
         this.firstName = firstName
@@ -35,7 +31,6 @@ open class CareProvider {
         this.address = address
         this.phoneNumber = phoneNumber
         this.specialism = specialism
-        this.patients = patients
     }
 
     // getter
@@ -46,7 +41,6 @@ open class CareProvider {
     fun address(): Address = this.address
     fun phoneNumber(): String = this.phoneNumber
     fun specialism(): Enum<Specialism> = this.specialism
-    fun patients(): MutableSet<Patient> = this.patients
 }
 
 

@@ -33,10 +33,12 @@
         <property name="email" column="email" type="string"/>
         <property name="isUsingApp" column="is_using_app" type="boolean"/>
 
+        <!-- one-to-one -->
         <component name="medicalRecordDomainId" class="nl.hva.backend.domain.ids.MedicalRecordId">
             <property name="id" column="medical_record_id" type="string"/>
         </component>
 
+        <!-- many-to-one -->
         <component name="gpDomainId" class="nl.hva.backend.domain.ids.GeneralPractitionerId">
             <property name="id" column="general_practitioner_id" type="string"/>
         </component>
