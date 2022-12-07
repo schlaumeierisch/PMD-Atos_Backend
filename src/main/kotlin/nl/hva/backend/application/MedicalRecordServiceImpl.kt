@@ -47,12 +47,14 @@ class MedicalRecordServiceImpl : MedicalRecordService {
 
         this.medicalRecordRepository.createNote(note)
     }
+
     @Transactional
     override fun getAllMedication(medicalRecordId: MedicalRecordId): List<MedicationDTO> {
         val medication: List<Medication> = this.medicalRecordRepository.getAllMedication(medicalRecordId)
 
         return MedicationDTO.fromMedication(medication)
     }
+
     @Transactional
     override fun getIntakeByMedicationId(medicationId: MedicationId): List<IntakeDTO> {
         val intakes: List<Intake> = this.medicalRecordRepository.getIntakeByMedicationId(medicationId)
