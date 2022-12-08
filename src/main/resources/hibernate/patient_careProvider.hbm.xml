@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping" default-access="field">
+    <class name="nl.hva.backend.domain.many_to_many.PatientCareProviderRelation" table="patient_care_provider">
+
+        <id name="id" column="id" type="long">
+            <generator class="increment"/>
+        </id>
+
+        <component name="patientDomainId" class="nl.hva.backend.domain.ids.PatientId">
+            <property name="id" column="patient_id" type="string"/>
+        </component>
+
+        <component name="cpDomainId" class="nl.hva.backend.domain.ids.CareProviderId">
+            <property name="id" column="care_provider_id" type="string"/>
+        </component>
+
+    </class>
+</hibernate-mapping>

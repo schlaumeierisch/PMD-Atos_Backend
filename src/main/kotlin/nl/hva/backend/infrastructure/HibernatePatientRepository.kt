@@ -4,6 +4,7 @@ import nl.hva.backend.domain.Patient
 import nl.hva.backend.domain.api.PatientRepository
 import nl.hva.backend.domain.ids.GeneralPractitionerId
 import nl.hva.backend.domain.ids.PatientId
+import nl.hva.backend.domain.many_to_many.PatientCareProviderRelation
 import nl.hva.backend.domain.value_objects.Gender
 import org.springframework.stereotype.Repository
 import java.time.LocalDate
@@ -68,18 +69,18 @@ class HibernatePatientRepository : PatientRepository {
         return query.setParameter(1, patientId).singleResult
     }
 
-    override fun getAccountByGeneralPractitionerId(generalPractitionerId: GeneralPractitionerId): List<Patient> {
-        val query: TypedQuery<Patient> = this.entityManager.createQuery(
-            "SELECT p FROM Patient p WHERE p.gpDomainId = ?1", Patient::class.java
-        )
-        return query.setParameter(1, generalPractitionerId).resultList
-    }
-
     override fun getAllAccounts(): List<Patient> {
         val query: TypedQuery<Patient> = this.entityManager.createQuery(
             "SELECT p FROM Patient p", Patient::class.java
         )
         return query.resultList
+    }
+
+    override fun getPatientCareProviderRelationsByPatientId(patientId: PatientId): List<PatientCareProviderRelation> {
+        val query: TypedQuery<PatientCareProviderRelation> = this.entityManager.createQuery(
+            "SELECT pcp FROM PatientCareProviderRelation pcp WHERE pcp.patientDomainId = ?1", PatientCareProviderRelation::class.java
+        )
+        return query.setParameter(1, patientId).resultList
     }
 
 }

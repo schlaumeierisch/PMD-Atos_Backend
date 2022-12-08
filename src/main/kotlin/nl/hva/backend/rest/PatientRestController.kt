@@ -1,10 +1,11 @@
 package nl.hva.backend.rest
 
-import nl.hva.backend.application.api.GeneralPractitionerService
+import nl.hva.backend.application.api.CareProviderService
 import nl.hva.backend.application.api.PatientService
-import nl.hva.backend.application.dto.GeneralPractitionerDTO
+import nl.hva.backend.application.dto.CareProviderDTO
 import nl.hva.backend.application.dto.PatientDTO
-import nl.hva.backend.domain.ids.GeneralPractitionerId
+import nl.hva.backend.application.dto.many_to_many.PatientCareProviderDTO
+import nl.hva.backend.domain.ids.CareProviderId
 import nl.hva.backend.domain.ids.PatientId
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -17,7 +18,7 @@ class PatientRestController {
     private lateinit var patientService: PatientService
 
     @Autowired
-    private lateinit var generalPractitionerService: GeneralPractitionerService
+    private lateinit var careProviderService: CareProviderService
 
     @GetMapping("/getAll")
     fun getAll(): List<PatientDTO> {
@@ -37,11 +38,22 @@ class PatientRestController {
         }
     }
 
-    @GetMapping("/getByGeneralPractitionerId/{id}")
+    @GetMapping("/getCareProvidersOfPatientById/{id}")
     @ResponseBody
-    fun getPatientsOfGeneralPractitioner(
+    fun getCareProvidersOfPatientById(
         @PathVariable("id") id: String
-    ): List<PatientDTO> {
-        return this.patientService.getAccountByGeneralPractitionerId(GeneralPractitionerId(id))
+    ): List<CareProviderDTO> {
+        val patientCareProviderDTOs: List<PatientCareProviderDTO> =
+            this.patientService.getPatientCareProviderRelationsByPatientId(PatientId(id))
+
+        val careProviderDTOs: ArrayList<CareProviderDTO> = arrayListOf()
+        for (patientCareProviderDTO in patientCareProviderDTOs) {
+            careProviderDTOs.add(
+                this.careProviderService.getAccountById(CareProviderId(patientCareProviderDTO.cpId()))
+            )
+        }
+
+        return careProviderDTOs
     }
+
 }

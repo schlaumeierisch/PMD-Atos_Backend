@@ -8,6 +8,7 @@ import java.time.LocalDate
 class Diagnosis {
     private val id: Long = 0
     private lateinit var domainId: DiagnosisId
+
     private lateinit var title: String
     private lateinit var diagnosisType: Enum<DiagnosisTypes>
     private lateinit var dateDiagnosed: LocalDate
@@ -15,7 +16,7 @@ class Diagnosis {
     private lateinit var treatment: String
     private lateinit var advice: String
 
-    //one-to-one connection
+    // one-to-one
     private var medicalRecordDomainId: MedicalRecordId = MedicalRecordId("")
 
     // required by hibernate
@@ -30,7 +31,6 @@ class Diagnosis {
         treatment: String,
         advice: String,
         medicalRecordDomainId: MedicalRecordId
-
     ) {
         this.domainId = domainId
         this.title = title
@@ -42,7 +42,7 @@ class Diagnosis {
         this.medicalRecordDomainId = medicalRecordDomainId
     }
 
-    //Getters
+    // getters
     fun id(): Long = this.id
     fun domainId(): DiagnosisId = this.domainId
     fun title(): String = this.title
@@ -52,5 +52,4 @@ class Diagnosis {
     fun treatment(): String = this.treatment
     fun advice(): String = this.advice
     fun medicalRecordDomainId(): MedicalRecordId = this.medicalRecordDomainId
-
 }

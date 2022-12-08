@@ -31,15 +31,13 @@ class CareProviderServiceImpl : CareProviderService {
     ) {
         val careProviderId: CareProviderId = careProviderRepository.nextIdentity()
 
-        // todo: change mutableSetOf() to real values
         val careProvider = CareProvider(
             careProviderId,
             firstName,
             lastName,
             Address(street, zip, city, country),
             phoneNumber,
-            specialism,
-            mutableSetOf()
+            specialism
         )
 
         this.careProviderRepository.createAccount(careProvider)
@@ -77,42 +75,16 @@ class CareProviderServiceImpl : CareProviderService {
 
     @Transactional
     override fun getAccountById(careProviderId: CareProviderId): CareProviderDTO {
-        val careProvider: CareProvider =
-            this.careProviderRepository.getAccountById(careProviderId)
+        val careProvider: CareProvider = this.careProviderRepository.getAccountById(careProviderId)
 
-        // todo: change mutableSetOf() to real values
-        return CareProviderDTO().builder()
-            .withId(careProvider.domainId().id())
-            .withFirstName(careProvider.firstName())
-            .withLastName(careProvider.lastName())
-            .withAddress(AddressDTO.fromAddress(careProvider.address()))
-            .withPhoneNumber(careProvider.phoneNumber())
-            .withSpecialism(careProvider.specialism())
-            .withPatientDTOs(mutableSetOf())
-            .build()
+        return CareProviderDTO.fromCareProvider(careProvider)
     }
 
     @Transactional
     override fun getAllAccounts(): List<CareProviderDTO> {
         val careProviders: List<CareProvider> = this.careProviderRepository.getAllAccounts()
-        val careProviderDTOs: ArrayList<CareProviderDTO> = arrayListOf()
 
-        // todo: change mutableSetOf() to real values
-        for (careProvider in careProviders) {
-            val careProviderDTO: CareProviderDTO = CareProviderDTO().builder()
-                .withId(careProvider.domainId().id())
-                .withFirstName(careProvider.firstName())
-                .withLastName(careProvider.lastName())
-                .withAddress(AddressDTO.fromAddress(careProvider.address()))
-                .withPhoneNumber(careProvider.phoneNumber())
-                .withSpecialism(careProvider.specialism())
-                .withPatientDTOs(mutableSetOf())
-                .build()
-
-            careProviderDTOs.add(careProviderDTO)
-        }
-
-        return careProviderDTOs
+        return CareProviderDTO.fromCareProviders(careProviders)
     }
 
 }

@@ -1,6 +1,7 @@
 package nl.hva.backend.application.api
 
 import nl.hva.backend.application.dto.GeneralPractitionerDTO
+import nl.hva.backend.application.dto.PatientDTO
 import nl.hva.backend.domain.ids.GeneralPractitionerId
 
 interface GeneralPractitionerService {
@@ -20,5 +21,7 @@ interface GeneralPractitionerService {
     fun getAccountById(generalPractitionerId: GeneralPractitionerId): GeneralPractitionerDTO
 
     fun getAllAccounts(): List<GeneralPractitionerDTO>
+
+    fun getPatientsOfGeneralPractitionerById(generalPractitionerId: GeneralPractitionerId): List<PatientDTO>
 
 }

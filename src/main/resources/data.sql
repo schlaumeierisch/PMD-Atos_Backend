@@ -34,6 +34,21 @@ values (001, 'dom-id-pa-001', 'Lotje', 'Oldhof', 'Johan Frisoplantsoen 184', '27
        (018, 'dom-id-pa-018', 'Maaike', 'Leeuw', 'Alexander Battalaan 175', '6221CB', 'Maastricht', 'Netherlands', 'FEMALE', '1977-03-26', '0664742542', 'barlow@comcast.net', true, 'dom-id-mr-018', 'dom-id-gp-005'),
        (019, 'dom-id-pa-019', 'Mannes', 'Stokkers', 'De Ruyschlaan 150', '1181PE', 'Amstelveen', 'Netherlands', 'MALE', '1990-10-10', '0674976363', 'scitext@yahoo.ca', true, 'dom-id-mr-019', 'dom-id-gp-005');
 
+-- patient & care provider (many-to-many)
+insert into patient_care_provider(id, patient_id, care_provider_id)
+values (001, 'dom-id-pa-001', 'dom-id-cp-001'),
+       (002, 'dom-id-pa-001', 'dom-id-cp-002'),
+       (003, 'dom-id-pa-001', 'dom-id-cp-003'),
+       (004, 'dom-id-pa-002', 'dom-id-cp-004'),
+       (005, 'dom-id-pa-002', 'dom-id-cp-005'),
+       (006, 'dom-id-pa-002', 'dom-id-cp-006'),
+       (007, 'dom-id-pa-003', 'dom-id-cp-001'),
+       (008, 'dom-id-pa-003', 'dom-id-cp-002'),
+       (009, 'dom-id-pa-003', 'dom-id-cp-003'),
+       (010, 'dom-id-pa-004', 'dom-id-cp-004'),
+       (011, 'dom-id-pa-004', 'dom-id-cp-005'),
+       (012, 'dom-id-pa-004', 'dom-id-cp-006');
+
 -- medical record
 insert into medical_record(id, medical_record_id)
 values (001, 'dom-id-mr-001'),
