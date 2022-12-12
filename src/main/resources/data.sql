@@ -137,15 +137,15 @@ values (001, 'dom-id-apt-001', '2022-12-01 14:00:00', 'The reason for the appoin
 
 -- exercise
 insert into exercise(id, exercise_id, title, description, start_date, end_date, medical_record_id)
-values (001, 'dom-id-exerc-001', 'Exercise 1', 'This is a description of exercise 1', '2022-10-10', '2022-12-30', 'dom-id-mr-001'),
-       (002, 'dom-id-exerc-002', 'Exercise 2', 'This is a description of exercise 2', '2022-10-10', '2022-12-30', 'dom-id-mr-001'),
-       (003, 'dom-id-exerc-003', 'Exercise 3', 'This is a description of exercise 3', '2022-10-10', '2022-12-30', 'dom-id-mr-001'),
-       (004, 'dom-id-exerc-004', 'Exercise 1', 'This is a description of exercise 1', '2022-10-10', '2022-12-30', 'dom-id-mr-002'),
-       (005, 'dom-id-exerc-005', 'Exercise 2', 'This is a description of exercise 2', '2022-10-10', '2022-12-30', 'dom-id-mr-002'),
-       (006, 'dom-id-exerc-006', 'Exercise 3', 'This is a description of exercise 3', '2022-10-10', '2022-12-30', 'dom-id-mr-002'),
-       (007, 'dom-id-exerc-007', 'Exercise 1', 'This is a description of exercise 1', '2022-10-10', '2022-12-30', 'dom-id-mr-003'),
-       (008, 'dom-id-exerc-008', 'Exercise 2', 'This is a description of exercise 2', '2022-10-10', '2022-12-30', 'dom-id-mr-003'),
-       (009, 'dom-id-exerc-009', 'Exercise 3', 'This is a description of exercise 3', '2022-10-10', '2022-12-30', 'dom-id-mr-003'),
-       (010, 'dom-id-exerc-010', 'Exercise 1', 'This is a description of exercise 1', '2022-10-10', '2022-12-30', 'dom-id-mr-004'),
-       (011, 'dom-id-exerc-011', 'Exercise 2', 'This is a description of exercise 2', '2022-10-10', '2022-12-30', 'dom-id-mr-004'),
-       (012, 'dom-id-exerc-012', 'Exercise 3', 'This is a description of exercise 3', '2022-10-10', '2022-12-30', 'dom-id-mr-004');
+values (001, 'dom-id-exerc-001', 'Sit-Ups', 'Advised by dr. Stegehuis', '2022-10-10', '2022-12-30', 'dom-id-mr-001'),
+       (002, 'dom-id-exerc-002', 'Running', 'Advised by dr. Stegehuis', '2022-11-03', '2022-11-27', 'dom-id-mr-001'),
+       (003, 'dom-id-exerc-003', 'Stretching', 'Advised by dr. Stegehuis', '2022-12-08', '2023-02-30', 'dom-id-mr-001'),
+       (004, 'dom-id-exerc-004', 'Weight Lifting', 'Advised by dr. Stegehuis', '2023-10-10', '2022-12-30', 'dom-id-mr-002'),
+       (005, 'dom-id-exerc-005', 'Yoga', 'Advised by dr. Stegehuis', '2023-01-01', '2022-04-27', 'dom-id-mr-002'),
+       (006, 'dom-id-exerc-006', 'High Intensity Training', 'Advised by dr. Stegehuis', '2023-01-10', '2022-12-30', 'dom-id-mr-002'),
+       (007, 'dom-id-exerc-007', 'Squash', 'Advised by dr. Stegehuis', '2023-01-11', '2022-12-30', 'dom-id-mr-003'),
+       (008, 'dom-id-exerc-008', 'Exercise 8', 'Advised by dr. Stegehuis', '2023-01-12', '2022-12-30', 'dom-id-mr-003'),
+       (009, 'dom-id-exerc-009', 'Exercise 9', 'Advised by dr. Stegehuis', '2023-01-13', '2022-12-30', 'dom-id-mr-003'),
+       (010, 'dom-id-exerc-010', 'Exercise 10', 'Advised by dr. Stegehuis', '2023-01-14', '2022-12-30', 'dom-id-mr-004'),
+       (011, 'dom-id-exerc-011', 'Exercise 11', 'Advised by dr. Stegehuis', '2023-01-15', '2022-12-30', 'dom-id-mr-004'),
+       (012, 'dom-id-exerc-012', 'Exercise 12', 'Advised by dr. Stegehuis', '2023-01-16', '2022-12-30', 'dom-id-mr-004');
