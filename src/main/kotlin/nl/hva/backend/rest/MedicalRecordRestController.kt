@@ -59,7 +59,7 @@ class MedicalRecordRestController {
         return this.medicalRecordService.getAllDiagnoses(MedicalRecordId(id))
     }
 
-    @GetMapping("/medication/getAllExercises/{id}")
+    @GetMapping("/exercises/getAllExercises/{id}")
     @ResponseBody
     fun getAllExercises(
         @PathVariable("id") id: String
