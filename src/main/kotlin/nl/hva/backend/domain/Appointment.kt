@@ -4,13 +4,15 @@ import nl.hva.backend.domain.ids.AppointmentId
 import nl.hva.backend.domain.ids.CareProviderId
 import nl.hva.backend.domain.ids.GeneralPractitionerId
 import nl.hva.backend.domain.ids.PatientId
-import java.time.LocalDateTime
+import java.time.LocalDate
+import java.time.LocalTime
 
 open class Appointment {
     private val id: Long = 0
     private lateinit var domainId: AppointmentId
 
-    private lateinit var time: LocalDateTime
+    private lateinit var date: LocalDate
+    private lateinit var time: LocalTime
     private lateinit var reason: String
 
     // one-to-one
@@ -25,13 +27,15 @@ open class Appointment {
 
     constructor(
         domainId: AppointmentId,
-        time: LocalDateTime,
+        date: LocalDate,
+        time: LocalTime,
         reason: String,
         patientDomainId: PatientId,
         gpDomainId: GeneralPractitionerId,
         cpDomainId: CareProviderId
     ) {
         this.domainId = domainId
+        this.date = date
         this.time = time
         this.reason = reason
         this.patientDomainId = patientDomainId
@@ -42,7 +46,8 @@ open class Appointment {
     // getter
     fun id(): Long = this.id
     fun domainId(): AppointmentId = this.domainId
-    fun time(): LocalDateTime = this.time
+    fun date(): LocalDate = this.date
+    fun time(): LocalTime = this.time
     fun reason(): String = this.reason
     fun patientDomainId(): PatientId = this.patientDomainId
     fun gpDomainId(): GeneralPractitionerId = this.gpDomainId

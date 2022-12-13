@@ -11,7 +11,8 @@ import nl.hva.backend.domain.ids.PatientId
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.time.LocalDateTime
+import java.time.LocalDate
+import java.time.LocalTime
 
 @Service
 class CalendarServiceImpl : CalendarService {
@@ -21,7 +22,8 @@ class CalendarServiceImpl : CalendarService {
 
     @Transactional
     override fun createAppointment(
-        time: LocalDateTime,
+        date: LocalDate,
+        time: LocalTime,
         reason: String,
         patientId: String,
         gpId: String?,
@@ -40,7 +42,7 @@ class CalendarServiceImpl : CalendarService {
         }
 
         val appointment = Appointment(
-            appointmentId, time, reason, PatientId(patientId), generalPractitionerId, careProviderId
+            appointmentId, date, time, reason, PatientId(patientId), generalPractitionerId, careProviderId
         )
 
         this.calendarRepository.createAppointment(appointment)
