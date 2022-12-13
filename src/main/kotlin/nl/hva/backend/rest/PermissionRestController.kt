@@ -28,23 +28,22 @@ class PermissionRestController {
         mrId: String,
         cpId: String
     ): List<MedicationDTO> {
+        //Check all permissions the care provider has
         val medicineCareProviderDTOs: List<MedicationCareProviderDTO> =
             this.permissionService.getMedicationCareProviderRelationById(
                 CareProviderId(cpId)
             )
 
+        //Return only the medication of the requested patient
         val medicationDTOs: ArrayList<MedicationDTO> = arrayListOf()
         for (medicineCareProviderDTO in medicineCareProviderDTOs) {
-            val medication = this.permissionService.getMedicationByIdAndMr(
-                MedicationId(medicineCareProviderDTO.medId()),
-                MedicalRecordId(mrId)
+            medicationDTOs.add(
+                this.permissionService.getMedicationByIdAndMr(
+                    MedicationId(medicineCareProviderDTO.medId()),
+                    MedicalRecordId(mrId)
+                )
             )
-
-            if(medication.id().isNotEmpty()) {
-                medicationDTOs.add(medication)
-            }
         }
-
         return medicationDTOs
     }
 }
