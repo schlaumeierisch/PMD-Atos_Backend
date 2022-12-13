@@ -152,5 +152,5 @@ values (001, 'dom-id-exerc-001', 'Exercise 1', 'This is a description of exercis
 
 -- medication & care-provider (many - many)
 insert into medication_care_provider(id, medication_id, care_provider_id, valid_until)
-values (001, 'dom-id-med-001', 'dom-id-pa-001', '2022-12-30'),
-       (002, 'dom-id-med-002', 'dom-id-pa-001', '2022-12-30');
+values (001, 'dom-id-med-001', 'dom-id-cp-001', '2022-12-30'),
+       (002, 'dom-id-med-002', 'dom-id-cp-001', '2022-12-30');
