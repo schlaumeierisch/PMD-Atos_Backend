@@ -149,3 +149,8 @@ values (001, 'dom-id-exerc-001', 'Exercise 1', 'This is a description of exercis
        (010, 'dom-id-exerc-010', 'Exercise 1', 'This is a description of exercise 1', '2022-10-10', '2022-12-30', 'dom-id-mr-004'),
        (011, 'dom-id-exerc-011', 'Exercise 2', 'This is a description of exercise 2', '2022-10-10', '2022-12-30', 'dom-id-mr-004'),
        (012, 'dom-id-exerc-012', 'Exercise 3', 'This is a description of exercise 3', '2022-10-10', '2022-12-30', 'dom-id-mr-004');
+
+-- medication & care-provider (many - many)
+insert into medication_care_provider(id, medication_id, care_provider_id, valid_until)
+values (001, 'dom-id-med-001', 'dom-id-pa-001', '2022-12-30'),
+       (002, 'dom-id-med-002', 'dom-id-pa-001', '2022-12-30');

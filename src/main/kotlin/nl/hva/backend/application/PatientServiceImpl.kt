@@ -89,8 +89,10 @@ class PatientServiceImpl : PatientService {
         return PatientDTO.fromPatients(patients)
     }
 
+    @Transactional
     override fun getPatientCareProviderRelationsByPatientId(patientId: PatientId): List<PatientCareProviderDTO> {
-        val patientCareProviderRelations: List<PatientCareProviderRelation> = this.patientRepository.getPatientCareProviderRelationsByPatientId(patientId)
+        val patientCareProviderRelations: List<PatientCareProviderRelation> =
+            this.patientRepository.getPatientCareProviderRelationsByPatientId(patientId)
 
         return PatientCareProviderDTO.fromPatientCareProviderRelations(patientCareProviderRelations)
     }
