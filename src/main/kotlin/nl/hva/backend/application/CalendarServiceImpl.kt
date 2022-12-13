@@ -11,8 +11,8 @@ import nl.hva.backend.domain.ids.PatientId
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.sql.Time
 import java.time.LocalDate
+import java.time.LocalTime
 
 @Service
 class CalendarServiceImpl : CalendarService {
@@ -23,7 +23,7 @@ class CalendarServiceImpl : CalendarService {
     @Transactional
     override fun createAppointment(
         date: LocalDate,
-        time: Time,
+        time: LocalTime,
         reason: String,
         patientId: String,
         gpId: String?,
