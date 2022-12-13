@@ -12,8 +12,7 @@
             <property name="id" column="appointment_id" type="string"/>
         </component>
 
-        <property name="date" column="date" type="java.time.LocalDate"/>
-        <property name="time" column="time" type="java.time.LocalTime"/>
+        <property name="dateTime" column="date_time" type="java.time.LocalDateTime"/>
         <property name="reason" column="reason" type="string"/>
 
         <component name="patientDomainId" class="nl.hva.backend.domain.ids.PatientId">

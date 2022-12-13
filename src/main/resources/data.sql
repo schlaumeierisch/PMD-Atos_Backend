@@ -131,12 +131,12 @@ values (001, 'dom-id-dia-001', 'Diagnosis 1', 'HEART', '2022-12-07', 'heart atta
        (002, 'dom-id-dia-002', 'Diagnosis 2', 'BONES', '2022-02-11', 'motor accident', 'operation and cast for 8 weeks', 'lot of rest, only walk with crutches','dom-id-mr-001');
 
 -- appointment
-insert into appointment(id, appointment_id, time, reason, patient_id, general_practitioner_id, care_provider_id)
-values (001, 'dom-id-apt-001', '2022-12-01 14:00:00', 'A weird mold on my knee!', 'dom-id-pa-001', 'dom-id-gp-001', ''),
-       (002, 'dom-id-apt-002', '2022-11-09 16:30:00', 'I have a lot of lower back pain which needs a good massage!', 'dom-id-pa-001', '', 'dom-id-cp-001'),
-       (003, 'dom-id-apt-003', '2023-01-29 18:00:00', 'I need to pick up the medicine for my headache.', 'dom-id-pa-001', '', 'dom-id-cp-003'),
-       (004, 'dom-id-apt-004', '2022-12-12 15:30:00', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
-       (005, 'dom-id-apt-005', '2022-12-10 17:00:00', 'Blood test.', 'dom-id-pa-001', 'dom-id-gp-001', '');
+insert into appointment(id, appointment_id, date_time, reason, patient_id, general_practitioner_id, care_provider_id)
+values (001, 'dom-id-apt-001', '2022-12-01T14:00:00.000', 'A weird mold on my knee!', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (002, 'dom-id-apt-002', '2022-11-09T16:30:00.000', 'I have a lot of lower back pain which needs a good massage!', 'dom-id-pa-001', '', 'dom-id-cp-001'),
+       (003, 'dom-id-apt-003', '2023-01-29T18:00:00.000', 'I need to pick up the medicine for my headache.', 'dom-id-pa-001', '', 'dom-id-cp-003'),
+       (004, 'dom-id-apt-004', '2022-12-12T15:30:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (005, 'dom-id-apt-005', '2022-12-10T17:00:00.000', 'Blood test.', 'dom-id-pa-001', 'dom-id-gp-001', '');
 
 -- exercise
 insert into exercise(id, exercise_id, title, description, start_date, end_date, medical_record_id)
