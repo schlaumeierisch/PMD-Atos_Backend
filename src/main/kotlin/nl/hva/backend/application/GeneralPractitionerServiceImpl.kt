@@ -59,11 +59,15 @@ class GeneralPractitionerServiceImpl : GeneralPractitionerService {
     }
 
     @Transactional
-    override fun getAccountById(generalPractitionerId: GeneralPractitionerId): GeneralPractitionerDTO {
-        val generalPractitioner: GeneralPractitioner =
+    override fun getAccountById(generalPractitionerId: GeneralPractitionerId): List<GeneralPractitionerDTO> {
+        val generalPractitioner: List<GeneralPractitioner> =
             this.generalPractitionerRepository.getAccountById(generalPractitionerId)
 
-        return GeneralPractitionerDTO.fromGeneralPractitioner(generalPractitioner)
+        return if (generalPractitioner.isNotEmpty()) {
+            listOf(GeneralPractitionerDTO.fromGeneralPractitioner(generalPractitioner[0]))
+        } else {
+            emptyList()
+        }
     }
 
     @Transactional

@@ -17,7 +17,7 @@ interface GeneralPractitionerRepository {
 
     fun deleteAccount(generalPractitionerId: GeneralPractitionerId)
 
-    fun getAccountById(generalPractitionerId: GeneralPractitionerId): GeneralPractitioner
+    fun getAccountById(generalPractitionerId: GeneralPractitionerId): List<GeneralPractitioner>
 
     fun getAllAccounts(): List<GeneralPractitioner>
 

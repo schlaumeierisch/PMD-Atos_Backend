@@ -27,12 +27,13 @@ class GeneralPractitionerRestController {
     @ResponseBody
     fun getAccountById(
         @PathVariable("id") id: String
-    ): GeneralPractitionerDTO? {
-        // TODO: return something else than null (maybe ResponseEntity<>)
-        return try {
-            this.generalPractitionerService.getAccountById(GeneralPractitionerId(id))
-        } catch (e: Exception) {
-            null
+    ): ResponseEntity<GeneralPractitionerDTO> {
+        val generalPractitionerDTO: List<GeneralPractitionerDTO> = this.generalPractitionerService.getAccountById(GeneralPractitionerId(id))
+
+        if (generalPractitionerDTO.isNotEmpty()) {
+            return ResponseEntity.status(HttpStatus.OK).body(generalPractitionerDTO[0])
+        } else {
+            throw NotExistingException("General practitioner with id '$id' does not exist.")
         }
     }
 
@@ -42,11 +43,6 @@ class GeneralPractitionerRestController {
         @PathVariable("id") id: String
     ): List<PatientDTO> {
         return this.generalPractitionerService.getPatientsOfGeneralPractitionerById(GeneralPractitionerId(id))
-    }
-
-    @ExceptionHandler(NotExistingException::class)
-    fun handleNotExistingException(e: NotExistingException): ResponseEntity<String> {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.message)
     }
 
 }
