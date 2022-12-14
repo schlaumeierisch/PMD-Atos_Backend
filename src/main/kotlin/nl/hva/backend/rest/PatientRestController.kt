@@ -56,4 +56,13 @@ class PatientRestController {
         return careProviderDTOs
     }
 
+    @GetMapping("/createPatientCareProviderLink")
+    @ResponseBody
+    fun createPatientCareProviderLink(
+        careProviderId: String,
+        patientId: String
+    ){
+        this.patientService.createLinkPatientCareProvider(PatientId(patientId), CareProviderId(careProviderId))
+    }
+
 }

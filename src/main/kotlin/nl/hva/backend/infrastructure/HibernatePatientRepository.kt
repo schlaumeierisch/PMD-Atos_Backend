@@ -83,4 +83,8 @@ class HibernatePatientRepository : PatientRepository {
         return query.setParameter(1, patientId).resultList
     }
 
+    override fun createLinkPatientCareProvider(patientCareProviderRelation: PatientCareProviderRelation) {
+        this.entityManager.persist(patientCareProviderRelation)
+    }
+
 }

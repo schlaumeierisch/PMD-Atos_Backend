@@ -1,6 +1,7 @@
 package nl.hva.backend.domain.api
 
 import nl.hva.backend.domain.Patient
+import nl.hva.backend.domain.ids.CareProviderId
 import nl.hva.backend.domain.ids.GeneralPractitionerId
 import nl.hva.backend.domain.ids.PatientId
 import nl.hva.backend.domain.many_to_many.PatientCareProviderRelation
@@ -26,5 +27,8 @@ interface PatientRepository {
     fun getAllAccounts(): List<Patient>
 
     fun getPatientCareProviderRelationsByPatientId(patientId: PatientId): List<PatientCareProviderRelation>
+
+    fun createLinkPatientCareProvider(patientCareProviderRelation: PatientCareProviderRelation)
+
 
 }

@@ -5,6 +5,7 @@ import nl.hva.backend.application.dto.PatientDTO
 import nl.hva.backend.application.dto.many_to_many.PatientCareProviderDTO
 import nl.hva.backend.domain.Patient
 import nl.hva.backend.domain.api.PatientRepository
+import nl.hva.backend.domain.ids.CareProviderId
 import nl.hva.backend.domain.ids.GeneralPractitionerId
 import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.PatientId
@@ -95,6 +96,11 @@ class PatientServiceImpl : PatientService {
             this.patientRepository.getPatientCareProviderRelationsByPatientId(patientId)
 
         return PatientCareProviderDTO.fromPatientCareProviderRelations(patientCareProviderRelations)
+    }
+
+    @Transactional
+    override fun createLinkPatientCareProvider(patientId: PatientId, careProviderId: CareProviderId) {
+        this.patientRepository.createLinkPatientCareProvider(PatientCareProviderRelation(patientId, careProviderId))
     }
 
 }

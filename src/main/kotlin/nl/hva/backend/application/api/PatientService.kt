@@ -2,6 +2,7 @@ package nl.hva.backend.application.api
 
 import nl.hva.backend.application.dto.PatientDTO
 import nl.hva.backend.application.dto.many_to_many.PatientCareProviderDTO
+import nl.hva.backend.domain.ids.CareProviderId
 import nl.hva.backend.domain.ids.PatientId
 import nl.hva.backend.domain.value_objects.Gender
 import java.time.LocalDate
@@ -27,5 +28,7 @@ interface PatientService {
     fun getAllAccounts(): List<PatientDTO>
 
     fun getPatientCareProviderRelationsByPatientId(patientId: PatientId): List<PatientCareProviderDTO>
+
+    fun createLinkPatientCareProvider(patientId: PatientId, careProviderId: CareProviderId)
 
 }
