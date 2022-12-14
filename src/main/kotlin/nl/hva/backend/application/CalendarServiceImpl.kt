@@ -47,6 +47,11 @@ class CalendarServiceImpl : CalendarService {
     }
 
     @Transactional
+    override fun cancelAppointment(appointmentId: AppointmentId) {
+        this.calendarRepository.cancelAppointment(appointmentId)
+    }
+
+    @Transactional
     override fun getAllAppointmentsByPatientId(patientId: PatientId): List<AppointmentDTO> {
         val appointments: List<Appointment> = this.calendarRepository.getAllAppointmentsByPatientId(patientId)
 

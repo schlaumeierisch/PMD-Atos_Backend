@@ -2,6 +2,7 @@ package nl.hva.backend.rest
 
 import nl.hva.backend.application.api.CalendarService
 import nl.hva.backend.application.dto.AppointmentDTO
+import nl.hva.backend.domain.ids.AppointmentId
 import nl.hva.backend.domain.ids.CareProviderId
 import nl.hva.backend.domain.ids.GeneralPractitionerId
 import nl.hva.backend.domain.ids.PatientId
@@ -32,6 +33,13 @@ class CalendarRestController {
         @RequestParam(required = false) cpId: String? = null
     ) {
         this.calendarService.createAppointment(dateTime, reason, patientId, gpId, cpId)
+    }
+
+    @PostMapping("/cancelAppointment/{id}")
+    fun cancelAppointment(
+        @PathVariable("id") id: String
+    ) {
+        this.calendarService.cancelAppointment(AppointmentId(id))
     }
 
     @GetMapping("/getAllAppointmentsByPatientId/{id}")
