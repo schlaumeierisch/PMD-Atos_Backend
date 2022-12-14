@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect
 import nl.hva.backend.application.dto.value_objects.AddressDTO
 import nl.hva.backend.domain.CareProvider
 import nl.hva.backend.domain.value_objects.Specialism
-import kotlin.collections.ArrayList
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 class CareProviderDTO {

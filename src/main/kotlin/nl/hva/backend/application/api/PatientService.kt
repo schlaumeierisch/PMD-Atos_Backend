@@ -22,7 +22,7 @@ interface PatientService {
 
     fun deleteAccount(patientId: PatientId)
 
-    fun getAccountById(patientId: PatientId): PatientDTO
+    fun getAccountById(patientId: PatientId): List<PatientDTO>
 
     fun getAllAccounts(): List<PatientDTO>
 

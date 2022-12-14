@@ -62,11 +62,11 @@ class HibernatePatientRepository : PatientRepository {
         this.entityManager.remove(result)
     }
 
-    override fun getAccountById(patientId: PatientId): Patient {
+    override fun getAccountById(patientId: PatientId): List<Patient> {
         val query: TypedQuery<Patient> = this.entityManager.createQuery(
             "SELECT p FROM Patient p WHERE p.domainId = ?1", Patient::class.java
         )
-        return query.setParameter(1, patientId).singleResult
+        return query.setParameter(1, patientId).resultList
     }
 
     override fun getAllAccounts(): List<Patient> {

@@ -7,7 +7,10 @@ import nl.hva.backend.application.dto.PatientDTO
 import nl.hva.backend.application.dto.many_to_many.PatientCareProviderDTO
 import nl.hva.backend.domain.ids.CareProviderId
 import nl.hva.backend.domain.ids.PatientId
+import nl.hva.backend.rest.exceptions.NotExistingException
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -29,12 +32,13 @@ class PatientRestController {
     @ResponseBody
     fun getAccountById(
         @PathVariable("id") id: String
-    ): PatientDTO? {
-        // TODO: return something else than null (maybe ResponseEntity<>)
-        return try {
-            this.patientService.getAccountById(PatientId(id))
-        } catch (e: Exception) {
-            null
+    ): ResponseEntity<PatientDTO> {
+        val patientDTO: List<PatientDTO> = this.patientService.getAccountById(PatientId(id))
+
+        if (patientDTO.isNotEmpty()) {
+            return ResponseEntity.status(HttpStatus.OK).body(patientDTO[0])
+        } else {
+            throw NotExistingException("Patient with id \'$id\' does not exist.")
         }
     }
 

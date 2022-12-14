@@ -21,7 +21,7 @@ interface PatientRepository {
 
     fun deleteAccount(patientId: PatientId)
 
-    fun getAccountById(patientId: PatientId): Patient
+    fun getAccountById(patientId: PatientId): List<Patient>
 
     fun getAllAccounts(): List<Patient>
 

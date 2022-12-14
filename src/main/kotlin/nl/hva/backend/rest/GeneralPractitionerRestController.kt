@@ -4,7 +4,10 @@ import nl.hva.backend.application.api.GeneralPractitionerService
 import nl.hva.backend.application.dto.GeneralPractitionerDTO
 import nl.hva.backend.application.dto.PatientDTO
 import nl.hva.backend.domain.ids.GeneralPractitionerId
+import nl.hva.backend.rest.exceptions.NotExistingException
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -39,6 +42,11 @@ class GeneralPractitionerRestController {
         @PathVariable("id") id: String
     ): List<PatientDTO> {
         return this.generalPractitionerService.getPatientsOfGeneralPractitionerById(GeneralPractitionerId(id))
+    }
+
+    @ExceptionHandler(NotExistingException::class)
+    fun handleNotExistingException(e: NotExistingException): ResponseEntity<String> {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.message)
     }
 
 }

@@ -1,7 +1,7 @@
 package nl.hva.backend.domain
 
-import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.ExerciseId
+import nl.hva.backend.domain.ids.MedicalRecordId
 import java.time.LocalDate
 
 open class Exercise {

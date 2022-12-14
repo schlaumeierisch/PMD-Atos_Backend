@@ -76,10 +76,14 @@ class PatientServiceImpl : PatientService {
     }
 
     @Transactional
-    override fun getAccountById(patientId: PatientId): PatientDTO {
-        val patient: Patient = this.patientRepository.getAccountById(patientId)
+    override fun getAccountById(patientId: PatientId): List<PatientDTO> {
+        val patient: List<Patient> = this.patientRepository.getAccountById(patientId)
 
-        return PatientDTO.fromPatient(patient)
+        return if (patient.isNotEmpty()) {
+            listOf(PatientDTO.fromPatient(patient[0]))
+        } else {
+            emptyList()
+        }
     }
 
     @Transactional

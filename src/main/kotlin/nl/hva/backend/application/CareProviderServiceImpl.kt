@@ -2,7 +2,6 @@ package nl.hva.backend.application
 
 import nl.hva.backend.application.api.CareProviderService
 import nl.hva.backend.application.dto.CareProviderDTO
-import nl.hva.backend.application.dto.value_objects.AddressDTO
 import nl.hva.backend.domain.CareProvider
 import nl.hva.backend.domain.api.CareProviderRepository
 import nl.hva.backend.domain.ids.CareProviderId

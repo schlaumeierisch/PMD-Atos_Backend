@@ -1,11 +1,7 @@
 package nl.hva.backend.application
 
 import nl.hva.backend.application.api.MedicalRecordService
-import nl.hva.backend.application.dto.ExerciseDTO
-import nl.hva.backend.application.dto.DiagnosisDTO
-import nl.hva.backend.application.dto.IntakeDTO
-import nl.hva.backend.application.dto.MedicationDTO
-import nl.hva.backend.application.dto.NoteDTO
+import nl.hva.backend.application.dto.*
 import nl.hva.backend.domain.*
 import nl.hva.backend.domain.api.MedicalRecordRepository
 import nl.hva.backend.domain.ids.*
