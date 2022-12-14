@@ -2,18 +2,22 @@ package nl.hva.backend.application
 
 import nl.hva.backend.application.api.PermissionService
 import nl.hva.backend.application.dto.DiagnosisDTO
+import nl.hva.backend.application.dto.ExerciseDTO
 import nl.hva.backend.application.dto.MedicationDTO
 import nl.hva.backend.application.dto.NoteDTO
 import nl.hva.backend.application.dto.many_to_many.DiagnosisCareProviderDTO
+import nl.hva.backend.application.dto.many_to_many.ExerciseCareProviderDTO
 import nl.hva.backend.application.dto.many_to_many.MedicationCareProviderDTO
 import nl.hva.backend.application.dto.many_to_many.NoteCareProviderDTO
 import nl.hva.backend.domain.Diagnosis
+import nl.hva.backend.domain.Exercise
 import nl.hva.backend.domain.Medication
 import nl.hva.backend.domain.Note
 import nl.hva.backend.domain.api.MedicalRecordRepository
 import nl.hva.backend.domain.api.PermissionRepository
 import nl.hva.backend.domain.ids.*
 import nl.hva.backend.domain.many_to_many.DiagnosisCareProviderRelation
+import nl.hva.backend.domain.many_to_many.ExerciseCareProviderRelation
 import nl.hva.backend.domain.many_to_many.MedicationCareProviderRelation
 import nl.hva.backend.domain.many_to_many.NoteCareProviderRelation
 import org.springframework.beans.factory.annotation.Autowired
@@ -80,11 +84,11 @@ class PermissionsServiceImpl : PermissionService {
 
         return NoteDTO.fromNote(note)
     }
-
+    @Transactional
     override fun createPermissionLinkNote(noteId: NoteId, careProviderId: CareProviderId, validDate: LocalDate) {
         this.permissionsRepository.createPermissionLinkNote(NoteCareProviderRelation (careProviderId, noteId, validDate))
     }
-
+    @Transactional
     override fun removeExpiredNotePermissions(currentDay: LocalDate) {
         this.permissionsRepository.removeExpiredNotePermissions(currentDay)
     }
@@ -93,20 +97,20 @@ class PermissionsServiceImpl : PermissionService {
     /**
      ********************************** Diagnosis **********************************
      */
-
+    @Transactional
     override fun getDiagnosisCareProviderRelationById(careProviderId: CareProviderId): List<DiagnosisCareProviderDTO> {
         val diagnosisCareProviderRelations: List<DiagnosisCareProviderRelation> =
             this.permissionsRepository.getDiagnosisCareProviderRelationById(careProviderId)
         return DiagnosisCareProviderDTO.fromDiagnosisCareProviderRelations(diagnosisCareProviderRelations)
     }
-
+    @Transactional
     override fun getDiagnosisByIdAndMr(diagnosisId: DiagnosisId, medicalRecordId: MedicalRecordId): DiagnosisDTO {
         val diagnosis: Diagnosis =
             this.permissionsRepository.getDiagnosisByIdAndMr(diagnosisId, medicalRecordId)
 
         return DiagnosisDTO.fromDiagnosis(diagnosis)
     }
-
+    @Transactional
     override fun createPermissionLinkDiagnosis(
         diagnosisId: DiagnosisId,
         careProviderId: CareProviderId,
@@ -114,9 +118,38 @@ class PermissionsServiceImpl : PermissionService {
     ) {
         this.permissionsRepository.createPermissionLinkDiagnosis(DiagnosisCareProviderRelation(careProviderId, diagnosisId, validDate))
     }
-
+    @Transactional
     override fun removeExpiredDiagnosisPermissions(currentDay: LocalDate) {
         this.permissionsRepository.removeExpiredDiagnosisPermissions(currentDay)
+    }
+
+    /**
+     ********************************** Exercise **********************************
+     */
+
+    override fun getExerciseCareProviderRelationById(careProviderId: CareProviderId): List<ExerciseCareProviderDTO> {
+        val exerciseCareProviderRelations: List<ExerciseCareProviderRelation> =
+            this.permissionsRepository.getExerciseCareProviderRelationById(careProviderId)
+        return ExerciseCareProviderDTO.fromExerciseCareProviderRelations(exerciseCareProviderRelations)
+    }
+
+    override fun getExerciseByIdAndMr(exerciseId: ExerciseId, medicalRecordId: MedicalRecordId): ExerciseDTO {
+        val exercise: Exercise =
+            this.permissionsRepository.getExerciseByIdAndMr(exerciseId, medicalRecordId)
+
+        return ExerciseDTO.fromExercise(exercise)
+    }
+
+    override fun createExerciseLinkDiagnosis(
+        exerciseId: ExerciseId,
+        careProviderId: CareProviderId,
+        validDate: LocalDate
+    ) {
+        this.permissionsRepository.createPermissionLinkExercise(ExerciseCareProviderRelation(careProviderId, exerciseId, validDate))
+    }
+
+    override fun removeExpiredExercisePermissions(currentDay: LocalDate) {
+        this.permissionsRepository.removeExpiredExercisePermissions(currentDay)
     }
 
 }

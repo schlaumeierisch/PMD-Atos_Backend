@@ -1,11 +1,13 @@
 package nl.hva.backend.infrastructure
 
 import nl.hva.backend.domain.Diagnosis
+import nl.hva.backend.domain.Exercise
 import nl.hva.backend.domain.Medication
 import nl.hva.backend.domain.Note
 import nl.hva.backend.domain.api.PermissionRepository
 import nl.hva.backend.domain.ids.*
 import nl.hva.backend.domain.many_to_many.DiagnosisCareProviderRelation
+import nl.hva.backend.domain.many_to_many.ExerciseCareProviderRelation
 import nl.hva.backend.domain.many_to_many.MedicationCareProviderRelation
 import nl.hva.backend.domain.many_to_many.NoteCareProviderRelation
 import org.springframework.stereotype.Repository
@@ -124,7 +126,7 @@ class HibernatePermissionRepository : PermissionRepository {
     }
 
     override fun createPermissionLinkDiagnosis(diagnosisCareProviderRelation: DiagnosisCareProviderRelation) {
-       this.entityManager.persist(diagnosisCareProviderRelation)
+        this.entityManager.persist(diagnosisCareProviderRelation)
     }
 
     override fun removeExpiredDiagnosisPermissions(currentDay: LocalDate) {
@@ -135,4 +137,39 @@ class HibernatePermissionRepository : PermissionRepository {
         query.executeUpdate()
     }
 
+    /**
+     ********************************** Exercise **********************************
+     */
+
+    override fun getExerciseCareProviderRelationById(careProviderId: CareProviderId): List<ExerciseCareProviderRelation> {
+        val query: TypedQuery<ExerciseCareProviderRelation> = this.entityManager.createQuery(
+            "SELECT excp from ExerciseCareProviderRelation excp WHERE excp.cpDomainId = ?1",
+            ExerciseCareProviderRelation::class.java
+        )
+            .setParameter(1, careProviderId)
+        return query.resultList
+    }
+
+    override fun getExerciseByIdAndMr(exerciseId: ExerciseId, medicalRecordId: MedicalRecordId): Exercise {
+        val query: TypedQuery<Exercise> = this.entityManager.createQuery(
+            "SELECT exer FROM Exercise exer WHERE exer.medicalRecordDomainId = ?1 AND exer.domainId = ?2",
+            Exercise::class.java
+        )
+            .setParameter(1, medicalRecordId)
+            .setParameter(2, exerciseId)
+
+        return query.singleResult
+    }
+
+    override fun createPermissionLinkExercise(exerciseCareProviderRelation: ExerciseCareProviderRelation) {
+        this.entityManager.persist(exerciseCareProviderRelation)
+    }
+
+    override fun removeExpiredExercisePermissions(currentDay: LocalDate) {
+        val query: Query = this.entityManager.createQuery(
+            "delete from ExerciseCareProviderRelation where validDate < ?1"
+        )
+            .setParameter(1, currentDay)
+        query.executeUpdate()
+    }
 }

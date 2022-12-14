@@ -3,10 +3,12 @@ package nl.hva.backend.domain.api
 import nl.hva.backend.application.dto.DiagnosisDTO
 import nl.hva.backend.application.dto.many_to_many.DiagnosisCareProviderDTO
 import nl.hva.backend.domain.Diagnosis
+import nl.hva.backend.domain.Exercise
 import nl.hva.backend.domain.Medication
 import nl.hva.backend.domain.Note
 import nl.hva.backend.domain.ids.*
 import nl.hva.backend.domain.many_to_many.DiagnosisCareProviderRelation
+import nl.hva.backend.domain.many_to_many.ExerciseCareProviderRelation
 import nl.hva.backend.domain.many_to_many.MedicationCareProviderRelation
 import nl.hva.backend.domain.many_to_many.NoteCareProviderRelation
 import java.time.LocalDate
@@ -48,4 +50,16 @@ interface PermissionRepository {
     fun createPermissionLinkDiagnosis(diagnosisCareProviderRelation: DiagnosisCareProviderRelation)
 
     fun removeExpiredDiagnosisPermissions(currentDay: LocalDate)
+
+    /**
+     ********************************** Exercise **********************************
+     */
+    fun getExerciseCareProviderRelationById(careProviderId: CareProviderId): List<ExerciseCareProviderRelation>
+
+    fun getExerciseByIdAndMr(exerciseId: ExerciseId, medicalRecordId: MedicalRecordId): Exercise
+
+    fun createPermissionLinkExercise(exerciseCareProviderRelation: ExerciseCareProviderRelation)
+
+    fun removeExpiredExercisePermissions(currentDay: LocalDate)
+
 }

@@ -1,9 +1,11 @@
 package nl.hva.backend.application.api
 
 import nl.hva.backend.application.dto.DiagnosisDTO
+import nl.hva.backend.application.dto.ExerciseDTO
 import nl.hva.backend.application.dto.MedicationDTO
 import nl.hva.backend.application.dto.NoteDTO
 import nl.hva.backend.application.dto.many_to_many.DiagnosisCareProviderDTO
+import nl.hva.backend.application.dto.many_to_many.ExerciseCareProviderDTO
 import nl.hva.backend.application.dto.many_to_many.MedicationCareProviderDTO
 import nl.hva.backend.application.dto.many_to_many.NoteCareProviderDTO
 import nl.hva.backend.domain.ids.*
@@ -47,5 +49,17 @@ interface PermissionService {
     fun createPermissionLinkDiagnosis(diagnosisId: DiagnosisId, careProviderId: CareProviderId, validDate: LocalDate)
 
     fun removeExpiredDiagnosisPermissions(currentDay: LocalDate)
+
+    /**
+     ********************************** Exercise **********************************
+     */
+
+    fun getExerciseCareProviderRelationById(careProviderId: CareProviderId): List<ExerciseCareProviderDTO>
+
+    fun getExerciseByIdAndMr(exerciseId: ExerciseId, medicalRecordId: MedicalRecordId): ExerciseDTO
+
+    fun createExerciseLinkDiagnosis(exerciseId: ExerciseId, careProviderId: CareProviderId, validDate: LocalDate)
+
+    fun removeExpiredExercisePermissions(currentDay: LocalDate)
 
 }
