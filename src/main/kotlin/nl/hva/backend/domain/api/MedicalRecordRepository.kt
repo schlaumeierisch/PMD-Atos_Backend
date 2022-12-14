@@ -14,6 +14,8 @@ interface MedicalRecordRepository {
 
     fun nextDiagnosisIdentity(): DiagnosisId
 
+    fun nextMedicationIdentity(): MedicationId
+
     fun createMedicalRecord(medicalRecord: MedicalRecord)
 
     fun getAllNotes(medicalRecordId: MedicalRecordId): List<Note>
@@ -21,6 +23,8 @@ interface MedicalRecordRepository {
     fun createNote(note: Note)
 
     fun getAllMedication(medicalRecordId: MedicalRecordId): List<Medication>
+
+    fun createMedication(medication: Medication)
 
     fun getIntakeByMedicationId(medicationId: MedicationId): List<Intake>
 

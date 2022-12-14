@@ -46,6 +46,19 @@ class MedicalRecordRestController {
         return this.medicalRecordService.getAllMedication(MedicalRecordId(id))
     }
 
+    @PostMapping("/medication/createMedication")
+    fun createMedication(
+        title: String,
+        description: String,
+        @RequestParam("startDate")
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) startDate: LocalDate,
+        @RequestParam("endDate", required = false)
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) endDate: LocalDate? = null,
+        medicalRecordId: String
+    ) {
+        this.medicalRecordService.createMedication(title, description, startDate, endDate, MedicalRecordId(medicalRecordId))
+    }
+
     @GetMapping("/medication/getIntakeByMedicationId/{id}")
     @ResponseBody
     fun getIntakeByMedicationId(

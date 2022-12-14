@@ -59,6 +59,21 @@ class MedicalRecordServiceImpl : MedicalRecordService {
     }
 
     @Transactional
+    override fun createMedication(
+        title: String,
+        description: String,
+        startDate: LocalDate,
+        endDate: LocalDate?,
+        medicalRecordId: MedicalRecordId
+    ) {
+        val medicationId: MedicationId = this.medicalRecordRepository.nextMedicationIdentity()
+
+        val medication = Medication(medicationId, title, description, startDate, endDate, medicalRecordId)
+
+        this.medicalRecordRepository.createMedication(medication)
+    }
+
+    @Transactional
     override fun getIntakeByMedicationId(medicationId: MedicationId): List<IntakeDTO> {
         val intakes: List<Intake> = this.medicalRecordRepository.getIntakeByMedicationId(medicationId)
 

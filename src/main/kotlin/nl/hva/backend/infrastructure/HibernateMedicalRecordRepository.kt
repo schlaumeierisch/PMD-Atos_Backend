@@ -24,6 +24,8 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
 
     override fun nextDiagnosisIdentity(): DiagnosisId = DiagnosisId(UUID.randomUUID().toString())
 
+    override fun nextMedicationIdentity(): MedicationId = MedicationId(UUID.randomUUID().toString())
+
     override fun createMedicalRecord(medicalRecord: MedicalRecord) {
         this.entityManager.persist(medicalRecord)
     }
@@ -44,6 +46,10 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
             "SELECT med FROM Medication med WHERE med.medicalRecordDomainId = ?1", Medication::class.java
         )
         return query.setParameter(1, medicalRecordId).resultList
+    }
+
+    override fun createMedication(medication: Medication) {
+        this.entityManager.persist(medication)
     }
 
     override fun getIntakeByMedicationId(medicationId: MedicationId): List<Intake> {
