@@ -7,8 +7,10 @@ import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.MedicationId
 import nl.hva.backend.domain.many_to_many.MedicationCareProviderRelation
 import org.springframework.stereotype.Repository
+import java.time.LocalDate
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
+import javax.persistence.Query
 import javax.persistence.TypedQuery
 
 @Repository
@@ -17,6 +19,9 @@ class HibernatePermissionRepository : PermissionRepository {
     @PersistenceContext
     private lateinit var entityManager: EntityManager
 
+    /**
+     ********************************** Medication **********************************
+     */
 
     override fun getMedicationCareProviderRelationById(
         careProviderId: CareProviderId
@@ -41,6 +46,18 @@ class HibernatePermissionRepository : PermissionRepository {
             .setParameter(2, medicationId)
 
         return query.singleResult
+    }
+
+    override fun createPermissionLinkMedication(medicationCareProviderRelation: MedicationCareProviderRelation) {
+        this.entityManager.persist(medicationCareProviderRelation)
+    }
+
+    override fun removeExpiredMedicationPermissions(currentDay: LocalDate) {
+        val query: Query = this.entityManager.createQuery(
+            "delete from MedicationCareProviderRelation where validDate < ?1"
+        )
+            .setParameter(1, currentDay)
+        query.executeUpdate()
     }
 
 }

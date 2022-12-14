@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
+import java.time.LocalDate
 import javax.validation.constraints.Null
 
 @RestController
@@ -21,7 +22,9 @@ class PermissionRestController {
     @Autowired
     private lateinit var permissionService: PermissionService
 
-
+    /**
+     ********************************** Medication **********************************
+     */
     @GetMapping("/getMedicationOfMedicalRecord")
     @ResponseBody
     fun getMedicationCareProviderRelationById(
@@ -46,4 +49,23 @@ class PermissionRestController {
         }
         return medicationDTOs
     }
+
+    @GetMapping("/createMedicationPermission")
+    @ResponseBody
+    fun createMedicationCareProviderLink(
+        medicationId: String,
+        careProviderId: String,
+        validDate: String
+    ) {
+        this.permissionService.createPermissionLink(MedicationId(medicationId), CareProviderId(careProviderId), LocalDate.parse(validDate))
+    }
+
+    @GetMapping("/removeExpiredMedicationPermission")
+    @ResponseBody
+    fun removeExpiredMedicationPermission(
+        currentDay: String
+    ) {
+        this.permissionService.removeExpiredMedicationPermissions(LocalDate.parse(currentDay))
+    }
+
 }

@@ -13,6 +13,7 @@ import nl.hva.backend.domain.many_to_many.MedicationCareProviderRelation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.time.LocalDate
 
 @Service
 class PermissionsServiceImpl : PermissionService {
@@ -20,6 +21,9 @@ class PermissionsServiceImpl : PermissionService {
     @Autowired
     private lateinit var permissionsRepository: PermissionRepository
 
+    /**
+     ********************************** Medication **********************************
+     */
 
     @Transactional
     override fun getMedicationCareProviderRelationById(
@@ -37,4 +41,21 @@ class PermissionsServiceImpl : PermissionService {
 
         return MedicationDTO.fromMedication(medication)
     }
+
+    @Transactional
+    override fun createPermissionLink(
+        medicationId: MedicationId,
+        careProviderId: CareProviderId,
+        validDate: LocalDate
+    ) {
+        val medicationCareProviderRelation = MedicationCareProviderRelation (careProviderId, medicationId, validDate)
+        this.permissionsRepository.createPermissionLinkMedication(medicationCareProviderRelation)
+    }
+
+    @Transactional
+    override fun removeExpiredMedicationPermissions(currentDay: LocalDate) {
+        this.permissionsRepository.removeExpiredMedicationPermissions(currentDay)
+    }
+
+
 }
