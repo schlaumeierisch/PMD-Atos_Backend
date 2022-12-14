@@ -1,6 +1,7 @@
 package nl.hva.backend.domain.api
 
 import nl.hva.backend.domain.*
+import nl.hva.backend.domain.ids.DiagnosisId
 import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.MedicationId
 import nl.hva.backend.domain.ids.NoteId
@@ -11,6 +12,8 @@ interface MedicalRecordRepository {
 
     fun nextNoteIdentity(): NoteId
 
+    fun nextDiagnosisIdentity(): DiagnosisId
+
     fun createMedicalRecord(medicalRecord: MedicalRecord)
 
     fun getAllNotes(medicalRecordId: MedicalRecordId): List<Note>
@@ -20,8 +23,11 @@ interface MedicalRecordRepository {
     fun getAllMedication(medicalRecordId: MedicalRecordId): List<Medication>
 
     fun getIntakeByMedicationId(medicationId: MedicationId): List<Intake>
+
     fun getAllExercises(medicalRecordId: MedicalRecordId): List<Exercise>
 
     fun getAllDiagnoses(medicalRecordId: MedicalRecordId): List<Diagnosis>
+
+    fun createDiagnosis(diagnosis: Diagnosis)
 
 }

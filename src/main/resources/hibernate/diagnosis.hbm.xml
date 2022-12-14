@@ -15,7 +15,7 @@
         <property name="title" column="title" type="string"/>
         <property name="diagnosisType" column="diagnosis_type">
             <type name="org.hibernate.type.EnumType">
-                <param name="enumClass">nl.hva.backend.domain.value_objects.DiagnosisTypes</param>
+                <param name="enumClass">nl.hva.backend.domain.value_objects.DiagnosisType</param>
                 <param name="type">12</param>
             </type>
         </property>
