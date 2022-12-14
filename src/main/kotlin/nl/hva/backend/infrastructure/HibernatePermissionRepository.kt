@@ -1,12 +1,11 @@
 package nl.hva.backend.infrastructure
 
+import nl.hva.backend.domain.Diagnosis
 import nl.hva.backend.domain.Medication
 import nl.hva.backend.domain.Note
 import nl.hva.backend.domain.api.PermissionRepository
-import nl.hva.backend.domain.ids.CareProviderId
-import nl.hva.backend.domain.ids.MedicalRecordId
-import nl.hva.backend.domain.ids.MedicationId
-import nl.hva.backend.domain.ids.NoteId
+import nl.hva.backend.domain.ids.*
+import nl.hva.backend.domain.many_to_many.DiagnosisCareProviderRelation
 import nl.hva.backend.domain.many_to_many.MedicationCareProviderRelation
 import nl.hva.backend.domain.many_to_many.NoteCareProviderRelation
 import org.springframework.stereotype.Repository
@@ -94,6 +93,43 @@ class HibernatePermissionRepository : PermissionRepository {
     override fun removeExpiredNotePermissions(currentDay: LocalDate) {
         val query: Query = this.entityManager.createQuery(
             "delete from NoteCareProviderRelation where validDate < ?1"
+        )
+            .setParameter(1, currentDay)
+        query.executeUpdate()
+    }
+
+
+    /**
+     ********************************** Diagnosis **********************************
+     */
+
+    override fun getDiagnosisCareProviderRelationById(careProviderId: CareProviderId): List<DiagnosisCareProviderRelation> {
+        val query: TypedQuery<DiagnosisCareProviderRelation> = this.entityManager.createQuery(
+            "SELECT dcp from DiagnosisCareProviderRelation dcp WHERE dcp.cpDomainId = ?1",
+            DiagnosisCareProviderRelation::class.java
+        )
+            .setParameter(1, careProviderId)
+        return query.resultList
+    }
+
+    override fun getDiagnosisByIdAndMr(diagnosisId: DiagnosisId, medicalRecordId: MedicalRecordId): Diagnosis {
+        val query: TypedQuery<Diagnosis> = this.entityManager.createQuery(
+            "SELECT diag FROM Diagnosis diag WHERE diag.medicalRecordDomainId = ?1 AND diag.domainId = ?2",
+            Diagnosis::class.java
+        )
+            .setParameter(1, medicalRecordId)
+            .setParameter(2, diagnosisId)
+
+        return query.singleResult
+    }
+
+    override fun createPermissionLinkDiagnosis(diagnosisCareProviderRelation: DiagnosisCareProviderRelation) {
+       this.entityManager.persist(diagnosisCareProviderRelation)
+    }
+
+    override fun removeExpiredDiagnosisPermissions(currentDay: LocalDate) {
+        val query: Query = this.entityManager.createQuery(
+            "delete from DiagnosisCareProviderRelation where validDate < ?1"
         )
             .setParameter(1, currentDay)
         query.executeUpdate()

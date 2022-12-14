@@ -3,6 +3,7 @@ package nl.hva.backend.rest
 import nl.hva.backend.application.api.MedicalRecordService
 import nl.hva.backend.application.api.PermissionService
 import nl.hva.backend.application.dto.MedicationDTO
+import nl.hva.backend.application.dto.many_to_many.DiagnosisCareProviderDTO
 import nl.hva.backend.application.dto.many_to_many.MedicationCareProviderDTO
 import nl.hva.backend.application.dto.many_to_many.NoteCareProviderDTO
 import nl.hva.backend.domain.ids.CareProviderId
@@ -34,6 +35,8 @@ class PermissionRestController {
         currentDay: String
     ) {
         this.permissionService.removeExpiredMedicationPermissions(LocalDate.parse(currentDay))
+        this.permissionService.removeExpiredNotePermissions(LocalDate.parse(currentDay))
+        this.permissionService.removeExpiredDiagnosisPermissions(LocalDate.parse(currentDay))
     }
 
 
@@ -79,6 +82,7 @@ class PermissionRestController {
     /**
      ********************************** Note **********************************
      */
+
     @GetMapping("/getNotenOfMedicalRecord")
     @ResponseBody
     fun getNoteCareProviderRelationById(
@@ -113,4 +117,46 @@ class PermissionRestController {
     ) {
         this.permissionService.createPermissionLinkNote(NoteId(noteId), CareProviderId(careProviderId), LocalDate.parse(validDate))
     }
+
+    /**
+     ********************************** Diagnosis **********************************
+     */
+
+
+    @GetMapping("/geDiagnosisOfMedicalRecord")
+    @ResponseBody
+    fun getDiagnosisCareProviderRelationById(
+        mrId: String,
+        cpId: String
+    ): List<MedicationDTO> {
+        //Check all permissions the care provider has
+        val diagnosisCareProviderDTOs: List<DiagnosisCareProviderDTO> =
+            this.permissionService.getDiagnosisCareProviderRelationById(
+                CareProviderId(cpId)
+            )
+
+        //Return only the medication of the requested patient
+        val diagnosisDTOs: ArrayList<MedicationDTO> = arrayListOf()
+        for (noteCareProviderDTO in diagnosisCareProviderDTOs) {
+            diagnosisDTOs.add(
+                this.permissionService.getMedicationByIdAndMr(
+                    MedicationId(noteCareProviderDTO.diagId()),
+                    MedicalRecordId(mrId)
+                )
+            )
+        }
+        return diagnosisDTOs
+    }
+
+    @GetMapping("/createDiagnosisPermission")
+    @ResponseBody
+    fun createDiagnosisCareProviderLink(
+        noteId: String,
+        careProviderId: String,
+        validDate: String
+    ) {
+        this.permissionService.createPermissionLinkNote(NoteId(noteId), CareProviderId(careProviderId), LocalDate.parse(validDate))
+    }
+
+
 }

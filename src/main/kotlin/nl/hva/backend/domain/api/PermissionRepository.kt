@@ -1,11 +1,12 @@
 package nl.hva.backend.domain.api
 
+import nl.hva.backend.application.dto.DiagnosisDTO
+import nl.hva.backend.application.dto.many_to_many.DiagnosisCareProviderDTO
+import nl.hva.backend.domain.Diagnosis
 import nl.hva.backend.domain.Medication
 import nl.hva.backend.domain.Note
-import nl.hva.backend.domain.ids.CareProviderId
-import nl.hva.backend.domain.ids.MedicalRecordId
-import nl.hva.backend.domain.ids.MedicationId
-import nl.hva.backend.domain.ids.NoteId
+import nl.hva.backend.domain.ids.*
+import nl.hva.backend.domain.many_to_many.DiagnosisCareProviderRelation
 import nl.hva.backend.domain.many_to_many.MedicationCareProviderRelation
 import nl.hva.backend.domain.many_to_many.NoteCareProviderRelation
 import java.time.LocalDate
@@ -36,4 +37,15 @@ interface PermissionRepository {
 
     fun removeExpiredNotePermissions(currentDay: LocalDate)
 
+    /**
+     ********************************** Diagnosis **********************************
+     */
+
+    fun getDiagnosisCareProviderRelationById(careProviderId: CareProviderId): List<DiagnosisCareProviderRelation>
+
+    fun getDiagnosisByIdAndMr(diagnosisId: DiagnosisId, medicalRecordId: MedicalRecordId): Diagnosis
+
+    fun createPermissionLinkDiagnosis(diagnosisCareProviderRelation: DiagnosisCareProviderRelation)
+
+    fun removeExpiredDiagnosisPermissions(currentDay: LocalDate)
 }
