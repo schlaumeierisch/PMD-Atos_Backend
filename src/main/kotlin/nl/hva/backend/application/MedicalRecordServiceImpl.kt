@@ -8,10 +8,7 @@ import nl.hva.backend.application.dto.MedicationDTO
 import nl.hva.backend.application.dto.NoteDTO
 import nl.hva.backend.domain.*
 import nl.hva.backend.domain.api.MedicalRecordRepository
-import nl.hva.backend.domain.ids.DiagnosisId
-import nl.hva.backend.domain.ids.MedicalRecordId
-import nl.hva.backend.domain.ids.MedicationId
-import nl.hva.backend.domain.ids.NoteId
+import nl.hva.backend.domain.ids.*
 import nl.hva.backend.domain.value_objects.DiagnosisType
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -109,6 +106,21 @@ class MedicalRecordServiceImpl : MedicalRecordService {
         val exercises: List<Exercise> = this.medicalRecordRepository.getAllExercises(medicalRecordId)
 
         return ExerciseDTO.fromExercises(exercises)
+    }
+
+    @Transactional
+    override fun createExercise(
+        title: String,
+        description: String,
+        startDate: LocalDate,
+        endDate: LocalDate?,
+        medicalRecordId: MedicalRecordId
+    ) {
+        val exerciseId: ExerciseId = this.medicalRecordRepository.nextExerciseIdentity()
+
+        val exercise = Exercise(exerciseId, title, description, startDate, endDate, medicalRecordId)
+
+        this.medicalRecordRepository.createExercise(exercise)
     }
 
 }

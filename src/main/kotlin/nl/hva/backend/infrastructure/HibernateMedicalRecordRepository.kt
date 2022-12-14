@@ -2,10 +2,7 @@ package nl.hva.backend.infrastructure
 
 import nl.hva.backend.domain.*
 import nl.hva.backend.domain.api.MedicalRecordRepository
-import nl.hva.backend.domain.ids.DiagnosisId
-import nl.hva.backend.domain.ids.MedicalRecordId
-import nl.hva.backend.domain.ids.MedicationId
-import nl.hva.backend.domain.ids.NoteId
+import nl.hva.backend.domain.ids.*
 import org.springframework.stereotype.Repository
 import java.util.*
 import javax.persistence.EntityManager
@@ -25,6 +22,8 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
     override fun nextDiagnosisIdentity(): DiagnosisId = DiagnosisId(UUID.randomUUID().toString())
 
     override fun nextMedicationIdentity(): MedicationId = MedicationId(UUID.randomUUID().toString())
+
+    override fun nextExerciseIdentity(): ExerciseId = ExerciseId(UUID.randomUUID().toString())
 
     override fun createMedicalRecord(medicalRecord: MedicalRecord) {
         this.entityManager.persist(medicalRecord)
@@ -75,6 +74,10 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
             "SELECT exerc FROM Exercise exerc WHERE exerc.medicalRecordDomainId = ?1", Exercise::class.java
         )
         return query.setParameter(1, medicalRecordId).resultList
+    }
+
+    override fun createExercise(exercise: Exercise) {
+        this.entityManager.persist(exercise)
     }
 
 }

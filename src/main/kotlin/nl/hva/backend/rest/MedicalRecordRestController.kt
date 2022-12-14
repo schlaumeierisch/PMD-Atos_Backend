@@ -56,7 +56,13 @@ class MedicalRecordRestController {
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) endDate: LocalDate? = null,
         medicalRecordId: String
     ) {
-        this.medicalRecordService.createMedication(title, description, startDate, endDate, MedicalRecordId(medicalRecordId))
+        this.medicalRecordService.createMedication(
+            title,
+            description,
+            startDate,
+            endDate,
+            MedicalRecordId(medicalRecordId)
+        )
     }
 
     @GetMapping("/medication/getIntakeByMedicationId/{id}")
@@ -86,7 +92,15 @@ class MedicalRecordRestController {
         advice: String,
         medicalRecordId: String
     ) {
-        this.medicalRecordService.createDiagnosis(title, DiagnosisType.valueOf(diagnosisType), dateDiagnosed, cause, treatment, advice, MedicalRecordId(medicalRecordId))
+        this.medicalRecordService.createDiagnosis(
+            title,
+            DiagnosisType.valueOf(diagnosisType),
+            dateDiagnosed,
+            cause,
+            treatment,
+            advice,
+            MedicalRecordId(medicalRecordId)
+        )
     }
 
     @GetMapping("/exercises/getAllExercises/{id}")
@@ -95,6 +109,25 @@ class MedicalRecordRestController {
         @PathVariable("id") id: String
     ): List<ExerciseDTO> {
         return this.medicalRecordService.getAllExercises(MedicalRecordId(id))
+    }
+
+    @PostMapping("/exercises/createExercise")
+    fun createExercise(
+        title: String,
+        description: String,
+        @RequestParam("startDate")
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) startDate: LocalDate,
+        @RequestParam("endDate", required = false)
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) endDate: LocalDate? = null,
+        medicalRecordId: String
+    ) {
+        this.medicalRecordService.createExercise(
+            title,
+            description,
+            startDate,
+            endDate,
+            MedicalRecordId(medicalRecordId)
+        )
     }
 
 }

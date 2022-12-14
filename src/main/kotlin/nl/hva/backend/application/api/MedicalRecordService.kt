@@ -30,4 +30,6 @@ interface MedicalRecordService {
 
     fun getAllExercises(medicalRecordId: MedicalRecordId): List<ExerciseDTO>
 
+    fun createExercise(title: String, description: String, startDate: LocalDate, endDate: LocalDate?, medicalRecordId: MedicalRecordId)
+
 }
