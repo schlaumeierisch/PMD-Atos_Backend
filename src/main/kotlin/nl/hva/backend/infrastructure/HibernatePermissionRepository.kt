@@ -1,11 +1,14 @@
 package nl.hva.backend.infrastructure
 
 import nl.hva.backend.domain.Medication
+import nl.hva.backend.domain.Note
 import nl.hva.backend.domain.api.PermissionRepository
 import nl.hva.backend.domain.ids.CareProviderId
 import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.MedicationId
+import nl.hva.backend.domain.ids.NoteId
 import nl.hva.backend.domain.many_to_many.MedicationCareProviderRelation
+import nl.hva.backend.domain.many_to_many.NoteCareProviderRelation
 import org.springframework.stereotype.Repository
 import java.time.LocalDate
 import javax.persistence.EntityManager
@@ -58,6 +61,34 @@ class HibernatePermissionRepository : PermissionRepository {
         )
             .setParameter(1, currentDay)
         query.executeUpdate()
+    }
+
+    /**
+     ********************************** Notes **********************************
+     */
+
+    override fun getNoteCareProviderRelationById(careProviderId: CareProviderId): List<NoteCareProviderRelation> {
+        val query: TypedQuery<NoteCareProviderRelation> = this.entityManager.createQuery(
+            "SELECT ncp from NoteCareProviderRelation ncp WHERE ncp.cpDomainId = ?1",
+            NoteCareProviderRelation::class.java
+        )
+            .setParameter(1, careProviderId)
+        return query.resultList
+    }
+
+    override fun getNoteByIdAndMr(noteId: NoteId, medicalRecordId: MedicalRecordId): Note {
+        val query: TypedQuery<Note> = this.entityManager.createQuery(
+            "SELECT note FROM Note note WHERE note.medicalRecordDomainId = ?1 AND note.domainId = ?2",
+            Note::class.java
+        )
+            .setParameter(1, medicalRecordId)
+            .setParameter(2, noteId)
+
+        return query.singleResult
+    }
+
+    override fun createPermissionLinkNote(noteCareProviderRelation: NoteCareProviderRelation) {
+        this.entityManager.persist(noteCareProviderRelation)
     }
 
 }
