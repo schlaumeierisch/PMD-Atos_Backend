@@ -8,8 +8,11 @@ import nl.hva.backend.application.dto.MedicationDTO
 import nl.hva.backend.application.dto.NoteDTO
 import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.MedicationId
+import nl.hva.backend.domain.value_objects.DiagnosisType
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.web.bind.annotation.*
+import java.time.LocalDate
 
 @RestController
 @RequestMapping("/rest/medicalRecords/")
@@ -32,7 +35,7 @@ class MedicalRecordRestController {
         description: String,
         medicalRecordId: String
     ) {
-        this.medicalRecordService.createNote(title, description, medicalRecordId)
+        this.medicalRecordService.createNote(title, description, MedicalRecordId(medicalRecordId))
     }
 
     @GetMapping("/medication/getAllMedication/{id}")
@@ -57,6 +60,20 @@ class MedicalRecordRestController {
         @PathVariable("id") id: String
     ): List<DiagnosisDTO> {
         return this.medicalRecordService.getAllDiagnoses(MedicalRecordId(id))
+    }
+
+    @PostMapping("/diagnoses/createDiagnosis")
+    fun createDiagnosis(
+        title: String,
+        diagnosisType: String,
+        @RequestParam("dateDiagnosed")
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) dateDiagnosed: LocalDate,
+        cause: String,
+        treatment: String,
+        advice: String,
+        medicalRecordId: String
+    ) {
+        this.medicalRecordService.createDiagnosis(title, DiagnosisType.valueOf(diagnosisType), dateDiagnosed, cause, treatment, advice, MedicalRecordId(medicalRecordId))
     }
 
     @GetMapping("/exercises/getAllExercises/{id}")

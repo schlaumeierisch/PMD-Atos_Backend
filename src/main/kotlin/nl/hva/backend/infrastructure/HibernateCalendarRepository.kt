@@ -24,6 +24,14 @@ class HibernateCalendarRepository : CalendarRepository {
         this.entityManager.persist(appointment)
     }
 
+    override fun cancelAppointment(appointmentId: AppointmentId) {
+        val query: TypedQuery<Appointment> = this.entityManager.createQuery(
+            "SELECT apt FROM Appointment apt WHERE apt.domainId = ?1", Appointment::class.java
+        )
+        val result: Appointment = query.setParameter(1, appointmentId).singleResult
+        this.entityManager.remove(result)
+    }
+
     override fun getAllAppointmentsByPatientId(patientId: PatientId): List<Appointment> {
         val query: TypedQuery<Appointment> = this.entityManager.createQuery(
                 "SELECT apt FROM Appointment apt WHERE apt.patientDomainId = ?1", Appointment::class.java

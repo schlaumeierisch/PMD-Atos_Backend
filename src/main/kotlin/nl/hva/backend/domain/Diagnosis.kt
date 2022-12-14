@@ -2,7 +2,7 @@ package nl.hva.backend.domain
 
 import nl.hva.backend.domain.ids.DiagnosisId
 import nl.hva.backend.domain.ids.MedicalRecordId
-import nl.hva.backend.domain.value_objects.DiagnosisTypes
+import nl.hva.backend.domain.value_objects.DiagnosisType
 import java.time.LocalDate
 
 class Diagnosis {
@@ -10,7 +10,7 @@ class Diagnosis {
     private lateinit var domainId: DiagnosisId
 
     private lateinit var title: String
-    private lateinit var diagnosisType: Enum<DiagnosisTypes>
+    private lateinit var diagnosisType: Enum<DiagnosisType>
     private lateinit var dateDiagnosed: LocalDate
     private lateinit var cause: String
     private lateinit var treatment: String
@@ -25,7 +25,7 @@ class Diagnosis {
     constructor(
         domainId: DiagnosisId,
         title: String,
-        diagnosisType: DiagnosisTypes,
+        diagnosisType: Enum<DiagnosisType>,
         dateDiagnosed: LocalDate,
         cause: String,
         treatment: String,
@@ -46,7 +46,7 @@ class Diagnosis {
     fun id(): Long = this.id
     fun domainId(): DiagnosisId = this.domainId
     fun title(): String = this.title
-    fun diagnosisType(): Enum<DiagnosisTypes> = this.diagnosisType
+    fun diagnosisType(): Enum<DiagnosisType> = this.diagnosisType
     fun dateDiagnosed(): LocalDate = this.dateDiagnosed
     fun cause(): String = this.cause
     fun treatment(): String = this.treatment
