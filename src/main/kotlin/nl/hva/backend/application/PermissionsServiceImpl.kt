@@ -84,5 +84,9 @@ class PermissionsServiceImpl : PermissionService {
         this.permissionsRepository.createPermissionLinkNote(NoteCareProviderRelation (careProviderId, noteId, validDate))
     }
 
+    override fun removeExpiredNotePermissions(currentDay: LocalDate) {
+        this.permissionsRepository.removeExpiredNotePermissions(currentDay)
+    }
+
 
 }

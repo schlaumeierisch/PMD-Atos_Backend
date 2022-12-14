@@ -35,5 +35,6 @@ interface PermissionService {
 
     fun createPermissionLinkNote(noteId: NoteId, careProviderId: CareProviderId, validDate: LocalDate)
 
+    fun removeExpiredNotePermissions(currentDay: LocalDate)
 
 }

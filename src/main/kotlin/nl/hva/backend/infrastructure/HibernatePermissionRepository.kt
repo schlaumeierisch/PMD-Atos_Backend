@@ -91,4 +91,12 @@ class HibernatePermissionRepository : PermissionRepository {
         this.entityManager.persist(noteCareProviderRelation)
     }
 
+    override fun removeExpiredNotePermissions(currentDay: LocalDate) {
+        val query: Query = this.entityManager.createQuery(
+            "delete from NoteCareProviderRelation where validDate < ?1"
+        )
+            .setParameter(1, currentDay)
+        query.executeUpdate()
+    }
+
 }

@@ -34,5 +34,6 @@ interface PermissionRepository {
 
     fun createPermissionLinkNote(noteCareProviderRelation: NoteCareProviderRelation)
 
+    fun removeExpiredNotePermissions(currentDay: LocalDate)
 
 }
