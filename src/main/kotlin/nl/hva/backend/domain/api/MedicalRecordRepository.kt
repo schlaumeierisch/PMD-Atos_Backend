@@ -39,4 +39,6 @@ interface MedicalRecordRepository {
 
     fun createDiagnosis(diagnosis: Diagnosis)
 
+    fun deleteNote(noteId: NoteId)
+
 }

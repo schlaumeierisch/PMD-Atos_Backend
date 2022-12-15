@@ -141,4 +141,9 @@ class MedicalRecordServiceImpl : MedicalRecordService {
         this.medicalRecordRepository.createExercise(exercise)
     }
 
+    @Transactional
+    override fun deleteNote(noteId: NoteId) {
+        this.medicalRecordRepository.deleteNote(noteId)
+    }
+
 }

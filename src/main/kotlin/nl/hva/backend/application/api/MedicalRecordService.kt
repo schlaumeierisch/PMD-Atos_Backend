@@ -1,8 +1,13 @@
 package nl.hva.backend.application.api
 
-import nl.hva.backend.application.dto.*
+import nl.hva.backend.application.dto.ExerciseDTO
+import nl.hva.backend.application.dto.DiagnosisDTO
+import nl.hva.backend.application.dto.IntakeDTO
+import nl.hva.backend.application.dto.MedicationDTO
+import nl.hva.backend.application.dto.NoteDTO
 import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.MedicationId
+import nl.hva.backend.domain.ids.NoteId
 import nl.hva.backend.domain.value_objects.DiagnosisType
 import java.time.LocalDate
 
@@ -31,5 +36,7 @@ interface MedicalRecordService {
     fun getAllExercises(medicalRecordId: MedicalRecordId): List<ExerciseDTO>
 
     fun createExercise(title: String, description: String, startDate: LocalDate, endDate: LocalDate?, medicalRecordId: MedicalRecordId)
+
+    fun deleteNote(noteId: NoteId)
 
 }

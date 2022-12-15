@@ -4,6 +4,7 @@ import nl.hva.backend.application.api.MedicalRecordService
 import nl.hva.backend.application.dto.*
 import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.MedicationId
+import nl.hva.backend.domain.ids.NoteId
 import nl.hva.backend.domain.value_objects.DiagnosisType
 import nl.hva.backend.rest.exceptions.NotExistingException
 import org.springframework.beans.factory.annotation.Autowired
@@ -199,6 +200,12 @@ class MedicalRecordRestController {
         } else {
             throw NotExistingException("Medical record with id \'$medicalRecordId\' does not exist.")
         }
+    }
+    @DeleteMapping("/note/deleteNote")
+    fun deleteNote(
+        noteId: String
+    ){
+        this.medicalRecordService.deleteNote(NoteId(noteId))
     }
 
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository
 import java.util.*
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
+import javax.persistence.Query
 import javax.persistence.TypedQuery
 
 @Repository
@@ -81,6 +82,14 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
 
     override fun createDiagnosis(diagnosis: Diagnosis) {
         this.entityManager.persist(diagnosis)
+    }
+
+    override fun deleteNote(noteId: NoteId) {
+        val query: TypedQuery<Note> = this.entityManager.createQuery(
+            "SELECT no FROM Note no WHERE no.domainId = ?1", Note::class.java
+        )
+        val result: Note = query.setParameter(1, noteId).singleResult
+        this.entityManager.remove(result)
     }
 
     override fun getAllExercises(medicalRecordId: MedicalRecordId): List<Exercise> {
