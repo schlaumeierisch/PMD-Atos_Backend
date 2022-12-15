@@ -116,8 +116,16 @@ class MedicalRecordRestController {
     @ResponseBody
     fun getAllDiagnoses(
         @PathVariable("id") id: String
-    ): List<DiagnosisDTO> {
-        return this.medicalRecordService.getAllDiagnoses(MedicalRecordId(id))
+    ): ResponseEntity<List<DiagnosisDTO>> {
+        val medicalRecordDTO: List<MedicalRecordDTO> = this.medicalRecordService.getMedicalRecord(MedicalRecordId(id))
+
+        if (medicalRecordDTO.isNotEmpty()) {
+            val diagnosisDTOs: List<DiagnosisDTO> = this.medicalRecordService.getAllDiagnoses(MedicalRecordId(id))
+
+            return ResponseEntity.status(HttpStatus.OK).body(diagnosisDTOs)
+        } else {
+            throw NotExistingException("Medical record with id \'$id\' does not exist.")
+        }
     }
 
     @PostMapping("/diagnoses/createDiagnosis")
@@ -130,16 +138,24 @@ class MedicalRecordRestController {
         treatment: String,
         advice: String,
         medicalRecordId: String
-    ) {
-        this.medicalRecordService.createDiagnosis(
-            title,
-            DiagnosisType.valueOf(diagnosisType),
-            dateDiagnosed,
-            cause,
-            treatment,
-            advice,
-            MedicalRecordId(medicalRecordId)
-        )
+    ): ResponseEntity<String> {
+        val medicalRecordDTO: List<MedicalRecordDTO> = this.medicalRecordService.getMedicalRecord(MedicalRecordId(medicalRecordId))
+
+        if (medicalRecordDTO.isNotEmpty()) {
+            this.medicalRecordService.createDiagnosis(
+                title,
+                DiagnosisType.valueOf(diagnosisType.uppercase()),
+                dateDiagnosed,
+                cause,
+                treatment,
+                advice,
+                MedicalRecordId(medicalRecordId)
+            )
+
+            return ResponseEntity.status(HttpStatus.OK).body("New diagnosis for medical record with id \'$medicalRecordId\' successfully created.")
+        } else {
+            throw NotExistingException("Medical record with id \'$medicalRecordId\' does not exist.")
+        }
     }
 
     @GetMapping("/exercises/getAllExercises/{id}")
