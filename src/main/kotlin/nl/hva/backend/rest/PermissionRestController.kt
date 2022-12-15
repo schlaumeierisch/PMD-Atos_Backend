@@ -1,6 +1,5 @@
 package nl.hva.backend.rest
 
-import nl.hva.backend.application.api.MedicalRecordService
 import nl.hva.backend.application.api.PermissionService
 import nl.hva.backend.application.dto.DiagnosisDTO
 import nl.hva.backend.application.dto.ExerciseDTO
@@ -10,7 +9,6 @@ import nl.hva.backend.application.dto.many_to_many.DiagnosisCareProviderDTO
 import nl.hva.backend.application.dto.many_to_many.ExerciseCareProviderDTO
 import nl.hva.backend.application.dto.many_to_many.MedicationCareProviderDTO
 import nl.hva.backend.application.dto.many_to_many.NoteCareProviderDTO
-import nl.hva.backend.domain.Exercise
 import nl.hva.backend.domain.ids.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDate
-import javax.validation.constraints.Null
 
 @RestController
 @RequestMapping("/rest/permissions")
@@ -78,7 +75,22 @@ class PermissionRestController {
         careProviderId: String,
         validDate: String
     ) {
-        this.permissionService.createPermissionLinkMedication(MedicationId(medicationId), CareProviderId(careProviderId), LocalDate.parse(validDate))
+        this.permissionService.createPermissionLinkMedication(
+            MedicationId(medicationId),
+            CareProviderId(careProviderId),
+            LocalDate.parse(validDate)
+        )
+    }
+
+    @DeleteMapping("/removeMedicationPermission")
+    fun deleteNotePermission(
+        medicationId: String,
+        careProviderId: String
+    ) {
+        this.permissionService.removeSelectedMedicationPermission(
+            MedicationId(medicationId),
+            CareProviderId(careProviderId)
+        )
     }
 
 
@@ -117,7 +129,11 @@ class PermissionRestController {
         careProviderId: String,
         validDate: String
     ) {
-        this.permissionService.createPermissionLinkNote(NoteId(noteId), CareProviderId(careProviderId), LocalDate.parse(validDate))
+        this.permissionService.createPermissionLinkNote(
+            NoteId(noteId),
+            CareProviderId(careProviderId),
+            LocalDate.parse(validDate)
+        )
     }
 
     /**
@@ -156,7 +172,11 @@ class PermissionRestController {
         careProviderId: String,
         validDate: String
     ) {
-        this.permissionService.createPermissionLinkNote(NoteId(noteId), CareProviderId(careProviderId), LocalDate.parse(validDate))
+        this.permissionService.createPermissionLinkNote(
+            NoteId(noteId),
+            CareProviderId(careProviderId),
+            LocalDate.parse(validDate)
+        )
     }
 
     /**
@@ -195,6 +215,10 @@ class PermissionRestController {
         careProviderId: String,
         validDate: String
     ) {
-        this.permissionService.createExerciseLinkDiagnosis(ExerciseId(exerId), CareProviderId(careProviderId), LocalDate.parse(validDate))
+        this.permissionService.createExerciseLinkDiagnosis(
+            ExerciseId(exerId),
+            CareProviderId(careProviderId),
+            LocalDate.parse(validDate)
+        )
     }
 }

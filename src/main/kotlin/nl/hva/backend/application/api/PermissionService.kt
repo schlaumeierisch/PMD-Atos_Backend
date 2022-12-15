@@ -9,7 +9,6 @@ import nl.hva.backend.application.dto.many_to_many.ExerciseCareProviderDTO
 import nl.hva.backend.application.dto.many_to_many.MedicationCareProviderDTO
 import nl.hva.backend.application.dto.many_to_many.NoteCareProviderDTO
 import nl.hva.backend.domain.ids.*
-import nl.hva.backend.domain.many_to_many.MedicationCareProviderRelation
 import java.time.LocalDate
 
 interface PermissionService {
@@ -26,6 +25,8 @@ interface PermissionService {
 
     fun removeExpiredMedicationPermissions(currentDay: LocalDate)
 
+    fun removeSelectedMedicationPermission(medicationId: MedicationId, careProviderId: CareProviderId)
+
     /**
      ********************************** Notes **********************************
      */
@@ -37,6 +38,8 @@ interface PermissionService {
     fun createPermissionLinkNote(noteId: NoteId, careProviderId: CareProviderId, validDate: LocalDate)
 
     fun removeExpiredNotePermissions(currentDay: LocalDate)
+
+    fun removeSelectedNotePermission(noteId: NoteId)
 
     /**
      ********************************** Diagnosis **********************************
@@ -50,6 +53,8 @@ interface PermissionService {
 
     fun removeExpiredDiagnosisPermissions(currentDay: LocalDate)
 
+    fun removeSelectedDiagnosisPermission(diagnosisId: DiagnosisId)
+
     /**
      ********************************** Exercise **********************************
      */
@@ -61,5 +66,7 @@ interface PermissionService {
     fun createExerciseLinkDiagnosis(exerciseId: ExerciseId, careProviderId: CareProviderId, validDate: LocalDate)
 
     fun removeExpiredExercisePermissions(currentDay: LocalDate)
+
+    fun removeSelectedExercisePermission(exerciseId: ExerciseId)
 
 }

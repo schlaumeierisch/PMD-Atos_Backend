@@ -58,12 +58,23 @@ class PermissionsServiceImpl : PermissionService {
         careProviderId: CareProviderId,
         validDate: LocalDate
     ) {
-        this.permissionsRepository.createPermissionLinkMedication(MedicationCareProviderRelation (careProviderId, medicationId, validDate))
+        this.permissionsRepository.createPermissionLinkMedication(
+            MedicationCareProviderRelation(
+                careProviderId,
+                medicationId,
+                validDate
+            )
+        )
     }
 
     @Transactional
     override fun removeExpiredMedicationPermissions(currentDay: LocalDate) {
         this.permissionsRepository.removeExpiredMedicationPermissions(currentDay)
+    }
+
+    @Transactional
+    override fun removeSelectedMedicationPermission(medicationId: MedicationId, careProviderId: CareProviderId) {
+        this.permissionsRepository.removeSelectedMedicationPermission(medicationId, careProviderId)
     }
 
     /**
@@ -84,15 +95,21 @@ class PermissionsServiceImpl : PermissionService {
 
         return NoteDTO.fromNote(note)
     }
+
     @Transactional
     override fun createPermissionLinkNote(noteId: NoteId, careProviderId: CareProviderId, validDate: LocalDate) {
-        this.permissionsRepository.createPermissionLinkNote(NoteCareProviderRelation (careProviderId, noteId, validDate))
+        this.permissionsRepository.createPermissionLinkNote(NoteCareProviderRelation(careProviderId, noteId, validDate))
     }
+
     @Transactional
     override fun removeExpiredNotePermissions(currentDay: LocalDate) {
         this.permissionsRepository.removeExpiredNotePermissions(currentDay)
     }
 
+    @Transactional
+    override fun removeSelectedNotePermission(noteId: NoteId) {
+        TODO("Not yet implemented")
+    }
 
     /**
      ********************************** Diagnosis **********************************
@@ -103,6 +120,7 @@ class PermissionsServiceImpl : PermissionService {
             this.permissionsRepository.getDiagnosisCareProviderRelationById(careProviderId)
         return DiagnosisCareProviderDTO.fromDiagnosisCareProviderRelations(diagnosisCareProviderRelations)
     }
+
     @Transactional
     override fun getDiagnosisByIdAndMr(diagnosisId: DiagnosisId, medicalRecordId: MedicalRecordId): DiagnosisDTO {
         val diagnosis: Diagnosis =
@@ -110,17 +128,30 @@ class PermissionsServiceImpl : PermissionService {
 
         return DiagnosisDTO.fromDiagnosis(diagnosis)
     }
+
     @Transactional
     override fun createPermissionLinkDiagnosis(
         diagnosisId: DiagnosisId,
         careProviderId: CareProviderId,
         validDate: LocalDate
     ) {
-        this.permissionsRepository.createPermissionLinkDiagnosis(DiagnosisCareProviderRelation(careProviderId, diagnosisId, validDate))
+        this.permissionsRepository.createPermissionLinkDiagnosis(
+            DiagnosisCareProviderRelation(
+                careProviderId,
+                diagnosisId,
+                validDate
+            )
+        )
     }
+
     @Transactional
     override fun removeExpiredDiagnosisPermissions(currentDay: LocalDate) {
         this.permissionsRepository.removeExpiredDiagnosisPermissions(currentDay)
+    }
+
+    @Transactional
+    override fun removeSelectedDiagnosisPermission(diagnosisId: DiagnosisId) {
+        TODO("Not yet implemented")
     }
 
     /**
@@ -132,6 +163,7 @@ class PermissionsServiceImpl : PermissionService {
             this.permissionsRepository.getExerciseCareProviderRelationById(careProviderId)
         return ExerciseCareProviderDTO.fromExerciseCareProviderRelations(exerciseCareProviderRelations)
     }
+
     @Transactional
     override fun getExerciseByIdAndMr(exerciseId: ExerciseId, medicalRecordId: MedicalRecordId): ExerciseDTO {
         val exercise: Exercise =
@@ -139,17 +171,29 @@ class PermissionsServiceImpl : PermissionService {
 
         return ExerciseDTO.fromExercise(exercise)
     }
+
     @Transactional
     override fun createExerciseLinkDiagnosis(
         exerciseId: ExerciseId,
         careProviderId: CareProviderId,
         validDate: LocalDate
     ) {
-        this.permissionsRepository.createPermissionLinkExercise(ExerciseCareProviderRelation(careProviderId, exerciseId, validDate))
+        this.permissionsRepository.createPermissionLinkExercise(
+            ExerciseCareProviderRelation(
+                careProviderId,
+                exerciseId,
+                validDate
+            )
+        )
     }
+
     @Transactional
     override fun removeExpiredExercisePermissions(currentDay: LocalDate) {
         this.permissionsRepository.removeExpiredExercisePermissions(currentDay)
     }
 
+    @Transactional
+    override fun removeSelectedExercisePermission(exerciseId: ExerciseId) {
+        TODO("Not yet implemented")
+    }
 }

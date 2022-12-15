@@ -64,6 +64,15 @@ class HibernatePermissionRepository : PermissionRepository {
         query.executeUpdate()
     }
 
+    override fun removeSelectedMedicationPermission(medicationId: MedicationId, careProviderId: CareProviderId) {
+        val query: Query = this.entityManager.createQuery(
+            "delete from MedicationCareProviderRelation where medicationId = ?1 and cpDomainId = ?2"
+        )
+            .setParameter(1, medicationId)
+            .setParameter(2, careProviderId)
+        query.executeUpdate()
+    }
+
     /**
      ********************************** Notes **********************************
      */
@@ -100,6 +109,9 @@ class HibernatePermissionRepository : PermissionRepository {
         query.executeUpdate()
     }
 
+    override fun removeSelectedNotePermission(noteId: NoteId) {
+        TODO("Not yet implemented")
+    }
 
     /**
      ********************************** Diagnosis **********************************
@@ -137,6 +149,10 @@ class HibernatePermissionRepository : PermissionRepository {
         query.executeUpdate()
     }
 
+    override fun removeSelectedDiagnosisPermission(diagnosisId: DiagnosisId) {
+        TODO("Not yet implemented")
+    }
+
     /**
      ********************************** Exercise **********************************
      */
@@ -171,5 +187,9 @@ class HibernatePermissionRepository : PermissionRepository {
         )
             .setParameter(1, currentDay)
         query.executeUpdate()
+    }
+
+    override fun removeSelectedExercisePermission(exerciseId: ExerciseId) {
+        TODO("Not yet implemented")
     }
 }

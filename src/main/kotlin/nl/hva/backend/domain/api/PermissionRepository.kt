@@ -27,6 +27,9 @@ interface PermissionRepository {
 
     fun removeExpiredMedicationPermissions(currentDay: LocalDate)
 
+    fun removeSelectedMedicationPermission(medicationId: MedicationId, careProviderId: CareProviderId)
+
+
     /**
      ********************************** Notes **********************************
      */
@@ -38,6 +41,8 @@ interface PermissionRepository {
     fun createPermissionLinkNote(noteCareProviderRelation: NoteCareProviderRelation)
 
     fun removeExpiredNotePermissions(currentDay: LocalDate)
+
+    fun removeSelectedNotePermission(noteId: NoteId)
 
     /**
      ********************************** Diagnosis **********************************
@@ -51,6 +56,8 @@ interface PermissionRepository {
 
     fun removeExpiredDiagnosisPermissions(currentDay: LocalDate)
 
+    fun removeSelectedDiagnosisPermission(diagnosisId: DiagnosisId)
+
     /**
      ********************************** Exercise **********************************
      */
@@ -61,5 +68,8 @@ interface PermissionRepository {
     fun createPermissionLinkExercise(exerciseCareProviderRelation: ExerciseCareProviderRelation)
 
     fun removeExpiredExercisePermissions(currentDay: LocalDate)
+
+    fun removeSelectedExercisePermission(exerciseId: ExerciseId)
+
 
 }
