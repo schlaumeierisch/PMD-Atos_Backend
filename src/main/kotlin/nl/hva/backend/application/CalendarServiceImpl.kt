@@ -28,14 +28,13 @@ class CalendarServiceImpl : CalendarService {
         cpId: String?
     ) {
         val appointmentId: AppointmentId = this.calendarRepository.nextIdentity()
-        var generalPractitionerId = GeneralPractitionerId("")
-        var careProviderId = CareProviderId("")
 
-        if (gpId != null && cpId == null) {
+        var generalPractitionerId: GeneralPractitionerId? = null
+        var careProviderId: CareProviderId? = null
+
+        if (!gpId.isNullOrBlank()) {
             generalPractitionerId = GeneralPractitionerId(gpId)
-            careProviderId = CareProviderId("")
-        } else if (gpId == null && cpId != null) {
-            generalPractitionerId = GeneralPractitionerId("")
+        } else if (!cpId.isNullOrBlank()) {
             careProviderId = CareProviderId(cpId)
         }
 
