@@ -31,7 +31,7 @@
         <property name="birthDate" column="birth_date" type="java.time.LocalDate"/>
         <property name="phoneNumber" column="phone_number" type="string"/>
         <property name="email" column="email" type="string"/>
-        <property name="isUsingApp" column="is_using_app" type="boolean"/>
+        <property name="usingApp" column="using_app" type="boolean"/>
 
         <!-- one-to-one -->
         <component name="medicalRecordDomainId" class="nl.hva.backend.domain.ids.MedicalRecordId">

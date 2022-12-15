@@ -18,7 +18,7 @@ open class Patient {
     private lateinit var birthDate: LocalDate
     private lateinit var phoneNumber: String
     private lateinit var email: String
-    private var isUsingApp: Boolean = false
+    private var usingApp: Boolean = false
 
     // one-to-one
     private var medicalRecordDomainId: MedicalRecordId = MedicalRecordId("")
@@ -38,7 +38,7 @@ open class Patient {
         birthDate: LocalDate,
         phoneNumber: String,
         email: String,
-        isUsingApp: Boolean,
+        usingApp: Boolean,
         medicalRecordDomainId: MedicalRecordId,
         gpDomainId: GeneralPractitionerId
     ) {
@@ -50,7 +50,7 @@ open class Patient {
         this.birthDate = birthDate
         this.phoneNumber = phoneNumber
         this.email = email
-        this.isUsingApp = isUsingApp
+        this.usingApp = usingApp
         this.medicalRecordDomainId = medicalRecordDomainId
         this.gpDomainId = gpDomainId
     }
@@ -65,7 +65,7 @@ open class Patient {
     fun birthDate(): LocalDate = this.birthDate
     fun phoneNumber(): String = this.phoneNumber
     fun email(): String = this.email
-    fun isUsingApp(): Boolean = this.isUsingApp
+    fun usingApp(): Boolean = this.usingApp
     fun medicalRecordDomainId(): MedicalRecordId = this.medicalRecordDomainId
     fun gpDomainId(): GeneralPractitionerId = this.gpDomainId
 }

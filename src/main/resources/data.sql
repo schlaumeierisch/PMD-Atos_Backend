@@ -13,7 +13,7 @@ values (001, 'dom-id-cp-001', 'Stijn', 'Boers', 'De Prunus 101', '7701WR', 'Dede
        (003, 'dom-id-cp-003', 'Margriet', 'Ranervelt', 'Laan van Meerdervoort 192', '2555BL', 'Den Haag', 'Netherlands', '0688177729', 'APOTHECARY');
 
 -- patient
-insert into patient (id, patient_id, first_name, last_name, street, zip, city, country, gender, birth_date, phone_number, email, is_using_app, medical_record_id, general_practitioner_id)
+insert into patient (id, patient_id, first_name, last_name, street, zip, city, country, gender, birth_date, phone_number, email, using_app, medical_record_id, general_practitioner_id)
 values (001, 'dom-id-pa-001', 'Lotje', 'Oldhof', 'Johan Frisoplantsoen 184', '2751XR', 'Moerkapelle', 'Netherlands', 'FEMALE', '1978-11-28', '0636038499', 'odin88@packiu.com', true, 'dom-id-mr-001', 'dom-id-gp-001'),
        (002, 'dom-id-pa-002', 'Loes', 'Sens', 'Dorperhofweg 5', '8161PD', 'Epe', 'Netherlands', 'FEMALE', '1995-02-14', '0676549954', 'family777@mercantravellers.com', true, 'dom-id-mr-002', 'dom-id-gp-001'),
        (003, 'dom-id-pa-003', 'Noud', 'Vrisau', 'Vlielandlaan 138', '6922EG', 'Duiven', 'Netherlands', 'MALE', '1984-05-25', '0692663244', 'sicego@hobbylegal.com', true, 'dom-id-mr-003', 'dom-id-gp-002'),
