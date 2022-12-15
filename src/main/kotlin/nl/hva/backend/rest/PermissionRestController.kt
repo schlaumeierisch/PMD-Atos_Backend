@@ -11,13 +11,10 @@ import nl.hva.backend.application.dto.many_to_many.MedicationCareProviderDTO
 import nl.hva.backend.application.dto.many_to_many.NoteCareProviderDTO
 import nl.hva.backend.domain.ids.*
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.ResponseBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.format.annotation.DateTimeFormat
+import org.springframework.web.bind.annotation.*
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 @RestController
 @RequestMapping("/rest/permissions")
@@ -32,12 +29,13 @@ class PermissionRestController {
 
     @DeleteMapping("/removeExpiredPermissions")
     fun removeExpiredPermissions(
-        currentDay: String
+        @RequestParam("currentDay")
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) currentDay: LocalDate,
     ) {
-        this.permissionService.removeExpiredMedicationPermissions(LocalDate.parse(currentDay))
-        this.permissionService.removeExpiredNotePermissions(LocalDate.parse(currentDay))
-        this.permissionService.removeExpiredDiagnosisPermissions(LocalDate.parse(currentDay))
-        this.permissionService.removeExpiredExercisePermissions(LocalDate.parse(currentDay))
+        this.permissionService.removeExpiredMedicationPermissions(currentDay)
+        this.permissionService.removeExpiredNotePermissions(currentDay)
+        this.permissionService.removeExpiredDiagnosisPermissions(currentDay)
+        this.permissionService.removeExpiredExercisePermissions(currentDay)
     }
 
 
@@ -73,12 +71,13 @@ class PermissionRestController {
     fun createMedicationCareProviderLink(
         medicationId: String,
         careProviderId: String,
-        validDate: String
+        @RequestParam("validDate")
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) validDate: LocalDate
     ) {
         this.permissionService.createPermissionLinkMedication(
             MedicationId(medicationId),
             CareProviderId(careProviderId),
-            LocalDate.parse(validDate)
+            validDate
         )
     }
 
@@ -127,12 +126,13 @@ class PermissionRestController {
     fun createNoteCareProviderLink(
         noteId: String,
         careProviderId: String,
-        validDate: String
+        @RequestParam("validDate")
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) validDate: LocalDate
     ) {
         this.permissionService.createPermissionLinkNote(
             NoteId(noteId),
             CareProviderId(careProviderId),
-            LocalDate.parse(validDate)
+            validDate
         )
     }
 
@@ -181,12 +181,13 @@ class PermissionRestController {
     fun createDiagnosisCareProviderLink(
         noteId: String,
         careProviderId: String,
-        validDate: String
+        @RequestParam("validDate")
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) validDate: LocalDate
     ) {
         this.permissionService.createPermissionLinkNote(
             NoteId(noteId),
             CareProviderId(careProviderId),
-            LocalDate.parse(validDate)
+            validDate
         )
     }
 
@@ -235,12 +236,13 @@ class PermissionRestController {
     fun createExerciseCareProviderLink(
         exerciseId: String,
         careProviderId: String,
-        validDate: String
+        @RequestParam("validDate")
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) validDate: LocalDate
     ) {
         this.permissionService.createExerciseLinkDiagnosis(
             ExerciseId(exerciseId),
             CareProviderId(careProviderId),
-            LocalDate.parse(validDate)
+            validDate
         )
     }
     @DeleteMapping("/removeExercisePermission")
