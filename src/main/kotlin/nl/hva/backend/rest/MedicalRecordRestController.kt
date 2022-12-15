@@ -5,8 +5,11 @@ import nl.hva.backend.application.dto.*
 import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.MedicationId
 import nl.hva.backend.domain.value_objects.DiagnosisType
+import nl.hva.backend.rest.exceptions.NotExistingException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.format.annotation.DateTimeFormat
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDate
 
@@ -21,8 +24,16 @@ class MedicalRecordRestController {
     @ResponseBody
     fun getAllNotes(
         @PathVariable("id") id: String
-    ): List<NoteDTO> {
-        return this.medicalRecordService.getAllNotes(MedicalRecordId(id))
+    ): ResponseEntity<List<NoteDTO>> {
+        val medicalRecordDTO: List<MedicalRecordDTO> = this.medicalRecordService.getMedicalRecord(MedicalRecordId(id))
+
+        if (medicalRecordDTO.isNotEmpty()) {
+            val noteDTOs: List<NoteDTO> = this.medicalRecordService.getAllNotes(MedicalRecordId(id))
+
+            return ResponseEntity.status(HttpStatus.OK).body(noteDTOs)
+        } else {
+            throw NotExistingException("Medical record with id \'$id\' does not exist.")
+        }
     }
 
     @PostMapping("/notes/createNote")
@@ -30,8 +41,16 @@ class MedicalRecordRestController {
         title: String,
         description: String,
         medicalRecordId: String
-    ) {
-        this.medicalRecordService.createNote(title, description, MedicalRecordId(medicalRecordId))
+    ): ResponseEntity<String> {
+        val medicalRecordDTO: List<MedicalRecordDTO> = this.medicalRecordService.getMedicalRecord(MedicalRecordId(medicalRecordId))
+
+        if (medicalRecordDTO.isNotEmpty()) {
+            this.medicalRecordService.createNote(title, description, MedicalRecordId(medicalRecordId))
+
+            return ResponseEntity.status(HttpStatus.OK).body("New node for medical record with id \'$medicalRecordId\' successfully created.")
+        } else {
+            throw NotExistingException("Medical record with id \'$medicalRecordId\' does not exist.")
+        }
     }
 
     @GetMapping("/medication/getAllMedication/{id}")

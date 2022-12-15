@@ -10,6 +10,8 @@ interface MedicalRecordService {
 
     fun createMedicalRecord(): MedicalRecordId
 
+    fun getMedicalRecord(medicalRecordId: MedicalRecordId): List<MedicalRecordDTO>
+
     fun getAllNotes(medicalRecordId: MedicalRecordId): List<NoteDTO>
 
     fun createNote(title: String, description: String, medicalRecordId: MedicalRecordId)

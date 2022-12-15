@@ -29,6 +29,17 @@ class MedicalRecordServiceImpl : MedicalRecordService {
     }
 
     @Transactional
+    override fun getMedicalRecord(medicalRecordId: MedicalRecordId): List<MedicalRecordDTO> {
+        val medicalRecord: List<MedicalRecord> = this.medicalRecordRepository.getMedicalRecord(medicalRecordId)
+
+        return if (medicalRecord.isNotEmpty()) {
+            listOf(MedicalRecordDTO.fromMedicalRecord(medicalRecord[0]))
+        } else {
+            emptyList()
+        }
+    }
+
+    @Transactional
     override fun getAllNotes(medicalRecordId: MedicalRecordId): List<NoteDTO> {
         val notes: List<Note> = this.medicalRecordRepository.getAllNotes(medicalRecordId)
 
