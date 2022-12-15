@@ -19,8 +19,10 @@ class GeneralPractitionerRestController {
 
     @GetMapping("/getAll")
     @ResponseBody
-    fun getAllAccounts(): List<GeneralPractitionerDTO> {
-        return this.generalPractitionerService.getAllAccounts()
+    fun getAllAccounts(): ResponseEntity<List<GeneralPractitionerDTO>> {
+        val generalPractitionerDTOs: List<GeneralPractitionerDTO> = this.generalPractitionerService.getAllAccounts()
+
+        return ResponseEntity.status(HttpStatus.OK).body(generalPractitionerDTOs)
     }
 
     @GetMapping("/getById/{id}")
@@ -41,8 +43,18 @@ class GeneralPractitionerRestController {
     @ResponseBody
     fun getPatientsOfGeneralPractitioner(
         @PathVariable("id") id: String
-    ): List<PatientDTO> {
-        return this.generalPractitionerService.getPatientsOfGeneralPractitionerById(GeneralPractitionerId(id))
+    ): ResponseEntity<List<PatientDTO>> {
+        val generalPractitionerDTO: List<GeneralPractitionerDTO> = this.generalPractitionerService.getAccountById(GeneralPractitionerId(id))
+
+        if (generalPractitionerDTO.isNotEmpty()) {
+            val patientDTOs: List<PatientDTO> = this.generalPractitionerService.getPatientsOfGeneralPractitionerById(
+                GeneralPractitionerId(id)
+            )
+
+            return ResponseEntity.status(HttpStatus.OK).body(patientDTOs)
+        } else {
+            throw NotExistingException("General practitioner with id '$id' does not exist.")
+        }
     }
 
 }

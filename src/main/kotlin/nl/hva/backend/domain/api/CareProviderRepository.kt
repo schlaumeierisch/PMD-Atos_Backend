@@ -24,7 +24,7 @@ interface CareProviderRepository {
 
     fun deleteAccount(careProviderId: CareProviderId)
 
-    fun getAccountById(careProviderId: CareProviderId): CareProvider
+    fun getAccountById(careProviderId: CareProviderId): List<CareProvider>
 
     fun getAllAccounts(): List<CareProvider>
 

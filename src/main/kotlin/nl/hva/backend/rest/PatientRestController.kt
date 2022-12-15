@@ -56,9 +56,15 @@ class PatientRestController {
 
             val careProviderDTOs: ArrayList<CareProviderDTO> = arrayListOf()
             for (patientCareProviderDTO in patientCareProviderDTOs) {
-                careProviderDTOs.add(
-                    this.careProviderService.getAccountById(CareProviderId(patientCareProviderDTO.cpId()))
-                )
+                val careProviderDTO: List<CareProviderDTO> = this.careProviderService.getAccountById(CareProviderId(patientCareProviderDTO.cpId()))
+
+                if (careProviderDTO.isNotEmpty()) {
+                    careProviderDTOs.add(
+                        this.careProviderService.getAccountById(CareProviderId(patientCareProviderDTO.cpId()))[0]
+                    )
+                } else {
+                    throw NotExistingException("Linked care provider with id \'${patientCareProviderDTO.cpId()}\' does not exist.")
+                }
             }
 
             return ResponseEntity.status(HttpStatus.OK).body(careProviderDTOs)

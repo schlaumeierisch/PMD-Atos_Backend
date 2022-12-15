@@ -73,10 +73,14 @@ class CareProviderServiceImpl : CareProviderService {
     }
 
     @Transactional
-    override fun getAccountById(careProviderId: CareProviderId): CareProviderDTO {
-        val careProvider: CareProvider = this.careProviderRepository.getAccountById(careProviderId)
+    override fun getAccountById(careProviderId: CareProviderId): List<CareProviderDTO> {
+        val careProvider: List<CareProvider> = this.careProviderRepository.getAccountById(careProviderId)
 
-        return CareProviderDTO.fromCareProvider(careProvider)
+        return if (careProvider.isNotEmpty()) {
+            listOf(CareProviderDTO.fromCareProvider(careProvider[0]))
+        } else {
+            emptyList()
+        }
     }
 
     @Transactional
