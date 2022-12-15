@@ -8,6 +8,7 @@ import nl.hva.backend.application.dto.MedicationDTO
 import nl.hva.backend.application.dto.NoteDTO
 import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.MedicationId
+import nl.hva.backend.domain.ids.NoteId
 import nl.hva.backend.domain.value_objects.DiagnosisType
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.format.annotation.DateTimeFormat
@@ -46,6 +47,25 @@ class MedicalRecordRestController {
         return this.medicalRecordService.getAllMedication(MedicalRecordId(id))
     }
 
+    @PostMapping("/medication/createMedication")
+    fun createMedication(
+        title: String,
+        description: String,
+        @RequestParam("startDate")
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) startDate: LocalDate,
+        @RequestParam("endDate", required = false)
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) endDate: LocalDate? = null,
+        medicalRecordId: String
+    ) {
+        this.medicalRecordService.createMedication(
+            title,
+            description,
+            startDate,
+            endDate,
+            MedicalRecordId(medicalRecordId)
+        )
+    }
+
     @GetMapping("/medication/getIntakeByMedicationId/{id}")
     @ResponseBody
     fun getIntakeByMedicationId(
@@ -73,7 +93,15 @@ class MedicalRecordRestController {
         advice: String,
         medicalRecordId: String
     ) {
-        this.medicalRecordService.createDiagnosis(title, DiagnosisType.valueOf(diagnosisType), dateDiagnosed, cause, treatment, advice, MedicalRecordId(medicalRecordId))
+        this.medicalRecordService.createDiagnosis(
+            title,
+            DiagnosisType.valueOf(diagnosisType),
+            dateDiagnosed,
+            cause,
+            treatment,
+            advice,
+            MedicalRecordId(medicalRecordId)
+        )
     }
 
     @GetMapping("/exercises/getAllExercises/{id}")
@@ -82,6 +110,31 @@ class MedicalRecordRestController {
         @PathVariable("id") id: String
     ): List<ExerciseDTO> {
         return this.medicalRecordService.getAllExercises(MedicalRecordId(id))
+    }
+
+    @PostMapping("/exercises/createExercise")
+    fun createExercise(
+        title: String,
+        description: String,
+        @RequestParam("startDate")
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) startDate: LocalDate,
+        @RequestParam("endDate", required = false)
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) endDate: LocalDate? = null,
+        medicalRecordId: String
+    ) {
+        this.medicalRecordService.createExercise(
+            title,
+            description,
+            startDate,
+            endDate,
+            MedicalRecordId(medicalRecordId)
+        )
+    }
+    @DeleteMapping("/note/deleteNote")
+    fun deleteNote(
+        noteId: String
+    ){
+        this.medicalRecordService.deleteNote(NoteId(noteId))
     }
 
 }

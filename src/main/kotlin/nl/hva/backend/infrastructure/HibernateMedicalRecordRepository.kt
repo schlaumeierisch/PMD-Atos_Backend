@@ -2,14 +2,12 @@ package nl.hva.backend.infrastructure
 
 import nl.hva.backend.domain.*
 import nl.hva.backend.domain.api.MedicalRecordRepository
-import nl.hva.backend.domain.ids.DiagnosisId
-import nl.hva.backend.domain.ids.MedicalRecordId
-import nl.hva.backend.domain.ids.MedicationId
-import nl.hva.backend.domain.ids.NoteId
+import nl.hva.backend.domain.ids.*
 import org.springframework.stereotype.Repository
 import java.util.*
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
+import javax.persistence.Query
 import javax.persistence.TypedQuery
 
 @Repository
@@ -23,6 +21,10 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
     override fun nextNoteIdentity(): NoteId = NoteId(UUID.randomUUID().toString())
 
     override fun nextDiagnosisIdentity(): DiagnosisId = DiagnosisId(UUID.randomUUID().toString())
+
+    override fun nextMedicationIdentity(): MedicationId = MedicationId(UUID.randomUUID().toString())
+
+    override fun nextExerciseIdentity(): ExerciseId = ExerciseId(UUID.randomUUID().toString())
 
     override fun createMedicalRecord(medicalRecord: MedicalRecord) {
         this.entityManager.persist(medicalRecord)
@@ -46,6 +48,10 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
         return query.setParameter(1, medicalRecordId).resultList
     }
 
+    override fun createMedication(medication: Medication) {
+        this.entityManager.persist(medication)
+    }
+
     override fun getIntakeByMedicationId(medicationId: MedicationId): List<Intake> {
         val query: TypedQuery<Intake> = this.entityManager.createQuery(
             "SELECT itk FROM Intake itk WHERE itk.medicationDomainId = ?1", Intake::class.java
@@ -64,11 +70,23 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
         this.entityManager.persist(diagnosis)
     }
 
+    override fun deleteNote(noteId: NoteId) {
+        val query: TypedQuery<Note> = this.entityManager.createQuery(
+            "SELECT no FROM Note no WHERE no.domainId = ?1", Note::class.java
+        )
+        val result: Note = query.setParameter(1, noteId).singleResult
+        this.entityManager.remove(result)
+    }
+
     override fun getAllExercises(medicalRecordId: MedicalRecordId): List<Exercise> {
         val query: TypedQuery<Exercise> = this.entityManager.createQuery(
             "SELECT exerc FROM Exercise exerc WHERE exerc.medicalRecordDomainId = ?1", Exercise::class.java
         )
         return query.setParameter(1, medicalRecordId).resultList
+    }
+
+    override fun createExercise(exercise: Exercise) {
+        this.entityManager.persist(exercise)
     }
 
 }
