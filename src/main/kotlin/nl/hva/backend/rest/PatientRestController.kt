@@ -24,8 +24,10 @@ class PatientRestController {
     private lateinit var careProviderService: CareProviderService
 
     @GetMapping("/getAll")
-    fun getAll(): List<PatientDTO> {
-        return this.patientService.getAllAccounts()
+    fun getAll(): ResponseEntity<List<PatientDTO>> {
+        val patientDTOs: List<PatientDTO> = this.patientService.getAllAccounts()
+
+        return ResponseEntity.status(HttpStatus.OK).body(patientDTOs)
     }
 
     @GetMapping("/getById/{id}")
@@ -46,18 +48,23 @@ class PatientRestController {
     @ResponseBody
     fun getCareProvidersOfPatientById(
         @PathVariable("id") id: String
-    ): List<CareProviderDTO> {
-        val patientCareProviderDTOs: List<PatientCareProviderDTO> =
-            this.patientService.getPatientCareProviderRelationsByPatientId(PatientId(id))
+    ): ResponseEntity<List<CareProviderDTO>> {
+        val patientDTO: List<PatientDTO> = this.patientService.getAccountById(PatientId(id))
 
-        val careProviderDTOs: ArrayList<CareProviderDTO> = arrayListOf()
-        for (patientCareProviderDTO in patientCareProviderDTOs) {
-            careProviderDTOs.add(
-                this.careProviderService.getAccountById(CareProviderId(patientCareProviderDTO.cpId()))
-            )
+        if (patientDTO.isNotEmpty()) {
+            val patientCareProviderDTOs: List<PatientCareProviderDTO> = this.patientService.getPatientCareProviderRelationsByPatientId(PatientId(id))
+
+            val careProviderDTOs: ArrayList<CareProviderDTO> = arrayListOf()
+            for (patientCareProviderDTO in patientCareProviderDTOs) {
+                careProviderDTOs.add(
+                    this.careProviderService.getAccountById(CareProviderId(patientCareProviderDTO.cpId()))
+                )
+            }
+
+            return ResponseEntity.status(HttpStatus.OK).body(careProviderDTOs)
+        } else {
+            throw NotExistingException("Patient with id \'$id\' does not exist.")
         }
-
-        return careProviderDTOs
     }
 
 }
