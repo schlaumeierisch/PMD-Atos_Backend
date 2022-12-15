@@ -54,6 +54,13 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
         return query.setParameter(1, medicalRecordId).resultList
     }
 
+    override fun getMedicationById(medicationId: MedicationId): List<Medication> {
+        val query: TypedQuery<Medication> = this.entityManager.createQuery(
+            "SELECT med FROM Medication med WHERE med.domainId = ?1", Medication::class.java
+        )
+        return query.setParameter(1, medicationId).resultList
+    }
+
     override fun createMedication(medication: Medication) {
         this.entityManager.persist(medication)
     }

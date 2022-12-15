@@ -57,8 +57,16 @@ class MedicalRecordRestController {
     @ResponseBody
     fun getAllMedication(
         @PathVariable("id") id: String
-    ): List<MedicationDTO> {
-        return this.medicalRecordService.getAllMedication(MedicalRecordId(id))
+    ): ResponseEntity<List<MedicationDTO>> {
+        val medicalRecordDTO: List<MedicalRecordDTO> = this.medicalRecordService.getMedicalRecord(MedicalRecordId(id))
+
+        if (medicalRecordDTO.isNotEmpty()) {
+            val medicationDTOs: List<MedicationDTO> = this.medicalRecordService.getAllMedication(MedicalRecordId(id))
+
+            return ResponseEntity.status(HttpStatus.OK).body(medicationDTOs)
+        } else {
+            throw NotExistingException("Medical record with id \'$id\' does not exist.")
+        }
     }
 
     @PostMapping("/medication/createMedication")
@@ -70,22 +78,38 @@ class MedicalRecordRestController {
         @RequestParam("endDate", required = false)
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) endDate: LocalDate? = null,
         medicalRecordId: String
-    ) {
-        this.medicalRecordService.createMedication(
-            title,
-            description,
-            startDate,
-            endDate,
-            MedicalRecordId(medicalRecordId)
-        )
+    ): ResponseEntity<String> {
+        val medicalRecordDTO: List<MedicalRecordDTO> = this.medicalRecordService.getMedicalRecord(MedicalRecordId(medicalRecordId))
+
+        if (medicalRecordDTO.isNotEmpty()) {
+            this.medicalRecordService.createMedication(
+                title,
+                description,
+                startDate,
+                endDate,
+                MedicalRecordId(medicalRecordId)
+            )
+
+            return ResponseEntity.status(HttpStatus.OK).body("New medication for medical record with id \'$medicalRecordId\' successfully created.")
+        } else {
+            throw NotExistingException("Medical record with id \'$medicalRecordId\' does not exist.")
+        }
     }
 
     @GetMapping("/medication/getIntakeByMedicationId/{id}")
     @ResponseBody
     fun getIntakeByMedicationId(
         @PathVariable("id") id: String
-    ): List<IntakeDTO> {
-        return this.medicalRecordService.getIntakeByMedicationId(MedicationId(id))
+    ): ResponseEntity<List<IntakeDTO>> {
+        val medicationDTO: List<MedicationDTO> = this.medicalRecordService.getMedicationById(MedicationId(id))
+
+        if (medicationDTO.isNotEmpty()) {
+            val intakeDTOs: List<IntakeDTO> = this.medicalRecordService.getIntakeByMedicationId(MedicationId(id))
+
+            return ResponseEntity.status(HttpStatus.OK).body(intakeDTOs)
+        } else {
+            throw NotExistingException("Medication with id \'$id\' does not exist.")
+        }
     }
 
     @GetMapping("/diagnoses/getAllDiagnoses/{id}")

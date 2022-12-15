@@ -63,6 +63,17 @@ class MedicalRecordServiceImpl : MedicalRecordService {
     }
 
     @Transactional
+    override fun getMedicationById(medicationId: MedicationId): List<MedicationDTO> {
+        val medication: List<Medication> = this.medicalRecordRepository.getMedicationById(medicationId)
+
+        return if (medication.isNotEmpty()) {
+            listOf(MedicationDTO.fromMedication(medication[0]))
+        } else {
+            emptyList()
+        }
+    }
+
+    @Transactional
     override fun createMedication(
         title: String,
         description: String,

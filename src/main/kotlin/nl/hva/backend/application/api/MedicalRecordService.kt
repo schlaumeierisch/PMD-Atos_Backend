@@ -18,6 +18,8 @@ interface MedicalRecordService {
 
     fun getAllMedication(medicalRecordId: MedicalRecordId): List<MedicationDTO>
 
+    fun getMedicationById(medicationId: MedicationId): List<MedicationDTO>
+
     fun createMedication(title: String, description: String, startDate: LocalDate, endDate: LocalDate?, medicalRecordId: MedicalRecordId)
 
     fun getIntakeByMedicationId(medicationId: MedicationId): List<IntakeDTO>
