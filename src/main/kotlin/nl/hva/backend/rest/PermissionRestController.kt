@@ -13,7 +13,9 @@ import nl.hva.backend.application.dto.many_to_many.NoteCareProviderDTO
 import nl.hva.backend.domain.Exercise
 import nl.hva.backend.domain.ids.*
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
@@ -31,8 +33,7 @@ class PermissionRestController {
      ********************************** General **********************************
      */
 
-    @GetMapping("/removeExpiredPermissions")
-    @ResponseBody
+    @DeleteMapping("/removeExpiredPermissions")
     fun removeExpiredPermissions(
         currentDay: String
     ) {
@@ -71,8 +72,7 @@ class PermissionRestController {
         return medicationDTOs
     }
 
-    @GetMapping("/createMedicationPermission")
-    @ResponseBody
+    @PostMapping("/createMedicationPermission")
     fun createMedicationCareProviderLink(
         medicationId: String,
         careProviderId: String,
@@ -111,8 +111,7 @@ class PermissionRestController {
         return noteDTOs
     }
 
-    @GetMapping("/createNotePermission")
-    @ResponseBody
+    @PostMapping("/createNotePermission")
     fun createNoteCareProviderLink(
         noteId: String,
         careProviderId: String,
@@ -151,8 +150,7 @@ class PermissionRestController {
         return diagnosisDTOs
     }
 
-    @GetMapping("/createDiagnosisPermission")
-    @ResponseBody
+    @PostMapping("/createDiagnosisPermission")
     fun createDiagnosisCareProviderLink(
         noteId: String,
         careProviderId: String,
@@ -191,8 +189,7 @@ class PermissionRestController {
         return exerciseDTOs
     }
 
-    @GetMapping("/createExercisePermission")
-    @ResponseBody
+    @PostMapping("/createExercisePermission")
     fun createExerciseCareProviderLink(
         exerId: String,
         careProviderId: String,

@@ -126,20 +126,20 @@ class PermissionsServiceImpl : PermissionService {
     /**
      ********************************** Exercise **********************************
      */
-
+    @Transactional
     override fun getExerciseCareProviderRelationById(careProviderId: CareProviderId): List<ExerciseCareProviderDTO> {
         val exerciseCareProviderRelations: List<ExerciseCareProviderRelation> =
             this.permissionsRepository.getExerciseCareProviderRelationById(careProviderId)
         return ExerciseCareProviderDTO.fromExerciseCareProviderRelations(exerciseCareProviderRelations)
     }
-
+    @Transactional
     override fun getExerciseByIdAndMr(exerciseId: ExerciseId, medicalRecordId: MedicalRecordId): ExerciseDTO {
         val exercise: Exercise =
             this.permissionsRepository.getExerciseByIdAndMr(exerciseId, medicalRecordId)
 
         return ExerciseDTO.fromExercise(exercise)
     }
-
+    @Transactional
     override fun createExerciseLinkDiagnosis(
         exerciseId: ExerciseId,
         careProviderId: CareProviderId,
@@ -147,7 +147,7 @@ class PermissionsServiceImpl : PermissionService {
     ) {
         this.permissionsRepository.createPermissionLinkExercise(ExerciseCareProviderRelation(careProviderId, exerciseId, validDate))
     }
-
+    @Transactional
     override fun removeExpiredExercisePermissions(currentDay: LocalDate) {
         this.permissionsRepository.removeExpiredExercisePermissions(currentDay)
     }
