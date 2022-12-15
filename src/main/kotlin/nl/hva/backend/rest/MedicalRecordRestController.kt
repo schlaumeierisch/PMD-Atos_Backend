@@ -8,6 +8,7 @@ import nl.hva.backend.application.dto.MedicationDTO
 import nl.hva.backend.application.dto.NoteDTO
 import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.MedicationId
+import nl.hva.backend.domain.ids.NoteId
 import nl.hva.backend.domain.value_objects.DiagnosisType
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.format.annotation.DateTimeFormat
@@ -128,6 +129,12 @@ class MedicalRecordRestController {
             endDate,
             MedicalRecordId(medicalRecordId)
         )
+    }
+    @DeleteMapping("/note/deleteNote")
+    fun deleteNote(
+        noteId: String
+    ){
+        this.medicalRecordService.deleteNote(NoteId(noteId))
     }
 
 }
