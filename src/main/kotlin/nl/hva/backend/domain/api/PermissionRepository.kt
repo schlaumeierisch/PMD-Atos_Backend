@@ -1,7 +1,5 @@
 package nl.hva.backend.domain.api
 
-import nl.hva.backend.application.dto.DiagnosisDTO
-import nl.hva.backend.application.dto.many_to_many.DiagnosisCareProviderDTO
 import nl.hva.backend.domain.Diagnosis
 import nl.hva.backend.domain.Exercise
 import nl.hva.backend.domain.Medication
