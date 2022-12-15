@@ -83,7 +83,7 @@ class PermissionRestController {
     }
 
     @DeleteMapping("/removeMedicationPermission")
-    fun deleteNotePermission(
+    fun deleteMedicationPermission(
         medicationId: String,
         careProviderId: String
     ) {
@@ -136,6 +136,17 @@ class PermissionRestController {
         )
     }
 
+    @DeleteMapping("/removeNotePermission")
+    fun deleteNotePermission(
+        noteId: String,
+        careProviderId: String
+    ) {
+        this.permissionService.removeSelectedNotePermission(
+            NoteId(noteId),
+            CareProviderId(careProviderId)
+        )
+    }
+
     /**
      ********************************** Diagnosis **********************************
      */
@@ -179,6 +190,17 @@ class PermissionRestController {
         )
     }
 
+    @DeleteMapping("/removeDiagnosisPermission")
+    fun deleteDiagnosisPermission(
+        diagnosisId: String,
+        careProviderId: String
+    ) {
+        this.permissionService.removeSelectedDiagnosisPermission(
+            DiagnosisId(diagnosisId),
+            CareProviderId(careProviderId)
+        )
+    }
+
     /**
      ********************************** Exercises **********************************
      */
@@ -211,14 +233,24 @@ class PermissionRestController {
 
     @PostMapping("/createExercisePermission")
     fun createExerciseCareProviderLink(
-        exerId: String,
+        exerciseId: String,
         careProviderId: String,
         validDate: String
     ) {
         this.permissionService.createExerciseLinkDiagnosis(
-            ExerciseId(exerId),
+            ExerciseId(exerciseId),
             CareProviderId(careProviderId),
             LocalDate.parse(validDate)
+        )
+    }
+    @DeleteMapping("/removeExercisePermission")
+    fun deleteExercisePermission(
+        exerciseId: String,
+        careProviderId: String
+    ) {
+        this.permissionService.removeSelectedExercisePermission(
+            ExerciseId(exerciseId),
+            CareProviderId(careProviderId)
         )
     }
 }

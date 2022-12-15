@@ -107,8 +107,8 @@ class PermissionsServiceImpl : PermissionService {
     }
 
     @Transactional
-    override fun removeSelectedNotePermission(noteId: NoteId) {
-        TODO("Not yet implemented")
+    override fun removeSelectedNotePermission(noteId: NoteId, careProviderId: CareProviderId) {
+        this.permissionsRepository.removeSelectedNotePermission(noteId, careProviderId)
     }
 
     /**
@@ -150,8 +150,8 @@ class PermissionsServiceImpl : PermissionService {
     }
 
     @Transactional
-    override fun removeSelectedDiagnosisPermission(diagnosisId: DiagnosisId) {
-        TODO("Not yet implemented")
+    override fun removeSelectedDiagnosisPermission(diagnosisId: DiagnosisId, careProviderId: CareProviderId) {
+        this.permissionsRepository.removeSelectedDiagnosisPermission(diagnosisId, careProviderId)
     }
 
     /**
@@ -193,7 +193,7 @@ class PermissionsServiceImpl : PermissionService {
     }
 
     @Transactional
-    override fun removeSelectedExercisePermission(exerciseId: ExerciseId) {
-        TODO("Not yet implemented")
+    override fun removeSelectedExercisePermission(exerciseId: ExerciseId, careProviderId: CareProviderId) {
+        this.permissionsRepository.removeSelectedExercisePermission(exerciseId, careProviderId)
     }
 }
