@@ -1,5 +1,6 @@
 package nl.hva.backend.rest
 
+import nl.hva.backend.application.api.MedicalRecordService
 import nl.hva.backend.application.api.PermissionService
 import nl.hva.backend.application.dto.DiagnosisDTO
 import nl.hva.backend.application.dto.ExerciseDTO
@@ -21,6 +22,10 @@ class PermissionRestController {
 
     @Autowired
     private lateinit var permissionService: PermissionService
+
+
+    @Autowired
+    private lateinit var medicalRecordService: MedicalRecordService
 
     /**
      ********************************** General **********************************
@@ -57,7 +62,7 @@ class PermissionRestController {
         val medicationDTOs: ArrayList<MedicationDTO> = arrayListOf()
         for (medicineCareProviderDTO in medicineCareProviderDTOs) {
             medicationDTOs.add(
-                this.permissionService.getMedicationByIdAndMr(
+                this.medicalRecordService.getMedicationByIdAndMr(
                     MedicationId(medicineCareProviderDTO.medId()),
                     MedicalRecordId(mrId)
                 )
@@ -112,7 +117,7 @@ class PermissionRestController {
         val noteDTOs: ArrayList<NoteDTO> = arrayListOf()
         for (noteCareProviderDTO in noteCareProviderDTOs) {
             noteDTOs.add(
-                this.permissionService.getNoteByIdAndMr(
+                this.medicalRecordService.getNoteByIdAndMr(
                     NoteId(noteCareProviderDTO.noteId()),
                     MedicalRecordId(mrId)
                 )
@@ -167,7 +172,7 @@ class PermissionRestController {
         val diagnosisDTOs: ArrayList<DiagnosisDTO> = arrayListOf()
         for (noteCareProviderDTO in diagnosisCareProviderDTOs) {
             diagnosisDTOs.add(
-                this.permissionService.getDiagnosisByIdAndMr(
+                this.medicalRecordService.getDiagnosisByIdAndMr(
                     DiagnosisId(noteCareProviderDTO.diagId()),
                     MedicalRecordId(mrId)
                 )
@@ -222,7 +227,7 @@ class PermissionRestController {
         val exerciseDTOs: ArrayList<ExerciseDTO> = arrayListOf()
         for (exerciseCareProviderDTO in exerciseCareProviderDTOs) {
             exerciseDTOs.add(
-                this.permissionService.getExerciseByIdAndMr(
+                this.medicalRecordService.getExerciseByIdAndMr(
                     ExerciseId(exerciseCareProviderDTO.exerId()),
                     MedicalRecordId(mrId)
                 )

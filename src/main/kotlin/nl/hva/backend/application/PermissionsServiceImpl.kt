@@ -44,13 +44,7 @@ class PermissionsServiceImpl : PermissionService {
         return MedicationCareProviderDTO.fromMedicationCareProviderRelations(medicationCareProviderRelations)
     }
 
-    @Transactional
-    override fun getMedicationByIdAndMr(medicationId: MedicationId, medicalRecordId: MedicalRecordId): MedicationDTO {
-        val medication: Medication =
-            this.permissionsRepository.getMedicationOfPatientByIdAndMr(medicationId, medicalRecordId)
 
-        return MedicationDTO.fromMedication(medication)
-    }
 
     @Transactional
     override fun createPermissionLinkMedication(
@@ -88,13 +82,7 @@ class PermissionsServiceImpl : PermissionService {
         return NoteCareProviderDTO.fromNoteCareProviderRelations(noteCareProviderRelations)
     }
 
-    @Transactional
-    override fun getNoteByIdAndMr(noteId: NoteId, medicalRecordId: MedicalRecordId): NoteDTO {
-        val note: Note =
-            this.permissionsRepository.getNoteByIdAndMr(noteId, medicalRecordId)
 
-        return NoteDTO.fromNote(note)
-    }
 
     @Transactional
     override fun createPermissionLinkNote(noteId: NoteId, careProviderId: CareProviderId, validDate: LocalDate) {
@@ -121,13 +109,7 @@ class PermissionsServiceImpl : PermissionService {
         return DiagnosisCareProviderDTO.fromDiagnosisCareProviderRelations(diagnosisCareProviderRelations)
     }
 
-    @Transactional
-    override fun getDiagnosisByIdAndMr(diagnosisId: DiagnosisId, medicalRecordId: MedicalRecordId): DiagnosisDTO {
-        val diagnosis: Diagnosis =
-            this.permissionsRepository.getDiagnosisByIdAndMr(diagnosisId, medicalRecordId)
 
-        return DiagnosisDTO.fromDiagnosis(diagnosis)
-    }
 
     @Transactional
     override fun createPermissionLinkDiagnosis(
@@ -164,13 +146,7 @@ class PermissionsServiceImpl : PermissionService {
         return ExerciseCareProviderDTO.fromExerciseCareProviderRelations(exerciseCareProviderRelations)
     }
 
-    @Transactional
-    override fun getExerciseByIdAndMr(exerciseId: ExerciseId, medicalRecordId: MedicalRecordId): ExerciseDTO {
-        val exercise: Exercise =
-            this.permissionsRepository.getExerciseByIdAndMr(exerciseId, medicalRecordId)
 
-        return ExerciseDTO.fromExercise(exercise)
-    }
 
     @Transactional
     override fun createExerciseLinkDiagnosis(

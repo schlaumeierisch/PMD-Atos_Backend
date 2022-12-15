@@ -19,8 +19,6 @@ interface PermissionService {
 
     fun getMedicationCareProviderRelationById(careProviderId: CareProviderId): List<MedicationCareProviderDTO>
 
-    fun getMedicationByIdAndMr(medicationId: MedicationId, medicalRecordId: MedicalRecordId): MedicationDTO
-
     fun createPermissionLinkMedication(medicationId: MedicationId, careProviderId: CareProviderId, validDate: LocalDate)
 
     fun removeExpiredMedicationPermissions(currentDay: LocalDate)
@@ -32,8 +30,6 @@ interface PermissionService {
      */
 
     fun getNoteCareProviderRelationById(careProviderId: CareProviderId): List<NoteCareProviderDTO>
-
-    fun getNoteByIdAndMr(noteId: NoteId, medicalRecordId: MedicalRecordId): NoteDTO
 
     fun createPermissionLinkNote(noteId: NoteId, careProviderId: CareProviderId, validDate: LocalDate)
 
@@ -47,8 +43,6 @@ interface PermissionService {
 
     fun getDiagnosisCareProviderRelationById(careProviderId: CareProviderId): List<DiagnosisCareProviderDTO>
 
-    fun getDiagnosisByIdAndMr(diagnosisId: DiagnosisId, medicalRecordId: MedicalRecordId): DiagnosisDTO
-
     fun createPermissionLinkDiagnosis(diagnosisId: DiagnosisId, careProviderId: CareProviderId, validDate: LocalDate)
 
     fun removeExpiredDiagnosisPermissions(currentDay: LocalDate)
@@ -60,8 +54,6 @@ interface PermissionService {
      */
 
     fun getExerciseCareProviderRelationById(careProviderId: CareProviderId): List<ExerciseCareProviderDTO>
-
-    fun getExerciseByIdAndMr(exerciseId: ExerciseId, medicalRecordId: MedicalRecordId): ExerciseDTO
 
     fun createExerciseLinkDiagnosis(exerciseId: ExerciseId, careProviderId: CareProviderId, validDate: LocalDate)
 

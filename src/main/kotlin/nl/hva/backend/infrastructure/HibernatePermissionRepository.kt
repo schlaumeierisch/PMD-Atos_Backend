@@ -38,19 +38,6 @@ class HibernatePermissionRepository : PermissionRepository {
         return query.resultList
     }
 
-    override fun getMedicationOfPatientByIdAndMr(
-        medicationId: MedicationId,
-        medicalRecordId: MedicalRecordId
-    ): Medication {
-        val query: TypedQuery<Medication> = this.entityManager.createQuery(
-            "SELECT med FROM Medication med WHERE med.medicalRecordDomainId = ?1 AND med.domainId = ?2",
-            Medication::class.java
-        )
-            .setParameter(1, medicalRecordId)
-            .setParameter(2, medicationId)
-
-        return query.singleResult
-    }
 
     override fun createPermissionLinkMedication(medicationCareProviderRelation: MedicationCareProviderRelation) {
         this.entityManager.persist(medicationCareProviderRelation)
@@ -86,16 +73,6 @@ class HibernatePermissionRepository : PermissionRepository {
         return query.resultList
     }
 
-    override fun getNoteByIdAndMr(noteId: NoteId, medicalRecordId: MedicalRecordId): Note {
-        val query: TypedQuery<Note> = this.entityManager.createQuery(
-            "SELECT note FROM Note note WHERE note.medicalRecordDomainId = ?1 AND note.domainId = ?2",
-            Note::class.java
-        )
-            .setParameter(1, medicalRecordId)
-            .setParameter(2, noteId)
-
-        return query.singleResult
-    }
 
     override fun createPermissionLinkNote(noteCareProviderRelation: NoteCareProviderRelation) {
         this.entityManager.persist(noteCareProviderRelation)
@@ -131,16 +108,7 @@ class HibernatePermissionRepository : PermissionRepository {
         return query.resultList
     }
 
-    override fun getDiagnosisByIdAndMr(diagnosisId: DiagnosisId, medicalRecordId: MedicalRecordId): Diagnosis {
-        val query: TypedQuery<Diagnosis> = this.entityManager.createQuery(
-            "SELECT diag FROM Diagnosis diag WHERE diag.medicalRecordDomainId = ?1 AND diag.domainId = ?2",
-            Diagnosis::class.java
-        )
-            .setParameter(1, medicalRecordId)
-            .setParameter(2, diagnosisId)
 
-        return query.singleResult
-    }
 
     override fun createPermissionLinkDiagnosis(diagnosisCareProviderRelation: DiagnosisCareProviderRelation) {
         this.entityManager.persist(diagnosisCareProviderRelation)
@@ -176,16 +144,7 @@ class HibernatePermissionRepository : PermissionRepository {
         return query.resultList
     }
 
-    override fun getExerciseByIdAndMr(exerciseId: ExerciseId, medicalRecordId: MedicalRecordId): Exercise {
-        val query: TypedQuery<Exercise> = this.entityManager.createQuery(
-            "SELECT exer FROM Exercise exer WHERE exer.medicalRecordDomainId = ?1 AND exer.domainId = ?2",
-            Exercise::class.java
-        )
-            .setParameter(1, medicalRecordId)
-            .setParameter(2, exerciseId)
 
-        return query.singleResult
-    }
 
     override fun createPermissionLinkExercise(exerciseCareProviderRelation: ExerciseCareProviderRelation) {
         this.entityManager.persist(exerciseCareProviderRelation)
