@@ -162,8 +162,8 @@ values (001, 'dom-id-med-001', 'dom-id-cp-001', '2022-12-30'),
 
 -- diagnosis & care-provider (many - many)
 insert into diagnosis_care_provider(id, diagnosis_id, care_provider_id, valid_until)
-values (001, 'dom-ida-med-001', 'dom-id-cp-001', '2022-12-30'),
-       (002, 'dom-ida-med-002', 'dom-id-cp-001', '2022-12-30');
+values (001, 'dom-id-dia-001', 'dom-id-cp-001', '2022-12-30'),
+       (002, 'dom-id-dia-002', 'dom-id-cp-001', '2022-12-30');
 
 -- exercise & care-provider (many - many)
 insert into exercise_care_provider(id, exercise_id, care_provider_id, valid_until)

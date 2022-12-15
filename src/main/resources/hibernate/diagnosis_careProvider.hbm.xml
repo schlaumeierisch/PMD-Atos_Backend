@@ -8,7 +8,7 @@
             <generator class="increment"/>
         </id>
 
-        <component name="diagnosisId" class="nl.hva.backend.domain.ids.MedicationId">
+        <component name="diagnosisId" class="nl.hva.backend.domain.ids.DiagnosisId">
             <property name="id" column="diagnosis_id" type="string"/>
         </component>
 
