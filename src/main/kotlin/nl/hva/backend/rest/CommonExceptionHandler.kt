@@ -19,7 +19,7 @@ class CommonExceptionHandler {
     }
 
     /**
-     * ExceptionHandler for not existing content (e.g., getting patient by invalid id)
+     * ExceptionHandler for not invalid parameter (e.g., passing null as parameter)
      */
     @ExceptionHandler(InvalidParameterException::class)
     fun handleInvalidParameterException(e: InvalidParameterException): ResponseEntity<String> {
