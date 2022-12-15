@@ -13,6 +13,8 @@ interface CalendarService {
 
     fun cancelAppointment(appointmentId: AppointmentId)
 
+    fun getAppointmentById(appointmentId: AppointmentId): List<AppointmentDTO>
+
     fun getAllAppointmentsByPatientId(patientId: PatientId): List<AppointmentDTO>
 
     fun getAllAppointmentsByGeneralPractitionerId(generalPractitionerId: GeneralPractitionerId): List<AppointmentDTO>

@@ -83,31 +83,63 @@ class CalendarRestController {
     @PostMapping("/cancelAppointment/{id}")
     fun cancelAppointment(
         @PathVariable("id") id: String
-    ) {
-        this.calendarService.cancelAppointment(AppointmentId(id))
+    ): ResponseEntity<String> {
+        val appointmentDTO: List<AppointmentDTO> = this.calendarService.getAppointmentById(AppointmentId(id))
+
+        if (appointmentDTO.isNotEmpty()) {
+            this.calendarService.cancelAppointment(AppointmentId(id))
+
+            return ResponseEntity.status(HttpStatus.OK).body("Appointment with id '$id' successfully cancelled.")
+        } else {
+            throw NotExistingException("Appointment with id \'$id\' does not exist.")
+        }
     }
 
     @GetMapping("/getAllAppointmentsByPatientId/{id}")
     @ResponseBody
     fun getAllAppointmentsByPatientId(
         @PathVariable("id") id: String
-    ): List<AppointmentDTO> {
-        return this.calendarService.getAllAppointmentsByPatientId(PatientId(id))
+    ): ResponseEntity<List<AppointmentDTO>> {
+        val patientDTO: List<PatientDTO> = this.patientService.getAccountById(PatientId(id))
+
+        if (patientDTO.isNotEmpty()) {
+            val appointmentDTOs: List<AppointmentDTO> = this.calendarService.getAllAppointmentsByPatientId(PatientId(id))
+
+            return ResponseEntity.status(HttpStatus.OK).body(appointmentDTOs)
+        } else {
+            throw NotExistingException("Patient with id \'$id\' does not exist.")
+        }
     }
 
     @GetMapping("/getAllAppointmentsByGeneralPractitionerId/{id}")
     @ResponseBody
     fun getAllAppointmentsByGeneralPractitionerId(
         @PathVariable("id") id: String
-    ): List<AppointmentDTO> {
-        return this.calendarService.getAllAppointmentsByGeneralPractitionerId(GeneralPractitionerId(id))
+    ): ResponseEntity<List<AppointmentDTO>> {
+        val generalPractitionerDTO: List<GeneralPractitionerDTO> = this.generalPractitionerService.getAccountById(GeneralPractitionerId(id))
+
+        if (generalPractitionerDTO.isNotEmpty()) {
+            val appointmentDTOs: List<AppointmentDTO> = this.calendarService.getAllAppointmentsByGeneralPractitionerId(GeneralPractitionerId(id))
+
+            return ResponseEntity.status(HttpStatus.OK).body(appointmentDTOs)
+        } else {
+            throw NotExistingException("General practitioner with id \'$id\' does not exist.")
+        }
     }
 
     @GetMapping("/getAllAppointmentsByCareProviderId/{id}")
     @ResponseBody
     fun getAllAppointmentsByCareProviderId(
         @PathVariable("id") id: String
-    ): List<AppointmentDTO> {
-        return this.calendarService.getAllAppointmentsByCareProviderId(CareProviderId(id))
+    ): ResponseEntity<List<AppointmentDTO>> {
+        val careProviderDTO: List<CareProviderDTO> = this.careProviderService.getAccountById(CareProviderId(id))
+
+        if (careProviderDTO.isNotEmpty()) {
+            val appointmentDTOs: List<AppointmentDTO> = this.calendarService.getAllAppointmentsByCareProviderId(CareProviderId(id))
+
+            return ResponseEntity.status(HttpStatus.OK).body(appointmentDTOs)
+        } else {
+            throw NotExistingException("Care provider with id \'$id\' does not exist.")
+        }
     }
 }

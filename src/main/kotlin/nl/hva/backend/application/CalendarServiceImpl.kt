@@ -51,6 +51,17 @@ class CalendarServiceImpl : CalendarService {
     }
 
     @Transactional
+    override fun getAppointmentById(appointmentId: AppointmentId): List<AppointmentDTO> {
+        val appointment: List<Appointment> = this.calendarRepository.getAppointmentById(appointmentId)
+
+        return if (appointment.isNotEmpty()) {
+            listOf(AppointmentDTO.fromAppointment(appointment[0]))
+        } else {
+            emptyList()
+        }
+    }
+
+    @Transactional
     override fun getAllAppointmentsByPatientId(patientId: PatientId): List<AppointmentDTO> {
         val appointments: List<Appointment> = this.calendarRepository.getAllAppointmentsByPatientId(patientId)
 
