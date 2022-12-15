@@ -162,8 +162,16 @@ class MedicalRecordRestController {
     @ResponseBody
     fun getAllExercises(
         @PathVariable("id") id: String
-    ): List<ExerciseDTO> {
-        return this.medicalRecordService.getAllExercises(MedicalRecordId(id))
+    ): ResponseEntity<List<ExerciseDTO>> {
+        val medicalRecordDTO: List<MedicalRecordDTO> = this.medicalRecordService.getMedicalRecord(MedicalRecordId(id))
+
+        if (medicalRecordDTO.isNotEmpty()) {
+            val exerciseDTOs: List<ExerciseDTO> = this.medicalRecordService.getAllExercises(MedicalRecordId(id))
+
+            return ResponseEntity.status(HttpStatus.OK).body(exerciseDTOs)
+        } else {
+            throw NotExistingException("Medical record with id \'$id\' does not exist.")
+        }
     }
 
     @PostMapping("/exercises/createExercise")
@@ -175,14 +183,22 @@ class MedicalRecordRestController {
         @RequestParam("endDate", required = false)
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) endDate: LocalDate? = null,
         medicalRecordId: String
-    ) {
-        this.medicalRecordService.createExercise(
-            title,
-            description,
-            startDate,
-            endDate,
-            MedicalRecordId(medicalRecordId)
-        )
+    ): ResponseEntity<String> {
+        val medicalRecordDTO: List<MedicalRecordDTO> = this.medicalRecordService.getMedicalRecord(MedicalRecordId(medicalRecordId))
+
+        if (medicalRecordDTO.isNotEmpty()) {
+            this.medicalRecordService.createExercise(
+                title,
+                description,
+                startDate,
+                endDate,
+                MedicalRecordId(medicalRecordId)
+            )
+
+            return ResponseEntity.status(HttpStatus.OK).body("New exercise for medical record with id \'$medicalRecordId\' successfully created.")
+        } else {
+            throw NotExistingException("Medical record with id \'$medicalRecordId\' does not exist.")
+        }
     }
 
 }
