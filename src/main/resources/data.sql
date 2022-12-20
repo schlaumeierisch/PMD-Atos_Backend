@@ -7,10 +7,10 @@ values (001, 'dom-id-gp-001', 'Arnout', 'Stegehuis', 'Vossenstraat 30', '6811JM'
        (005, 'dom-id-gp-005', 'Thies', 'Veenebrugge', 'Verbindingsweg 191', '2061EK', 'Bloemendaal', 'Netherlands', '0652431375', '09:00', '17:00', '12:00', '30', '15');
 
 -- care provider
-insert into care_provider (id, care_provider_id, first_name, last_name, street, zip, city, country, phone_number, specialism, start_time_shift, end_time_shift, break_times, break_duration, appointment_duration)
-values (001, 'dom-id-cp-001', 'Stijn', 'Boers', 'De Prunus 101', '7701WR', 'Dedemsvaart', 'Netherlands', '0638469429', 'PHYSIOTHERAPY', '09:00', '17:00', '12:00', '60', '60'),
-       (002, 'dom-id-cp-002', 'Loesje', 'Terruwe', 'Zorgvrij 152', '1391RM', 'Abcoude', 'Netherlands', '0683667078', 'APOTHECARY', '09:00', '17:00', '12:00', '30', '10'),
-       (003, 'dom-id-cp-003', 'Margriet', 'Ranervelt', 'Laan van Meerdervoort 192', '2555BL', 'Den Haag', 'Netherlands', '0688177729', 'APOTHECARY', '09:00', '17:00', '12:00', '30', '10');
+insert into care_provider (id, care_provider_id, first_name, last_name, street, zip, city, country, phone_number, specialism)
+values (001, 'dom-id-cp-001', 'Stijn', 'Boers', 'De Prunus 101', '7701WR', 'Dedemsvaart', 'Netherlands', '0638469429', 'PHYSIOTHERAPY'),
+       (002, 'dom-id-cp-002', 'Loesje', 'Terruwe', 'Zorgvrij 152', '1391RM', 'Abcoude', 'Netherlands', '0683667078', 'APOTHECARY'),
+       (003, 'dom-id-cp-003', 'Margriet', 'Ranervelt', 'Laan van Meerdervoort 192', '2555BL', 'Den Haag', 'Netherlands', '0688177729', 'APOTHECARY');
 
 -- patient
 insert into patient (id, patient_id, first_name, last_name, street, zip, city, country, gender, birth_date, phone_number, email, is_using_app, medical_record_id, general_practitioner_id)
