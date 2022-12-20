@@ -59,11 +59,11 @@ class HibernateGeneralPractitionerRepository : GeneralPractitionerRepository {
         updateQuery.executeUpdate()
     }
 
-    override fun getAccountById(generalPractitionerId: GeneralPractitionerId): GeneralPractitioner {
+    override fun getAccountById(generalPractitionerId: GeneralPractitionerId): List<GeneralPractitioner> {
         val query: TypedQuery<GeneralPractitioner> = this.entityManager.createQuery(
             "SELECT gp FROM GeneralPractitioner gp WHERE gp.domainId = ?1", GeneralPractitioner::class.java
         )
-        return query.setParameter(1, generalPractitionerId).singleResult
+        return query.setParameter(1, generalPractitionerId).resultList
     }
 
     override fun getAllAccounts(): List<GeneralPractitioner> {

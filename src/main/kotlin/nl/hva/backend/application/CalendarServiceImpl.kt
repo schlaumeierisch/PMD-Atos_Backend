@@ -28,14 +28,13 @@ class CalendarServiceImpl : CalendarService {
         cpId: String?
     ) {
         val appointmentId: AppointmentId = this.calendarRepository.nextIdentity()
-        var generalPractitionerId = GeneralPractitionerId("")
-        var careProviderId = CareProviderId("")
 
-        if (gpId != null && cpId == null) {
+        var generalPractitionerId: GeneralPractitionerId? = null
+        var careProviderId: CareProviderId? = null
+
+        if (!gpId.isNullOrBlank()) {
             generalPractitionerId = GeneralPractitionerId(gpId)
-            careProviderId = CareProviderId("")
-        } else if (gpId == null && cpId != null) {
-            generalPractitionerId = GeneralPractitionerId("")
+        } else if (!cpId.isNullOrBlank()) {
             careProviderId = CareProviderId(cpId)
         }
 
@@ -49,6 +48,17 @@ class CalendarServiceImpl : CalendarService {
     @Transactional
     override fun cancelAppointment(appointmentId: AppointmentId) {
         this.calendarRepository.cancelAppointment(appointmentId)
+    }
+
+    @Transactional
+    override fun getAppointmentById(appointmentId: AppointmentId): List<AppointmentDTO> {
+        val appointment: List<Appointment> = this.calendarRepository.getAppointmentById(appointmentId)
+
+        return if (appointment.isNotEmpty()) {
+            listOf(AppointmentDTO.fromAppointment(appointment[0]))
+        } else {
+            emptyList()
+        }
     }
 
     @Transactional

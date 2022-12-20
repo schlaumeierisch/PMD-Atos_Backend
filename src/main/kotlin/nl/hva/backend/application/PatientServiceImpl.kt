@@ -35,7 +35,7 @@ class PatientServiceImpl : PatientService {
         birthDate: LocalDate,
         phoneNumber: String,
         email: String,
-        isUsingApp: Boolean,
+        usingApp: Boolean,
         medicalRecordId: String,
         gpId: String
     ) {
@@ -43,7 +43,7 @@ class PatientServiceImpl : PatientService {
 
         val patient = Patient(
             patientId, firstName, lastName, Address(street, zip, city, country), gender, birthDate,
-            phoneNumber, email, isUsingApp, MedicalRecordId(medicalRecordId), GeneralPractitionerId(gpId)
+            phoneNumber, email, usingApp, MedicalRecordId(medicalRecordId), GeneralPractitionerId(gpId)
         )
 
         this.patientRepository.createAccount(patient)
@@ -62,12 +62,12 @@ class PatientServiceImpl : PatientService {
         birthDate: LocalDate,
         phoneNumber: String,
         email: String,
-        isUsingApp: Boolean,
+        usingApp: Boolean,
         gpId: String
     ) {
         this.patientRepository.editAccount(
             patientId, firstName, lastName, street, zip, city, country,
-            gender, birthDate, phoneNumber, email, isUsingApp, GeneralPractitionerId(gpId)
+            gender, birthDate, phoneNumber, email, usingApp, GeneralPractitionerId(gpId)
         )
     }
 
@@ -77,10 +77,14 @@ class PatientServiceImpl : PatientService {
     }
 
     @Transactional
-    override fun getAccountById(patientId: PatientId): PatientDTO {
-        val patient: Patient = this.patientRepository.getAccountById(patientId)
+    override fun getAccountById(patientId: PatientId): List<PatientDTO> {
+        val patient: List<Patient> = this.patientRepository.getAccountById(patientId)
 
-        return PatientDTO.fromPatient(patient)
+        return if (patient.isNotEmpty()) {
+            listOf(PatientDTO.fromPatient(patient[0]))
+        } else {
+            emptyList()
+        }
     }
 
     @Transactional

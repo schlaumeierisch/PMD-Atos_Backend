@@ -17,12 +17,12 @@ interface PatientRepository {
     fun editAccount(
         patientId: PatientId, firstName: String, lastName: String, street: String,
         zip: String, city: String, country: String, gender: Enum<Gender>, birthDate: LocalDate,
-        phoneNumber: String, email: String, isUsingApp: Boolean, gpDomainId: GeneralPractitionerId
+        phoneNumber: String, email: String, usingApp: Boolean, gpDomainId: GeneralPractitionerId
     )
 
     fun deleteAccount(patientId: PatientId)
 
-    fun getAccountById(patientId: PatientId): Patient
+    fun getAccountById(patientId: PatientId): List<Patient>
 
     fun getAllAccounts(): List<Patient>
 

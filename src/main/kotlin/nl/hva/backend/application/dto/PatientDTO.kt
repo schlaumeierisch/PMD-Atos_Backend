@@ -16,7 +16,7 @@ class PatientDTO {
     private lateinit var birthDate: LocalDate
     private lateinit var phoneNumber: String
     private lateinit var email: String
-    private var isUsingApp: Boolean = false
+    private var usingApp: Boolean = false
 
     // one-to-one
     private lateinit var medicalRecordId: String
@@ -36,7 +36,7 @@ class PatientDTO {
             patientDTO.birthDate = patient.birthDate()
             patientDTO.phoneNumber = patient.phoneNumber()
             patientDTO.email = patient.email()
-            patientDTO.isUsingApp = patient.isUsingApp()
+            patientDTO.usingApp = patient.usingApp()
 
             patientDTO.medicalRecordId = patient.medicalRecordDomainId().id()
 
@@ -65,7 +65,7 @@ class PatientDTO {
     fun birthDate(): LocalDate = this.birthDate
     fun phoneNumber(): String = this.phoneNumber
     fun email(): String = this.email
-    fun isUsingApp(): Boolean = this.isUsingApp
+    fun usingApp(): Boolean = this.usingApp
     fun medicalRecordId(): String = this.medicalRecordId
     fun gpId(): String = this.gpId
 }

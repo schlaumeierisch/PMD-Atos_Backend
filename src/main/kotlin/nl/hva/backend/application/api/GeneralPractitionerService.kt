@@ -18,7 +18,7 @@ interface GeneralPractitionerService {
 
     fun deleteAccount(generalPractitionerId: GeneralPractitionerId)
 
-    fun getAccountById(generalPractitionerId: GeneralPractitionerId): GeneralPractitionerDTO
+    fun getAccountById(generalPractitionerId: GeneralPractitionerId): List<GeneralPractitionerDTO>
 
     fun getAllAccounts(): List<GeneralPractitionerDTO>
 

@@ -31,7 +31,7 @@ interface CareProviderService {
 
     fun deleteAccount(careProviderId: CareProviderId)
 
-    fun getAccountById(careProviderId: CareProviderId): CareProviderDTO
+    fun getAccountById(careProviderId: CareProviderId): List<CareProviderDTO>
 
     fun getAllAccounts(): List<CareProviderDTO>
 

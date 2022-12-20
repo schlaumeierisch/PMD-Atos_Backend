@@ -29,12 +29,12 @@ class HibernatePatientRepository : PatientRepository {
     override fun editAccount(
         patientId: PatientId, firstName: String, lastName: String, street: String, zip: String,
         city: String, country: String, gender: Enum<Gender>, birthDate: LocalDate, phoneNumber: String,
-        email: String, isUsingApp: Boolean, gpDomainId: GeneralPractitionerId
+        email: String, usingApp: Boolean, gpDomainId: GeneralPractitionerId
     ) {
         val query: Query = this.entityManager.createQuery(
             "UPDATE Patient p SET p.firstName = ?1, p.lastName = ?2, p.address.street = ?3, p.address.zip = ?4," +
                     "p.address.city = ?5, p.address.country = ?6, p.gender = ?7, p.birthDate = ?8, p.phoneNumber = ?9," +
-                    "p.email = ?10, p.isUsingApp = ?11, p.gpDomainId = ?12" +
+                    "p.email = ?10, p.usingApp = ?11, p.gpDomainId = ?12" +
                     "WHERE p.domainId = ?13"
         )
             .setParameter(1, firstName)
@@ -47,7 +47,7 @@ class HibernatePatientRepository : PatientRepository {
             .setParameter(8, birthDate)
             .setParameter(9, phoneNumber)
             .setParameter(10, email)
-            .setParameter(11, isUsingApp)
+            .setParameter(11, usingApp)
             .setParameter(12, gpDomainId)
             .setParameter(13, patientId)
 
@@ -62,11 +62,11 @@ class HibernatePatientRepository : PatientRepository {
         this.entityManager.remove(result)
     }
 
-    override fun getAccountById(patientId: PatientId): Patient {
+    override fun getAccountById(patientId: PatientId): List<Patient> {
         val query: TypedQuery<Patient> = this.entityManager.createQuery(
             "SELECT p FROM Patient p WHERE p.domainId = ?1", Patient::class.java
         )
-        return query.setParameter(1, patientId).singleResult
+        return query.setParameter(1, patientId).resultList
     }
 
     override fun getAllAccounts(): List<Patient> {

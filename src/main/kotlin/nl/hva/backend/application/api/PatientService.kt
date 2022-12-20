@@ -12,18 +12,18 @@ interface PatientService {
     fun createAccount(
         firstName: String, lastName: String, street: String, zip: String, city: String,
         country: String, gender: Enum<Gender>, birthDate: LocalDate, phoneNumber: String,
-        email: String, isUsingApp: Boolean, medicalRecordId: String, gpId: String
+        email: String, usingApp: Boolean, medicalRecordId: String, gpId: String
     )
 
     fun editAccount(
         patientId: PatientId, firstName: String, lastName: String, street: String,
         zip: String, city: String, country: String, gender: Enum<Gender>, birthDate: LocalDate,
-        phoneNumber: String, email: String, isUsingApp: Boolean, gpId: String
+        phoneNumber: String, email: String, usingApp: Boolean, gpId: String
     )
 
     fun deleteAccount(patientId: PatientId)
 
-    fun getAccountById(patientId: PatientId): PatientDTO
+    fun getAccountById(patientId: PatientId): List<PatientDTO>
 
     fun getAllAccounts(): List<PatientDTO>
 

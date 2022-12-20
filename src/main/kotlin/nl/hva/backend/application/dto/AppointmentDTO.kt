@@ -14,8 +14,8 @@ class AppointmentDTO {
     private lateinit var patientId: String
 
     // one-to-one - can be either GP or CP (not both!)
-    private var gpId: String = ""
-    private var cpId: String = ""
+    private var gpId: String? = null
+    private var cpId: String? = null
 
     companion object {
         fun fromAppointment(appointment: Appointment): AppointmentDTO {
@@ -26,8 +26,8 @@ class AppointmentDTO {
             appointmentDTO.reason = appointment.reason()
 
             appointmentDTO.patientId = appointment.patientDomainId().id()
-            appointmentDTO.gpId = appointment.gpDomainId().id()
-            appointmentDTO.cpId = appointment.cpDomainId().id()
+            appointmentDTO.gpId = appointment.gpDomainId()?.id()
+            appointmentDTO.cpId = appointment.cpDomainId()?.id()
 
             return appointmentDTO
         }
@@ -48,6 +48,6 @@ class AppointmentDTO {
     fun dateTime(): LocalDateTime = this.dateTime
     fun reason(): String = this.reason
     fun patientId(): String = this.patientId
-    fun gpId(): String = this.gpId
-    fun cpId(): String = this.cpId
+    fun gpId(): String? = this.gpId
+    fun cpId(): String? = this.cpId
 }

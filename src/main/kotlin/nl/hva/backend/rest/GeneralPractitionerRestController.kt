@@ -4,7 +4,10 @@ import nl.hva.backend.application.api.GeneralPractitionerService
 import nl.hva.backend.application.dto.GeneralPractitionerDTO
 import nl.hva.backend.application.dto.PatientDTO
 import nl.hva.backend.domain.ids.GeneralPractitionerId
+import nl.hva.backend.rest.exceptions.NotExistingException
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -16,20 +19,23 @@ class GeneralPractitionerRestController {
 
     @GetMapping("/getAll")
     @ResponseBody
-    fun getAllAccounts(): List<GeneralPractitionerDTO> {
-        return this.generalPractitionerService.getAllAccounts()
+    fun getAllAccounts(): ResponseEntity<List<GeneralPractitionerDTO>> {
+        val generalPractitionerDTOs: List<GeneralPractitionerDTO> = this.generalPractitionerService.getAllAccounts()
+
+        return ResponseEntity.status(HttpStatus.OK).body(generalPractitionerDTOs)
     }
 
     @GetMapping("/getById/{id}")
     @ResponseBody
     fun getAccountById(
         @PathVariable("id") id: String
-    ): GeneralPractitionerDTO? {
-        // TODO: return something else than null (maybe ResponseEntity<>)
-        return try {
-            this.generalPractitionerService.getAccountById(GeneralPractitionerId(id))
-        } catch (e: Exception) {
-            null
+    ): ResponseEntity<GeneralPractitionerDTO> {
+        val generalPractitionerDTO: List<GeneralPractitionerDTO> = this.generalPractitionerService.getAccountById(GeneralPractitionerId(id))
+
+        if (generalPractitionerDTO.isNotEmpty()) {
+            return ResponseEntity.status(HttpStatus.OK).body(generalPractitionerDTO[0])
+        } else {
+            throw NotExistingException("General practitioner with id '$id' does not exist.")
         }
     }
 
@@ -37,8 +43,18 @@ class GeneralPractitionerRestController {
     @ResponseBody
     fun getPatientsOfGeneralPractitioner(
         @PathVariable("id") id: String
-    ): List<PatientDTO> {
-        return this.generalPractitionerService.getPatientsOfGeneralPractitionerById(GeneralPractitionerId(id))
+    ): ResponseEntity<List<PatientDTO>> {
+        val generalPractitionerDTO: List<GeneralPractitionerDTO> = this.generalPractitionerService.getAccountById(GeneralPractitionerId(id))
+
+        if (generalPractitionerDTO.isNotEmpty()) {
+            val patientDTOs: List<PatientDTO> = this.generalPractitionerService.getPatientsOfGeneralPractitionerById(
+                GeneralPractitionerId(id)
+            )
+
+            return ResponseEntity.status(HttpStatus.OK).body(patientDTOs)
+        } else {
+            throw NotExistingException("General practitioner with id '$id' does not exist.")
+        }
     }
 
 }

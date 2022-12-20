@@ -1,11 +1,7 @@
 package nl.hva.backend.application
 
 import nl.hva.backend.application.api.MedicalRecordService
-import nl.hva.backend.application.dto.ExerciseDTO
-import nl.hva.backend.application.dto.DiagnosisDTO
-import nl.hva.backend.application.dto.IntakeDTO
-import nl.hva.backend.application.dto.MedicationDTO
-import nl.hva.backend.application.dto.NoteDTO
+import nl.hva.backend.application.dto.*
 import nl.hva.backend.domain.*
 import nl.hva.backend.domain.api.MedicalRecordRepository
 import nl.hva.backend.domain.ids.*
@@ -33,6 +29,17 @@ class MedicalRecordServiceImpl : MedicalRecordService {
     }
 
     @Transactional
+    override fun getMedicalRecord(medicalRecordId: MedicalRecordId): List<MedicalRecordDTO> {
+        val medicalRecord: List<MedicalRecord> = this.medicalRecordRepository.getMedicalRecord(medicalRecordId)
+
+        return if (medicalRecord.isNotEmpty()) {
+            listOf(MedicalRecordDTO.fromMedicalRecord(medicalRecord[0]))
+        } else {
+            emptyList()
+        }
+    }
+
+    @Transactional
     override fun getAllNotes(medicalRecordId: MedicalRecordId): List<NoteDTO> {
         val notes: List<Note> = this.medicalRecordRepository.getAllNotes(medicalRecordId)
 
@@ -53,6 +60,17 @@ class MedicalRecordServiceImpl : MedicalRecordService {
         val medication: List<Medication> = this.medicalRecordRepository.getAllMedication(medicalRecordId)
 
         return MedicationDTO.fromMedication(medication)
+    }
+
+    @Transactional
+    override fun getMedicationById(medicationId: MedicationId): List<MedicationDTO> {
+        val medication: List<Medication> = this.medicalRecordRepository.getMedicationById(medicationId)
+
+        return if (medication.isNotEmpty()) {
+            listOf(MedicationDTO.fromMedication(medication[0]))
+        } else {
+            emptyList()
+        }
     }
 
     @Transactional

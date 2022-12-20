@@ -59,11 +59,11 @@ class HibernateCareProviderRepository : CareProviderRepository {
         this.entityManager.remove(result)
     }
 
-    override fun getAccountById(careProviderId: CareProviderId): CareProvider {
+    override fun getAccountById(careProviderId: CareProviderId): List<CareProvider> {
         val query: TypedQuery<CareProvider> = this.entityManager.createQuery(
             "SELECT cp FROM CareProvider cp WHERE cp.domainId = ?1", CareProvider::class.java
         )
-        return query.setParameter(1, careProviderId).singleResult
+        return query.setParameter(1, careProviderId).resultList
     }
 
     override fun getAllAccounts(): List<CareProvider> {

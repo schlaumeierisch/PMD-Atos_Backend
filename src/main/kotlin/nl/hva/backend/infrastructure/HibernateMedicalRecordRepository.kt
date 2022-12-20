@@ -30,6 +30,13 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
         this.entityManager.persist(medicalRecord)
     }
 
+    override fun getMedicalRecord(medicalRecordId: MedicalRecordId): List<MedicalRecord> {
+        val query: TypedQuery<MedicalRecord> = this.entityManager.createQuery(
+            "SELECT mr FROM MedicalRecord mr WHERE mr.domainId = ?1", MedicalRecord::class.java
+        )
+        return query.setParameter(1, medicalRecordId).resultList
+    }
+
     override fun getAllNotes(medicalRecordId: MedicalRecordId): List<Note> {
         val query: TypedQuery<Note> = this.entityManager.createQuery(
             "SELECT no FROM Note no WHERE no.medicalRecordDomainId = ?1", Note::class.java
@@ -46,6 +53,13 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
             "SELECT med FROM Medication med WHERE med.medicalRecordDomainId = ?1", Medication::class.java
         )
         return query.setParameter(1, medicalRecordId).resultList
+    }
+
+    override fun getMedicationById(medicationId: MedicationId): List<Medication> {
+        val query: TypedQuery<Medication> = this.entityManager.createQuery(
+            "SELECT med FROM Medication med WHERE med.domainId = ?1", Medication::class.java
+        )
+        return query.setParameter(1, medicationId).resultList
     }
 
     override fun createMedication(medication: Medication) {

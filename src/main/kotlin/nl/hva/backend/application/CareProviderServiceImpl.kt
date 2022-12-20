@@ -2,7 +2,6 @@ package nl.hva.backend.application
 
 import nl.hva.backend.application.api.CareProviderService
 import nl.hva.backend.application.dto.CareProviderDTO
-import nl.hva.backend.application.dto.value_objects.AddressDTO
 import nl.hva.backend.domain.CareProvider
 import nl.hva.backend.domain.api.CareProviderRepository
 import nl.hva.backend.domain.ids.CareProviderId
@@ -74,10 +73,14 @@ class CareProviderServiceImpl : CareProviderService {
     }
 
     @Transactional
-    override fun getAccountById(careProviderId: CareProviderId): CareProviderDTO {
-        val careProvider: CareProvider = this.careProviderRepository.getAccountById(careProviderId)
+    override fun getAccountById(careProviderId: CareProviderId): List<CareProviderDTO> {
+        val careProvider: List<CareProvider> = this.careProviderRepository.getAccountById(careProviderId)
 
-        return CareProviderDTO.fromCareProvider(careProvider)
+        return if (careProvider.isNotEmpty()) {
+            listOf(CareProviderDTO.fromCareProvider(careProvider[0]))
+        } else {
+            emptyList()
+        }
     }
 
     @Transactional
