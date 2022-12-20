@@ -22,8 +22,11 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("com.h2database:h2")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation("org.springdoc:springdoc-openapi-ui:1.6.13")
+
+    // testing
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("junit:junit:4.13.2")
 }
 
 tasks.withType<KotlinCompile> {
