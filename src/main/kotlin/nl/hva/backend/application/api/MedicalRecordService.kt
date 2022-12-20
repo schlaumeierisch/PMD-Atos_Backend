@@ -31,6 +31,8 @@ interface MedicalRecordService {
 
     fun createExercise(title: String, description: String, startDate: LocalDate, endDate: LocalDate?, medicalRecordId: MedicalRecordId)
 
+    fun deleteExercise(exerciseId: ExerciseId)
+
     fun deleteNote(noteId: NoteId)
 
     fun getMedicationByIdAndMr(medicationId: MedicationId, medicalRecordId: MedicalRecordId): MedicationDTO

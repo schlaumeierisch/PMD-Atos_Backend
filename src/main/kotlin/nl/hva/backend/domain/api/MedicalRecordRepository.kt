@@ -23,6 +23,8 @@ interface MedicalRecordRepository {
 
     fun createNote(note: Note)
 
+    fun deleteNote(noteId: NoteId)
+
     fun getAllMedication(medicalRecordId: MedicalRecordId): List<Medication>
 
     fun getMedicationById(medicationId: MedicationId): List<Medication>
@@ -35,11 +37,11 @@ interface MedicalRecordRepository {
 
     fun createExercise(exercise: Exercise)
 
+    fun deleteExercise(exerciseId: ExerciseId)
+
     fun getAllDiagnoses(medicalRecordId: MedicalRecordId): List<Diagnosis>
 
     fun createDiagnosis(diagnosis: Diagnosis)
-
-    fun deleteNote(noteId: NoteId)
 
     fun getMedicationOfPatientByIdAndMr(medicationId: MedicationId, medicalRecordId: MedicalRecordId): Medication
 

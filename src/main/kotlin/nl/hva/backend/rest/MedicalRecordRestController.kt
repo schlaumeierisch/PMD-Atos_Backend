@@ -2,6 +2,7 @@ package nl.hva.backend.rest
 
 import nl.hva.backend.application.api.MedicalRecordService
 import nl.hva.backend.application.dto.*
+import nl.hva.backend.domain.ids.ExerciseId
 import nl.hva.backend.domain.ids.MedicalRecordId
 import nl.hva.backend.domain.ids.MedicationId
 import nl.hva.backend.domain.ids.NoteId
@@ -52,6 +53,13 @@ class MedicalRecordRestController {
         } else {
             throw NotExistingException("Medical record with id \'$medicalRecordId\' does not exist.")
         }
+    }
+
+    @DeleteMapping("/note/deleteNote")
+    fun deleteNote(
+        noteId: String
+    ){
+        this.medicalRecordService.deleteNote(NoteId(noteId))
     }
 
     @GetMapping("/medication/getAllMedication/{id}")
@@ -201,11 +209,12 @@ class MedicalRecordRestController {
             throw NotExistingException("Medical record with id \'$medicalRecordId\' does not exist.")
         }
     }
-    @DeleteMapping("/note/deleteNote")
-    fun deleteNote(
-        noteId: String
+
+    @DeleteMapping("/exercises/deleteExercise")
+    fun deleteExercise(
+        exerciseId: String
     ){
-        this.medicalRecordService.deleteNote(NoteId(noteId))
+        this.medicalRecordService.deleteExercise(ExerciseId(exerciseId))
     }
 
 }

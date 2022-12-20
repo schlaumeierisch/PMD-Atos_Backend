@@ -56,6 +56,11 @@ class MedicalRecordServiceImpl : MedicalRecordService {
     }
 
     @Transactional
+    override fun deleteNote(noteId: NoteId) {
+        this.medicalRecordRepository.deleteNote(noteId)
+    }
+
+    @Transactional
     override fun getAllMedication(medicalRecordId: MedicalRecordId): List<MedicationDTO> {
         val medication: List<Medication> = this.medicalRecordRepository.getAllMedication(medicalRecordId)
 
@@ -142,8 +147,8 @@ class MedicalRecordServiceImpl : MedicalRecordService {
     }
 
     @Transactional
-    override fun deleteNote(noteId: NoteId) {
-        this.medicalRecordRepository.deleteNote(noteId)
+    override fun deleteExercise(exerciseId: ExerciseId) {
+        this.medicalRecordRepository.deleteExercise(exerciseId)
     }
 
     @Transactional

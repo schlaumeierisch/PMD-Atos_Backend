@@ -47,6 +47,14 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
         this.entityManager.persist(note)
     }
 
+    override fun deleteNote(noteId: NoteId) {
+        val query: TypedQuery<Note> = this.entityManager.createQuery(
+            "SELECT no FROM Note no WHERE no.domainId = ?1", Note::class.java
+        )
+        val result: Note = query.setParameter(1, noteId).singleResult
+        this.entityManager.remove(result)
+    }
+
     override fun getAllMedication(medicalRecordId: MedicalRecordId): List<Medication> {
         val query: TypedQuery<Medication> = this.entityManager.createQuery(
             "SELECT med FROM Medication med WHERE med.medicalRecordDomainId = ?1", Medication::class.java
@@ -83,14 +91,6 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
         this.entityManager.persist(diagnosis)
     }
 
-    override fun deleteNote(noteId: NoteId) {
-        val query: TypedQuery<Note> = this.entityManager.createQuery(
-            "SELECT no FROM Note no WHERE no.domainId = ?1", Note::class.java
-        )
-        val result: Note = query.setParameter(1, noteId).singleResult
-        this.entityManager.remove(result)
-    }
-
     override fun getAllExercises(medicalRecordId: MedicalRecordId): List<Exercise> {
         val query: TypedQuery<Exercise> = this.entityManager.createQuery(
             "SELECT exerc FROM Exercise exerc WHERE exerc.medicalRecordDomainId = ?1", Exercise::class.java
@@ -100,6 +100,14 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
 
     override fun createExercise(exercise: Exercise) {
         this.entityManager.persist(exercise)
+    }
+
+    override fun deleteExercise(exerciseId: ExerciseId) {
+        val query: TypedQuery<Exercise> = this.entityManager.createQuery(
+            "SELECT exerc FROM Exercise exerc WHERE exerc.domainId = ?1", Exercise::class.java
+        )
+        val result: Exercise = query.setParameter(1, exerciseId).singleResult
+        this.entityManager.remove(result)
     }
 
     override fun getMedicationOfPatientByIdAndMr(
