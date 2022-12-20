@@ -164,7 +164,6 @@ values (001, 'dom-id-apt-001', '2022-12-01T14:00:00.000', 'A weird mold on my kn
        (030, 'dom-id-apt-032', '2022-12-30T16:30:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
        (031, 'dom-id-apt-033', '2022-12-30T16:45:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
        (032, 'dom-id-apt-003', '2023-01-29T16:00:00.000', 'I have a lot of lower back pain which needs a good massage!', 'dom-id-pa-001', '', 'dom-id-cp-001'),
-       (032, 'dom-id-apt-003', '2023-01-29T16:00:00.000', 'I have a lot of lower back pain which needs a good massage!', 'dom-id-pa-001', '', 'dom-id-cp-001'),
        (033, 'dom-id-apt-004', '2022-12-12T15:30:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
        (034, 'dom-id-apt-005', '2022-12-10T17:00:00.000', 'Blood test.', 'dom-id-pa-001', 'dom-id-gp-001', '');
 
