@@ -5,6 +5,7 @@ import nl.hva.backend.domain.Patient
 import nl.hva.backend.domain.api.GeneralPractitionerRepository
 import nl.hva.backend.domain.ids.GeneralPractitionerId
 import org.springframework.stereotype.Repository
+import java.time.LocalTime
 import java.util.*
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
@@ -24,11 +25,15 @@ class HibernateGeneralPractitionerRepository : GeneralPractitionerRepository {
     }
 
     override fun editAccount(
-        generalPractitionerId: GeneralPractitionerId, firstName: String, lastName: String, street: String,
-        zip: String, city: String, country: String, phoneNumber: String
+            generalPractitionerId: GeneralPractitionerId, firstName: String, lastName: String, street: String,
+            zip: String, city: String, country: String, phoneNumber: String,
+            startTimeShift: LocalTime, endTimeShift: LocalTime, breakTimes: String, breakDuration: Long, appointmentDuration: Long
     ) {
         val updateQuery: Query = this.entityManager.createQuery(
-            "UPDATE GeneralPractitioner gp SET gp.firstName = ?1, gp.lastName = ?2, gp.address.street = ?3, gp.address.zip = ?4, gp.address.city = ?5, gp.address.country = ?6, gp.phoneNumber = ?7 WHERE gp.domainId = ?8"
+            "UPDATE GeneralPractitioner gp SET gp.firstName = ?1, gp.lastName = ?2, gp.address.street = ?3, gp.address.zip = ?4, " +
+                    "gp.address.city = ?5, gp.address.country = ?6, gp.phoneNumber = ?7, " +
+                    "gp.startTimeShift = ?8, gp.endTimeShift = ?9, gp.breakTimes = ?10, gp.breakDuration = ?11, gp.appointmentDuration = ?12 " +
+                    "WHERE gp.domainId = ?13"
         )
             .setParameter(1, firstName)
             .setParameter(2, lastName)
@@ -37,7 +42,12 @@ class HibernateGeneralPractitionerRepository : GeneralPractitionerRepository {
             .setParameter(5, city)
             .setParameter(6, country)
             .setParameter(7, phoneNumber)
-            .setParameter(8, generalPractitionerId)
+            .setParameter(8, startTimeShift)
+            .setParameter(9, endTimeShift)
+            .setParameter(10, breakTimes)
+            .setParameter(11, breakDuration)
+            .setParameter(12, appointmentDuration)
+            .setParameter(13, generalPractitionerId)
 
         updateQuery.executeUpdate()
     }

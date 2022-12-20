@@ -20,4 +20,6 @@ interface CalendarRepository {
 
     fun getAllAppointmentsByCareProviderId(careProviderId: CareProviderId): List<Appointment>
 
+    fun getAppointmentsOfParticularDay(yearNumber: Int, monthNumber: Int, monthDay: Int, gpId: GeneralPractitionerId): List<Appointment>
+
 }

@@ -1,16 +1,16 @@
 -- general practitioner
-insert into general_practitioner (id, general_practitioner_id, first_name, last_name, street, zip, city, country, phone_number)
-values (001, 'dom-id-gp-001', 'Arnout', 'Stegehuis', 'Vossenstraat 30', '6811JM', 'Arnheim', 'Netherlands', '0663370595'),
-       (002, 'dom-id-gp-002', 'Joep', 'Kuipers', 'Zuidzijde 69', '2411RS', 'Bodegraven', 'Netherlands', '5145125251'),
-       (003, 'dom-id-gp-003', 'Mathies', 'Wesselink', 'Ondernemingsweg 67', '8251KW', 'Dronten', 'Netherlands', '0680688352'),
-       (004, 'dom-id-gp-004', 'Gerrit', 'Merjenburgh', 'Lange Jufferstraat 176', '3512ED', 'Utrecht', 'Netherlands', '0634577354'),
-       (005, 'dom-id-gp-005', 'Thies', 'Veenebrugge', 'Verbindingsweg 191', '2061EK', 'Bloemendaal', 'Netherlands', '0652431375');
+insert into general_practitioner (id, general_practitioner_id, first_name, last_name, street, zip, city, country, phone_number, start_time_shift, end_time_shift, break_times, break_duration, appointment_duration)
+values (001, 'dom-id-gp-001', 'Arnout', 'Stegehuis', 'Vossenstraat 30', '6811JM', 'Arnheim', 'Netherlands', '0663370595', '09:00', '17:00', '12:00', '30', '15'),
+       (002, 'dom-id-gp-002', 'Joep', 'Kuipers', 'Zuidzijde 69', '2411RS', 'Bodegraven', 'Netherlands', '5145125251', '09:00', '17:00', '12:00', '30', '15'),
+       (003, 'dom-id-gp-003', 'Mathies', 'Wesselink', 'Ondernemingsweg 67', '8251KW', 'Dronten', 'Netherlands', '0680688352', '09:00', '17:00', '12:00', '30', '15'),
+       (004, 'dom-id-gp-004', 'Gerrit', 'Merjenburgh', 'Lange Jufferstraat 176', '3512ED', 'Utrecht', 'Netherlands', '0634577354', '09:00', '17:00', '12:00', '30', '15'),
+       (005, 'dom-id-gp-005', 'Thies', 'Veenebrugge', 'Verbindingsweg 191', '2061EK', 'Bloemendaal', 'Netherlands', '0652431375', '09:00', '17:00', '12:00', '30', '15');
 
 -- care provider
-insert into care_provider (id, care_provider_id, first_name, last_name, street, zip, city, country, phone_number, specialism)
-values (001, 'dom-id-cp-001', 'Stijn', 'Boers', 'De Prunus 101', '7701WR', 'Dedemsvaart', 'Netherlands', '0638469429', 'PHYSIOTHERAPY'),
-       (002, 'dom-id-cp-002', 'Loesje', 'Terruwe', 'Zorgvrij 152', '1391RM', 'Abcoude', 'Netherlands', '0683667078', 'APOTHECARY'),
-       (003, 'dom-id-cp-003', 'Margriet', 'Ranervelt', 'Laan van Meerdervoort 192', '2555BL', 'Den Haag', 'Netherlands', '0688177729', 'APOTHECARY');
+insert into care_provider (id, care_provider_id, first_name, last_name, street, zip, city, country, phone_number, specialism, start_time_shift, end_time_shift, break_times, break_duration, appointment_duration)
+values (001, 'dom-id-cp-001', 'Stijn', 'Boers', 'De Prunus 101', '7701WR', 'Dedemsvaart', 'Netherlands', '0638469429', 'PHYSIOTHERAPY', '09:00', '17:00', '12:00', '60', '60'),
+       (002, 'dom-id-cp-002', 'Loesje', 'Terruwe', 'Zorgvrij 152', '1391RM', 'Abcoude', 'Netherlands', '0683667078', 'APOTHECARY', '09:00', '17:00', '12:00', '30', '10'),
+       (003, 'dom-id-cp-003', 'Margriet', 'Ranervelt', 'Laan van Meerdervoort 192', '2555BL', 'Den Haag', 'Netherlands', '0688177729', 'APOTHECARY', '09:00', '17:00', '12:00', '30', '10');
 
 -- patient
 insert into patient (id, patient_id, first_name, last_name, street, zip, city, country, gender, birth_date, phone_number, email, is_using_app, medical_record_id, general_practitioner_id)
@@ -133,10 +133,40 @@ values (001, 'dom-id-dia-001', 'Diagnosis 1', 'HEART', '2022-12-07', 'heart atta
 -- appointment
 insert into appointment(id, appointment_id, date_time, reason, patient_id, general_practitioner_id, care_provider_id)
 values (001, 'dom-id-apt-001', '2022-12-01T14:00:00.000', 'A weird mold on my knee!', 'dom-id-pa-001', 'dom-id-gp-001', ''),
-       (002, 'dom-id-apt-002', '2022-11-09T16:30:00.000', 'I have a lot of lower back pain which needs a good massage!', 'dom-id-pa-001', '', 'dom-id-cp-001'),
-       (003, 'dom-id-apt-003', '2023-01-29T18:00:00.000', 'I need to pick up the medicine for my headache.', 'dom-id-pa-001', '', 'dom-id-cp-003'),
-       (004, 'dom-id-apt-004', '2022-12-12T15:30:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
-       (005, 'dom-id-apt-005', '2022-12-10T17:00:00.000', 'Blood test.', 'dom-id-pa-001', 'dom-id-gp-001', '');
+       (002, 'dom-id-apt-002', '2022-12-30T09:00:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (003, 'dom-id-apt-003', '2022-12-30T09:15:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (004, 'dom-id-apt-004', '2022-12-30T09:30:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (005, 'dom-id-apt-005', '2022-12-30T09:45:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (006, 'dom-id-apt-006', '2022-12-30T10:00:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (007, 'dom-id-apt-007', '2022-12-30T10:15:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (008, 'dom-id-apt-008', '2022-12-30T10:30:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (009, 'dom-id-apt-009', '2022-12-30T10:45:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (010, 'dom-id-apt-010', '2022-12-30T11:00:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (011, 'dom-id-apt-011', '2022-12-30T11:15:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (012, 'dom-id-apt-012', '2022-12-30T11:30:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (013, 'dom-id-apt-013', '2022-12-30T11:45:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (014, 'dom-id-apt-016', '2022-12-30T12:30:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (015, 'dom-id-apt-017', '2022-12-30T12:45:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (016, 'dom-id-apt-018', '2022-12-30T13:00:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (017, 'dom-id-apt-019', '2022-12-30T13:15:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (018, 'dom-id-apt-020', '2022-12-30T13:30:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (019, 'dom-id-apt-021', '2022-12-30T13:45:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (020, 'dom-id-apt-022', '2022-12-30T14:00:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (021, 'dom-id-apt-023', '2022-12-30T14:15:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (022, 'dom-id-apt-024', '2022-12-30T14:30:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (023, 'dom-id-apt-025', '2022-12-30T14:45:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (024, 'dom-id-apt-026', '2022-12-30T15:00:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (025, 'dom-id-apt-027', '2022-12-30T15:15:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (026, 'dom-id-apt-028', '2022-12-30T15:30:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (027, 'dom-id-apt-029', '2022-12-30T15:45:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (028, 'dom-id-apt-030', '2022-12-30T16:00:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (029, 'dom-id-apt-031', '2022-12-30T16:15:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (030, 'dom-id-apt-032', '2022-12-30T16:30:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (031, 'dom-id-apt-033', '2022-12-30T16:45:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (032, 'dom-id-apt-003', '2023-01-29T16:00:00.000', 'I have a lot of lower back pain which needs a good massage!', 'dom-id-pa-001', '', 'dom-id-cp-001'),
+       (032, 'dom-id-apt-003', '2023-01-29T16:00:00.000', 'I have a lot of lower back pain which needs a good massage!', 'dom-id-pa-001', '', 'dom-id-cp-001'),
+       (033, 'dom-id-apt-004', '2022-12-12T15:30:00.000', 'Half year check-up.', 'dom-id-pa-001', 'dom-id-gp-001', ''),
+       (034, 'dom-id-apt-005', '2022-12-10T17:00:00.000', 'Blood test.', 'dom-id-pa-001', 'dom-id-gp-001', '');
 
 -- exercise
 insert into exercise(id, exercise_id, title, description, start_date, end_date, medical_record_id)

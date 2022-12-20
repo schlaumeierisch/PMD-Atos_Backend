@@ -11,6 +11,7 @@ import nl.hva.backend.domain.value_objects.Address
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.time.LocalTime
 
 @Service
 class GeneralPractitionerServiceImpl : GeneralPractitionerService {
@@ -26,12 +27,17 @@ class GeneralPractitionerServiceImpl : GeneralPractitionerService {
         zip: String,
         city: String,
         country: String,
-        phoneNumber: String
+        phoneNumber: String,
+        startTimeShift: LocalTime,
+        endTimeShift: LocalTime,
+        breakTimes: String,
+        breakDuration: Long,
+        appointmentDuration: Long
     ) {
         val generalPractitionerId: GeneralPractitionerId = generalPractitionerRepository.nextIdentity()
 
         val generalPractitioner = GeneralPractitioner(
-            generalPractitionerId, firstName, lastName, Address(street, zip, city, country), phoneNumber
+            generalPractitionerId, firstName, lastName, Address(street, zip, city, country), phoneNumber, startTimeShift, endTimeShift, breakTimes, breakDuration, appointmentDuration
         )
 
         this.generalPractitionerRepository.createAccount(generalPractitioner)
@@ -46,10 +52,15 @@ class GeneralPractitionerServiceImpl : GeneralPractitionerService {
         zip: String,
         city: String,
         country: String,
-        phoneNumber: String
+        phoneNumber: String,
+        startTimeShift: LocalTime,
+        endTimeShift: LocalTime,
+        breakTimes: String,
+        breakDuration: Long,
+        appointmentDuration: Long
     ) {
         this.generalPractitionerRepository.editAccount(
-            generalPractitionerId, firstName, lastName, street, zip, city, country, phoneNumber
+            generalPractitionerId, firstName, lastName, street, zip, city, country, phoneNumber, startTimeShift, endTimeShift, breakTimes, breakDuration, appointmentDuration
         )
     }
 

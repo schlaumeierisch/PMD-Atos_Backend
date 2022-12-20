@@ -3,6 +3,7 @@ package nl.hva.backend.domain.api
 import nl.hva.backend.domain.GeneralPractitioner
 import nl.hva.backend.domain.Patient
 import nl.hva.backend.domain.ids.GeneralPractitionerId
+import java.time.LocalTime
 
 interface GeneralPractitionerRepository {
 
@@ -11,8 +12,9 @@ interface GeneralPractitionerRepository {
     fun createAccount(generalPractitioner: GeneralPractitioner)
 
     fun editAccount(
-        generalPractitionerId: GeneralPractitionerId, firstName: String, lastName: String,
-        street: String, zip: String, city: String, country: String, phoneNumber: String
+            generalPractitionerId: GeneralPractitionerId, firstName: String, lastName: String,
+            street: String, zip: String, city: String, country: String, phoneNumber: String,
+            startTimeShift: LocalTime, endTimeShift: LocalTime, breakTimes: String, breakDuration: Long, appointmentDuration: Long
     )
 
     fun deleteAccount(generalPractitionerId: GeneralPractitionerId)

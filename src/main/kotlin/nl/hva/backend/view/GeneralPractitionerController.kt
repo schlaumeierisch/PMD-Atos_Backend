@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.servlet.ModelAndView
 import org.springframework.web.servlet.mvc.support.RedirectAttributes
 import org.springframework.web.servlet.view.RedirectView
+import java.time.LocalTime
 
 @Controller
 @RequestMapping("general-practitioner")
@@ -47,6 +48,11 @@ class GeneralPractitionerController {
         @RequestParam("city") city: String,
         @RequestParam("country") country: String,
         @RequestParam("phone_number") phoneNumber: String,
+        @RequestParam("start_time_shift") startTimeShift: LocalTime,
+        @RequestParam("end_time_shift") endTimeShift: LocalTime,
+        @RequestParam("break_times") breakTimes: String,
+        @RequestParam("break_duration") breakDuration: Long,
+        @RequestParam("appointment_duration") appointmentDuration: Long,
         redirectAttributes: RedirectAttributes
     ): RedirectView {
         // use generalPractitionerService to create a new GP account
@@ -57,7 +63,12 @@ class GeneralPractitionerController {
             zip,
             city,
             country,
-            phoneNumber
+            phoneNumber,
+            startTimeShift,
+            endTimeShift,
+            breakTimes,
+            breakDuration,
+            appointmentDuration
         )
 
         // add new flash attribute to show the state in a card
@@ -104,6 +115,11 @@ class GeneralPractitionerController {
         @RequestParam("city") city: String,
         @RequestParam("country") country: String,
         @RequestParam("phone_number") phoneNumber: String,
+        @RequestParam("start_time_shift") startTimeShift: LocalTime,
+        @RequestParam("end_time_shift") endTimeShift: LocalTime,
+        @RequestParam("break_times") breakTimes: String,
+        @RequestParam("break_duration") breakDuration: Long,
+        @RequestParam("appointment_duration") appointmentDuration: Long,
         redirectAttributes: RedirectAttributes
     ): RedirectView {
         // use generalPractitionerService to edit the GP account
@@ -115,7 +131,12 @@ class GeneralPractitionerController {
             zip,
             city,
             country,
-            phoneNumber
+            phoneNumber,
+            startTimeShift,
+            endTimeShift,
+            breakTimes,
+            breakDuration,
+            appointmentDuration
         )
 
         // add new flash attribute to show the state in a card

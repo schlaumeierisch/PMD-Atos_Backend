@@ -2,6 +2,7 @@ package nl.hva.backend.rest
 
 import nl.hva.backend.application.api.CalendarService
 import nl.hva.backend.application.dto.AppointmentDTO
+import nl.hva.backend.domain.TimeSlot
 import nl.hva.backend.domain.ids.AppointmentId
 import nl.hva.backend.domain.ids.CareProviderId
 import nl.hva.backend.domain.ids.GeneralPractitionerId
@@ -9,12 +10,8 @@ import nl.hva.backend.domain.ids.PatientId
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.web.bind.annotation.*
-import java.sql.Time
 import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 
 @RestController
 @RequestMapping("/rest/calendar/")
@@ -64,5 +61,26 @@ class CalendarRestController {
         @PathVariable("id") id: String
     ): List<AppointmentDTO> {
         return this.calendarService.getAllAppointmentsByCareProviderId(CareProviderId(id))
+    }
+
+    @GetMapping("/getNotAvailableDaysInThisMonth/{yearNumber}/{monthNumber}/{gpId}")
+    @ResponseBody
+    fun getNotAvailableDaysInThisMonth(
+            @PathVariable("yearNumber") yearNumber: Int,
+            @PathVariable("monthNumber") monthNumber: Int,
+            @PathVariable("gpId") gpId: String
+    ): List<LocalDate> {
+        return this.calendarService.getNotAvailableDaysInThisMonth(yearNumber, monthNumber, gpId)
+    }
+
+    @GetMapping("/getAvailableTimeSlotsOfParticularDay/{yearNumber}/{monthNumber}/{monthDay}/{gpId}")
+    @ResponseBody
+    fun getAvailableTimeSlotsOfParticularDay(
+        @PathVariable("yearNumber") yearNumber: Int,
+        @PathVariable("monthNumber") monthNumber: Int,
+        @PathVariable("monthDay") monthDay: Int,
+        @PathVariable("gpId") gpId: String
+    ): List<TimeSlot> {
+        return this.calendarService.getAvailableTimeSlotsOfParticularDay(yearNumber, monthNumber, monthDay, gpId)
     }
 }

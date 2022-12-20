@@ -24,5 +24,11 @@
 
         <property name="phoneNumber" column="phone_number" type="string"/>
 
+        <property name="startTimeShift" column="start_time_shift" type="java.time.LocalTime"/>
+        <property name="endTimeShift" column="end_time_shift" type="java.time.LocalTime"/>
+        <property name="breakTimes" column="break_times" type="string"/>
+        <property name="breakDuration" column="break_duration" type="java.lang.Long"/>
+        <property name="appointmentDuration" column="appointment_duration" type="java.lang.Long"/>
+
     </class>
 </hibernate-mapping>

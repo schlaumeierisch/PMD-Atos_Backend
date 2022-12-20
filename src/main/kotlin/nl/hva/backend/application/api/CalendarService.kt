@@ -1,10 +1,12 @@
 package nl.hva.backend.application.api
 
 import nl.hva.backend.application.dto.AppointmentDTO
+import nl.hva.backend.domain.TimeSlot
 import nl.hva.backend.domain.ids.AppointmentId
 import nl.hva.backend.domain.ids.CareProviderId
 import nl.hva.backend.domain.ids.GeneralPractitionerId
 import nl.hva.backend.domain.ids.PatientId
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 interface CalendarService {
@@ -19,4 +21,7 @@ interface CalendarService {
 
     fun getAllAppointmentsByCareProviderId(careProviderId: CareProviderId): List<AppointmentDTO>
 
+    fun getNotAvailableDaysInThisMonth(yearNumber: Int, monthNumber: Int, gpId: String): List<LocalDate>
+
+    fun getAvailableTimeSlotsOfParticularDay(yearNumber: Int, monthNumber: Int, monthDay: Int, gpId: String): List<TimeSlot>
 }
