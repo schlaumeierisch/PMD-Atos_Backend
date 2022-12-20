@@ -1,19 +1,10 @@
 package nl.hva.backend.application
 
 import nl.hva.backend.application.api.PermissionService
-import nl.hva.backend.application.dto.DiagnosisDTO
-import nl.hva.backend.application.dto.ExerciseDTO
-import nl.hva.backend.application.dto.MedicationDTO
-import nl.hva.backend.application.dto.NoteDTO
 import nl.hva.backend.application.dto.many_to_many.DiagnosisCareProviderDTO
 import nl.hva.backend.application.dto.many_to_many.ExerciseCareProviderDTO
 import nl.hva.backend.application.dto.many_to_many.MedicationCareProviderDTO
 import nl.hva.backend.application.dto.many_to_many.NoteCareProviderDTO
-import nl.hva.backend.domain.Diagnosis
-import nl.hva.backend.domain.Exercise
-import nl.hva.backend.domain.Medication
-import nl.hva.backend.domain.Note
-import nl.hva.backend.domain.api.MedicalRecordRepository
 import nl.hva.backend.domain.api.PermissionRepository
 import nl.hva.backend.domain.ids.*
 import nl.hva.backend.domain.many_to_many.DiagnosisCareProviderRelation

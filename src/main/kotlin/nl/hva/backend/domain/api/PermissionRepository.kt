@@ -1,9 +1,5 @@
 package nl.hva.backend.domain.api
 
-import nl.hva.backend.domain.Diagnosis
-import nl.hva.backend.domain.Exercise
-import nl.hva.backend.domain.Medication
-import nl.hva.backend.domain.Note
 import nl.hva.backend.domain.ids.*
 import nl.hva.backend.domain.many_to_many.DiagnosisCareProviderRelation
 import nl.hva.backend.domain.many_to_many.ExerciseCareProviderRelation

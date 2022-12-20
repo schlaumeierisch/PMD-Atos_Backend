@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository
 import java.util.*
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
-import javax.persistence.Query
 import javax.persistence.TypedQuery
 
 @Repository

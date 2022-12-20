@@ -2,7 +2,6 @@ package nl.hva.backend.domain.api
 
 import nl.hva.backend.domain.*
 import nl.hva.backend.domain.ids.*
-import nl.hva.backend.domain.many_to_many.DiagnosisCareProviderRelation
 
 interface MedicalRecordRepository {
 

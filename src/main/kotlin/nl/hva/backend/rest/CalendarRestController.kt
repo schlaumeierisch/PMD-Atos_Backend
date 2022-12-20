@@ -1,9 +1,7 @@
 package nl.hva.backend.rest
 
+import nl.hva.backend.application.api.AccountService
 import nl.hva.backend.application.api.CalendarService
-import nl.hva.backend.application.api.CareProviderService
-import nl.hva.backend.application.api.GeneralPractitionerService
-import nl.hva.backend.application.api.PatientService
 import nl.hva.backend.application.dto.AppointmentDTO
 import nl.hva.backend.application.dto.CareProviderDTO
 import nl.hva.backend.application.dto.GeneralPractitionerDTO
@@ -29,13 +27,7 @@ class CalendarRestController {
     private lateinit var calendarService: CalendarService
 
     @Autowired
-    private lateinit var patientService: PatientService
-
-    @Autowired
-    private lateinit var generalPractitionerService: GeneralPractitionerService
-
-    @Autowired
-    private lateinit var careProviderService: CareProviderService
+    private lateinit var accountService: AccountService
 
     // SwaggerUI: LocalDateTime must be passed in the format '2022-12-12T14:00:00.000'
     @PostMapping("/createAppointment")
@@ -47,29 +39,32 @@ class CalendarRestController {
         @RequestParam(required = false) gpId: String? = null,
         @RequestParam(required = false) cpId: String? = null
     ): ResponseEntity<String> {
-        val patientDTO: List<PatientDTO> = this.patientService.getAccountById(PatientId(patientId))
+        val patientDTO: List<PatientDTO> = this.accountService.getPatientById(PatientId(patientId))
 
         if (patientDTO.isEmpty()) {
             throw NotExistingException("Patient with id \'$patientId\' does not exist.")
         }
 
         if (gpId.isNullOrBlank() && !cpId.isNullOrBlank()) {
-            val careProviderDTO: List<CareProviderDTO> = this.careProviderService.getAccountById(CareProviderId(cpId))
+            val careProviderDTO: List<CareProviderDTO> = this.accountService.getCareProviderById(CareProviderId(cpId))
 
             if (careProviderDTO.isNotEmpty()) {
                 this.calendarService.createAppointment(dateTime, reason, patientId, null, cpId)
 
-                return ResponseEntity.status(HttpStatus.OK).body("New appointment for patient with id \'$patientId\' & care provider with id \'$cpId\' successfully created.")
+                return ResponseEntity.status(HttpStatus.OK)
+                    .body("New appointment for patient with id \'$patientId\' & care provider with id \'$cpId\' successfully created.")
             } else {
                 throw NotExistingException("Care provider with id \'$cpId\' does not exist.")
             }
         } else if (!gpId.isNullOrBlank() && cpId.isNullOrBlank()) {
-            val generalPractitionerDTO: List<GeneralPractitionerDTO> = this.generalPractitionerService.getAccountById(GeneralPractitionerId(gpId))
+            val generalPractitionerDTO: List<GeneralPractitionerDTO> =
+                this.accountService.getGeneralPractitionerById(GeneralPractitionerId(gpId))
 
             if (generalPractitionerDTO.isNotEmpty()) {
                 this.calendarService.createAppointment(dateTime, reason, patientId, gpId, null)
 
-                return ResponseEntity.status(HttpStatus.OK).body("New appointment for patient with id \'$patientId\' & general practitioner with id \'$gpId\' successfully created.")
+                return ResponseEntity.status(HttpStatus.OK)
+                    .body("New appointment for patient with id \'$patientId\' & general practitioner with id \'$gpId\' successfully created.")
             } else {
                 throw NotExistingException("General practitioner with id \'$gpId\' does not exist.")
             }
@@ -100,10 +95,11 @@ class CalendarRestController {
     fun getAllAppointmentsByPatientId(
         @PathVariable("id") id: String
     ): ResponseEntity<List<AppointmentDTO>> {
-        val patientDTO: List<PatientDTO> = this.patientService.getAccountById(PatientId(id))
+        val patientDTO: List<PatientDTO> = this.accountService.getPatientById(PatientId(id))
 
         if (patientDTO.isNotEmpty()) {
-            val appointmentDTOs: List<AppointmentDTO> = this.calendarService.getAllAppointmentsByPatientId(PatientId(id))
+            val appointmentDTOs: List<AppointmentDTO> =
+                this.calendarService.getAllAppointmentsByPatientId(PatientId(id))
 
             return ResponseEntity.status(HttpStatus.OK).body(appointmentDTOs)
         } else {
@@ -116,10 +112,12 @@ class CalendarRestController {
     fun getAllAppointmentsByGeneralPractitionerId(
         @PathVariable("id") id: String
     ): ResponseEntity<List<AppointmentDTO>> {
-        val generalPractitionerDTO: List<GeneralPractitionerDTO> = this.generalPractitionerService.getAccountById(GeneralPractitionerId(id))
+        val generalPractitionerDTO: List<GeneralPractitionerDTO> =
+            this.accountService.getGeneralPractitionerById(GeneralPractitionerId(id))
 
         if (generalPractitionerDTO.isNotEmpty()) {
-            val appointmentDTOs: List<AppointmentDTO> = this.calendarService.getAllAppointmentsByGeneralPractitionerId(GeneralPractitionerId(id))
+            val appointmentDTOs: List<AppointmentDTO> =
+                this.calendarService.getAllAppointmentsByGeneralPractitionerId(GeneralPractitionerId(id))
 
             return ResponseEntity.status(HttpStatus.OK).body(appointmentDTOs)
         } else {
@@ -132,10 +130,11 @@ class CalendarRestController {
     fun getAllAppointmentsByCareProviderId(
         @PathVariable("id") id: String
     ): ResponseEntity<List<AppointmentDTO>> {
-        val careProviderDTO: List<CareProviderDTO> = this.careProviderService.getAccountById(CareProviderId(id))
+        val careProviderDTO: List<CareProviderDTO> = this.accountService.getCareProviderById(CareProviderId(id))
 
         if (careProviderDTO.isNotEmpty()) {
-            val appointmentDTOs: List<AppointmentDTO> = this.calendarService.getAllAppointmentsByCareProviderId(CareProviderId(id))
+            val appointmentDTOs: List<AppointmentDTO> =
+                this.calendarService.getAllAppointmentsByCareProviderId(CareProviderId(id))
 
             return ResponseEntity.status(HttpStatus.OK).body(appointmentDTOs)
         } else {
