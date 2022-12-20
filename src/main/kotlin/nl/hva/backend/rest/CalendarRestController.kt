@@ -71,7 +71,7 @@ class CalendarRestController {
 
                 return ResponseEntity.status(HttpStatus.OK).body("New appointment for patient with id \'$patientId\' & general practitioner with id \'$gpId\' successfully created.")
             } else {
-                throw NotExistingException("Care provider with id \'$gpId\' does not exist.")
+                throw NotExistingException("General practitioner with id \'$gpId\' does not exist.")
             }
         } else if (!gpId.isNullOrBlank() && !cpId.isNullOrBlank()) {
             throw InvalidParameterException("Only one id (general practitioner or care provider) may be set.")
