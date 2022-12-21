@@ -138,3 +138,11 @@ class GeneralPractitionerController {
             breakDuration,
             appointmentDuration
         )
+
+        // add new flash attribute to show the state in a card
+        redirectAttributes.addFlashAttribute("successfulAction", "edit")
+
+        // redirect to @GetMapping("overview")
+        return RedirectView("/general-practitioner/overview")
+    }
+}
