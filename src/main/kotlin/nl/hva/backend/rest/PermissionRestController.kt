@@ -53,21 +53,19 @@ class PermissionRestController {
         cpId: String
     ): List<MedicationDTO> {
         //Check all permissions the care provider has
-        val medicineCareProviderDTOs: List<MedicationCareProviderDTO> =
-            this.permissionService.getMedicationCareProviderRelationById(
-                CareProviderId(cpId)
-            )
+        val medicationCareProviderDTOs: List<MedicationCareProviderDTO> =
+            this.permissionService.getMedicationCareProviderRelationById(CareProviderId(cpId))
 
         //Return only the medication of the requested patient
         val medicationDTOs: ArrayList<MedicationDTO> = arrayListOf()
-        for (medicineCareProviderDTO in medicineCareProviderDTOs) {
-            medicationDTOs.add(
-                this.medicalRecordService.getMedicationByIdAndMr(
-                    MedicationId(medicineCareProviderDTO.medId()),
-                    MedicalRecordId(mrId)
-                )
+        for (medicationCareProviderDTO in medicationCareProviderDTOs) {
+            val medicationDTO: List<MedicationDTO> = this.medicalRecordService.getMedicationByIdAndMedicalRecordId(
+                MedicationId(medicationCareProviderDTO.medId()),
+                MedicalRecordId(mrId)
             )
+            medicationDTOs.add(medicationDTO[0])
         }
+
         return medicationDTOs
     }
 
@@ -116,13 +114,13 @@ class PermissionRestController {
         //Return only the note of the requested patient
         val noteDTOs: ArrayList<NoteDTO> = arrayListOf()
         for (noteCareProviderDTO in noteCareProviderDTOs) {
-            noteDTOs.add(
-                this.medicalRecordService.getNoteByIdAndMr(
-                    NoteId(noteCareProviderDTO.noteId()),
-                    MedicalRecordId(mrId)
-                )
+            val noteDTO: List<NoteDTO> = this.medicalRecordService.getNoteByIdAndMedicalRecordId(
+                NoteId(noteCareProviderDTO.noteId()),
+                MedicalRecordId(mrId)
             )
+            noteDTOs.add(noteDTO[0])
         }
+
         return noteDTOs
     }
 
@@ -171,13 +169,13 @@ class PermissionRestController {
         //Return only the medication of the requested patient
         val diagnosisDTOs: ArrayList<DiagnosisDTO> = arrayListOf()
         for (noteCareProviderDTO in diagnosisCareProviderDTOs) {
-            diagnosisDTOs.add(
-                this.medicalRecordService.getDiagnosisByIdAndMr(
-                    DiagnosisId(noteCareProviderDTO.diagId()),
-                    MedicalRecordId(mrId)
-                )
+            val diagnosisDTO: List<DiagnosisDTO> = this.medicalRecordService.getDiagnosisByIdAndMedicalRecordId(
+                DiagnosisId(noteCareProviderDTO.diagId()),
+                MedicalRecordId(mrId)
             )
+            diagnosisDTOs.add(diagnosisDTO[0])
         }
+
         return diagnosisDTOs
     }
 
@@ -226,13 +224,13 @@ class PermissionRestController {
         //Return only the medication of the requested patient
         val exerciseDTOs: ArrayList<ExerciseDTO> = arrayListOf()
         for (exerciseCareProviderDTO in exerciseCareProviderDTOs) {
-            exerciseDTOs.add(
-                this.medicalRecordService.getExerciseByIdAndMr(
-                    ExerciseId(exerciseCareProviderDTO.exerId()),
-                    MedicalRecordId(mrId)
-                )
+            val exerciseDTO: List<ExerciseDTO> = this.medicalRecordService.getExerciseByIdAndMedicalRecordId(
+                ExerciseId(exerciseCareProviderDTO.exerId()),
+                MedicalRecordId(mrId)
             )
+            exerciseDTOs.add(exerciseDTO[0])
         }
+
         return exerciseDTOs
     }
 
@@ -249,6 +247,7 @@ class PermissionRestController {
             validDate
         )
     }
+
     @DeleteMapping("/removeExercisePermission")
     fun deleteExercisePermission(
         exerciseId: String,

@@ -18,17 +18,6 @@ class MedicalRecordServiceImpl : MedicalRecordService {
     private lateinit var medicalRecordRepository: MedicalRecordRepository
 
     @Transactional
-    override fun createMedicalRecord(): MedicalRecordId {
-        val medicalRecordId: MedicalRecordId = this.medicalRecordRepository.nextIdentity()
-
-        val medicalRecord = MedicalRecord(medicalRecordId)
-
-        this.medicalRecordRepository.createMedicalRecord(medicalRecord)
-
-        return medicalRecordId
-    }
-
-    @Transactional
     override fun getMedicalRecord(medicalRecordId: MedicalRecordId): List<MedicalRecordDTO> {
         val medicalRecord: List<MedicalRecord> = this.medicalRecordRepository.getMedicalRecord(medicalRecordId)
 
@@ -47,12 +36,29 @@ class MedicalRecordServiceImpl : MedicalRecordService {
     }
 
     @Transactional
+    override fun getNoteByIdAndMedicalRecordId(noteId: NoteId, medicalRecordId: MedicalRecordId): List<NoteDTO> {
+        val note: List<Note> =
+            this.medicalRecordRepository.getNoteByIdAndMedicalRecordId(noteId, medicalRecordId)
+
+        return if (note.isNotEmpty()) {
+            listOf(NoteDTO.fromNote(note[0]))
+        } else {
+            emptyList()
+        }
+    }
+
+    @Transactional
     override fun createNote(title: String, description: String, medicalRecordId: MedicalRecordId) {
         val noteId: NoteId = this.medicalRecordRepository.nextNoteIdentity()
 
         val note = Note(noteId, title, description, LocalDate.now(), medicalRecordId)
 
         this.medicalRecordRepository.createNote(note)
+    }
+
+    @Transactional
+    override fun deleteNote(noteId: NoteId) {
+        this.medicalRecordRepository.deleteNote(noteId)
     }
 
     @Transactional
@@ -65,6 +71,21 @@ class MedicalRecordServiceImpl : MedicalRecordService {
     @Transactional
     override fun getMedicationById(medicationId: MedicationId): List<MedicationDTO> {
         val medication: List<Medication> = this.medicalRecordRepository.getMedicationById(medicationId)
+
+        return if (medication.isNotEmpty()) {
+            listOf(MedicationDTO.fromMedication(medication[0]))
+        } else {
+            emptyList()
+        }
+    }
+
+    @Transactional
+    override fun getMedicationByIdAndMedicalRecordId(
+        medicationId: MedicationId,
+        medicalRecordId: MedicalRecordId
+    ): List<MedicationDTO> {
+        val medication: List<Medication> =
+            this.medicalRecordRepository.getMedicationByIdAndMedicalRecordId(medicationId, medicalRecordId)
 
         return if (medication.isNotEmpty()) {
             listOf(MedicationDTO.fromMedication(medication[0]))
@@ -103,6 +124,21 @@ class MedicalRecordServiceImpl : MedicalRecordService {
     }
 
     @Transactional
+    override fun getDiagnosisByIdAndMedicalRecordId(
+        diagnosisId: DiagnosisId,
+        medicalRecordId: MedicalRecordId
+    ): List<DiagnosisDTO> {
+        val diagnosis: List<Diagnosis> =
+            this.medicalRecordRepository.getDiagnosisByIdAndMedicalRecordId(diagnosisId, medicalRecordId)
+
+        return if (diagnosis.isNotEmpty()) {
+            listOf(DiagnosisDTO.fromDiagnosis(diagnosis[0]))
+        } else {
+            emptyList()
+        }
+    }
+
+    @Transactional
     override fun createDiagnosis(
         title: String,
         diagnosisType: Enum<DiagnosisType>,
@@ -114,7 +150,8 @@ class MedicalRecordServiceImpl : MedicalRecordService {
     ) {
         val diagnosisId: DiagnosisId = this.medicalRecordRepository.nextDiagnosisIdentity()
 
-        val diagnosis = Diagnosis(diagnosisId, title, diagnosisType, dateDiagnosed, cause, treatment, advice, medicalRecordId)
+        val diagnosis =
+            Diagnosis(diagnosisId, title, diagnosisType, dateDiagnosed, cause, treatment, advice, medicalRecordId)
 
         this.medicalRecordRepository.createDiagnosis(diagnosis)
     }
@@ -124,6 +161,21 @@ class MedicalRecordServiceImpl : MedicalRecordService {
         val exercises: List<Exercise> = this.medicalRecordRepository.getAllExercises(medicalRecordId)
 
         return ExerciseDTO.fromExercises(exercises)
+    }
+
+    @Transactional
+    override fun getExerciseByIdAndMedicalRecordId(
+        exerciseId: ExerciseId,
+        medicalRecordId: MedicalRecordId
+    ): List<ExerciseDTO> {
+        val exercise: List<Exercise> =
+            this.medicalRecordRepository.getExerciseByIdAndMedicalRecordId(exerciseId, medicalRecordId)
+
+        return if (exercise.isNotEmpty()) {
+            listOf(ExerciseDTO.fromExercise(exercise[0]))
+        } else {
+            emptyList()
+        }
     }
 
     @Transactional
@@ -139,43 +191,6 @@ class MedicalRecordServiceImpl : MedicalRecordService {
         val exercise = Exercise(exerciseId, title, description, startDate, endDate, medicalRecordId)
 
         this.medicalRecordRepository.createExercise(exercise)
-    }
-
-    @Transactional
-    override fun deleteNote(noteId: NoteId) {
-        this.medicalRecordRepository.deleteNote(noteId)
-    }
-
-    @Transactional
-    override fun getMedicationByIdAndMr(medicationId: MedicationId, medicalRecordId: MedicalRecordId): MedicationDTO {
-        val medication: Medication =
-            this.medicalRecordRepository.getMedicationOfPatientByIdAndMr(medicationId, medicalRecordId)
-
-        return MedicationDTO.fromMedication(medication)
-    }
-
-    @Transactional
-    override fun getNoteByIdAndMr(noteId: NoteId, medicalRecordId: MedicalRecordId): NoteDTO {
-        val note: Note =
-            this.medicalRecordRepository.getNoteByIdAndMr(noteId, medicalRecordId)
-
-        return NoteDTO.fromNote(note)
-    }
-
-    @Transactional
-    override fun getDiagnosisByIdAndMr(diagnosisId: DiagnosisId, medicalRecordId: MedicalRecordId): DiagnosisDTO {
-        val diagnosis: Diagnosis =
-            this.medicalRecordRepository.getDiagnosisByIdAndMr(diagnosisId, medicalRecordId)
-
-        return DiagnosisDTO.fromDiagnosis(diagnosis)
-    }
-
-    @Transactional
-    override fun getExerciseByIdAndMr(exerciseId: ExerciseId, medicalRecordId: MedicalRecordId): ExerciseDTO {
-        val exercise: Exercise =
-            this.medicalRecordRepository.getExerciseByIdAndMr(exerciseId, medicalRecordId)
-
-        return ExerciseDTO.fromExercise(exercise)
     }
 
 }

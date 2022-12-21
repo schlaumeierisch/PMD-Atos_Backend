@@ -133,12 +133,11 @@ class AccountServiceTests {
                 this.phoneNumber
             )
         )
+        val expected: List<GeneralPractitionerDTO> = GeneralPractitionerDTO.fromGeneralPractitioners(allGeneralPractitioners)
 
         // when
         Mockito.`when`(this.accountRepository.getAllGeneralPractitioners()).thenReturn(allGeneralPractitioners)
         val actual: List<GeneralPractitionerDTO> = this.accountService.getAllGeneralPractitioners()
-        val expected: List<GeneralPractitionerDTO> =
-            GeneralPractitionerDTO.fromGeneralPractitioners(allGeneralPractitioners)
 
         // then
         Assertions.assertEquals(expected.size, actual.size)
@@ -191,11 +190,11 @@ class AccountServiceTests {
                 this.generalPractitionerId3
             )
         )
+        val expected: List<PatientDTO> = PatientDTO.fromPatients(allPatients)
 
         // when
         Mockito.`when`(this.accountRepository.getAllPatients()).thenReturn(allPatients)
         val actual: List<PatientDTO> = this.accountService.getAllPatients()
-        val expected: List<PatientDTO> = PatientDTO.fromPatients(allPatients)
 
         // then
         Assertions.assertEquals(expected.size, actual.size)
@@ -233,11 +232,11 @@ class AccountServiceTests {
                 this.specialism
             )
         )
+        val expected: List<CareProviderDTO> = CareProviderDTO.fromCareProviders(allCareProviders)
 
         // when
         Mockito.`when`(this.accountRepository.getAllCareProviders()).thenReturn(allCareProviders)
         val actual: List<CareProviderDTO> = this.accountService.getAllCareProviders()
-        val expected: List<CareProviderDTO> = CareProviderDTO.fromCareProviders(allCareProviders)
 
         // then
         Assertions.assertEquals(expected.size, actual.size)
@@ -275,7 +274,7 @@ class AccountServiceTests {
     }
 
     @Test
-    fun given_repository_when_getAllGeneralPractitionerById_then_returnsGeneralPractitioner() {
+    fun given_repository_when_getGeneralPractitionerById_then_returnsGeneralPractitioner() {
         // given
         val generalPractitioner: List<GeneralPractitioner> = listOf(
             GeneralPractitioner(
@@ -286,14 +285,13 @@ class AccountServiceTests {
                 this.phoneNumber
             )
         )
+        val expected: List<GeneralPractitionerDTO> = listOf(GeneralPractitionerDTO.fromGeneralPractitioner(generalPractitioner[0]))
 
         // when
         Mockito.`when`(this.accountRepository.getGeneralPractitionerById(this.generalPractitionerId1))
             .thenReturn(generalPractitioner)
         val actual: List<GeneralPractitionerDTO> =
             this.accountService.getGeneralPractitionerById(this.generalPractitionerId1)
-        val expected: List<GeneralPractitionerDTO> =
-            listOf(GeneralPractitionerDTO.fromGeneralPractitioner(generalPractitioner[0]))
 
         // then
         Assertions.assertEquals(expected.size, actual.size)
@@ -301,7 +299,7 @@ class AccountServiceTests {
     }
 
     @Test
-    fun given_repository_when_getAllPatientById_then_returnsPatient() {
+    fun given_repository_when_getPatientById_then_returnsPatient() {
         // given
         val patient: List<Patient> = listOf(
             Patient(
@@ -318,11 +316,11 @@ class AccountServiceTests {
                 this.generalPractitionerId1
             )
         )
+        val expected: List<PatientDTO> = listOf(PatientDTO.fromPatient(patient[0]))
 
         // when
         Mockito.`when`(this.accountRepository.getPatientById(this.patientId1)).thenReturn(patient)
         val actual: List<PatientDTO> = this.accountService.getPatientById(this.patientId1)
-        val expected: List<PatientDTO> = listOf(PatientDTO.fromPatient(patient[0]))
 
         // then
         Assertions.assertEquals(expected.size, actual.size)
@@ -330,7 +328,7 @@ class AccountServiceTests {
     }
 
     @Test
-    fun given_repository_when_getAllCareProviderById_then_returnsPatient() {
+    fun given_repository_when_getCareProviderById_then_returnsCareProvider() {
         // given
         val careProvider: List<CareProvider> = listOf(
             CareProvider(
@@ -342,12 +340,12 @@ class AccountServiceTests {
                 this.specialism
             )
         )
+        val expected: List<CareProviderDTO> = listOf(CareProviderDTO.fromCareProvider(careProvider[0]))
 
         // when
         Mockito.`when`(this.accountRepository.getCareProviderById(this.careProviderId1))
             .thenReturn(careProvider)
         val actual: List<CareProviderDTO> = this.accountService.getCareProviderById(this.careProviderId1)
-        val expected: List<CareProviderDTO> = listOf(CareProviderDTO.fromCareProvider(careProvider[0]))
 
         // then
         Assertions.assertEquals(expected.size, actual.size)
@@ -411,13 +409,13 @@ class AccountServiceTests {
                 this.generalPractitionerId3
             )
         )
+        val expected: List<PatientDTO> = PatientDTO.fromPatients(allPatients)
 
         // when
         Mockito.`when`(this.accountRepository.getPatientsOfGeneralPractitionerById(GeneralPractitionerId("")))
             .thenReturn(allPatients)
         val actual: List<PatientDTO> =
             this.accountService.getPatientsOfGeneralPractitionerById(GeneralPractitionerId(""))
-        val expected: List<PatientDTO> = PatientDTO.fromPatients(allPatients)
 
         // then
         Assertions.assertEquals(expected.size, actual.size)
@@ -453,14 +451,13 @@ class AccountServiceTests {
                 this.careProviderId3
             )
         )
+        val expected: List<PatientCareProviderRelationDTO> = PatientCareProviderRelationDTO.fromPatientCareProviderRelations(allPatientCareProviderRelations)
 
         // when
         Mockito.`when`(this.accountRepository.getPatientCareProviderRelationsByPatientId(PatientId("")))
             .thenReturn(allPatientCareProviderRelations)
         val actual: List<PatientCareProviderRelationDTO> =
             this.accountService.getPatientCareProviderRelationsByPatientId(PatientId(""))
-        val expected: List<PatientCareProviderRelationDTO> =
-            PatientCareProviderRelationDTO.fromPatientCareProviderRelations(allPatientCareProviderRelations)
 
         // then
         Assertions.assertEquals(expected.size, actual.size)
