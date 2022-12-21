@@ -42,7 +42,7 @@ class AccountRestController {
         if (generalPractitionerDTO.isNotEmpty()) {
             return ResponseEntity.status(HttpStatus.OK).body(generalPractitionerDTO[0])
         } else {
-            throw NotExistingException("General practitioner with id '$id' does not exist.")
+            throw NotExistingException("General practitioner with id \'$id\' does not exist.")
         }
     }
 
@@ -62,7 +62,7 @@ class AccountRestController {
 
             return ResponseEntity.status(HttpStatus.OK).body(patientDTOs)
         } else {
-            throw NotExistingException("General practitioner with id '$id' does not exist.")
+            throw NotExistingException("General practitioner with id \'$id\' does not exist.")
         }
     }
 
@@ -150,7 +150,7 @@ class AccountRestController {
         if (careProviderDTO.isNotEmpty()) {
             return ResponseEntity.status(HttpStatus.OK).body(careProviderDTO[0])
         } else {
-            throw NotExistingException("Care provider with id '$id' does not exist.")
+            throw NotExistingException("Care provider with id \'$id\' does not exist.")
         }
     }
 }

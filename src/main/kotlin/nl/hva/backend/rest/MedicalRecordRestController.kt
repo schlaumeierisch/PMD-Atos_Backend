@@ -43,15 +43,24 @@ class MedicalRecordRestController {
         description: String,
         medicalRecordId: String
     ): ResponseEntity<String> {
-        val medicalRecordDTO: List<MedicalRecordDTO> = this.medicalRecordService.getMedicalRecord(MedicalRecordId(medicalRecordId))
+        val medicalRecordDTO: List<MedicalRecordDTO> =
+            this.medicalRecordService.getMedicalRecord(MedicalRecordId(medicalRecordId))
 
         if (medicalRecordDTO.isNotEmpty()) {
             this.medicalRecordService.createNote(title, description, MedicalRecordId(medicalRecordId))
 
-            return ResponseEntity.status(HttpStatus.OK).body("New node for medical record with id \'$medicalRecordId\' successfully created.")
+            return ResponseEntity.status(HttpStatus.OK)
+                .body("New node for medical record with id \'$medicalRecordId\' successfully created.")
         } else {
             throw NotExistingException("Medical record with id \'$medicalRecordId\' does not exist.")
         }
+    }
+
+    @DeleteMapping("/note/deleteNote")
+    fun deleteNote(
+        noteId: String
+    ) {
+        this.medicalRecordService.deleteNote(NoteId(noteId))
     }
 
     @GetMapping("/medication/getAllMedication/{id}")
@@ -80,7 +89,8 @@ class MedicalRecordRestController {
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) endDate: LocalDate? = null,
         medicalRecordId: String
     ): ResponseEntity<String> {
-        val medicalRecordDTO: List<MedicalRecordDTO> = this.medicalRecordService.getMedicalRecord(MedicalRecordId(medicalRecordId))
+        val medicalRecordDTO: List<MedicalRecordDTO> =
+            this.medicalRecordService.getMedicalRecord(MedicalRecordId(medicalRecordId))
 
         if (medicalRecordDTO.isNotEmpty()) {
             this.medicalRecordService.createMedication(
@@ -91,7 +101,8 @@ class MedicalRecordRestController {
                 MedicalRecordId(medicalRecordId)
             )
 
-            return ResponseEntity.status(HttpStatus.OK).body("New medication for medical record with id \'$medicalRecordId\' successfully created.")
+            return ResponseEntity.status(HttpStatus.OK)
+                .body("New medication for medical record with id \'$medicalRecordId\' successfully created.")
         } else {
             throw NotExistingException("Medical record with id \'$medicalRecordId\' does not exist.")
         }
@@ -140,7 +151,8 @@ class MedicalRecordRestController {
         advice: String,
         medicalRecordId: String
     ): ResponseEntity<String> {
-        val medicalRecordDTO: List<MedicalRecordDTO> = this.medicalRecordService.getMedicalRecord(MedicalRecordId(medicalRecordId))
+        val medicalRecordDTO: List<MedicalRecordDTO> =
+            this.medicalRecordService.getMedicalRecord(MedicalRecordId(medicalRecordId))
 
         if (medicalRecordDTO.isNotEmpty()) {
             this.medicalRecordService.createDiagnosis(
@@ -153,7 +165,8 @@ class MedicalRecordRestController {
                 MedicalRecordId(medicalRecordId)
             )
 
-            return ResponseEntity.status(HttpStatus.OK).body("New diagnosis for medical record with id \'$medicalRecordId\' successfully created.")
+            return ResponseEntity.status(HttpStatus.OK)
+                .body("New diagnosis for medical record with id \'$medicalRecordId\' successfully created.")
         } else {
             throw NotExistingException("Medical record with id \'$medicalRecordId\' does not exist.")
         }
@@ -185,7 +198,8 @@ class MedicalRecordRestController {
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) endDate: LocalDate? = null,
         medicalRecordId: String
     ): ResponseEntity<String> {
-        val medicalRecordDTO: List<MedicalRecordDTO> = this.medicalRecordService.getMedicalRecord(MedicalRecordId(medicalRecordId))
+        val medicalRecordDTO: List<MedicalRecordDTO> =
+            this.medicalRecordService.getMedicalRecord(MedicalRecordId(medicalRecordId))
 
         if (medicalRecordDTO.isNotEmpty()) {
             this.medicalRecordService.createExercise(
@@ -196,16 +210,11 @@ class MedicalRecordRestController {
                 MedicalRecordId(medicalRecordId)
             )
 
-            return ResponseEntity.status(HttpStatus.OK).body("New exercise for medical record with id \'$medicalRecordId\' successfully created.")
+            return ResponseEntity.status(HttpStatus.OK)
+                .body("New exercise for medical record with id \'$medicalRecordId\' successfully created.")
         } else {
             throw NotExistingException("Medical record with id \'$medicalRecordId\' does not exist.")
         }
-    }
-    @DeleteMapping("/note/deleteNote")
-    fun deleteNote(
-        noteId: String
-    ){
-        this.medicalRecordService.deleteNote(NoteId(noteId))
     }
 
 }
