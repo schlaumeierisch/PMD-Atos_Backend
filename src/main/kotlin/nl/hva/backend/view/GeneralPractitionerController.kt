@@ -138,26 +138,3 @@ class GeneralPractitionerController {
             breakDuration,
             appointmentDuration
         )
-
-        // add new flash attribute to show the state in a card
-        redirectAttributes.addFlashAttribute("successfulAction", "edit")
-
-        // redirect to @GetMapping("overview")
-        return RedirectView("/general-practitioner/overview")
-    }
-
-    @PostMapping("delete")
-    fun deleteGeneralPractitioner(
-        @RequestParam("general_practitioner_id") id: String,
-        redirectAttributes: RedirectAttributes
-    ): RedirectView {
-        // use generalPractitionerService to delete the GP account
-        this.generalPractitionerService.deleteAccount(GeneralPractitionerId(id))
-
-        // add new flash attribute to show the state in a card
-        redirectAttributes.addFlashAttribute("successfulAction", "delete")
-
-        // redirect to @GetMapping("overview")
-        return RedirectView("overview")
-    }
-}

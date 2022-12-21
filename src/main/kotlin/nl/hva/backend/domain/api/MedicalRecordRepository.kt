@@ -2,7 +2,6 @@ package nl.hva.backend.domain.api
 
 import nl.hva.backend.domain.*
 import nl.hva.backend.domain.ids.*
-import nl.hva.backend.domain.many_to_many.DiagnosisCareProviderRelation
 
 interface MedicalRecordRepository {
 
@@ -18,11 +17,15 @@ interface MedicalRecordRepository {
 
     fun createMedicalRecord(medicalRecord: MedicalRecord)
 
+    fun getMedicalRecord(medicalRecordId: MedicalRecordId): List<MedicalRecord>
+
     fun getAllNotes(medicalRecordId: MedicalRecordId): List<Note>
 
     fun createNote(note: Note)
 
     fun getAllMedication(medicalRecordId: MedicalRecordId): List<Medication>
+
+    fun getMedicationById(medicationId: MedicationId): List<Medication>
 
     fun createMedication(medication: Medication)
 

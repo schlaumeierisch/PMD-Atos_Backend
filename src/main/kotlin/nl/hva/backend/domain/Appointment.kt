@@ -17,8 +17,8 @@ open class Appointment {
     private var patientDomainId: PatientId = PatientId("")
 
     // one-to-one - can be either GP or CP (not both!)
-    private var gpDomainId: GeneralPractitionerId = GeneralPractitionerId("")
-    private var cpDomainId: CareProviderId = CareProviderId("")
+    private var gpDomainId: GeneralPractitionerId? = null
+    private var cpDomainId: CareProviderId? = null
 
     // required by hibernate
     protected constructor()
@@ -28,8 +28,8 @@ open class Appointment {
         dateTime: LocalDateTime,
         reason: String,
         patientDomainId: PatientId,
-        gpDomainId: GeneralPractitionerId,
-        cpDomainId: CareProviderId
+        gpDomainId: GeneralPractitionerId?,
+        cpDomainId: CareProviderId?
     ) {
         this.domainId = domainId
         this.dateTime = dateTime
@@ -45,6 +45,6 @@ open class Appointment {
     fun dateTime(): LocalDateTime = this.dateTime
     fun reason(): String = this.reason
     fun patientDomainId(): PatientId = this.patientDomainId
-    fun gpDomainId(): GeneralPractitionerId = this.gpDomainId
-    fun cpDomainId(): CareProviderId = this.cpDomainId
+    fun gpDomainId(): GeneralPractitionerId? = this.gpDomainId
+    fun cpDomainId(): CareProviderId? = this.cpDomainId
 }

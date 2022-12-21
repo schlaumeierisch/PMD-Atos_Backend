@@ -14,6 +14,8 @@ interface CalendarRepository {
 
     fun cancelAppointment(appointmentId: AppointmentId)
 
+    fun getAppointmentById(appointmentId: AppointmentId): List<Appointment>
+
     fun getAllAppointmentsByPatientId(patientId: PatientId): List<Appointment>
 
     fun getAllAppointmentsByGeneralPractitionerId(generalPractitionerId: GeneralPractitionerId): List<Appointment>
