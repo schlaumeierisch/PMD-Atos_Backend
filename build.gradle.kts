@@ -23,7 +23,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("com.h2database:h2")
-    implementation("org.springdoc:springdoc-openapi-ui:1.6.13")
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.14")
 
     // testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -51,5 +51,16 @@ tasks.withType<JacocoReport> {
         xml.required.set(false)
         csv.required.set(false)
         html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
+    }
+
+    // exclude files from reports
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.map {
+            fileTree(it).apply {
+                exclude("**/application/dto")
+                exclude("**/domain")
+                exclude("**/rest/exceptions")
+            }
+        }))
     }
 }
