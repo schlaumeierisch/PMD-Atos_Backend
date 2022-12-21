@@ -138,6 +138,12 @@ class CalendarServiceImpl : CalendarService {
         return getAvailableTimeslots(defaultAvailableTimeSlots, timeSlotsOfCurrentDay)
     }
 
+    /**
+     * @author Nassim Mengat
+     * @param byDefaultAvailableTimeSlots: a complete list of [TimeSlot]s that would be available if day was empty of appointments.
+     * @param filledTimeSlots: actually booked [TimeSlot]s of a certain cp/gp.
+     * @return a [List] of [TimeSlot]s that are available to book for the user that particular day.
+     */
     fun getAvailableTimeslots(
         byDefaultAvailableTimeSlots: List<TimeSlot>,
         filledTimeSlots: List<TimeSlot>
@@ -157,6 +163,14 @@ class CalendarServiceImpl : CalendarService {
         return notFilledTimeSlots
     }
 
+    /**
+     * @author Nassim Mengat
+     * @param startTime: The start time of the shift of a cp/gp.
+     * @param endTime: The end time of the shift of a cp/gp.
+     * @param duration: The duration of an appointment with a cp/gp. An appointment is longer at a Physio than a GP for example.
+     * @param avoid: A list of timeslots (timeframe) to avoid making timeslots/appointments in. It's a list because a cp/gp can have multiple breaks for example.
+     * @return a [List] of [TimeSlot]s that are not in a particular timeFrame with a custom duration of each appointment depending on cp/gp.
+     */
     fun generateTimeSlots(
         startTime: LocalTime,
         endTime: LocalTime,
@@ -179,7 +193,7 @@ class CalendarServiceImpl : CalendarService {
             *  if the startTime of the currently looped timeSlot is in the timeFrame (it.startTime..it.endTime) given by @param avoid, return true
             *  So for the first loop, TimeSlot(09:00, 09:15) is not in the (example) avoid value, 12:00-13:00.
             *  that is checked by the .. (inRange) operator: creates a range from one value to another value which are COMPARABLE with each other!
-            *  1 minute has been subtracted for the avoid time because the next timeslot couldnt be generated otherwise at the endTime of the avoid timeFrame. */
+            *  1 minute has been subtracted of the avoid timeframe because otherwise the next timeslot couldn't be generated at the endTime of @avoid. */
             if (avoid.none { timeSlot.startTime in it.startTime..it.endTime.minusMinutes(1) }) {
 
                 // add the timeslot if the currently looped TimeSlot is not in the timeframe.
