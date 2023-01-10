@@ -25,10 +25,6 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
 
     override fun nextExerciseIdentity(): ExerciseId = ExerciseId(UUID.randomUUID().toString())
 
-    override fun createMedicalRecord(medicalRecord: MedicalRecord) {
-        this.entityManager.persist(medicalRecord)
-    }
-
     override fun getMedicalRecord(medicalRecordId: MedicalRecordId): List<MedicalRecord> {
         val query: TypedQuery<MedicalRecord> = this.entityManager.createQuery(
             "SELECT mr FROM MedicalRecord mr WHERE mr.domainId = ?1", MedicalRecord::class.java
@@ -41,6 +37,17 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
             "SELECT no FROM Note no WHERE no.medicalRecordDomainId = ?1", Note::class.java
         )
         return query.setParameter(1, medicalRecordId).resultList
+    }
+
+    override fun getNoteByIdAndMedicalRecordId(noteId: NoteId, medicalRecordId: MedicalRecordId): List<Note> {
+        val query: TypedQuery<Note> = this.entityManager.createQuery(
+            "SELECT note FROM Note note WHERE note.medicalRecordDomainId = ?1 AND note.domainId = ?2",
+            Note::class.java
+        )
+            .setParameter(1, medicalRecordId)
+            .setParameter(2, noteId)
+
+        return query.resultList
     }
 
     override fun createNote(note: Note) {
@@ -69,6 +76,20 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
         return query.setParameter(1, medicationId).resultList
     }
 
+    override fun getMedicationByIdAndMedicalRecordId(
+        medicationId: MedicationId,
+        medicalRecordId: MedicalRecordId
+    ): List<Medication> {
+        val query: TypedQuery<Medication> = this.entityManager.createQuery(
+            "SELECT med FROM Medication med WHERE med.medicalRecordDomainId = ?1 AND med.domainId = ?2",
+            Medication::class.java
+        )
+            .setParameter(1, medicalRecordId)
+            .setParameter(2, medicationId)
+
+        return query.resultList
+    }
+
     override fun createMedication(medication: Medication) {
         this.entityManager.persist(medication)
     }
@@ -87,6 +108,17 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
         return query.setParameter(1, medicalRecordId).resultList
     }
 
+    override fun getDiagnosisByIdAndMedicalRecordId(diagnosisId: DiagnosisId, medicalRecordId: MedicalRecordId): List<Diagnosis> {
+        val query: TypedQuery<Diagnosis> = this.entityManager.createQuery(
+            "SELECT diag FROM Diagnosis diag WHERE diag.medicalRecordDomainId = ?1 AND diag.domainId = ?2",
+            Diagnosis::class.java
+        )
+            .setParameter(1, medicalRecordId)
+            .setParameter(2, diagnosisId)
+
+        return query.resultList
+    }
+
     override fun createDiagnosis(diagnosis: Diagnosis) {
         this.entityManager.persist(diagnosis)
     }
@@ -96,6 +128,17 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
             "SELECT exerc FROM Exercise exerc WHERE exerc.medicalRecordDomainId = ?1", Exercise::class.java
         )
         return query.setParameter(1, medicalRecordId).resultList
+    }
+
+    override fun getExerciseByIdAndMedicalRecordId(exerciseId: ExerciseId, medicalRecordId: MedicalRecordId): List<Exercise> {
+        val query: TypedQuery<Exercise> = this.entityManager.createQuery(
+            "SELECT exer FROM Exercise exer WHERE exer.medicalRecordDomainId = ?1 AND exer.domainId = ?2",
+            Exercise::class.java
+        )
+            .setParameter(1, medicalRecordId)
+            .setParameter(2, exerciseId)
+
+        return query.resultList
     }
 
     override fun createExercise(exercise: Exercise) {
@@ -142,17 +185,6 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
         )
             .setParameter(1, medicalRecordId)
             .setParameter(2, diagnosisId)
-
-        return query.singleResult
-    }
-
-    override fun getExerciseByIdAndMr(exerciseId: ExerciseId, medicalRecordId: MedicalRecordId): Exercise {
-        val query: TypedQuery<Exercise> = this.entityManager.createQuery(
-            "SELECT exer FROM Exercise exer WHERE exer.medicalRecordDomainId = ?1 AND exer.domainId = ?2",
-            Exercise::class.java
-        )
-            .setParameter(1, medicalRecordId)
-            .setParameter(2, exerciseId)
 
         return query.singleResult
     }

@@ -7,17 +7,21 @@ import java.time.LocalDate
 
 interface MedicalRecordService {
 
-    fun createMedicalRecord(): MedicalRecordId
-
     fun getMedicalRecord(medicalRecordId: MedicalRecordId): List<MedicalRecordDTO>
 
     fun getAllNotes(medicalRecordId: MedicalRecordId): List<NoteDTO>
 
+    fun getNoteByIdAndMedicalRecordId(noteId: NoteId, medicalRecordId: MedicalRecordId): List<NoteDTO>
+
     fun createNote(title: String, description: String, medicalRecordId: MedicalRecordId)
+
+    fun deleteNote(noteId: NoteId)
 
     fun getAllMedication(medicalRecordId: MedicalRecordId): List<MedicationDTO>
 
     fun getMedicationById(medicationId: MedicationId): List<MedicationDTO>
+
+    fun getMedicationByIdAndMedicalRecordId(medicationId: MedicationId, medicalRecordId: MedicalRecordId): List<MedicationDTO>
 
     fun createMedication(title: String, description: String, startDate: LocalDate, endDate: LocalDate?, medicalRecordId: MedicalRecordId)
 
@@ -25,15 +29,17 @@ interface MedicalRecordService {
 
     fun getAllDiagnoses(medicalRecordId: MedicalRecordId): List<DiagnosisDTO>
 
+    fun getDiagnosisByIdAndMedicalRecordId(diagnosisId: DiagnosisId, medicalRecordId: MedicalRecordId): List<DiagnosisDTO>
+
     fun createDiagnosis(title: String, diagnosisType: Enum<DiagnosisType>, dateDiagnosed: LocalDate, cause: String, treatment: String, advice: String, medicalRecordId: MedicalRecordId)
 
     fun getAllExercises(medicalRecordId: MedicalRecordId): List<ExerciseDTO>
 
+    fun getExerciseByIdAndMedicalRecordId(exerciseId: ExerciseId, medicalRecordId: MedicalRecordId): List<ExerciseDTO>
+
     fun createExercise(title: String, description: String, startDate: LocalDate, endDate: LocalDate?, medicalRecordId: MedicalRecordId)
 
     fun deleteExercise(exerciseId: ExerciseId)
-
-    fun deleteNote(noteId: NoteId)
 
     fun getMedicationByIdAndMr(medicationId: MedicationId, medicalRecordId: MedicalRecordId): MedicationDTO
 

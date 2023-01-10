@@ -18,17 +18,6 @@ class MedicalRecordServiceImpl : MedicalRecordService {
     private lateinit var medicalRecordRepository: MedicalRecordRepository
 
     @Transactional
-    override fun createMedicalRecord(): MedicalRecordId {
-        val medicalRecordId: MedicalRecordId = this.medicalRecordRepository.nextIdentity()
-
-        val medicalRecord = MedicalRecord(medicalRecordId)
-
-        this.medicalRecordRepository.createMedicalRecord(medicalRecord)
-
-        return medicalRecordId
-    }
-
-    @Transactional
     override fun getMedicalRecord(medicalRecordId: MedicalRecordId): List<MedicalRecordDTO> {
         val medicalRecord: List<MedicalRecord> = this.medicalRecordRepository.getMedicalRecord(medicalRecordId)
 
@@ -44,6 +33,18 @@ class MedicalRecordServiceImpl : MedicalRecordService {
         val notes: List<Note> = this.medicalRecordRepository.getAllNotes(medicalRecordId)
 
         return NoteDTO.fromNotes(notes)
+    }
+
+    @Transactional
+    override fun getNoteByIdAndMedicalRecordId(noteId: NoteId, medicalRecordId: MedicalRecordId): List<NoteDTO> {
+        val note: List<Note> =
+            this.medicalRecordRepository.getNoteByIdAndMedicalRecordId(noteId, medicalRecordId)
+
+        return if (note.isNotEmpty()) {
+            listOf(NoteDTO.fromNote(note[0]))
+        } else {
+            emptyList()
+        }
     }
 
     @Transactional
@@ -70,6 +71,21 @@ class MedicalRecordServiceImpl : MedicalRecordService {
     @Transactional
     override fun getMedicationById(medicationId: MedicationId): List<MedicationDTO> {
         val medication: List<Medication> = this.medicalRecordRepository.getMedicationById(medicationId)
+
+        return if (medication.isNotEmpty()) {
+            listOf(MedicationDTO.fromMedication(medication[0]))
+        } else {
+            emptyList()
+        }
+    }
+
+    @Transactional
+    override fun getMedicationByIdAndMedicalRecordId(
+        medicationId: MedicationId,
+        medicalRecordId: MedicalRecordId
+    ): List<MedicationDTO> {
+        val medication: List<Medication> =
+            this.medicalRecordRepository.getMedicationByIdAndMedicalRecordId(medicationId, medicalRecordId)
 
         return if (medication.isNotEmpty()) {
             listOf(MedicationDTO.fromMedication(medication[0]))
@@ -108,6 +124,21 @@ class MedicalRecordServiceImpl : MedicalRecordService {
     }
 
     @Transactional
+    override fun getDiagnosisByIdAndMedicalRecordId(
+        diagnosisId: DiagnosisId,
+        medicalRecordId: MedicalRecordId
+    ): List<DiagnosisDTO> {
+        val diagnosis: List<Diagnosis> =
+            this.medicalRecordRepository.getDiagnosisByIdAndMedicalRecordId(diagnosisId, medicalRecordId)
+
+        return if (diagnosis.isNotEmpty()) {
+            listOf(DiagnosisDTO.fromDiagnosis(diagnosis[0]))
+        } else {
+            emptyList()
+        }
+    }
+
+    @Transactional
     override fun createDiagnosis(
         title: String,
         diagnosisType: Enum<DiagnosisType>,
@@ -119,7 +150,8 @@ class MedicalRecordServiceImpl : MedicalRecordService {
     ) {
         val diagnosisId: DiagnosisId = this.medicalRecordRepository.nextDiagnosisIdentity()
 
-        val diagnosis = Diagnosis(diagnosisId, title, diagnosisType, dateDiagnosed, cause, treatment, advice, medicalRecordId)
+        val diagnosis =
+            Diagnosis(diagnosisId, title, diagnosisType, dateDiagnosed, cause, treatment, advice, medicalRecordId)
 
         this.medicalRecordRepository.createDiagnosis(diagnosis)
     }
@@ -129,6 +161,21 @@ class MedicalRecordServiceImpl : MedicalRecordService {
         val exercises: List<Exercise> = this.medicalRecordRepository.getAllExercises(medicalRecordId)
 
         return ExerciseDTO.fromExercises(exercises)
+    }
+
+    @Transactional
+    override fun getExerciseByIdAndMedicalRecordId(
+        exerciseId: ExerciseId,
+        medicalRecordId: MedicalRecordId
+    ): List<ExerciseDTO> {
+        val exercise: List<Exercise> =
+            this.medicalRecordRepository.getExerciseByIdAndMedicalRecordId(exerciseId, medicalRecordId)
+
+        return if (exercise.isNotEmpty()) {
+            listOf(ExerciseDTO.fromExercise(exercise[0]))
+        } else {
+            emptyList()
+        }
     }
 
     @Transactional
