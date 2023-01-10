@@ -198,36 +198,4 @@ class MedicalRecordServiceImpl : MedicalRecordService {
         this.medicalRecordRepository.deleteExercise(exerciseId)
     }
 
-    @Transactional
-    override fun getMedicationByIdAndMr(medicationId: MedicationId, medicalRecordId: MedicalRecordId): MedicationDTO {
-        val medication: Medication =
-            this.medicalRecordRepository.getMedicationOfPatientByIdAndMr(medicationId, medicalRecordId)
-
-        return MedicationDTO.fromMedication(medication)
-    }
-
-    @Transactional
-    override fun getNoteByIdAndMr(noteId: NoteId, medicalRecordId: MedicalRecordId): NoteDTO {
-        val note: Note =
-            this.medicalRecordRepository.getNoteByIdAndMr(noteId, medicalRecordId)
-
-        return NoteDTO.fromNote(note)
-    }
-
-    @Transactional
-    override fun getDiagnosisByIdAndMr(diagnosisId: DiagnosisId, medicalRecordId: MedicalRecordId): DiagnosisDTO {
-        val diagnosis: Diagnosis =
-            this.medicalRecordRepository.getDiagnosisByIdAndMr(diagnosisId, medicalRecordId)
-
-        return DiagnosisDTO.fromDiagnosis(diagnosis)
-    }
-
-    @Transactional
-    override fun getExerciseByIdAndMr(exerciseId: ExerciseId, medicalRecordId: MedicalRecordId): ExerciseDTO {
-        val exercise: Exercise =
-            this.medicalRecordRepository.getExerciseByIdAndMr(exerciseId, medicalRecordId)
-
-        return ExerciseDTO.fromExercise(exercise)
-    }
-
 }

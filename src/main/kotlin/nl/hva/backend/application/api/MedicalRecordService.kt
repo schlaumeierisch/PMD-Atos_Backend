@@ -9,6 +9,8 @@ interface MedicalRecordService {
 
     fun getMedicalRecord(medicalRecordId: MedicalRecordId): List<MedicalRecordDTO>
 
+
+    // NOTES -----------------------------------------------------------------------------------------------------------
     fun getAllNotes(medicalRecordId: MedicalRecordId): List<NoteDTO>
 
     fun getNoteByIdAndMedicalRecordId(noteId: NoteId, medicalRecordId: MedicalRecordId): List<NoteDTO>
@@ -17,6 +19,8 @@ interface MedicalRecordService {
 
     fun deleteNote(noteId: NoteId)
 
+
+    // MEDICATION ------------------------------------------------------------------------------------------------------
     fun getAllMedication(medicalRecordId: MedicalRecordId): List<MedicationDTO>
 
     fun getMedicationById(medicationId: MedicationId): List<MedicationDTO>
@@ -27,12 +31,16 @@ interface MedicalRecordService {
 
     fun getIntakeByMedicationId(medicationId: MedicationId): List<IntakeDTO>
 
+
+    // DIAGNOSES -------------------------------------------------------------------------------------------------------
     fun getAllDiagnoses(medicalRecordId: MedicalRecordId): List<DiagnosisDTO>
 
     fun getDiagnosisByIdAndMedicalRecordId(diagnosisId: DiagnosisId, medicalRecordId: MedicalRecordId): List<DiagnosisDTO>
 
     fun createDiagnosis(title: String, diagnosisType: Enum<DiagnosisType>, dateDiagnosed: LocalDate, cause: String, treatment: String, advice: String, medicalRecordId: MedicalRecordId)
 
+
+    // EXERCISES -------------------------------------------------------------------------------------------------------
     fun getAllExercises(medicalRecordId: MedicalRecordId): List<ExerciseDTO>
 
     fun getExerciseByIdAndMedicalRecordId(exerciseId: ExerciseId, medicalRecordId: MedicalRecordId): List<ExerciseDTO>
@@ -40,13 +48,5 @@ interface MedicalRecordService {
     fun createExercise(title: String, description: String, startDate: LocalDate, endDate: LocalDate?, medicalRecordId: MedicalRecordId)
 
     fun deleteExercise(exerciseId: ExerciseId)
-
-    fun getMedicationByIdAndMr(medicationId: MedicationId, medicalRecordId: MedicalRecordId): MedicationDTO
-
-    fun getNoteByIdAndMr(noteId: NoteId, medicalRecordId: MedicalRecordId): NoteDTO
-
-    fun getDiagnosisByIdAndMr(diagnosisId: DiagnosisId, medicalRecordId: MedicalRecordId): DiagnosisDTO
-
-    fun getExerciseByIdAndMr(exerciseId: ExerciseId, medicalRecordId: MedicalRecordId): ExerciseDTO
 
 }

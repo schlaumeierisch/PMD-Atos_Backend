@@ -221,7 +221,7 @@ class MedicalRecordRestController {
     @DeleteMapping("/exercises/deleteExercise")
     fun deleteExercise(
         exerciseId: String
-    ){
+    ) {
         this.medicalRecordService.deleteExercise(ExerciseId(exerciseId))
     }
 

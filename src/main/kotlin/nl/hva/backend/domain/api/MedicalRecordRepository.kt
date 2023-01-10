@@ -17,6 +17,8 @@ interface MedicalRecordRepository {
 
     fun getMedicalRecord(medicalRecordId: MedicalRecordId): List<MedicalRecord>
 
+
+    // NOTES -----------------------------------------------------------------------------------------------------------
     fun getAllNotes(medicalRecordId: MedicalRecordId): List<Note>
 
     fun getNoteByIdAndMedicalRecordId(noteId: NoteId, medicalRecordId: MedicalRecordId): List<Note>
@@ -25,6 +27,8 @@ interface MedicalRecordRepository {
 
     fun deleteNote(noteId: NoteId)
 
+
+    // MEDICATION ------------------------------------------------------------------------------------------------------
     fun getAllMedication(medicalRecordId: MedicalRecordId): List<Medication>
 
     fun getMedicationById(medicationId: MedicationId): List<Medication>
@@ -35,20 +39,22 @@ interface MedicalRecordRepository {
 
     fun getIntakeByMedicationId(medicationId: MedicationId): List<Intake>
 
-    fun getAllExercises(medicalRecordId: MedicalRecordId): List<Exercise>
 
-    fun deleteExercise(exerciseId: ExerciseId)
-
+    // DIAGNOSES -------------------------------------------------------------------------------------------------------
     fun getAllDiagnoses(medicalRecordId: MedicalRecordId): List<Diagnosis>
 
     fun getDiagnosisByIdAndMedicalRecordId(diagnosisId: DiagnosisId, medicalRecordId: MedicalRecordId): List<Diagnosis>
 
     fun createDiagnosis(diagnosis: Diagnosis)
 
-    fun getMedicationOfPatientByIdAndMr(medicationId: MedicationId, medicalRecordId: MedicalRecordId): Medication
+
+    // EXERCISES -------------------------------------------------------------------------------------------------------
+    fun getAllExercises(medicalRecordId: MedicalRecordId): List<Exercise>
 
     fun getExerciseByIdAndMedicalRecordId(exerciseId: ExerciseId, medicalRecordId: MedicalRecordId): List<Exercise>
 
     fun createExercise(exercise: Exercise)
+
+    fun deleteExercise(exerciseId: ExerciseId)
 
 }

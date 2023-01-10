@@ -153,40 +153,4 @@ class HibernateMedicalRecordRepository : MedicalRecordRepository {
         this.entityManager.remove(result)
     }
 
-    override fun getMedicationOfPatientByIdAndMr(
-        medicationId: MedicationId,
-        medicalRecordId: MedicalRecordId
-    ): Medication {
-        val query: TypedQuery<Medication> = this.entityManager.createQuery(
-            "SELECT med FROM Medication med WHERE med.medicalRecordDomainId = ?1 AND med.domainId = ?2",
-            Medication::class.java
-        )
-            .setParameter(1, medicalRecordId)
-            .setParameter(2, medicationId)
-
-        return query.singleResult
-    }
-
-    override fun getNoteByIdAndMr(noteId: NoteId, medicalRecordId: MedicalRecordId): Note {
-        val query: TypedQuery<Note> = this.entityManager.createQuery(
-            "SELECT note FROM Note note WHERE note.medicalRecordDomainId = ?1 AND note.domainId = ?2",
-            Note::class.java
-        )
-            .setParameter(1, medicalRecordId)
-            .setParameter(2, noteId)
-
-        return query.singleResult
-    }
-
-    override fun getDiagnosisByIdAndMr(diagnosisId: DiagnosisId, medicalRecordId: MedicalRecordId): Diagnosis {
-        val query: TypedQuery<Diagnosis> = this.entityManager.createQuery(
-            "SELECT diag FROM Diagnosis diag WHERE diag.medicalRecordDomainId = ?1 AND diag.domainId = ?2",
-            Diagnosis::class.java
-        )
-            .setParameter(1, medicalRecordId)
-            .setParameter(2, diagnosisId)
-
-        return query.singleResult
-    }
-
 }
