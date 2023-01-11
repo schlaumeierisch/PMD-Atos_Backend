@@ -23,6 +23,8 @@ interface AccountRepository {
 
     fun getPatientById(patientId: PatientId): List<Patient>
 
+    fun getPatientByEmail(email: String): List<Patient>
+
     fun getPatientCareProviderRelationsByPatientId(patientId: PatientId): List<PatientCareProviderRelation>
 
     fun createPatientCareProviderRelation(patientCareProviderRelation: PatientCareProviderRelation)

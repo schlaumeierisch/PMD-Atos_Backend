@@ -68,6 +68,17 @@ class AccountServiceImpl : AccountService {
     }
 
     @Transactional
+    override fun getPatientByEmail(email: String): List<PatientDTO> {
+        val patient: List<Patient> = this.accountRepository.getPatientByEmail(email)
+
+        return if (patient.isNotEmpty()) {
+            listOf(PatientDTO.fromPatient(patient[0]))
+        } else {
+            emptyList()
+        }
+    }
+
+    @Transactional
     override fun getPatientCareProviderRelationsByPatientId(patientId: PatientId): List<PatientCareProviderRelationDTO> {
         val patientCareProviderRelations: List<PatientCareProviderRelation> =
             this.accountRepository.getPatientCareProviderRelationsByPatientId(patientId)

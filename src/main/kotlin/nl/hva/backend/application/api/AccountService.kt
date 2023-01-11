@@ -23,6 +23,8 @@ interface AccountService {
 
     fun getPatientById(patientId: PatientId): List<PatientDTO>
 
+    fun getPatientByEmail(email: String): List<PatientDTO>
+
     fun getPatientCareProviderRelationsByPatientId(patientId: PatientId): List<PatientCareProviderRelationDTO>
 
     fun createPatientCareProviderRelation(patientId: PatientId, careProviderId: CareProviderId)
