@@ -15,6 +15,8 @@ interface AccountService {
 
     fun getGeneralPractitionerById(generalPractitionerId: GeneralPractitionerId): List<GeneralPractitionerDTO>
 
+    fun getGeneralPractitionerByEmail(email: String): List<GeneralPractitionerDTO>
+
     fun getPatientsOfGeneralPractitionerById(generalPractitionerId: GeneralPractitionerId): List<PatientDTO>
 
 

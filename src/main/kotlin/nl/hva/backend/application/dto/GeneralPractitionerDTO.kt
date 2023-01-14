@@ -11,6 +11,7 @@ class GeneralPractitionerDTO {
     private lateinit var lastName: String
     private lateinit var addressDTO: AddressDTO
     private lateinit var phoneNumber: String
+    private lateinit var email: String
 
     companion object {
         fun fromGeneralPractitioner(generalPractitioner: GeneralPractitioner): GeneralPractitionerDTO {
@@ -21,6 +22,7 @@ class GeneralPractitionerDTO {
             generalPractitionerDTO.lastName = generalPractitioner.lastName()
             generalPractitionerDTO.addressDTO = AddressDTO.fromAddress(generalPractitioner.address())
             generalPractitionerDTO.phoneNumber = generalPractitioner.phoneNumber()
+            generalPractitionerDTO.email = generalPractitioner.email()
 
             return generalPractitionerDTO
         }
@@ -42,4 +44,5 @@ class GeneralPractitionerDTO {
     fun lastName(): String = this.lastName
     fun address(): AddressDTO = this.addressDTO
     fun phoneNumber(): String = this.phoneNumber
+    fun email(): String = this.email
 }

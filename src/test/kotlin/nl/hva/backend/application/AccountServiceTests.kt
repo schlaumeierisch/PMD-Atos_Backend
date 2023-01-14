@@ -116,21 +116,24 @@ class AccountServiceTests {
                 this.firstName,
                 this.lastName,
                 this.address,
-                this.phoneNumber
+                this.phoneNumber,
+                this.email
             ),
             GeneralPractitioner(
                 this.generalPractitionerId2,
                 this.firstName,
                 this.lastName,
                 this.address,
-                this.phoneNumber
+                this.phoneNumber,
+                this.email
             ),
             GeneralPractitioner(
                 this.generalPractitionerId3,
                 this.firstName,
                 this.lastName,
                 this.address,
-                this.phoneNumber
+                this.phoneNumber,
+                this.email
             )
         )
         val expected: List<GeneralPractitionerDTO> = GeneralPractitionerDTO.fromGeneralPractitioners(allGeneralPractitioners)
@@ -282,7 +285,8 @@ class AccountServiceTests {
                 this.firstName,
                 this.lastName,
                 this.address,
-                this.phoneNumber
+                this.phoneNumber,
+                this.email
             )
         )
         val expected: List<GeneralPractitionerDTO> = listOf(GeneralPractitionerDTO.fromGeneralPractitioner(generalPractitioner[0]))

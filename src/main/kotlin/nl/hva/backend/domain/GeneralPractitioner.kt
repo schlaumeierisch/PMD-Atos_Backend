@@ -11,6 +11,7 @@ open class GeneralPractitioner {
     private lateinit var lastName: String
     private lateinit var address: Address
     private lateinit var phoneNumber: String
+    private lateinit var email: String
 
     // required by hibernate
     protected constructor()
@@ -20,13 +21,15 @@ open class GeneralPractitioner {
         firstName: String,
         lastName: String,
         address: Address,
-        phoneNumber: String
+        phoneNumber: String,
+        email: String
     ) {
         this.domainId = generalPractitionerId
         this.firstName = firstName
         this.lastName = lastName
         this.address = address
         this.phoneNumber = phoneNumber
+        this.email = email
     }
 
     // getter
@@ -36,4 +39,5 @@ open class GeneralPractitioner {
     fun lastName(): String = this.lastName
     fun address(): Address = this.address
     fun phoneNumber(): String = this.phoneNumber
+    fun email(): String = this.email
 }

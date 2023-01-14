@@ -43,6 +43,17 @@ class AccountServiceImpl : AccountService {
     }
 
     @Transactional
+    override fun getGeneralPractitionerByEmail(email: String): List<GeneralPractitionerDTO> {
+        val generalPractitioner: List<GeneralPractitioner> = this.accountRepository.getGeneralPractitionerByEmail(email)
+
+        return if (generalPractitioner.isNotEmpty()) {
+            listOf(GeneralPractitionerDTO.fromGeneralPractitioner(generalPractitioner[0]))
+        } else {
+            emptyList()
+        }
+    }
+
+    @Transactional
     override fun getPatientsOfGeneralPractitionerById(generalPractitionerId: GeneralPractitionerId): List<PatientDTO> {
         val patients: List<Patient> = this.accountRepository.getPatientsOfGeneralPractitionerById(generalPractitionerId)
 

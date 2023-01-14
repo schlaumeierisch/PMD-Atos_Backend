@@ -15,6 +15,8 @@ interface AccountRepository {
 
     fun getGeneralPractitionerById(generalPractitionerId: GeneralPractitionerId): List<GeneralPractitioner>
 
+    fun getGeneralPractitionerByEmail(email: String): List<GeneralPractitioner>
+
     fun getPatientsOfGeneralPractitionerById(generalPractitionerId: GeneralPractitionerId): List<Patient>
 
 

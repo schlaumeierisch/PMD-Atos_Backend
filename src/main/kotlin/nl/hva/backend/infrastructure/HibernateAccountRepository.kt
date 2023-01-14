@@ -33,6 +33,13 @@ class HibernateAccountRepository : AccountRepository {
         return query.setParameter(1, generalPractitionerId).resultList
     }
 
+    override fun getGeneralPractitionerByEmail(email: String): List<GeneralPractitioner> {
+        val query: TypedQuery<GeneralPractitioner> = this.entityManager.createQuery(
+            "SELECT gp FROM GeneralPractitioner gp WHERE gp.email = ?1", GeneralPractitioner::class.java
+        )
+        return query.setParameter(1, email).resultList
+    }
+
     override fun getPatientsOfGeneralPractitionerById(generalPractitionerId: GeneralPractitionerId): List<Patient> {
         val query: TypedQuery<Patient> = this.entityManager.createQuery(
             "SELECT p FROM Patient p WHERE p.gpDomainId = ?1", Patient::class.java

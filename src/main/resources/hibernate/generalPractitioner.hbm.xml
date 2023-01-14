@@ -23,6 +23,7 @@
         </component>
 
         <property name="phoneNumber" column="phone_number" type="string"/>
+        <property name="email" column="email" type="string"/>
 
     </class>
 </hibernate-mapping>
