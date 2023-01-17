@@ -1,10 +1,10 @@
 -- general practitioner
-insert into general_practitioner (id, general_practitioner_id, first_name, last_name, street, zip, city, country, phone_number, email)
-values (001, 'dom-id-gp-001', 'Arnout', 'Stegehuis', 'Vossenstraat 30', '6811JM', 'Arnheim', 'Netherlands', '0663370595', 'arnout.stegehuis@gmail.com'),
-       (002, 'dom-id-gp-002', 'Joep', 'Kuipers', 'Zuidzijde 69', '2411RS', 'Bodegraven', 'Netherlands', '5145125251', 'joep.kuipers@gmail.com'),
-       (003, 'dom-id-gp-003', 'Mathies', 'Wesselink', 'Ondernemingsweg 67', '8251KW', 'Dronten', 'Netherlands', '0680688352', 'mathies.wesselink@gmail.com'),
-       (004, 'dom-id-gp-004', 'Gerrit', 'Merjenburgh', 'Lange Jufferstraat 176', '3512ED', 'Utrecht', 'Netherlands', '0634577354', 'gerrit.merjenburgh@gmail.com'),
-       (005, 'dom-id-gp-005', 'Thies', 'Veenebrugge', 'Verbindingsweg 191', '2061EK', 'Bloemendaal', 'Netherlands', '0652431375', 'thies.veenebrugge@gmail.com');
+insert into general_practitioner (id, general_practitioner_id, first_name, last_name, street, zip, city, country, phone_number, email, start_time_shift, end_time_shift, break_times, break_duration, appointment_duration)
+values (001, 'dom-id-gp-001', 'Arnout', 'Stegehuis', 'Vossenstraat 30', '6811JM', 'Arnheim', 'Netherlands', '0663370595', 'arnout.stegehuis@gmail.com', '09:00', '17:00', '12:00', '30', '15'),
+       (002, 'dom-id-gp-002', 'Joep', 'Kuipers', 'Zuidzijde 69', '2411RS', 'Bodegraven', 'Netherlands', '5145125251', 'joep.kuipers@gmail.com', '09:00', '17:00', '12:00', '30', '15'),
+       (003, 'dom-id-gp-003', 'Mathies', 'Wesselink', 'Ondernemingsweg 67', '8251KW', 'Dronten', 'Netherlands', '0680688352', 'mathies.wesselink@gmail.com', '09:00', '17:00', '12:00', '30', '15'),
+       (004, 'dom-id-gp-004', 'Gerrit', 'Merjenburgh', 'Lange Jufferstraat 176', '3512ED', 'Utrecht', 'Netherlands', '0634577354', 'gerrit.merjenburgh@gmail.com', '09:00', '17:00', '12:00', '30', '15'),
+       (005, 'dom-id-gp-005', 'Thies', 'Veenebrugge', 'Verbindingsweg 191', '2061EK', 'Bloemendaal', 'Netherlands', '0652431375', 'thies.veenebrugge@gmail.com', '09:00', '17:00', '12:00', '30', '15');
 
 -- care provider
 insert into care_provider (id, care_provider_id, first_name, last_name, street, zip, city, country, phone_number, specialism)

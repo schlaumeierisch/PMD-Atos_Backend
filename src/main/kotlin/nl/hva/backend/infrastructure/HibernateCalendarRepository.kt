@@ -60,4 +60,14 @@ class HibernateCalendarRepository : CalendarRepository {
         return query.setParameter(1, careProviderId).resultList
     }
 
+    override fun getAppointmentsOfParticularDay(yearNumber: Int, monthNumber: Int, monthDay: Int, gpId: GeneralPractitionerId): List<Appointment> {
+        val query: TypedQuery<Appointment> = this.entityManager.createQuery(
+                "SELECT apt FROM Appointment apt WHERE year(apt.dateTime) = ?1 and month(apt.dateTime) = ?2 and day(apt.dateTime) = ?3 and apt.gpDomainId = ?4", Appointment::class.java
+        )
+            .setParameter(1, yearNumber)
+            .setParameter(2, monthNumber)
+            .setParameter(3, monthDay)
+            .setParameter(4, gpId)
+        return query.resultList
+    }
 }

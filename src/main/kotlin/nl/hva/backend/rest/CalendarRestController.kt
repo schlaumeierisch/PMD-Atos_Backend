@@ -3,6 +3,7 @@ package nl.hva.backend.rest
 import nl.hva.backend.application.api.AccountService
 import nl.hva.backend.application.api.CalendarService
 import nl.hva.backend.application.dto.AppointmentDTO
+import nl.hva.backend.domain.TimeSlot
 import nl.hva.backend.application.dto.CareProviderDTO
 import nl.hva.backend.application.dto.GeneralPractitionerDTO
 import nl.hva.backend.application.dto.PatientDTO
@@ -17,6 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 @RestController
@@ -140,5 +142,26 @@ class CalendarRestController {
         } else {
             throw NotExistingException("Care provider with id \'$id\' does not exist.")
         }
+    }
+
+    @GetMapping("/getNotAvailableDaysInThisMonth/{yearNumber}/{monthNumber}/{gpId}")
+    @ResponseBody
+    fun getNotAvailableDaysInThisMonth(
+            @PathVariable("yearNumber") yearNumber: Int,
+            @PathVariable("monthNumber") monthNumber: Int,
+            @PathVariable("gpId") gpId: String
+    ): List<LocalDate> {
+        return this.calendarService.getNotAvailableDaysInThisMonth(yearNumber, monthNumber, gpId)
+    }
+
+    @GetMapping("/getAvailableTimeSlotsOfParticularDay/{yearNumber}/{monthNumber}/{monthDay}/{gpId}")
+    @ResponseBody
+    fun getAvailableTimeSlotsOfParticularDay(
+        @PathVariable("yearNumber") yearNumber: Int,
+        @PathVariable("monthNumber") monthNumber: Int,
+        @PathVariable("monthDay") monthDay: Int,
+        @PathVariable("gpId") gpId: String
+    ): List<TimeSlot> {
+        return this.calendarService.getAvailableTimeSlotsOfParticularDay(yearNumber, monthNumber, monthDay, gpId)
     }
 }
