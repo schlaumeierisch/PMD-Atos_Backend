@@ -89,8 +89,7 @@ class PermissionRestController {
     fun createMedicationCareProviderLink(
         medicationId: String,
         careProviderId: String,
-        @RequestParam("validDate")
-        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) validDate: LocalDate
+        validDate: String
     ): ResponseEntity<String> {
         val medicationDTO: List<MedicationDTO> = this.medicalRecordService.getMedicationById(MedicationId(medicationId))
 
@@ -101,7 +100,7 @@ class PermissionRestController {
                 this.permissionService.createPermissionLinkMedication(
                     MedicationId(medicationId),
                     CareProviderId(careProviderId),
-                    validDate
+                    LocalDate.parse(validDate)
                 )
 
                 return ResponseEntity.status(HttpStatus.OK).body("New permission for care provider with id \'$careProviderId\' for medication with id \'$medicationId\' successfully created.")
