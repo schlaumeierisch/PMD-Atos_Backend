@@ -9,7 +9,7 @@ interface GeneralPractitionerService {
 
     fun createAccount(
         firstName: String, lastName: String, street: String,zip: String,
-        city: String, country: String, phoneNumber: String,
+        city: String, country: String, phoneNumber: String, email: String,
         startTimeShift: LocalTime, endTimeShift: LocalTime, breakTimes: String, breakDuration: Long, appointmentDuration: Long
     )
 

@@ -18,7 +18,6 @@ open class GeneralPractitioner {
     // And it'd be annoying to have different columns for different times of their breaks.
     // And a list of LocalTime is sadly not possible in SQL.
     private lateinit var breakTimes: String
-    // Getting the input as minutes. Primitive types cannot be lateinit and delegates are not supported by hibernate.
     private var breakDuration: Long = 0L
     private var appointmentDuration: Long = 0L
     private lateinit var email: String
@@ -32,13 +31,12 @@ open class GeneralPractitioner {
         lastName: String,
         address: Address,
         phoneNumber: String,
+        email: String,
         startTimeShift: LocalTime,
         endTimeShift: LocalTime,
         breakTimes: String,
         breakDuration: Long,
-        appointmentDuration: Long
-        phoneNumber: String,
-        email: String
+        appointmentDuration: Long,
     ) {
         this.domainId = generalPractitionerId
         this.firstName = firstName

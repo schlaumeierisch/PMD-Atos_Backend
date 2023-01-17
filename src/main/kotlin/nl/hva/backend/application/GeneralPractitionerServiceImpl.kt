@@ -28,6 +28,7 @@ class GeneralPractitionerServiceImpl : GeneralPractitionerService {
         city: String,
         country: String,
         phoneNumber: String,
+        email: String,
         startTimeShift: LocalTime,
         endTimeShift: LocalTime,
         breakTimes: String,
@@ -37,7 +38,7 @@ class GeneralPractitionerServiceImpl : GeneralPractitionerService {
         val generalPractitionerId: GeneralPractitionerId = generalPractitionerRepository.nextIdentity()
 
         val generalPractitioner = GeneralPractitioner(
-            generalPractitionerId, firstName, lastName, Address(street, zip, city, country), phoneNumber, startTimeShift, endTimeShift, breakTimes, breakDuration, appointmentDuration
+            generalPractitionerId, firstName, lastName, Address(street, zip, city, country), phoneNumber, email, startTimeShift, endTimeShift, breakTimes, breakDuration, appointmentDuration
         )
 
         this.generalPractitionerRepository.createAccount(generalPractitioner)
