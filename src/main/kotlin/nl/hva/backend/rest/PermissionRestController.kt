@@ -249,13 +249,13 @@ class PermissionRestController {
 
     @PostMapping("/createDiagnosisPermission")
     fun createDiagnosisCareProviderLink(
-        noteId: String,
+        diagnosisId: String,
         careProviderId: String,
         @RequestParam("validDate")
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) validDate: LocalDate
     ) {
-        this.permissionService.createPermissionLinkNote(
-            NoteId(noteId),
+        this.permissionService.createPermissionLinkDiagnosis(
+            DiagnosisId(diagnosisId),
             CareProviderId(careProviderId),
             validDate
         )
