@@ -23,6 +23,7 @@
         </component>
 
         <property name="phoneNumber" column="phone_number" type="string"/>
+        <property name="email" column="email" type="string"/>
         <property name="specialism" column="specialism">
             <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">nl.hva.backend.domain.value_objects.Specialism</param>

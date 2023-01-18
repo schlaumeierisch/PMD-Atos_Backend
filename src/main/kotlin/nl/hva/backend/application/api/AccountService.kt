@@ -37,4 +37,6 @@ interface AccountService {
 
     fun getCareProviderById(careProviderId: CareProviderId): List<CareProviderDTO>
 
+    fun getCareProviderByEmail(email: String): List<CareProviderDTO>
+
 }

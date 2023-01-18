@@ -120,4 +120,15 @@ class AccountServiceImpl : AccountService {
         }
     }
 
+    @Transactional
+    override fun getCareProviderByEmail(email: String): List<CareProviderDTO> {
+        val careProvider: List<CareProvider> = this.accountRepository.getCareProviderByEmail(email)
+
+        return if (careProvider.isNotEmpty()) {
+            listOf(CareProviderDTO.fromCareProvider(careProvider[0]))
+        } else {
+            emptyList()
+        }
+    }
+
 }

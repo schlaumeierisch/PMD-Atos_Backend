@@ -93,5 +93,11 @@ class HibernateAccountRepository : AccountRepository {
         return query.setParameter(1, careProviderId).resultList
     }
 
+    override fun getCareProviderByEmail(email: String): List<CareProvider> {
+        val query: TypedQuery<CareProvider> = this.entityManager.createQuery(
+            "SELECT cp FROM CareProvider cp WHERE cp.email = ?1", CareProvider::class.java
+        )
+        return query.setParameter(1, email).resultList
+    }
 
 }

@@ -12,6 +12,7 @@ class CareProviderDTO {
     private lateinit var lastName: String
     private lateinit var addressDTO: AddressDTO
     private lateinit var phoneNumber: String
+    private lateinit var email: String
     private lateinit var specialism: Enum<Specialism>
 
     companion object {
@@ -23,6 +24,7 @@ class CareProviderDTO {
             careProviderDTO.lastName = careProvider.lastName()
             careProviderDTO.addressDTO = AddressDTO.fromAddress(careProvider.address())
             careProviderDTO.phoneNumber = careProvider.phoneNumber()
+            careProviderDTO.email = careProvider.email()
             careProviderDTO.specialism = careProvider.specialism()
 
             return careProviderDTO
@@ -45,5 +47,6 @@ class CareProviderDTO {
     fun lastName(): String = this.lastName
     fun address(): AddressDTO = this.addressDTO
     fun phoneNumber(): String = this.phoneNumber
+    fun email(): String = this.email
     fun specialism(): Enum<Specialism> = this.specialism
 }

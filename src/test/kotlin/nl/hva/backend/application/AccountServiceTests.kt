@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import java.time.LocalDate
+import java.time.LocalTime
 
 @SpringBootTest
 class AccountServiceTests {
@@ -54,6 +55,11 @@ class AccountServiceTests {
     private lateinit var email: String
     private var usingApp: Boolean = true
     private lateinit var specialism: Enum<Specialism>
+    private lateinit var startTimeShift: LocalTime
+    private lateinit var endTimeShift: LocalTime
+    private lateinit var breakTimes: String
+    private var breakDuration: Long = 0L
+    private var appointmentDuration: Long = 0L
 
     @BeforeEach
     fun init() {
@@ -78,6 +84,11 @@ class AccountServiceTests {
         this.email = "odin88@packiu.com"
         this.usingApp = true
         this.specialism = Specialism.APOTHECARY
+        this.startTimeShift = LocalTime.now()
+        this.endTimeShift = LocalTime.now()
+        this.breakTimes = "These are the break times"
+        this.breakDuration = 30
+        this.appointmentDuration = 15
     }
 
     @Test
@@ -117,7 +128,12 @@ class AccountServiceTests {
                 this.lastName,
                 this.address,
                 this.phoneNumber,
-                this.email
+                this.email,
+                this.startTimeShift,
+                this.endTimeShift,
+                this.breakTimes,
+                this.breakDuration,
+                this.appointmentDuration
             ),
             GeneralPractitioner(
                 this.generalPractitionerId2,
@@ -125,7 +141,12 @@ class AccountServiceTests {
                 this.lastName,
                 this.address,
                 this.phoneNumber,
-                this.email
+                this.email,
+                this.startTimeShift,
+                this.endTimeShift,
+                this.breakTimes,
+                this.breakDuration,
+                this.appointmentDuration
             ),
             GeneralPractitioner(
                 this.generalPractitionerId3,
@@ -133,10 +154,16 @@ class AccountServiceTests {
                 this.lastName,
                 this.address,
                 this.phoneNumber,
-                this.email
+                this.email,
+                this.startTimeShift,
+                this.endTimeShift,
+                this.breakTimes,
+                this.breakDuration,
+                this.appointmentDuration
             )
         )
-        val expected: List<GeneralPractitionerDTO> = GeneralPractitionerDTO.fromGeneralPractitioners(allGeneralPractitioners)
+        val expected: List<GeneralPractitionerDTO> =
+            GeneralPractitionerDTO.fromGeneralPractitioners(allGeneralPractitioners)
 
         // when
         Mockito.`when`(this.accountRepository.getAllGeneralPractitioners()).thenReturn(allGeneralPractitioners)
@@ -216,6 +243,7 @@ class AccountServiceTests {
                 this.lastName,
                 this.address,
                 this.phoneNumber,
+                this.email,
                 this.specialism
             ),
             CareProvider(
@@ -224,6 +252,7 @@ class AccountServiceTests {
                 this.lastName,
                 this.address,
                 this.phoneNumber,
+                this.email,
                 this.specialism
             ),
             CareProvider(
@@ -232,6 +261,7 @@ class AccountServiceTests {
                 this.lastName,
                 this.address,
                 this.phoneNumber,
+                this.email,
                 this.specialism
             )
         )
@@ -286,10 +316,16 @@ class AccountServiceTests {
                 this.lastName,
                 this.address,
                 this.phoneNumber,
-                this.email
+                this.email,
+                this.startTimeShift,
+                this.endTimeShift,
+                this.breakTimes,
+                this.breakDuration,
+                this.appointmentDuration
             )
         )
-        val expected: List<GeneralPractitionerDTO> = listOf(GeneralPractitionerDTO.fromGeneralPractitioner(generalPractitioner[0]))
+        val expected: List<GeneralPractitionerDTO> =
+            listOf(GeneralPractitionerDTO.fromGeneralPractitioner(generalPractitioner[0]))
 
         // when
         Mockito.`when`(this.accountRepository.getGeneralPractitionerById(this.generalPractitionerId1))
@@ -341,6 +377,7 @@ class AccountServiceTests {
                 this.lastName,
                 this.address,
                 this.phoneNumber,
+                this.email,
                 this.specialism
             )
         )
@@ -455,7 +492,8 @@ class AccountServiceTests {
                 this.careProviderId3
             )
         )
-        val expected: List<PatientCareProviderRelationDTO> = PatientCareProviderRelationDTO.fromPatientCareProviderRelations(allPatientCareProviderRelations)
+        val expected: List<PatientCareProviderRelationDTO> =
+            PatientCareProviderRelationDTO.fromPatientCareProviderRelations(allPatientCareProviderRelations)
 
         // when
         Mockito.`when`(this.accountRepository.getPatientCareProviderRelationsByPatientId(PatientId("")))

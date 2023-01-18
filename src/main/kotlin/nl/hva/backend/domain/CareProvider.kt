@@ -12,6 +12,7 @@ open class CareProvider {
     private lateinit var lastName: String
     private lateinit var address: Address
     private lateinit var phoneNumber: String
+    private lateinit var email: String
     private lateinit var specialism: Enum<Specialism>
 
     // required by hibernate
@@ -23,6 +24,7 @@ open class CareProvider {
         lastName: String,
         address: Address,
         phoneNumber: String,
+        email: String,
         specialism: Enum<Specialism>
     ) {
         this.domainId = generalPractitionerId
@@ -30,6 +32,7 @@ open class CareProvider {
         this.lastName = lastName
         this.address = address
         this.phoneNumber = phoneNumber
+        this.email = email
         this.specialism = specialism
     }
 
@@ -40,6 +43,7 @@ open class CareProvider {
     fun lastName(): String = this.lastName
     fun address(): Address = this.address
     fun phoneNumber(): String = this.phoneNumber
+    fun email(): String = this.email
     fun specialism(): Enum<Specialism> = this.specialism
 }
 

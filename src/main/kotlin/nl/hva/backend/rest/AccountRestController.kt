@@ -51,7 +51,8 @@ class AccountRestController {
     fun getGeneralPractitionerByEmail(
         @PathVariable("email") email: String
     ): ResponseEntity<GeneralPractitionerDTO> {
-        val generalPractitionerDTO: List<GeneralPractitionerDTO> = this.accountService.getGeneralPractitionerByEmail(email)
+        val generalPractitionerDTO: List<GeneralPractitionerDTO> =
+            this.accountService.getGeneralPractitionerByEmail(email)
 
         if (generalPractitionerDTO.isNotEmpty()) {
             return ResponseEntity.status(HttpStatus.OK).body(generalPractitionerDTO[0])
@@ -179,6 +180,20 @@ class AccountRestController {
             return ResponseEntity.status(HttpStatus.OK).body(careProviderDTO[0])
         } else {
             throw NotExistingException("Care provider with id \'$id\' does not exist.")
+        }
+    }
+
+    @GetMapping("/careProviders/getByEmail/{email}")
+    @ResponseBody
+    fun getCareProviderByEmail(
+        @PathVariable("email") email: String
+    ): ResponseEntity<CareProviderDTO> {
+        val careProviderDTO: List<CareProviderDTO> = this.accountService.getCareProviderByEmail(email)
+
+        if (careProviderDTO.isNotEmpty()) {
+            return ResponseEntity.status(HttpStatus.OK).body(careProviderDTO[0])
+        } else {
+            throw NotExistingException("Care provider with email \'$email\' does not exist.")
         }
     }
 }
