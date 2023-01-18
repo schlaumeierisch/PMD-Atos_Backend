@@ -37,17 +37,17 @@ values (001, 'dom-id-pa-001', 'Lotje', 'Oldhof', 'Johan Frisoplantsoen 184', '27
 -- patient & care provider (many-to-many)
 insert into patient_care_provider(id, patient_id, care_provider_id)
 values (001, 'dom-id-pa-001', 'dom-id-cp-001'),
-       (002, 'dom-id-pa-001', 'dom-id-cp-002'),
-       (003, 'dom-id-pa-001', 'dom-id-cp-003'),
-       (004, 'dom-id-pa-002', 'dom-id-cp-004'),
-       (005, 'dom-id-pa-002', 'dom-id-cp-005'),
-       (006, 'dom-id-pa-002', 'dom-id-cp-006'),
-       (007, 'dom-id-pa-003', 'dom-id-cp-001'),
-       (008, 'dom-id-pa-003', 'dom-id-cp-002'),
-       (009, 'dom-id-pa-003', 'dom-id-cp-003'),
-       (010, 'dom-id-pa-004', 'dom-id-cp-004'),
-       (011, 'dom-id-pa-004', 'dom-id-cp-005'),
-       (012, 'dom-id-pa-004', 'dom-id-cp-006');
+       (002, 'dom-id-pa-002', 'dom-id-cp-001'),
+       (003, 'dom-id-pa-003', 'dom-id-cp-001'),
+       (004, 'dom-id-pa-004', 'dom-id-cp-001'),
+       (005, 'dom-id-pa-005', 'dom-id-cp-002'),
+       (006, 'dom-id-pa-006', 'dom-id-cp-002'),
+       (007, 'dom-id-pa-007', 'dom-id-cp-002'),
+       (008, 'dom-id-pa-008', 'dom-id-cp-002'),
+       (009, 'dom-id-pa-009', 'dom-id-cp-003'),
+       (010, 'dom-id-pa-010', 'dom-id-cp-003'),
+       (011, 'dom-id-pa-011', 'dom-id-cp-003'),
+       (012, 'dom-id-pa-012', 'dom-id-cp-003');
 
 -- medical record
 insert into medical_record(id, medical_record_id)

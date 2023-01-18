@@ -100,4 +100,11 @@ class HibernateAccountRepository : AccountRepository {
         return query.setParameter(1, email).resultList
     }
 
+    override fun getPatientCareProviderRelationsByCareProviderId(careProviderId: CareProviderId): List<PatientCareProviderRelation> {
+        val query: TypedQuery<PatientCareProviderRelation> = this.entityManager.createQuery(
+            "SELECT pcp FROM PatientCareProviderRelation pcp WHERE pcp.cpDomainId = ?1", PatientCareProviderRelation::class.java
+        )
+        return query.setParameter(1, careProviderId).resultList
+    }
+
 }

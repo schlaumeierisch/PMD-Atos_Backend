@@ -131,4 +131,25 @@ class AccountServiceImpl : AccountService {
         }
     }
 
+    @Transactional
+    override fun getPatientCareProviderRelationsByCareProviderId(careProviderId: CareProviderId): List<PatientCareProviderRelationDTO> {
+        val patientCareProviderRelations: List<PatientCareProviderRelation> =
+            this.accountRepository.getPatientCareProviderRelationsByCareProviderId(careProviderId)
+
+        return PatientCareProviderRelationDTO.fromPatientCareProviderRelations(patientCareProviderRelations)
+    }
+
+    @Transactional
+    override fun getPatientsOfCareProviderById(careProviderId: CareProviderId): List<PatientDTO> {
+        val patientCareProviderRelations: List<PatientCareProviderRelationDTO> =
+            getPatientCareProviderRelationsByCareProviderId(careProviderId)
+
+        val patientDTOs = arrayListOf<PatientDTO>()
+        for (patientCareProviderRelation in patientCareProviderRelations) {
+            patientDTOs.add(getPatientById(PatientId(patientCareProviderRelation.patientId()))[0])
+        }
+
+        return patientDTOs
+    }
+
 }

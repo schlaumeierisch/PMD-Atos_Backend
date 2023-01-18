@@ -196,4 +196,20 @@ class AccountRestController {
             throw NotExistingException("Care provider with email \'$email\' does not exist.")
         }
     }
+
+    @GetMapping("/careProviders/getPatientsOfCareProviderById/{id}")
+    @ResponseBody
+    fun getPatientsOfCareProviderById(
+        @PathVariable("id") id: String
+    ): ResponseEntity<List<PatientDTO>> {
+        val careProviderDTO: List<CareProviderDTO> = this.accountService.getCareProviderById(CareProviderId(id))
+
+        if (careProviderDTO.isNotEmpty()) {
+            val patientDTOs: List<PatientDTO> = this.accountService.getPatientsOfCareProviderById(CareProviderId(id))
+
+            return ResponseEntity.status(HttpStatus.OK).body(patientDTOs)
+        } else {
+            throw NotExistingException("Care provider with id \'$id\' does not exist.")
+        }
+    }
 }

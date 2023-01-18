@@ -39,4 +39,6 @@ interface AccountRepository {
 
     fun getCareProviderByEmail(email: String): List<CareProvider>
 
+    fun getPatientCareProviderRelationsByCareProviderId(careProviderId: CareProviderId): List<PatientCareProviderRelation>
+
 }
