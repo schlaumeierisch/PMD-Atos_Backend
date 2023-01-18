@@ -142,7 +142,7 @@ class PermissionRestController {
      ********************************** Note **********************************
      */
 
-    @GetMapping("/getNoteOfMedicalRecord")
+    @GetMapping("/getNotesOfMedicalRecord")
     @ResponseBody
     fun getNoteCareProviderRelationById(
         mrId: String,
@@ -155,10 +155,7 @@ class PermissionRestController {
 
             if (careProviderDTO.isNotEmpty()) {
                 //Check all permissions the care provider has
-                val noteCareProviderDTOs: List<NoteCareProviderDTO> =
-                    this.permissionService.getNoteCareProviderRelationById(
-                        CareProviderId(cpId)
-                    )
+                val noteCareProviderDTOs: List<NoteCareProviderDTO> = this.permissionService.getNoteCareProviderRelationById(CareProviderId(cpId))
 
                 //Return only the note of the requested patient
                 val noteDTOs: ArrayList<NoteDTO> = arrayListOf()
@@ -276,7 +273,7 @@ class PermissionRestController {
      */
 
 
-    @GetMapping("/getExerciseOfMedicalRecord")
+    @GetMapping("/getExercisesOfMedicalRecord")
     @ResponseBody
     fun getExerciseCareProviderRelationById(
         mrId: String,
