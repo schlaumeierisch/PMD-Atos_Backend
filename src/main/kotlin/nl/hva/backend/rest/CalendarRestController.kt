@@ -3,10 +3,10 @@ package nl.hva.backend.rest
 import nl.hva.backend.application.api.AccountService
 import nl.hva.backend.application.api.CalendarService
 import nl.hva.backend.application.dto.AppointmentDTO
-import nl.hva.backend.domain.TimeSlot
 import nl.hva.backend.application.dto.CareProviderDTO
 import nl.hva.backend.application.dto.GeneralPractitionerDTO
 import nl.hva.backend.application.dto.PatientDTO
+import nl.hva.backend.domain.TimeSlot
 import nl.hva.backend.domain.ids.AppointmentId
 import nl.hva.backend.domain.ids.CareProviderId
 import nl.hva.backend.domain.ids.GeneralPractitionerId

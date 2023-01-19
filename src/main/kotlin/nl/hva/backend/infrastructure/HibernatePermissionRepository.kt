@@ -36,6 +36,22 @@ class HibernatePermissionRepository : PermissionRepository {
 
 
     override fun createPermissionLinkMedication(medicationCareProviderRelation: MedicationCareProviderRelation) {
+        val query: TypedQuery<MedicationCareProviderRelation> = this.entityManager.createQuery(
+            "SELECT mcp FROM MedicationCareProviderRelation mcp WHERE mcp.cpDomainId = ?1 AND mcp.medicationId = ?2",
+            MedicationCareProviderRelation::class.java
+        )
+
+        val result: List<MedicationCareProviderRelation> = query
+            .setParameter(1, medicationCareProviderRelation.cpDomainId())
+            .setParameter(2, medicationCareProviderRelation.medicationId())
+            .resultList
+
+        if (result.isNotEmpty()) {
+            for (res in result) {
+                this.entityManager.remove(res)
+            }
+        }
+
         this.entityManager.persist(medicationCareProviderRelation)
     }
 
@@ -71,6 +87,22 @@ class HibernatePermissionRepository : PermissionRepository {
 
 
     override fun createPermissionLinkNote(noteCareProviderRelation: NoteCareProviderRelation) {
+        val query: TypedQuery<NoteCareProviderRelation> = this.entityManager.createQuery(
+            "SELECT ncp FROM NoteCareProviderRelation ncp WHERE ncp.cpDomainId = ?1 AND ncp.noteId = ?2",
+            NoteCareProviderRelation::class.java
+        )
+
+        val result: List<NoteCareProviderRelation> = query
+            .setParameter(1, noteCareProviderRelation.cpDomainId())
+            .setParameter(2, noteCareProviderRelation.noteId())
+            .resultList
+
+        if (result.isNotEmpty()) {
+            for (res in result) {
+                this.entityManager.remove(res)
+            }
+        }
+
         this.entityManager.persist(noteCareProviderRelation)
     }
 
@@ -105,8 +137,23 @@ class HibernatePermissionRepository : PermissionRepository {
     }
 
 
-
     override fun createPermissionLinkDiagnosis(diagnosisCareProviderRelation: DiagnosisCareProviderRelation) {
+        val query: TypedQuery<DiagnosisCareProviderRelation> = this.entityManager.createQuery(
+            "SELECT dcp FROM DiagnosisCareProviderRelation dcp WHERE dcp.cpDomainId = ?1 AND dcp.diagnosisId = ?2",
+            DiagnosisCareProviderRelation::class.java
+        )
+
+        val result: List<DiagnosisCareProviderRelation> = query
+            .setParameter(1, diagnosisCareProviderRelation.cpDomainId())
+            .setParameter(2, diagnosisCareProviderRelation.diagnosisId())
+            .resultList
+
+        if (result.isNotEmpty()) {
+            for (res in result) {
+                this.entityManager.remove(res)
+            }
+        }
+
         this.entityManager.persist(diagnosisCareProviderRelation)
     }
 
@@ -141,8 +188,23 @@ class HibernatePermissionRepository : PermissionRepository {
     }
 
 
-
     override fun createPermissionLinkExercise(exerciseCareProviderRelation: ExerciseCareProviderRelation) {
+        val query: TypedQuery<ExerciseCareProviderRelation> = this.entityManager.createQuery(
+            "SELECT ecp FROM ExerciseCareProviderRelation ecp WHERE ecp.cpDomainId = ?1 AND ecp.exerciseId = ?2",
+            ExerciseCareProviderRelation::class.java
+        )
+
+        val result: List<ExerciseCareProviderRelation> = query
+            .setParameter(1, exerciseCareProviderRelation.cpDomainId())
+            .setParameter(2, exerciseCareProviderRelation.exerciseId())
+            .resultList
+
+        if (result.isNotEmpty()) {
+            for (res in result) {
+                this.entityManager.remove(res)
+            }
+        }
+
         this.entityManager.persist(exerciseCareProviderRelation)
     }
 
