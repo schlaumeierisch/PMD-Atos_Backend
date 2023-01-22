@@ -73,42 +73,27 @@ values (001, 'dom-id-mr-001'),
 
 -- note
 insert into note(id, note_id, title, description, date, medical_record_id)
-values (001, 'dom-id-no-001', 'Note 1', 'This is a description of note 1', '2022-11-20', 'dom-id-mr-001'),
-       (002, 'dom-id-no-002', 'Note 2', 'This is a description of note 2', '2022-11-20', 'dom-id-mr-001'),
-       (003, 'dom-id-no-003', 'Note 3', 'This is a description of note 3', '2022-11-20', 'dom-id-mr-001'),
-       (004, 'dom-id-no-004', 'Note 1', 'This is a description of note 1', '2022-11-20', 'dom-id-mr-002'),
-       (005, 'dom-id-no-005', 'Note 2', 'This is a description of note 2', '2022-11-20', 'dom-id-mr-002'),
-       (006, 'dom-id-no-006', 'Note 3', 'This is a description of note 3', '2022-11-20', 'dom-id-mr-002'),
-       (007, 'dom-id-no-007', 'Note 1', 'This is a description of note 1', '2022-11-20', 'dom-id-mr-003'),
-       (008, 'dom-id-no-008', 'Note 2', 'This is a description of note 2', '2022-11-20', 'dom-id-mr-003'),
-       (009, 'dom-id-no-009', 'Note 3', 'This is a description of note 3', '2022-11-20', 'dom-id-mr-003'),
-       (010, 'dom-id-no-010', 'Note 1', 'This is a description of note 1', '2022-11-20', 'dom-id-mr-004'),
-       (011, 'dom-id-no-011', 'Note 2', 'This is a description of note 2', '2022-11-20', 'dom-id-mr-004'),
-       (012, 'dom-id-no-012', 'Note 3', 'This is a description of note 3', '2022-11-20', 'dom-id-mr-004'),
-       (013, 'dom-id-no-013', 'Note 1', 'This is a description of note 1', '2022-11-20', 'dom-id-mr-005'),
-       (014, 'dom-id-no-014', 'Note 2', 'This is a description of note 2', '2022-11-20', 'dom-id-mr-005'),
-       (015, 'dom-id-no-015', 'Note 3', 'This is a description of note 3', '2022-11-20', 'dom-id-mr-005'),
-       (016, 'dom-id-no-016', 'Note 1', 'This is a description of note 1', '2022-11-20', 'dom-id-mr-006'),
-       (017, 'dom-id-no-017', 'Note 2', 'This is a description of note 2', '2022-11-20', 'dom-id-mr-006'),
-       (018, 'dom-id-no-018', 'Note 3', 'This is a description of note 3', '2022-11-20', 'dom-id-mr-006'),
-       (019, 'dom-id-no-019', 'Note 1', 'This is a description of note 1', '2022-11-20', 'dom-id-mr-007'),
-       (020, 'dom-id-no-020', 'Note 2', 'This is a description of note 2', '2022-11-20', 'dom-id-mr-007'),
-       (021, 'dom-id-no-021', 'Note 3', 'This is a description of note 3', '2022-11-20', 'dom-id-mr-007');
+values (001, 'dom-id-no-001', 'Weird rash', 'Weird rash on my foot', '2022-11-20', 'dom-id-mr-001'),
+       (002, 'dom-id-no-002', 'Constant tears', 'I constantly have tears coming out my right eye', '2022-11-20', 'dom-id-mr-001'),
+       (003, 'dom-id-no-003', 'Annoying cough', 'Annoying cough that has not changed', '2022-11-20', 'dom-id-mr-001'),
+       (004, 'dom-id-no-004', 'Weird rash', 'Weird rash on my foot', '2022-11-20', 'dom-id-mr-002'),
+       (005, 'dom-id-no-005', 'Constant tears', 'I constantly have tears coming out my right eye', '2022-11-20', 'dom-id-mr-002'),
+       (006, 'dom-id-no-006', 'Annoying cough', 'Annoying cough that has not changed', '2022-11-20', 'dom-id-mr-002');
 
 -- medication
 insert into medication(id, medication_id, title, description, start_date, end_date, medical_record_id)
-values (001, 'dom-id-med-001', 'Medication 1', 'This is a description of medication 1', '2022-10-10', '2022-12-30', 'dom-id-mr-001'),
-       (002, 'dom-id-med-002', 'Medication 2', 'This is a description of medication 2', '2022-10-10', '2022-12-30', 'dom-id-mr-001'),
-       (003, 'dom-id-med-003', 'Medication 3', 'This is a description of medication 3', '2022-10-10', '2022-12-30', 'dom-id-mr-001'),
-       (004, 'dom-id-med-004', 'Medication 1', 'This is a description of medication 1', '2022-10-10', '2022-12-30', 'dom-id-mr-002'),
-       (005, 'dom-id-med-005', 'Medication 2', 'This is a description of medication 2', '2022-10-10', '2022-12-30', 'dom-id-mr-002'),
-       (006, 'dom-id-med-006', 'Medication 3', 'This is a description of medication 3', '2022-10-10', '2022-12-30', 'dom-id-mr-002'),
-       (007, 'dom-id-med-007', 'Medication 1', 'This is a description of medication 1', '2022-10-10', '2022-12-30', 'dom-id-mr-003'),
-       (008, 'dom-id-med-008', 'Medication 2', 'This is a description of medication 2', '2022-10-10', '2022-12-30', 'dom-id-mr-003'),
-       (009, 'dom-id-med-009', 'Medication 3', 'This is a description of medication 3', '2022-10-10', '2022-12-30', 'dom-id-mr-003'),
-       (010, 'dom-id-med-010', 'Medication 1', 'This is a description of medication 1', '2022-10-10', '2022-12-30', 'dom-id-mr-004'),
-       (011, 'dom-id-med-011', 'Medication 2', 'This is a description of medication 2', '2022-10-10', '2022-12-30', 'dom-id-mr-004'),
-       (012, 'dom-id-med-012', 'Medication 3', 'This is a description of medication 3', '2022-10-10', '2022-12-30', 'dom-id-mr-004');
+values (001, 'dom-id-med-001', 'Paracetamol', 'This is a description of Paracetamol', '2023-01-10', '2023-01-25', 'dom-id-mr-001'),
+       (002, 'dom-id-med-002', 'Atorvastatin Calcium', 'This is a description of Atorvastatin Calcium', '2023-01-10', '2023-01-30', 'dom-id-mr-001'),
+       (003, 'dom-id-med-003', 'antibiotics', 'This is a description of antibiotics', '2023-01-10', '2023-02-28', 'dom-id-mr-001'),
+       (004, 'dom-id-med-004', 'Paracetamol', 'This is a description of Paracetamol', '2023-01-10', '2023-01-25', 'dom-id-mr-002'),
+       (005, 'dom-id-med-005', 'Atorvastatin Calcium', 'This is a description of Atorvastatin Calcium', '2023-01-10', '2023-01-30', 'dom-id-mr-002'),
+       (006, 'dom-id-med-006', 'antibiotics', 'This is a description of antibiotics', '2023-01-10', '2023-02-28', 'dom-id-mr-002'),
+       (007, 'dom-id-med-007', 'Paracetamol', 'This is a description of Paracetamol', '2023-01-10', '2023-01-25', 'dom-id-mr-003'),
+       (008, 'dom-id-med-008', 'Atorvastatin Calcium', 'This is a description of Atorvastatin Calcium', '2023-01-10', '2023-01-30', 'dom-id-mr-003'),
+       (009, 'dom-id-med-009', 'antibiotics', 'This is a description of antibiotics', '2023-01-10', '2023-02-28', 'dom-id-mr-003'),
+       (010, 'dom-id-med-010', 'Paracetamol', 'This is a description of Paracetamol', '2023-01-10', '2023-01-25', 'dom-id-mr-004'),
+       (011, 'dom-id-med-011', 'Atorvastatin Calcium', 'This is a description of Atorvastatin Calcium', '2023-01-10', '2023-01-30', 'dom-id-mr-004'),
+       (012, 'dom-id-med-012', 'antibiotics', 'This is a description of antibiotics', '2023-01-10', '2023-02-28', 'dom-id-mr-004');
 
 -- intake
 insert into intake(id, intake_id, time, amount, unit, medication_id)
@@ -127,8 +112,8 @@ values (001, 'dom-id-itk-001', '14:00', 2, 'PILL', 'dom-id-med-001'),
 
 -- diagnosis
 insert into diagnosis(id, diagnosis_id, title, diagnosis_type, date_diagnosed, cause, treatment, advice, medical_record_id)
-values (001, 'dom-id-dia-001', 'Diagnosis 1', 'HEART', '2022-12-07', 'heart attack', 'heart medication', 'more rest and less exercises','dom-id-mr-001'),
-       (002, 'dom-id-dia-002', 'Diagnosis 2', 'BONES', '2022-02-11', 'motor accident', 'operation and cast for 8 weeks', 'lot of rest, only walk with crutches','dom-id-mr-001');
+values (001, 'dom-id-dia-001', 'Weakened heart', 'HEART', '2022-12-07', 'heart attack', 'heart medication', 'more rest and less exercises','dom-id-mr-001'),
+       (002, 'dom-id-dia-002', 'Broken leg 2', 'BONES', '2022-02-11', 'motor accident', 'operation and cast for 8 weeks', 'lot of rest, only walk with crutches','dom-id-mr-001');
 
 -- appointment
 insert into appointment(id, appointment_id, date_time, reason, patient_id, general_practitioner_id, care_provider_id)
@@ -140,9 +125,9 @@ values (001, 'dom-id-apt-001', '2022-12-01T14:00:00.000', 'A weird mold on my kn
 
 -- exercise
 insert into exercise(id, exercise_id, title, description, start_date, end_date, medical_record_id)
-values (001, 'dom-id-exerc-001', 'Sit-Ups', 'Advised by dr. Stegehuis', '2022-10-10', '2022-12-30', 'dom-id-mr-001'),
-       (002, 'dom-id-exerc-002', 'Running', 'Advised by dr. Stegehuis', '2022-12-08', '2023-01-01', 'dom-id-mr-001'),
-       (003, 'dom-id-exerc-003', 'Stretching', 'Advised by dr. Stegehuis', '2022-11-03', '2022-11-27', 'dom-id-mr-001'),
+values (001, 'dom-id-exerc-001', 'Sit-Ups', 'Advised by dr. Stegehuis', '2023-10-10', '2023-02-28', 'dom-id-mr-001'),
+       (002, 'dom-id-exerc-002', 'Running', 'Advised by dr. Stegehuis', '2023-01-08', '2023-01-30', 'dom-id-mr-001'),
+       (003, 'dom-id-exerc-003', 'Stretching', 'Advised by dr. Stegehuis', '2023-01-03', '2023-11-01', 'dom-id-mr-001'),
        (004, 'dom-id-exerc-004', 'Weight Lifting', 'Advised by dr. Stegehuis', '2022-12-10', '2022-12-30', 'dom-id-mr-002'),
        (005, 'dom-id-exerc-005', 'Yoga', 'Advised by dr. Stegehuis', '2022-12-12', '2023-04-27', 'dom-id-mr-002'),
        (006, 'dom-id-exerc-006', 'High Intensity Training', 'Advised by dr. Stegehuis', '2022-12-12', '2022-12-30', 'dom-id-mr-002'),
